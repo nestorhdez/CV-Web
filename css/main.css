@@ -1,0 +1,42 @@
+/* Header */
+*,
+html {
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    margin: 0 2.5em;
+}
+
+button {
+    margin: 0 0.2em;
+    width: 6em;
+    height: 1.5em;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1.5em;
+}
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end; 
+}
+
+.title {
+    margin-left: 1em;
+}
