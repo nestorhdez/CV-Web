@@ -11,15 +11,27 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/main.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
 </head>
 
 <body>
     <!-- Header section -->
     <header>
-        <div class="container-fluid">
-            <h3>Nav</h3> <!-- Delete, insert code-->
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="navs">
+            <img src="images/logo.png" alt="20H Talent Logo" width="50" height="50">
+            <a class="navbar-brand" href="#">Talent</a>
+
+            <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div class="ml-auto">
+                    <button type="button" class="btn btn-primary btn-sm mr-3">Log-in</button>
+                    <button type="button" class="btn btn-secondary btn-sm mr-3">Logout</button>
+                </div>
+                <form id="nav-main-search" action="/es/search" method="get" role="search" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
     </header>
     <!-- Advanced Search section -->
     <section>
