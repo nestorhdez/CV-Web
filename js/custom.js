@@ -19,19 +19,24 @@ function sleep(milliseconds) {
  */
 function card() {
   let card = `
-      <div class="card" style="width: 18rem;">
-      <div class="card-body">
+  <div class="card mr-3 mb-3 card-user" style="width: 18rem;">
+  <div class="card-body text-center">
       <div class="mb-3">
-              <img class="card-img-top w-25 p-1 d-inline  " src="images/1293744.svg" alt="Card image cap">
-              <h5 class="card-title d-inline">Card title</h5>
-              </div>
-              <h6 class="card-subtitle mb-3 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-          card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <i class="fas fa-user mb-3" style="font-size: 2rem;"></i> <br>
+          <h5 class="card-title d-inline user-name">Name</h5>
       </div>
-      </div>`;
+      <div class="text-left">
+          <h6 class="card-subtitle mb-3">Contact information</h6>
+          <p class="card-text font-weight-bold">
+              City: <span class="font-weight-normal">Adress</span><br>
+              Email: <a href="mailto:mail">mail</a><br>
+              Phone: <span class="font-weight-normal">Phone</span><br>
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Card link</a>
+      </div>
+  </div>
+  </div>`;
   container.innerHTML += card;
 }
 /**
