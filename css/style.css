@@ -6,4 +6,10 @@
 #search-btn {
     background-color: #6610f2;
     color: #fff;
-}2
+}
+
+.scrolleable {
+    height: 70vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
