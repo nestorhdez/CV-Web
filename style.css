@@ -1,0 +1,14 @@
+.container-fluid,
+.container,
+.col {
+    border: 2px solid red;
+}
+
+.col {
+    width: 8rem;
+    height: 8rem;
+}
+
+main{
+    margin: 2rem;
+}

@@ -56,40 +56,36 @@ var createCard =  function (e) {
 
 //Filter data with the form
 
+let list = document.querySelector("#card-container");
 
-let list = document.querySelector('#card-container');
+let searchBar = document.querySelector("#adv-search-form");
 
-let searchBar = document.querySelector('#adv-search-form');
-
-// console.log(list);
-// console.log(searchBar);
 
 //Make the filter when submit the form
-searchBar.addEventListener('submit', function(e){
-    //Don't refresh the page when submit
-    e.preventDefault();
-    
-    //Put the value of the input name in lower case into a variable
-    let term = document.querySelector('#input-name').value.toLowerCase();
-    
-    let users = list.getElementsByClassName('card-user');
+searchBar.addEventListener("submit", function(e) {
+  //Don't refresh the page when submit
+  e.preventDefault();
 
-//     console.log(e);
-//     console.log(users);
+  //Put the value of the input name in lower case into a variable
+  let term = document.querySelector("#input-name").value.toLowerCase();
 
-    //Create a loop through the cards
-    Array.from(users).forEach(function(user){
-        
-        //Put every user name into a var
-        let title = user.querySelector('.user-name').textContent;
-            console.log(title);
-            
-        //If the user has some character equal to the search of the
-        //input it will be display block
-        if (title.toLowerCase().indexOf(term) != -1){
-            user.style.display = 'block';
-            } else {
-                user.style.display = 'none';
-            }
-    })
-})
+  let users = list.getElementsByClassName("card-user");
+
+//   console.log(e);
+//   console.log(users);
+
+  //Create a loop through the cards
+  Array.from(users).forEach(function(user) {
+    //Put every user name into a var
+    let title = user.querySelector(".user-name").textContent;
+    console.log(title);
+
+    //If the user has some character equal to the search of the
+    //input it will be display block
+    if (title.toLowerCase().indexOf(term) != -1) {
+      user.style.display = "block";
+    } else {
+      user.style.display = "none";
+    }
+  });
+});
