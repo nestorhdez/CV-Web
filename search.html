@@ -10,33 +10,33 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" href="css/customstyles.css">
 </head>
 
 <body>
+
     <!-- Header section -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="navs">
-            <img src="images/logo.png" alt="20H Talent Logo" width="50" height="50">
-            <a class="navbar-brand" href="home.html">Talent</a>
+            <a href="home.html"><img src="images/logo.png" alt="20H Talent Logo" width="50" height="50"></a>
+            <a class="navbar-brand ml-3" href="home.html">Talent</a>
 
             <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
                 <div class="ml-auto">
-                    <button type="button" class="btn btn-primary btn-sm mr-3">Log-in</button>
-                    <button type="button" class="btn btn-secondary btn-sm mr-3">Logout</button>
+                    <button type="button" class="btn btn-primary btn-outline-primary border-1 border-white bg-dark btn-sm mr-3 text-white">Log-in</button>
+                    <button type="button" class="btn btn-secondary btn-outline-primary btn-sm mr-3 border-1 border-white bg-dark text-white">Logout</button>
                 </div>
-                <form id="nav-main-search" action="/es/search" method="get" role="search" class="form-inline my-2 my-lg-0">
+                <form id="nav-main-search" action="search.html" method="get" role="search" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-primary my-2 my-sm-0 border-1 border-white bg-dark text-white" type="submit">Search</button>
                 </form>
             </div>
         </nav>
     </header>
+
     <!-- Advanced Search section -->
     <section>
         <div class="container-fluid">
-            <!-- ADVANCED SEARCH -->
 
             <a class=" mb-3" id="adv-btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
@@ -153,15 +153,31 @@
                     </div>
                 </div>
             </div>
-            <div id ="loader"></div>
+            <div id="loader"></div>
         </div>
     </main>
 
     <!-- Footer section -->
     <footer>
-        <div class="container-fluid">
-            <h3>Footer</h3><!-- Delete, insert code-->
+        <div class="fixed-bottom">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="navs">
+                <img src="images/logo.png" alt="20H Talent Logo" width="50" height="50">
+                <!-- <a class="navbar-brand" href="#">Talent</a> -->
+
+                <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <div class="ml-3 d-flex justify-content-start">
+                        <a class="text-white mr-3" href="">About</a>
+                        <a class="text-white" href="">Contact</a>
+                    </div>
+                    <div class="ml-auto">
+                        <a class="text-white mr-3" href="">Privacy policy</a>
+                        <a class="text-white" href="">&copy 20H Talent</a>
+                    </div>
+                </div>
+            </nav>
+
         </div>
+
     </footer>
 
     <!-- Scripts section -->
