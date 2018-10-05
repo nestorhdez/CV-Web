@@ -10,8 +10,10 @@ function getJsonUsers(){
 
                 <div class="card mr-3 mb-3 card-user" style="width: 18rem;">
                     <div class="card-body text-center">
-                        <div class="mb-3">
-                            <i class="fas fa-user mb-3" style="font-size: 2rem;"></i> <br>
+                    <div class="d-flex flex-column justify-content-center mb-3">
+                    <div class="d-flex mx-auto profile-picture mb-1"><a href="#" class="d-flex profile-picture" id="${val.id}"
+                            data-toggle="modal" data-target="#ModalCenter"><img class="img-user rounded-circle" src="../img/default-profile-picture.jpg"></a>
+                    </div>
                             <h5 class="card-title d-inline user-name">${val.name}</h5>
                         </div>
                         <div class="text-left">
