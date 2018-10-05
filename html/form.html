@@ -34,10 +34,143 @@
         </nav>
     </header>
 
-   
-<main>
-    
-</main>
+
+    <main>
+        <div class="container-fluid mt-5 bg-light">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault01">First name</label>
+                        <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value=""
+                            required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault02">Last name</label>
+                        <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value=""
+                            required>
+                    </div>
+                    <div class="form-group">
+                            <label for="InputPhone">Phone</label>
+                            <input type="number" class="form-control" id="InputNumber" aria-describedby="numberHelp" placeholder="Enter phone number">
+                            <small id="numberHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          </div>  
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault05">Zip</label>
+                        <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefaultUsername">Username</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                            </div>
+                            <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username"
+                                aria-describedby="inputGroupPrepend2" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault03">City</label>
+                        <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault04">State</label>
+                        <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault04">Experience</label>
+                        <select class="form-control col-md-8 col-lg-8" id="experience">
+                            <option>Default select</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>                        
+                    </div>
+                </div>
+                    <fieldset class="form-group">
+                            <div class="mb-2">Languages</div>
+                            <div class="d-flex flex-wrap">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="eng-check">
+                                    <label class="form-check-label mr-5" for="eng-check">
+                                        English
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="french-check">
+                                    <label class="form-check-label mr-5" for="french-check">
+                                        French
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="german-check">
+                                    <label class="form-check-label mr-5" for="german-check">
+                                        German
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                                <div class="mb-2">Skills</div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="html-check">
+                                        <label class="form-check-label mr-5" for="html-check">
+                                            HTML
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="css-check">
+                                        <label class="form-check-label mr-5" for="css-check">
+                                            CSS
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sass-check">
+                                        <label class="form-check-label mr-5" for="sass-check">
+                                            SASS
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="javascript-check">
+                                        <label class="form-check-label mr-5" for="javascript-check">
+                                            JavaScript
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="react-check">
+                                        <label class="form-check-label mr-5" for="react-check">
+                                            React
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                </div>
+                <div class="form-group">
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                        <label class="form-check-label" for="invalidCheck2">
+                            Agree to terms and conditions
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-primary ml-4" type="submit">Submit form</button>
+            </form>
+        </div>
+    </main>
 
     <!-- Footer section -->
     <footer>
