@@ -24,3 +24,13 @@
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
+
+.img-user {
+  max-height: auto;
+  max-width: auto;
+}
+
+.profile-picture{
+  width: 5em;
+  height: 5em;
+}
