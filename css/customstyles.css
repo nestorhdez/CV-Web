@@ -9,8 +9,12 @@
 }
 
 /* Header */
-#navs {
+#nav-bottom, #nav-top {
   background-color: black !important;
+}
+
+header {
+  margin-bottom: 85px;
 }
 
 /* User's Curriculum Scroll */
@@ -33,4 +37,9 @@
 .profile-picture{
   width: 5em;
   height: 5em;
+}
+
+/* Footer */
+footer {
+  margin-top: 70px;
 }
