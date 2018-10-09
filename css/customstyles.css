@@ -1,0 +1,45 @@
+/* Advanced Search */
+#adv-btn {
+  text-decoration: none;
+  color: #343a40;
+}
+#search-btn {
+  background-color: #6610f2;
+  color: #fff;
+}
+
+/* Header */
+#nav-bottom, #nav-top {
+  background-color: black !important;
+}
+
+header {
+  margin-bottom: 85px;
+}
+
+/* User's Curriculum Scroll */
+.row-1 {
+  overflow: scroll;
+}
+
+/* Cards container */
+.scrolleable {
+  height: 75vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.img-user {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.profile-picture{
+  width: 5em;
+  height: 5em;
+}
+
+/* Footer */
+footer {
+  margin-top: 70px;
+}
