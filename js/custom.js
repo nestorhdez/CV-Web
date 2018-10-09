@@ -17,7 +17,7 @@ function sleep(milliseconds) {
 /**
  *  @name card Constructor of one element.
  */
-function card() {
+function card() { // <== createCard();
   let card = `
   <div class="card mr-3 mb-3 card-user" style="width: 18rem;">
   <div class="card-body text-center">
@@ -43,7 +43,7 @@ function card() {
  * @name createBoxes Function create "n" elements.
  * @param {number} num
  */
-function createBoxes(num) {
+function createBoxes(num) {  // <= Mejorar el creador de tarjetas para poder renderizar por lote.
   const loader = document.querySelector("#loader");
   loader.classList.toggle("hide");
   console.log("Esperando a cargar...");
@@ -71,7 +71,7 @@ container.addEventListener("scroll", () => {
     !hasLoaded
   ) {
     console.log("Llegó al final.");
-    createBoxes(10);
+    createBoxes(10); // <= Invocar el generador de tarjetas por lotes.
     hasLoaded = false;
     console.log("Creado los 10 elementos.");
   }
