@@ -1,5 +1,5 @@
 function takevalues() {
-  $("form").on("submit", function(event) {
+  $("#registerSubmit").on("submit", function(event) {
     console.log("submit send...");
     event.preventDefault();
     console.log($( this ));
@@ -7,7 +7,7 @@ function takevalues() {
     console.log(form.length);
     for (i=0; i<form.length; i++){
         console.log(form[i]);
-        $(".form-control").value;
+        console.log($(".form-control").value);
     }
     });
 }
