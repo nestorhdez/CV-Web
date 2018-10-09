@@ -7,9 +7,7 @@ function takevalues() {
     console.log(form.length);
     for (i=0; i<form.length; i++){
         console.log(form[i]);
-        if ($(".form-control")) {
-            console.log(form[i].value);
-        }
+        $(".form-control").value;
     }
     });
 }

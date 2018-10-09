@@ -17,16 +17,15 @@
 
     <!-- Header section -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="navs">
-            <a href="../index.html"><img src="../img/logo.png" alt="20H Talent Logo" width="50" height="50"></a>
-            <a class="navbar-brand ml-3" href="../index.html">Talent</a>
-
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="nav-top">
+            <a href="index.html" class="navbar-brand ml-3"><img src="img/logo.png" alt="20H Talent Logo" width="50" height="50"> Talent</a>
+            
             <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
                 <div class="ml-auto">
                     <button type="button" class="btn btn-primary btn-outline-primary border-1 border-white bg-dark btn-sm mr-3 text-white">Log-in</button>
                     <button type="button" class="btn btn-secondary btn-outline-primary btn-sm mr-3 border-1 border-white bg-dark text-white">Logout</button>
                 </div>
-                <form id="nav-main-search" action="search.html" method="get" role="search" class="form-inline my-2 my-lg-0">
+                <form id="nav-main-search" action="html/search.html" method="get" role="search" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search">
                     <button class="btn btn-outline-primary my-2 my-sm-0 border-1 border-white bg-dark text-white" type="submit">Search</button>
                 </form>
@@ -235,9 +234,9 @@
 
     <!-- Footer section -->
     <footer>
-        <div class="fixed-bottom">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="navs">
-                <img src="../img/logo.png" alt="20H Talent Logo" width="50" height="50">
+        <div class="">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="nav-bottom">
+                <img src="img/logo.png" alt="20H Talent Logo" width="50" height="50">
                 <!-- <a class="navbar-brand" href="#">Talent</a> -->
 
                 <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -246,12 +245,51 @@
                         <a class="text-white" href="">Contact</a>
                     </div>
                     <div class="ml-auto">
-                        <a class="text-white mr-3" href="">Privacy policy</a>
+                        <!-- Link trigger modal -->
+                        <a href="#" class="text-white mr-3" data-toggle="modal" data-target="#modalConditions">Privacy policy</a>
+
+                        <!-- Modal Conditions -->
+                        <div class="modal fade" id="modalConditions" tabindex="-1" role="dialog" aria-labelledby="modalConditions"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Privacy policy</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2>Personal data protection</h2>
+                                        <p>
+                                            <b>Tech a Lot S.L.</b> (tradenames:
+                                            <em>20H</em>, <em>20H Solutions</em> o <em>20 Talent</em>)
+                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione eveniet,
+                                            quo fugiat temporibus adipisci quisquam totam maxime deleniti dolor
+                                            distinctio ea provident tempora, ut modi rem cupiditate sunt blanditiis
+                                            ipsa.
+
+                                            <address>
+                                                <b>20H Talent</b>
+                                                <br>Avenida Alcalde José Remírez Bethencourt 17,
+                                                <br>CP 35004 - Las Palmas de Gran Canaria, Las Palmas</address>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente minima
+                                            veniam officia inventore nesciunt assumenda dolorum quisquam ipsa eaque
+                                            deleniti quod tenetur facilis ea, fugiat vitae architecto in. Facere,
+                                            error!
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <a class="text-white" href="">&copy 20H Talent</a>
                     </div>
                 </div>
             </nav>
-
         </div>
 
     </footer>
