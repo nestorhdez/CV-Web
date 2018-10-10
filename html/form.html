@@ -18,8 +18,9 @@
     <!-- Header section -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id="nav-top">
-            <a href="../index.html" class="navbar-brand ml-3"><img src="../img/logo.png" alt="20H Talent Logo" width="50" height="50"> Talent</a>
-            
+            <a href="../index.html" class="navbar-brand ml-3"><img src="../img/logo.png" alt="20H Talent Logo" width="50"
+                    height="50"> Talent</a>
+
             <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
                 <div class="ml-auto">
                     <button type="button" class="btn btn-primary btn-outline-primary border-1 border-white bg-dark btn-sm mr-3 text-white">Log-in</button>
@@ -38,23 +39,23 @@
         <div class="container-fluid">
             <div class="mx-auto bg-light w-75 p-3">
 
-                <form  action="/" id="registerSubmit">
+                <form action="/" id="registerSubmit">
                     <div class="form-row mb-2">
                         <div class="col-md-4 mb-3">
-                            <label for="validationDefault01">First name</label>
-                            <input type="text" class="form-control" id="validationDefault01" placeholder="First name"
-                                value="" required>
+                            <label for="validationname">First name</label>
+                            <input type="text" class="form-control" id="validationname" placeholder="First name" value=""
+                                required>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="validationDefault02">Last name</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="Last name"
+                            <label for="validationlastname">Last name</label>
+                            <input type="text" class="form-control" id="validationlastname" placeholder="Last name"
                                 value="" required>
                         </div>
 
                         <div class="form-group">
                             <label for="InputPhone">Phone</label>
-                            <input type="text" class="form-control" id="InputNumber" aria-describedby="numberHelp"
+                            <input type="text" class="form-control" id="InputPhone" aria-describedby="numberHelp"
                                 placeholder="Enter phone number">
                             <small id="numberHelp" class="form-text text-muted">We'll never share your phone with
                                 anyone
@@ -62,25 +63,25 @@
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="validationDefault05">Zip</label>
-                            <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                            <label for="validationZip">Zip</label>
+                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            <label for="InputEmail">Email address</label>
+                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
                                 placeholder="Enter email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                 else.</small>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="validationDefaultUsername">Username</label>
+                            <label for="validationUsername">Username</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
                                 </div>
-                                <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username"
+                                <input type="text" class="form-control" id="validationUsername" placeholder="Username"
                                     aria-describedby="inputGroupPrepend2" required>
                             </div>
                         </div>
@@ -88,21 +89,18 @@
 
                     <div class="form-row mb-2">
                         <div class="col-md-3 mb-3">
-                            <label for="validationDefault03">City</label>
-                            <input type="text" class="form-control" id="validationDefault03" placeholder="City"
-                                required>
+                            <label for="validationCity">City</label>
+                            <input type="text" class="form-control" id="validationCity" placeholder="City" required>
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="validationDefault04">Street</label>
-                            <input type="text" class="form-control" id="validationDefault03" placeholder="Street"
-                                required>
+                            <label for="validationStreet">Street</label>
+                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" required>
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="validationDefault05">State</label>
-                            <input type="text" class="form-control" id="validationDefault04" placeholder="State"
-                                required>
+                            <label for="validationState">State</label>
+                            <input type="text" class="form-control" id="validationState" placeholder="State" required>
                         </div>
                     </div>
 
@@ -123,87 +121,65 @@
                     </div>
 
                     <fieldset class="form-group mb-3">
-                        <div class="mb-2">Languages</div>
-                        <div class="d-flex flex-wrap">
+                        <div class="mb-2" >Languages</div>
+                        <div class="d-flex flex-wrap" id="languages">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="eng-check">
-                                <label class="form-check-label mr-5" for="eng-check">
-                                    English
-                                </label>
+                                <label class="form-check-label mr-5" for="eng-check">English</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="french-check">
-                                <label class="form-check-label mr-5" for="french-check">
-                                    French
-                                </label>
+                                <label class="form-check-label mr-5" for="french-check">French</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="german-check">
-                                <label class="form-check-label mr-5" for="german-check">
-                                    German
-                                </label>
+                                <label class="form-check-label mr-5" for="german-check">German</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="spanish-check">
-                                <label class="form-check-label mr-5" for="spanish-check">
-                                    Spanish
-                                </label>
+                                <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
                             </div>
                         </div>
                     </fieldset>
 
                     <fieldset class="form-group mb-3">
                         <div class="mb-2">Skills</div>
-                        <div class="d-flex flex-wrap">
+                        <div class="d-flex flex-wrap" id="skills">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="html-check">
-                                <label class="form-check-label mr-5" for="html-check">
-                                    HTML
-                                </label>
+                                <label class="form-check-label mr-5" for="html-check">HTML</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="css-check">
-                                <label class="form-check-label mr-5" for="css-check">
-                                    CSS
-                                </label>
+                                <label class="form-check-label mr-5" for="css-check">CSS</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="sass-check">
-                                <label class="form-check-label mr-5" for="sass-check">
-                                    SASS
-                                </label>
+                                <label class="form-check-label mr-5" for="sass-check">SASS</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="javascript-check">
-                                <label class="form-check-label mr-5" for="javascript-check">
-                                    JavaScript
-                                </label>
+                                <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="react-check">
-                                <label class="form-check-label mr-5" for="react-check">
-                                    React
-                                </label>
+                                <label class="form-check-label mr-5" for="react-check">React</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="git-check">
-                                <label class="form-check-label mr-5" for="git-check">
-                                    Git
-                                </label>
+                                <label class="form-check-label mr-5" for="git-check">Git</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="github-check">
-                                <label class="form-check-label mr-5" for="github-check">
-                                    Github
-                                </label>
+                                <label class="form-check-label mr-5" for="github-check">Github</label>
                             </div>
                         </div>
                     </fieldset>
 
                     <div class="form-row mb-2">
                         <div class="col-md-3 mb-3">
-                            <label for="validationDefault03">Personal Repository</label>
-                            <input type="text" class="form-control" id="validationDefault03" placeholder="Web direction"
+                            <label for="validationRepository">Personal Repository</label>
+                            <input type="text" class="form-control" id="validationRepository" placeholder="Web direction"
                                 required>
                         </div>
                     </div>
@@ -221,7 +197,8 @@
                         <div class="form-check ml-4">
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                             <label class="form-check-label" for="invalidCheck2">
-                                Agree to terms and conditions  <!-- Need linked to terms and conditions. -->
+                                Agree to terms and conditions
+                                <!-- Need linked to terms and conditions. -->
                             </label>
                         </div>
                     </div>
@@ -246,7 +223,8 @@
                     </div>
                     <div class="ml-auto">
                         <!-- Link trigger modal -->
-                        <a href="#" class="text-white mr-3" data-toggle="modal" data-target="#modalConditions">Privacy policy</a>
+                        <a href="#" class="text-white mr-3" data-toggle="modal" data-target="#modalConditions">Privacy
+                            policy</a>
 
                         <!-- Modal Conditions -->
                         <div class="modal fade" id="modalConditions" tabindex="-1" role="dialog" aria-labelledby="modalConditions"
