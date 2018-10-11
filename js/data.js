@@ -1,3 +1,21 @@
+function NewUser(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository) {
+    this.name = name;
+    this.lastname = lastname;
+    this.phone = phone;
+    this.zip = zip;
+    this.email = email;
+    this.username = username;
+    this.city = city;
+    this.street = street;
+    this.state = state;
+    this.explab = explab;
+    this.languages = languages;
+    this.skills = skills;
+    this.repository = repository;
+}
+
+let registered;
+
 $("#registerSubmit").submit(function(event) {
     console.log("submit send...");
     event.preventDefault();
@@ -25,7 +43,9 @@ $("#registerSubmit").submit(function(event) {
 
     console.log(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
 
-    return NewUser = [name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository];
+    registered = new NewUser(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
+    
+    return registered;
     });
 
 console.log(NewUser);
