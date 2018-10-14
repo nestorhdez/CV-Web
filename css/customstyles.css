@@ -18,8 +18,8 @@ header {
 }
 
 /* User's Curriculum Scroll */
-.row-1 {
-  overflow: scroll;
+#inner-carousel {
+  height: 300px;
 }
 
 /* Cards container */
