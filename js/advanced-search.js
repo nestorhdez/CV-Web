@@ -15,7 +15,7 @@ $("#search-btn").on("click", function() {
 for (i = 0; i < 8;){
   if ($("input[type=checkbox]").is(':checked')) {
     var check = $(".form-check-label").html();
-    $(".area").append('<span class="badge">' + i.val() + "</span");
+    $(".area").append('<span class="badge">' + check + "</span");
   }
 }
 
