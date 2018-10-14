@@ -21,8 +21,8 @@ function createCard() {
     jsonData.forEach(function(val) {
         let card = (`
 
-            <div class="card mr-3 mb-3 card-user" style="width: 18rem;">
-                <div class="card-body text-center">
+        <div class="card mr-3 mb-3 card-user shadow list-group-item-action" style="width: 18rem;">
+        <div class="card-body text-center">
                 <div class="d-flex flex-column justify-content-center mb-3">
                 <div class="d-flex mx-auto profile-picture mb-1"><a href="#" class="d-flex profile-picture" id="${val.id}"
                         data-toggle="modal" data-target="#ModalCenter"><img class="img-user rounded-circle" src="../img/default-profile-picture.jpg"></a>
@@ -36,8 +36,10 @@ function createCard() {
                         <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
                         <p><b>Phone: </b>${val.phone}</p>
 
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Card link</a>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-info btn-sm">Edit</button>
+                            <button type="button" class="btn btn-primary btn-sm">Delete</button>
+                        </div>
                         
                     </div>
                 </div>
