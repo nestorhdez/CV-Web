@@ -5,16 +5,38 @@ $("#search-btn").on("click", function() {
   $(".area").append('<span class="badge">' + shown + "</span> ");
   shown = $("#experience").val();
   $(".area").append('<span class="badge">' + shown + "</span> ");
-  var check = $('input[name="language[]"]:checked').val();
-  console.log("valor check: " + check);
-  if (check == "on") {
-    $(".form-check-label").append('<span class="badge">' + (label)'.innerHtml'); //me faltael contenido del label//
-  } else if (check == "off") {
-    $(".form-check-label").hide();
+  checkboxElements = new Array();
+  var inputchecked = document.getElementsByTagName("input");
+  for (var i = 0; i < inputchecked; i++) {
+    if (inputchecked[i].checked == true) {
+      checkboxElements.push(inputchecked[i]);
+    }
   }
-  $(".area").append('<span class="badge">' + check + "</span> ");
-  check = $('input[name="skilss[]"]:checked').val();
-  $(".area").append('<span class="badge">' + shown + "</span> ");
+
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var check = $("#lang-2").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var check = $("#lang-3").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var checked = $("#html-check").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var checked = $("#html-check").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var checked = $("#html-check").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
+  // if ($("input[type=checkbox]").is(':checked')) {
+  //   var checked = $("#html-check").html();
+  //   $(".area").append('<span class="badge">' + check + "</span");
+  // }
 });
 
 $("#adv-btn").on("click", function() {
