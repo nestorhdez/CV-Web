@@ -5,13 +5,9 @@ $("#search-btn").on("click", function() {
   $(".area").append('<span class="badge">' + shown + "</span> ");
   shown = $("#experience").val();
   $(".area").append('<span class="badge">' + shown + "</span> ");
-  checkboxElements = new Array();
-  var inputchecked = document.getElementsByTagName("input");
-  for (var i = 0; i < inputchecked; i++) {
-    if (inputchecked[i].checked == true) {
-      checkboxElements.push(inputchecked[i]);
-    }
-  }
+
+
+  // convertir todo lo de abajo en un for o for.each
 
   // if ($("input[type=checkbox]").is(':checked')) {
   //   var check = $("#lang-2").html();
@@ -38,6 +34,7 @@ $("#search-btn").on("click", function() {
   //   $(".area").append('<span class="badge">' + check + "</span");
   // }
 });
+
 
 $("#adv-btn").on("click", function() {
   $(".area").hide();
