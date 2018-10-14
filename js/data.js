@@ -44,7 +44,7 @@ $("#registerSubmit").submit(function(event) {
     console.log(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
 
     registered = new NewUser(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
-    
+    this.reset();
     return registered;
     });
 
