@@ -14,7 +14,7 @@
 }
 
 header {
-  margin-bottom: 85px;
+  margin-bottom: 0px;
 }
 
 /* User's Curriculum Scroll */
@@ -41,5 +41,5 @@ header {
 
 /* Footer */
 footer {
-  margin-top: 70px;
+  margin-top: 5px;
 }
