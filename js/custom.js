@@ -1,7 +1,6 @@
 let hasLoaded = false;
 const container = document.querySelector("#card-container");
 
-
 /**
  * @name sleep function to simulation waiting data.
  * @param {*} milliseconds
@@ -27,7 +26,7 @@ function card() {
           <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
         </div>
         <h5 class="card-title d-inline user-name">name</h5>
-       </div>
+      </div>
       <div class="text-left">
       <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
       <p class="m-0 city-user"><b>City: </b>address.city</p>
@@ -81,6 +80,5 @@ container.addEventListener("scroll", () => {
     console.log("Creado los 10 elementos.");
   }
 });
-
 
 console.log("This running.");
