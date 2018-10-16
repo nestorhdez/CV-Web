@@ -13,8 +13,17 @@
   background-color: black !important;
 }
 
+body {
+  margin-bottom: 7em;
+}
+
 header {
   margin-bottom: 0px;
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
 }
 
 /* User's Curriculum Scroll */
@@ -24,7 +33,7 @@ header {
 
 /* Cards container */
 .scrolleable {
-  height: 75vh;
+  height: 77vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
@@ -37,11 +46,6 @@ header {
 .profile-picture{
   width: 5em;
   height: 5em;
-}
-
-/* Footer */
-footer {
-  margin-top: 5px;
 }
 
 /* Fix Modal in Fixed container */

@@ -25,7 +25,7 @@ $("#registerSubmit").submit(function(event) {
     let lastname = $("#validationlastname").val();
     let phone = $("#InputPhone").val();
     let zip = $("#validationZip").val();
-    let email = $("#InputEmail").val();
+    let email = $("#validationInputEmail").val();
     let username = $("#validationUsername").val();
     let password = $("#validationInputPassword").val();
     let city = $("#validationCity").val();
