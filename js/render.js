@@ -20,30 +20,28 @@ function createCard() {
 
     jsonData.forEach(function(val) {
         let card = (`
-
         <div class="card mr-3 mb-3 card-user shadow list-group-item-action" style="width: 18rem;">
-        <div class="card-body text-center">
+            <div class="card-body text-center">
                 <div class="d-flex flex-column justify-content-center mb-3">
-                <div class="d-flex mx-auto profile-picture mb-1"><a href="#" class="d-flex profile-picture" id="${val.id}"
-                        data-toggle="modal" data-target="#ModalCenter"><img class="img-user rounded-circle" src="../img/default-profile-picture.jpg"></a>
-                </div>
-                        <h5 class="card-title d-inline user-name">${val.name}</h5>
+                    <div class="d-flex mx-auto profile-picture mb-1">
+                        <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
                     </div>
-                    <div class="text-left">
-                        <h6 class="card-subtitle mb-3">Contact information</h6>
-            
-                        <p class="m-0 city-user"><b>City: </b>${val.address.city}</p>
-                        <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
-                        <p><b>Phone: </b>${val.phone}</p>
+                    <h5 class="card-title d-inline user-name">${val.name}</h5>
+                </div>
+                <div class="text-left">
+                    <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                    <p class="m-0 city-user"><b>City: </b>${val.address.city}</p>
+                    <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
+                    <p><b>Phone: </b>${val.phone}</p>
 
-                        <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-info btn-sm">Edit</button>
-                            <button type="button" class="btn btn-primary btn-sm">Delete</button>
-                        </div>
-                        
+                    <div class="d-flex justify-content-between align-items-end">
+                        <button type="button" class="btn btn-info btn-sm">Edit</button>
+                        <button type="button" class="btn btn-info btn-sm" id="fulldata" data-toggle="modal" data-target="#ModalCenter">Detail</button>
+                        <button type="button" class="btn btn-primary btn-sm">Delete</button>
                     </div>
                 </div>
             </div>
+        </div>
         `);
 
         document.getElementById('card-container').innerHTML += card;
