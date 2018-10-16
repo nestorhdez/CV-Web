@@ -1,10 +1,11 @@
-function NewUser(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository) {
+function NewUser(name, lastname, phone, zip, email, username, password, city, street, state, explab, languages, skills, repository) {
     this.name = name;
     this.lastname = lastname;
     this.phone = phone;
     this.zip = zip;
     this.email = email;
     this.username = username;
+    this.password = password;
     this.city = city;
     this.street = street;
     this.state = state;
@@ -26,6 +27,7 @@ $("#registerSubmit").submit(function(event) {
     let zip = $("#validationZip").val();
     let email = $("#InputEmail").val();
     let username = $("#validationUsername").val();
+    let password = $("#validationInputPassword").val();
     let city = $("#validationCity").val();
     let street = $("#validationStreet").val();
     let state = $("#validationState").val();
@@ -41,9 +43,9 @@ $("#registerSubmit").submit(function(event) {
 
     let repository = $("#validationRepository").val();
 
-    console.log(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
+    console.log(name, lastname, phone, zip, email, username, password, city, street, state, explab, languages, skills, repository);
 
-    registered = new NewUser(name, lastname, phone, zip, email, username, city, street, state, explab, languages, skills, repository);
+    registered = new NewUser(name, lastname, phone, zip, email, username, password, city, street, state, explab, languages, skills, repository);
     this.reset();
     return registered;
     });

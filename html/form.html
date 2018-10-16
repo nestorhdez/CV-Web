@@ -74,16 +74,6 @@
                                 else.</small>
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationUsername">Username</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                </div>
-                                <input type="text" class="form-control" id="validationUsername" placeholder="Username"
-                                    aria-describedby="inputGroupPrepend2" required>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="form-row mb-2">
@@ -105,6 +95,23 @@
 
                     <div class="form-row mb-2">
                         <div class="col-md-3 mb-3">
+                            <label for="validationUsername">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationUsername" value="" name="username" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationInputPassword">Password</label>
+                            <input type="password" class="form-control" id="validationInputPassword" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-3 mb-3">
                             <label for="validationDefault06">Laboral Experience</label>
                             <select class="form-control col-md-8 col-lg-8" id="experience">
                                 <option>Years of experience</option>
@@ -120,7 +127,7 @@
                     </div>
 
                     <fieldset class="form-group mb-3">
-                        <div class="mb-2" >Languages</div>
+                        <div class="mb-2">Languages</div>
                         <div class="d-flex flex-wrap" id="languages">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="eng-check">
