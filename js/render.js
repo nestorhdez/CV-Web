@@ -48,7 +48,7 @@ function ListUsers() {
 
                             <div class="d-flex justify-content-between align-items-end">
                                 <button type="button" class="btn btn-info btn-sm">Edit</button>
-                                <button type="button" class="btn btn-info btn-sm" id="fulldata" data-toggle="modal" data-target="#ModalCenter">Detail</button>
+                                <button type="button" class="btn btn-modal btn-info btn-sm" id="${val.id}" data-toggle="modal" data-target="#ModalCenter">Detail</button>
                                 <button type="button" class="btn btn-primary btn-sm">Delete</button>
                             </div>
                         </div>
@@ -60,7 +60,35 @@ function ListUsers() {
 
         });
     
+        this.renderModal(data);
+
     };
+
+    //Change the data of the modal when click on a user card
+    this.renderModal = function(data) {
+        $('.btn-modal').click(function(e){
+            console.log('click done');
+            console.log(data[e.target.id - 1]);
+            console.log('User id ' + e.target.id);
+            let user = data[e.target.id - 1];
+            $('#ModalCenterTitle').empty().html(user.name);
+
+            $('#city').empty().html(user.address.city);
+
+            $('#street').empty().html(user.address.street);
+            
+            $('#zipcode').empty().html(user.address.zipcode);
+
+            $('#email').empty().html(user.email);
+
+            $('#phone').empty().html(user.phone);
+           
+            $('#website').empty().html(user.website);
+
+            $('#company').empty().html(user.company.name);
+
+        })
+    }
 
 }
 
