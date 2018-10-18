@@ -5,7 +5,7 @@ function ListUsers() {
     this.url = "https://jsonplaceholder.typicode.com/users";
 
     //Call the ajax and get the list of users
-    this.getAllUsers = function ( url, callback  ) {
+    this.getAllUsers = function ( url, callback, val ) {
 
         $.ajax ({
             url: url,
@@ -14,7 +14,7 @@ function ListUsers() {
 
             //this control do optional the callback
             if(typeof callback == "function" ){
-                callback( data );
+                callback( data, val );
                 console.log("Callback parameter is a function");
             }else{
                 console.log("Callback parameter isn't a function");
@@ -24,11 +24,11 @@ function ListUsers() {
 
     };
 
-    this.renderUsers = function ( data ) {
-        // console.log(data);
+    this.renderUsers = function ( arr ) {
+        console.log(arr);
         
         //Create a card for each user
-        data.forEach(function(val) {
+        arr.forEach(function(val) {
             
             let card = (`
 
@@ -59,36 +59,37 @@ function ListUsers() {
         document.getElementById('card-container').innerHTML += card;
 
         });
+        
+        //Change the data of the modal when click on a user card
+        //It's indise of renderUsers because it only has to work with the cards that are already rendered.
+        this.renderModal = function(arr) {
+            $('.btn-modal').click(function(e){
+                console.log('click done');
+                console.log(arr[e.target.id - 1]);
+                console.log('User id ' + e.target.id);
+                let user = arr[e.target.id - 1];
+                $('#ModalCenterTitle').empty().html(user.name);
     
-        this.renderModal(data);
-
-    };
-
-    //Change the data of the modal when click on a user card
-    this.renderModal = function(data) {
-        $('.btn-modal').click(function(e){
-            console.log('click done');
-            console.log(data[e.target.id - 1]);
-            console.log('User id ' + e.target.id);
-            let user = data[e.target.id - 1];
-            $('#ModalCenterTitle').empty().html(user.name);
-
-            $('#city').empty().html(user.address.city);
-
-            $('#street').empty().html(user.address.street);
-            
-            $('#zipcode').empty().html(user.address.zipcode);
-
-            $('#email').empty().html(user.email);
-
-            $('#phone').empty().html(user.phone);
-           
-            $('#website').empty().html(user.website);
-
-            $('#company').empty().html(user.company.name);
-
-        })
-    }
+                $('#city').empty().html(user.address.city);
+    
+                $('#street').empty().html(user.address.street);
+                
+                $('#zipcode').empty().html(user.address.zipcode);
+    
+                $('#email').empty().html(user.email);
+    
+                $('#phone').empty().html(user.phone);
+               
+                $('#website').empty().html(user.website);
+    
+                $('#company').empty().html(user.company.name);
+    
+            })
+        }
+    
+        this.renderModal(arr);
+        
+    }; 
 
 }
 
@@ -96,18 +97,17 @@ function ListUsers() {
 //Object FilterUsers
 function FilterUsers() {
 
-    this.filterName = function ( data ){
+    //The callback parameter has to be passed on the getAllUsers function
+    this.filterName = function ( arr, callback ){
 
         let nameInput = document.querySelector("#input-name").value.toLowerCase();
 
-        let filterName = data.filter(user => user.name.toLowerCase().indexOf(nameInput) != -1);
+        let filterName = arr.filter(user => user.name.toLowerCase().indexOf(nameInput) != -1);
         console.log(filterName);
-        
-        let list = new ListUsers;
         
         if(filterName.length > 0 ){
             $( "#card-container" ).empty();
-            list.renderUsers( filterName );
+            callback( filterName );
         }else{
             $( "#card-container" ).empty().html("<h1>There are not any coincidence</h1>");
         }
@@ -116,6 +116,7 @@ function FilterUsers() {
 
 }
 
+//Calling the FilterUsers and createCards functions
 let list = new ListUsers;
 let printUsers = new FilterUsers;
 
@@ -123,5 +124,5 @@ $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
 
-    list.getAllUsers(list.url, printUsers.filterName);
+    list.getAllUsers(list.url, printUsers.filterName, list.renderUsers);
 })
