@@ -60,42 +60,37 @@ function ListUsers() {
 
         });
         
-        //Change the data of the modal when click on a user card
-        //It's indise of renderUsers because it only has to work with the cards that are already rendered.
-        this.renderModal = function(arr) {
-            $('.btn-modal').click(function(e){
-                console.log('click done');
-                console.log(arr[e.target.id - 1]);
-                console.log('User id ' + e.target.id);
-                let user = arr[e.target.id - 1];
-                $('#ModalCenterTitle').empty().html(user.name);
-    
-                $('#city').empty().html(user.address.city);
-    
-                $('#street').empty().html(user.address.street);
-                
-                $('#zipcode').empty().html(user.address.zipcode);
-    
-                $('#email').empty().html(user.email);
-    
-                $('#phone').empty().html(user.phone);
-               
-                $('#website').empty().html(user.website);
-    
-                $('#company').empty().html(user.company.name);
-    
-            })
-        }
-    
+        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
         this.renderModal(arr);
         
-    }; 
+    }.bind(this);
 
-}
+    //Change the data of the modal when click on a user card
+    //It's indise of renderUsers because it only has to work with the cards that are already rendered.
+    this.renderModal = function(arr) {
+        $('.btn-modal').click(function(e){
+            console.log('click done');
+            console.log(arr[e.target.id - 1]);
+            console.log('User id ' + e.target.id);
+            let user = arr[e.target.id - 1];
+            $('#ModalCenterTitle').empty().html(user.name);
 
+            $('#city').empty().html(user.address.city);
 
-//Object FilterUsers
-function FilterUsers() {
+            $('#street').empty().html(user.address.street);
+            
+            $('#zipcode').empty().html(user.address.zipcode);
+
+            $('#email').empty().html(user.email);
+
+            $('#phone').empty().html(user.phone);
+            
+            $('#website').empty().html(user.website);
+
+            $('#company').empty().html(user.company.name);
+
+        })
+    }
 
     //The callback parameter has to be passed on the getAllUsers function
     this.filterName = function ( arr, callback ){
@@ -107,22 +102,21 @@ function FilterUsers() {
         
         if(filterName.length > 0 ){
             $( "#card-container" ).empty();
-            callback( filterName );
+            this.renderUsers( filterName );
         }else{
             $( "#card-container" ).empty().html("<h1>There are not any coincidence</h1>");
         }
         
-    }
+    }.bind(this);
 
 }
 
-//Calling the FilterUsers and createCards functions
+//Calling the FilterUsers and createCards functions on form submit
 let list = new ListUsers;
-let printUsers = new FilterUsers;
 
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
 
-    list.getAllUsers(list.url, printUsers.filterName, list.renderUsers);
+    list.getAllUsers(list.url, list.filterName);
 })
