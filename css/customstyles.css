@@ -56,3 +56,24 @@ footer {
 .modal {
   z-index: 100001 !important;
 }
+
+.bg-coolgray{
+  background-color: #d5d6d2;
+}
+
+.bg-cobalt{
+  background-color: #3A5199;
+}
+
+.btn-cobalt{
+  background-color: #3A5199;
+  color:white;
+}
+
+.btn-cobalt:hover{
+  background-color: rgb(176, 190, 236)
+}
+
+.text-cobalt {
+  color: #3A5199;
+}
