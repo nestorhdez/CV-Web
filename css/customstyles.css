@@ -56,3 +56,64 @@ footer {
 .modal {
   z-index: 100001 !important;
 }
+
+.bg-coolgray{
+  background-color: #d5d6d2;
+}
+
+.bg-cobalt{
+  background-color: #3A5199;
+}
+
+.border-cobalt{
+  color: #3A5199;
+}
+
+.btn-cobalt{
+  background-color: #3A5199;
+  color:white;
+}
+
+.btn-cobalt:hover{
+  background-color: rgb(176, 190, 236);
+  color: #3A5199;
+}
+
+.icon-cobalt{
+  background-color: rgba(26,122,255,.1);
+  color: #3A5199;
+}
+
+.text-cobalt {
+  color: #3A5199;
+}
+
+/* ============ */
+/* Colors of landpage for companies */
+/* =========== */
+
+.blue-gray {
+  color: #7ba4a8;
+}
+
+.bg-blue-gray{
+  background-color: #7ba4a8;
+}
+
+.btn-blue-gray {
+  background-color: #7ba4a8; 
+  color: white;
+}
+
+.btn-blue-gray:hover {
+  background-color: #dddede;
+  color: black;
+}
+
+.link-blue-gray {
+  border-color: #7ba4a8;
+}
+
+.link-blue-gray:hover {
+  color: #628083;
+}
