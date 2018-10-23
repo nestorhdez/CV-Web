@@ -65,13 +65,22 @@ footer {
   background-color: #3A5199;
 }
 
+.border-cobalt{
+  color: #3A5199;
+}
+
 .btn-cobalt{
   background-color: #3A5199;
   color:white;
 }
 
 .btn-cobalt:hover{
-  background-color: rgb(176, 190, 236)
+  background-color: rgb(176, 190, 236);
+  color: #3A5199;
+}
+
+.icon-cobalt{
+  color: #3A5199;
 }
 
 .text-cobalt {
