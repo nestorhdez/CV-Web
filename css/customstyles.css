@@ -36,6 +36,11 @@ footer {
   overflow: scroll;
 }
 
+/* disable resize textarea */
+.noresize {
+  resize: none; 
+}
+
 /* Cards container */
 .scrolleable {
   height: 77vh;
