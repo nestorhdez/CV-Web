@@ -89,7 +89,7 @@ footer {
 }
 
 /* ============ */
-/* Colors of landpage for companies */
+/* Landpage for companies */
 /* =========== */
 
 .blue-gray {
@@ -110,10 +110,13 @@ footer {
   color: black;
 }
 
-.link-blue-gray {
-  border-color: #7ba4a8;
+.btn-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
+  text-transform: initial!important;
 }
 
-.link-blue-gray:hover {
-  color: #628083;
+.input-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
 }
