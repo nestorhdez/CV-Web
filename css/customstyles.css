@@ -1,3 +1,16 @@
+body {
+  margin-bottom: 7em;
+}
+
+header {
+  margin-bottom: 0px;
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
+}
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -13,17 +26,9 @@
   background-color: black !important;
 }
 
-body {
-  margin-bottom: 7em;
-}
-
-header {
-  margin-bottom: 0px;
-}
-
-/* Footer */
-footer {
-  margin-top: 5px;
+.navbar-brand>img {
+  max-height: 50px;
+  width: auto;
 }
 
 /* User's Curriculum Scroll */
