@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Goole fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700%7CMerriweather+Sans:300,400,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/theme.min.css">
+    <link rel="stylesheet" href="../css/customstyles.css">
+    <title>More Info</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" id="nav-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <a href="../index.html" class="navbar-brand ml-3"><img src="../img/logo.png" alt="20H Talent Logo"
+                        width="50" height="50"> Talent</a>
+                <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-primary btn-outline-primary border-1 border-white bg-dark btn-sm mr-3 text-white">Log-in</button>
+                        <button type="button" class="btn btn-secondary btn-outline-primary btn-sm mr-3 border-1 border-white bg-dark text-white">Logout</button>
+                    </div>
+                    <form id="nav-main-search" action="search.html" method="get" role="search" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0 border-1 border-white bg-dark text-white"
+                            type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="content">
+
+        <!-- Hero -->
+        <div class="container">
+            <div class="row justify-content-lg-between align-items-lg-center py-5">
+                <div class="col-lg-6">
+                    <h1 class="display-4">We help you find your job</h1>
+                    <p class="lead mb-4">Tell us the profile you are looking for, the needs to cover and we will help
+                        you find and train it.</p>
+                    <a class="btn btn-pill btn-cobalt" href="#" role="button" data-toggle="modal" data-target="#FormContact">More
+                        info</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="../img/people-office-group-team.jpg" class="d-none d-lg-block img-fluid img-thumbnail"
+                        alt="Creation process">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="FormContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Contact Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Contact Form-->
+                        <!--Form with header-->
+                        <form action="#"" method=" post">
+                            <div class="card border-primary rounded-0">
+                                <div class="card-header p-0">
+                                    <div class="bg-cobalt text-white text-center py-2">
+                                        <h3><i class="fa fa-envelope"></i> Contact us</h3>
+                                        <p class="m-0">We will gladly help you</p>
+                                    </div>
+                                </div>
+                                <div class="card-body p-3">
+
+                                    <!--Body-->
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-user text-cobalt"></i></div>
+                                            </div>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name and Surname"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-mobile-alt text-cobalt"></i></i></div>
+                                            </div>
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Contact phone"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-envelope text-cobalt"></i></div>
+                                            </div>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="example@gmail.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-comment text-cobalt"></i></div>
+                                            </div>
+                                            <textarea class="form-control" placeholder="Send us your message" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <input type="submit" value="Send" class="btn btn-cobalt btn-block rounded-0 py-2">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <!--Form with header-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-coolgray" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-skew bg-skew-light">
+
+            <!-- Icon blocks -->
+            <hr class="sep border-primary">
+            <div class="container">
+                <div class="text-center">
+                    <h3 class="mb-4">Front-end Developer, skills that we empower</h2>
+                </div>
+                <div class="row pt-5">
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-html5" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Html5</h3>
+                            <p class="mb-md-0">It is the fifth and current major version of the HTML standard, and
+                                subsumes XHTML.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-css3-alt" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">CSS3</h3>
+                            <p class="mb-md-0"> CSS is a cornerstone technology of the World Wide Web, alongside HTML
+                                and JavaScript.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-sass" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Sass Files</h3>
+                            <p class="mb-md-0">Easily customize your site modifying the source scss files.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-font-awesome-flag" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Font Awesome</h3>
+                            <p class="mb-md-0">More than 1200 vector icons from the web's most popular icon set.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fas fa-code" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Valid Code</h3>
+                            <p class="mb-md-0">W3C valid code to ensure the site works properly on all major browsers.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-git" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Git</h3>
+                            <p class="mb-md-0">Gitflow, automated workflow for your development tasks.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-js" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">JavaScript</h3>
+                            <p class="mb-md-0">It is a language which is also characterized as dynamic, weakly typed,
+                                prototype-based and multi-paradigm.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fas fa-bold" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">Bootstrap</h3>
+                            <p class="mb-md-0">Bootstrap is the most popular HTML, CSS, and JavaScript framework for
+                                developing responsive, mobile-first websites.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-5">
+                        <div class="pr-lg-3">
+                            <span class="icon icon-cobalt mb-3">
+                                <i class="icon-inner fab fa-react" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="h4">React</h3>
+                            <p class="mb-md-0">React can be used as a base in the development of single-page or mobile
+                                applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to action -->
+            <hr class="sep border-primary">
+            <div class="container py-5">
+                <div class="text-center">
+                    <h2 class="mb-4">Let us help you improve your selection of candidates</h2>
+                    <div class="mb-4">
+                        <a class="btn btn-pill btn-cobalt" href="form.html" role="button">Sign up now</a>
+                    </div>
+                    <a class="link-cta" href="#">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="container">
+                <h2 class="h3 mt-5 mb-4 text-center">What the students saying…</h2>
+                <div class="row py-5">
+                    <div class="col-md">
+                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                            <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Leo Gill">
+                            <p class="text-secondary">Boost theme is awesome! We've seen amazing results already.</p>
+                            <cite class="small text-uppercase">Leo Gill</cite>
+                        </blockquote>
+                    </div>
+                    <div class="col-md">
+                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                            <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Renee Sims">
+                            <p class="text-secondary">It really saves me time and effort. Boost theme is exactly what
+                                our business has been lacking.</p>
+                            <cite class="small text-uppercase">Renee Sims</cite>
+                        </blockquote>
+                    </div>
+                    <div class="col-md">
+                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                            <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Dallas Kwok">
+                            <p class="text-secondary">Boost theme impressed me on multiple levels.</p>
+                            <cite class="small text-uppercase">Dallas Kwok</cite>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end bg-skew -->
+
+        <!-- Features -->
+        <div class="container">
+            <div class="row justify-content-lg-between align-items-lg-center py-4 py-lg-5">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h2>If you get to the end of the road</h2>
+                    <hr class="sep border-primary ml-0 mb-3 text-left">
+                    <p>If you show your interest, desire to learn and proactivity in training, we will ensure you a
+                        job.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="../img/front-end-web-developer_we.jpeg" class="img-fluid img-thumbnail" alt="Finance results">
+                </div>
+            </div>
+            <div class="row justify-content-lg-between align-items-lg-center py-4 py-lg-5">
+                <div class="col-lg-5 order-lg-2 mb-4 mb-lg-0">
+                    <h2>We provide you with the selection</h2>
+                    <hr class="sep border-primary ml-0 mb-3 text-left">
+                    <p>We deal with the negotiation of the contract and conditions, always counting on your opinion and
+                        possibilities.</p>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <img src="../img/business-negotiation.jpg" class="img-fluid img-thumbnail" alt="Finance results">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bg-skew bg-skew-light">
+
+            <!-- Accordion -->
+            <div class="container">
+                <h2 class="my-5 text-center">Questions</h2>
+                <div class="row justify-content-lg-center pb-5">
+                    <div class="col-lg-9">
+                        <div class="accordion" id="accordionQuestions">
+                            <div class="card shadow mb-2">
+                                <div class="card-header" id="headingOne">
+                                    <a class="collapsed" href="#collapseOne" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="false" aria-controls="collapseOne">
+                                        <h3 class="card-title">What methods of payments are supported? <i class="fas fa-angle-down float-right rotate-icon"></i></h3>
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionQuestions">
+                                    <div class="card-body">
+                                        <p>You can purchase via any major credit/debit card (via Stripe) or with your
+                                            Paypal account. We don't support
+                                            cryptocurrencies or invoicing at this time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-2">
+                                <div class="card-header" id="headingTwo">
+                                    <a class="collapsed" href="#collapseTwo" data-toggle="collapse" data-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                        <h3 class="card-title">How much do you have to pay for the bootcamp? <i class="fas fa-angle-down float-right rotate-icon"></i></h3>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionQuestions">
+                                    <div class="card-body">
+                                        <p>You will be informed before starting the monthly payment to pay, if you
+                                            decide not to continue you can recover the monthly payment but not the
+                                            previous months.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-2">
+                                <div class="card-header" id="headingThree">
+                                    <a class="collapsed" href="#collapseThree" data-toggle="collapse" data-target="#collapseThree"
+                                        aria-expanded="false" aria-controls="collapseThree">
+                                        <h3 class="card-title">Is it safe that I will have a contract? <i class="fas fa-angle-down float-right rotate-icon"></i></h3>
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionQuestions">
+                                    <div class="card-body">
+                                        <p>Before starting the bootcamp we do not make sure that we have enough
+                                            interested companies to be able to give a contract to each student within
+                                            the limit of places, but remember, you have to get to the end.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="sep border-primary">
+
+            <!-- Call to action -->
+            <div class="container py-5">
+                <div class="text-center">
+                    <h2 class="mb-4">Are you ready to start?</h2>
+                    <div class="mb-4">
+                        <a class="btn btn-pill btn-cobalt" href="form.html" role="button">Sign up now</a>
+                    </div>
+                    <a class="link-cta" href="#">Learn More</a>
+                </div>
+            </div>
+
+        </div><!-- end bg-skew -->
+    </main>
+
+    <!-- Footer section -->
+    <footer class="mt-3">
+        <div class="container p-0">
+            <nav class="fixed-bottom navbar navbar-expand-lg navbar-dark bg-dark mt-auto" id="nav-bottom">
+                <img src="../img/logo.png" alt="20H Talent Logo" width="50" height="50">
+                <!-- <a class="navbar-brand" href="#">Talent</a> -->
+
+                <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <div class="ml-3 d-flex justify-content-start">
+                        <a class="text-white mr-3" href="">About</a>
+                        <a class="text-white" href="">Contact</a>
+                    </div>
+                    <div class="ml-auto">
+                        <!-- Link trigger modal -->
+                        <a href="#" class="text-white mr-3" data-toggle="modal" data-target="#modalConditions">Privacy
+                            policy</a>
+                        <a class="text-white" href="">&copy 20H Talent</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Modal Conditions -->
+            <div class="modal fade" id="modalConditions" tabindex="-1" role="dialog" aria-labelledby="modalConditions"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Privacy policy</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Personal data protection</h2>
+                            <p>
+                                <b>Tech a Lot S.L.</b> (tradenames:
+                                <em>20H</em>, <em>20H Solutions</em> o <em>20 Talent</em>)
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
+                                eveniet,
+                                quo fugiat temporibus adipisci quisquam totam maxime deleniti dolor
+                                distinctio ea provident tempora, ut modi rem cupiditate sunt blanditiis
+                                ipsa.
+
+                                <address>
+                                    <b>20H Talent</b>
+                                    <br>Avenida Alcalde José Remírez Bethencourt 17,
+                                    <br>CP 35004 - Las Palmas de Gran Canaria, Las Palmas</address>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+                                minima
+                                veniam officia inventore nesciunt assumenda dolorum quisquam ipsa eaque
+                                deleniti quod tenetur facilis ea, fugiat vitae architecto in. Facere,
+                                error!
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- <footer class="site-footer mt-5">
+        <div class="container">
+            <div class="row justify-content-md-between">
+                <div class="col-sm-12 col-md-4 mb-4">
+                    <h3 class="h5 mb-3">Company</h3>
+                    <p>Cambiar el footer por el diseño más acorde al inicial y dejar los campos que sean necesarios.
+                        Ejemp de inecesarios: "Themes".</p>
+                </div>
+                <div class="col-4 col-md-2 mb-4">
+                    <h3 class="h5 mb-3">About</h3>
+                    <ul class="nav flex-column">
+                        <li class="mb-1"><a href="#">About</a></li>
+                        <li class="mb-1"><a href="#">Team</a></li>
+                        <li class="mb-1"><a href="#">Careers</a></li>
+                        <li class="mb-1"><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-4 col-md-2 mb-4">
+                    <h3 class="h5 mb-3">Services</h3>
+                    <ul class="nav flex-column">
+                        <li class="mb-1"><a href="#">Design</a></li>
+                        <li class="mb-1"><a href="#">Themes</a></li>
+                        <li class="mb-1"><a href="#">Branding</a></li>
+                        <li class="mb-1"><a href="#">CMS</a></li>
+                    </ul>
+                </div>
+                <div class="col-4 col-md-2 mb-4">
+                    <h3 class="h5 mb-3">Help</h3>
+                    <ul class="nav flex-column">
+                        <li class="mb-1"><a href="#">FAQ</a></li>
+                        <li class="mb-1"><a href="#">Contact</a></li>
+                        <li class="mb-1"><a href="#">Phones</a></li>
+                        <li class="mb-1"><a href="#">Chat</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="m-0">
+
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mt-4">
+                <p class="small text-muted">&copy; Boost 2018</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a class="icon icon-sm icon-secondary" href="#"><i class="icon-inner fab fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="icon icon-sm icon-secondary" href="#"><i class="icon-inner fab fa-facebook-f"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+
+
+</body>
