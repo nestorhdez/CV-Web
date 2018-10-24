@@ -2,7 +2,7 @@
 //Object List of Users
 function ListUsers() {
 
-    this.url = "https://jsonplaceholder.typicode.com/usersgi";
+    this.url = "https://jsonplaceholder.typicode.com/users";
 
     //Call the ajax and get the list of users
     this.getAllUsers = function ( url, callback, val ) {

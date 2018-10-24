@@ -1,5 +1,33 @@
-let hasLoaded = false;
 const container = document.querySelector("#card-container");
+const object = new ListUsers;
+const callback = object.getAllUsers(object.url, object.filterName);
+
+function Scrollinfinite(container, object, callback){
+  this.container = container;
+  this.object = object;
+  this.callback = callback;
+  currentpage = 0;
+  let hasLoaded = false;
+
+  container.addEventListener("scroll", function(callback) {
+    console.log("Listening...");
+  
+    // Determine if an element has been totally scrolled
+    if (container.scrollHeight - container.scrollTop === container.clientHeight && !hasLoaded) {
+      console.log("Llegó al final.");
+      callback; // <= Invocar el generador de tarjetas por lotes.
+      createBoxes(10);
+      hasLoaded = false;
+      console.log("Creado los 10 elementos.");
+      currentpage += 1;
+      console.log(currentpage);
+      return currentpage;
+    }
+});
+}
+
+Scrollinfinite(container, object, callback);
+
 
 /**
  * @name sleep function to simulation waiting data.
@@ -70,19 +98,5 @@ function createBoxes(num) {
 
 
 // Definir en el objeto, el parametro de contenedor, callback, el objeto que lo usa)
-
-container.addEventListener("scroll", function(callback) {
-    console.log("Listening...");
-  
-    // Determine if an element has been totally scrolled
-    if (container.scrollHeight - container.scrollTop === container.clientHeight && !hasLoaded) {
-      console.log("Llegó al final.");
-      callback; // <= Invocar el generador de tarjetas por lotes.
-      hasLoaded = false;
-      console.log("Creado los 10 elementos.");
-    }
-});
-
-scrollinfinite(container, createBoxes(10));
 
 console.log("This running.");
