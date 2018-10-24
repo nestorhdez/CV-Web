@@ -47,7 +47,8 @@ function card() { // <== createCard();
  * @name createBoxes Function create "n" elements.
  * @param {number} num
  */
-function createBoxes(num) {  // <= Mejorar el creador de tarjetas para poder renderizar por lote.
+function createBoxes(num) {
+  let hasLoaded = false;  // <= Mejorar el creador de tarjetas para poder renderizar por lote.
   const loader = document.querySelector("#loader");
   loader.classList.toggle("hide");
   console.log("Esperando a cargar...");
@@ -66,19 +67,22 @@ function createBoxes(num) {  // <= Mejorar el creador de tarjetas para poder ren
 /**
  * @event scroll Waiting for scrolling bottom of container.
  */
-container.addEventListener("scroll", () => {
-  console.log("Lisening...");
 
-  // Determine if an element has been totally scrolled
-  if (
-    container.scrollHeight - container.scrollTop === container.clientHeight &&
-    !hasLoaded
-  ) {
-    console.log("Llegó al final.");
-    createBoxes(10); // <= Invocar el generador de tarjetas por lotes.
-    hasLoaded = false;
-    console.log("Creado los 10 elementos.");
-  }
+
+// Definir en el objeto, el parametro de contenedor, callback, el objeto que lo usa)
+
+container.addEventListener("scroll", function(callback) {
+    console.log("Listening...");
+  
+    // Determine if an element has been totally scrolled
+    if (container.scrollHeight - container.scrollTop === container.clientHeight && !hasLoaded) {
+      console.log("Llegó al final.");
+      callback; // <= Invocar el generador de tarjetas por lotes.
+      hasLoaded = false;
+      console.log("Creado los 10 elementos.");
+    }
 });
+
+scrollinfinite(container, createBoxes(10));
 
 console.log("This running.");
