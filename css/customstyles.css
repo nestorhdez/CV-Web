@@ -1,3 +1,16 @@
+body {
+  /* margin-bottom: 7em; */
+}
+
+header {
+  /* margin-bottom: 0px; */
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
+}
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -26,9 +39,19 @@ footer {
   margin-top: 5px;
 }
 
+.navbar-brand>img {
+  max-height: 50px;
+  width: auto;
+}
+
 /* User's Curriculum Scroll */
 .row-1 {
   overflow: scroll;
+}
+
+/* disable resize textarea */
+.noresize {
+  resize: none; 
 }
 
 /* Cards container */
