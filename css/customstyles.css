@@ -150,4 +150,8 @@ footer {
 .btn-contact, .btn-sign {
   width: 155px;
 }
-/* Footer */
+/* Form Companies */
+
+.form-company {
+  margin: 100px 0;
+}
