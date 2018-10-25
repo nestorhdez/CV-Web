@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+#badge-font {
+  font-size: 0.85em;
+}
+
 /* Header */
 #navs {
   background-color: black !important;
@@ -30,7 +34,7 @@
   max-width: 100%;
 }
 
-.profile-picture{
+.profile-picture {
   width: 5em;
   height: 5em;
 }
