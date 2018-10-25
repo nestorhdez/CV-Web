@@ -1,5 +1,4 @@
 $("#search-btn").on("click", function() {
-  // for  text inputs
   $(".area").empty();
   var name = $("#validationname").val();
   var city = $("#validationCity").val();
@@ -18,13 +17,13 @@ $("#search-btn").on("click", function() {
   var variables = [name, lastname, city, street, state, zip, experience];
   console.log("longvariables: " + variables.length + name + "name");
   for (let i = 0; i < variables.length; i++) {
-    if (variables[i] != 0) {
-    $(".area").append(spans + variables[i] + deletion + finspans);
     if (i == 7) {
-      $(".area").append(spans + variables[i] + "years" + deletion + finspans);
+    $(".area").append(spans + variables[i] + "years" + deletion + finspans);
+    }
+    else if (variables[i] != 0) {
+      $(".area").append(spans + variables[i] + deletion + finspans);
     } 
-  }}
-
+  }
   for (input of languages) {
     // coge los inputs dentro del array language
     if ($(input).prop("checked") === true) {
