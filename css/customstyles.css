@@ -1,3 +1,16 @@
+body {
+  /* margin-bottom: 7em; */
+}
+
+header {
+  /* margin-bottom: 0px; */
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
+}
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -13,22 +26,19 @@
   background-color: black !important;
 }
 
-body {
-  margin-bottom: 7em;
-}
-
-header {
-  margin-bottom: 0px;
-}
-
-/* Footer */
-footer {
-  margin-top: 5px;
+.navbar-brand>img {
+  max-height: 50px;
+  width: auto;
 }
 
 /* User's Curriculum Scroll */
 .row-1 {
   overflow: scroll;
+}
+
+/* disable resize textarea */
+.noresize {
+  resize: none; 
 }
 
 /* Cards container */
@@ -55,4 +65,35 @@ footer {
 
 .modal {
   z-index: 100001 !important;
+}
+
+.bg-coolgray{
+  background-color: #d5d6d2;
+}
+
+.bg-cobalt{
+  background-color: #3A5199;
+}
+
+.border-cobalt{
+  color: #3A5199;
+}
+
+.btn-cobalt{
+  background-color: #3A5199;
+  color:white;
+}
+
+.btn-cobalt:hover{
+  background-color: rgb(176, 190, 236);
+  color: #3A5199;
+}
+
+.icon-cobalt{
+  background-color: rgba(26,122,255,.1);
+  color: #3A5199;
+}
+
+.text-cobalt {
+  color: #3A5199;
 }
