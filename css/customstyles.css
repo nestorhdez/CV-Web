@@ -1,3 +1,16 @@
+body {
+  /* margin-bottom: 7em; */
+}
+
+header {
+  /* margin-bottom: 0px; */
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
+}
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -13,18 +26,42 @@
 }
 
 /* Header */
-#navs {
+#nav-bottom, #nav-top {
   background-color: black !important;
 }
 
+/* body {
+  margin-bottom: 7em;
+} */
+
+header {
+  margin-bottom: 0px;
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
+}
+
+.navbar-brand>img {
+  max-height: 50px;
+  width: auto;
+}
+
 /* User's Curriculum Scroll */
-.row-1 {
-  overflow: scroll;
+#carouselExampleControls {
+  width: 18rem;
+  height: auto;
+}
+
+/* disable resize textarea */
+.noresize {
+  resize: none; 
 }
 
 /* Cards container */
 .scrolleable {
-  height: 60vh;
+  height: 77vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
@@ -37,4 +74,112 @@
 .profile-picture {
   width: 5em;
   height: 5em;
+}
+
+/* Fix Modal in Fixed container */
+.modal-backdrop {
+  z-index: 100000 !important;
+}
+
+.modal {
+  z-index: 100001 !important;
+}
+
+.bg-coolgray{
+  background-color: #d5d6d2;
+}
+
+.bg-cobalt{
+  background-color: #3A5199;
+}
+
+.border-cobalt{
+  color: #3A5199;
+}
+
+.btn-cobalt{
+  background-color: #3A5199;
+  color:white;
+}
+
+.btn-cobalt:hover{
+  background-color: rgb(176, 190, 236);
+  color: #3A5199;
+}
+
+.icon-cobalt{
+  background-color: rgba(26,122,255,.1);
+  color: #3A5199;
+}
+
+.text-cobalt {
+  color: #3A5199;
+}
+
+/* ============ */
+/* Landpage for companies */
+/* =========== */
+
+.header-bg {
+  background-image: url("../img/desk.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 92vh;
+}
+
+#arrow-div {
+  width: 20px;
+  height: 20px;
+  transform: rotate(-45deg);
+
+}
+
+.text-header {
+  margin-top: 170px;
+}
+
+/* SKILLS */
+.title-skills{
+  height: 80px;
+  width: 100%;
+}
+
+/* Colors */
+.blue-gray {
+  color: #7ba4a8;
+}
+
+.bg-blue-gray{
+  background-color: #7ba4a8;
+}
+
+.btn-blue-gray {
+  background-color: #7ba4a8; 
+  color: white;
+}
+
+.btn-blue-gray:hover {
+  background-color:transparent;
+  color: black;
+}
+/* Buttons */
+.btn-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
+  text-transform: initial!important;
+}
+
+.input-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
+}
+
+.btn-contact, .btn-sign {
+  width: 155px;
+}
+/* Form Companies */
+
+.form-company {
+  margin: 100px 0;
 }

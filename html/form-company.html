@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CV Web - New profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/customstyles.css">
+</head>
+
+<body>
+
+    <!-- Header section -->
+    <header>
+        <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" id="nav-top">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="../index.html" class="navbar-brand ml-3"><img class="rounded-circle" src="../img/logo.png" alt="20H Talent Logo" width="50">
+                    Talent</a>
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-default btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Log in</button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container-fluid">
+            <div class="form-company mx-auto bg-light w-75 p-3 shadow">
+                <form action="/" id="registerSubmit">
+                    <div class="form-row mb-2">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationname">First name</label>
+                            <input type="text" class="form-control" id="validationname" placeholder="First name" name="name" value="" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationlastname">Last name</label>
+                            <input type="text" class="form-control" id="validationlastname" placeholder="Last name" name="lastname" value="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputPhone">Phone</label>
+                            <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone" value="" placeholder="Enter phone number">
+                            <small id="numberHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationZip">Zip</label>
+                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip" value="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="validationInputEmail">Email address</label>
+                            <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp" name="email" value="" placeholder="Enter email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCity">City</label>
+                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city" value="" required>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationStreet">Street</label>
+                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="" required>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationState">State</label>
+                            <input type="text" class="form-control" id="validationState" placeholder="State" name="state" value="" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationUsername">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationUsername" value="" name="username" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationInputPassword">Password</label>
+                            <input type="password" class="form-control" id="validationInputPassword" name="password" value="" placeholder="Password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationDefault06">Company</label>
+                            <input type="text" class="form-control" placeholder="Company">
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationRepository">Web direction</label>
+                            <input type="text" class="form-control" id="validationRepository" placeholder="Web direction" name="repository" value="">
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group mb-3">
+                        <!-- Save picture user-->
+                        <div class="mb-2">Profile picture</div>
+                        <div class="custom-file col-lg-3 col-md-4">
+                            <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="pictureprofile" value="">
+                            <label class="custom-file-label" for="customFileLang">Select file</label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group mb-2">
+                        <div class="form-check ml-4">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions" required>
+                            <label class="form-check-label" for="invalidCheck2">
+                                Agree to terms and conditions
+                                <!-- Need linked to terms and conditions. -->
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary ml-4" type="submit">Submit form</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer section -->
+    <footer class="mt-3">
+        <nav class="w-100 navbar navbar-expand-lg navbar-dark bg-dark mt-auto" id="nav-bottom">
+            <img src="../img/logo.png" alt="20H Talent Logo" width="50" height="50">
+            <!-- <a class="navbar-brand" href="#">Talent</a> -->
+
+            <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div class="ml-3 d-flex justify-content-start">
+                    <a class="text-white mr-3" href="">About</a>
+                    <a class="text-white" href="">Contact</a>
+                </div>
+                <div class="ml-auto">
+                    <!-- Link trigger modal -->
+                    <a href="#" class="text-white mr-3" data-toggle="modal" data-target="#modalConditions">Privacy policy</a>
+                    <a class="text-white" href="">&copy 20H Talent</a>
+                </div>
+            </div>
+        </nav>
+                <!-- Modal Conditions -->
+                <div class="modal fade" id="modalConditions" tabindex="-1" role="dialog" aria-labelledby="modalConditions"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Privacy policy</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Personal data protection</h2>
+                            <p>
+                                <b>Tech a Lot S.L.</b> (tradenames:
+                                <em>20H</em>, <em>20H Solutions</em> o <em>20 Talent</em>)
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
+                                eveniet,
+                                quo fugiat temporibus adipisci quisquam totam maxime deleniti dolor
+                                distinctio ea provident tempora, ut modi rem cupiditate sunt blanditiis
+                                ipsa.
+    
+                                <address>
+                                    <b>20H Talent</b>
+                                    <br>Avenida Alcalde José Remírez Bethencourt 17,
+                                    <br>CP 35004 - Las Palmas de Gran Canaria, Las Palmas</address>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+                                minima
+                                veniam officia inventore nesciunt assumenda dolorum quisquam ipsa eaque
+                                deleniti quod tenetur facilis ea, fugiat vitae architecto in. Facere,
+                                error!
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    
+        </footer>
+    
+
+    <!-- Scripts section -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- <script src="../js/render.js"></script>
+    <script src="../js/custom.js"></script> -->
+    <script src="../js/data.js"></script>
+</body>
+
+</html>
