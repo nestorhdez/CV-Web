@@ -39,10 +39,10 @@ $("#search-btn").on("click", function() {
       $(".area").append(spans + $(input).prop("name") + deletion + finspans);
     }
   }
-  $(".deletion").on("click", function() {
-    console.log("apretar boton");
-    $(".badge").remove();
-  });
+  // $(".deletion").on("click", function() {
+  //   console.log("apretar boton");
+  //   $(".badge").remove();
+  // });
 });
 
 $("#adv-btn").on("click", function() {
