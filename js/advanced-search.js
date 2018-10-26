@@ -7,9 +7,10 @@ $("#search-btn").on("click", function() {
   var state = $("#validationState").val();
   var zip = $("#validationZip").val();
   var experience = $("#experience").val();
-  var spans = '<span id="badge-font" class="badge badge-info mr-2">';
-  var deletion = '<button class="bg-transparent border-0" id="deletion"><i class="fas fa-times-circle"></i></button>';
-  var finspans = '</span>';
+  var spans = '<span class="badge badge-info mr-2 badge-font">';
+  var deletion =
+    '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
+  var finspans = "</span>";
   var selectLanguage = $("#languages");
   var languages = selectLanguage.find("input[type=checkbox]");
   var selectSkill = $("#skills");
@@ -17,12 +18,15 @@ $("#search-btn").on("click", function() {
   var variables = [name, lastname, city, street, state, zip, experience];
   console.log("longvariables: " + variables.length + name + "name");
   for (let i = 0; i < variables.length; i++) {
-    if (i == 7) {
-    $(".area").append(spans + variables[i] + "years" + deletion + finspans);
+    if (variables[i] != 0) {
+      if (i == 6) {
+        $(".area").append(
+          spans + variables[i] + " " + "year/s" + deletion + finspans
+        );
+      } else {
+        $(".area").append(spans + variables[i] + deletion + finspans);
+      }
     }
-    else if (variables[i] != 0) {
-      $(".area").append(spans + variables[i] + deletion + finspans);
-    } 
   }
   for (input of languages) {
     // coge los inputs dentro del array language
@@ -35,8 +39,11 @@ $("#search-btn").on("click", function() {
       $(".area").append(spans + $(input).prop("name") + deletion + finspans);
     }
   }
+  $(".deletion").on("click", function() {
+    console.log("apretar boton");
+    $(".badge").remove();
+  });
 });
-
 
 $("#adv-btn").on("click", function() {
   $(".area").hide();
