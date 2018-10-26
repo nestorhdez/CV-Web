@@ -21,6 +21,10 @@ footer {
   color: #fff;
 }
 
+#badge-font {
+  font-size: 0.85em;
+}
+
 /* Header */
 #nav-bottom, #nav-top {
   background-color: black !important;
@@ -67,7 +71,7 @@ footer {
   max-width: 100%;
 }
 
-.profile-picture{
+.profile-picture {
   width: 5em;
   height: 5em;
 }
