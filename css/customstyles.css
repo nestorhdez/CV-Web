@@ -45,8 +45,9 @@ footer {
 }
 
 /* User's Curriculum Scroll */
-.row-1 {
-  overflow: scroll;
+#carouselExampleControls {
+  width: 18rem;
+  height: auto;
 }
 
 /* disable resize textarea */
