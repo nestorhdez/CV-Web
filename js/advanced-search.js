@@ -1,8 +1,8 @@
 $("#search-btn").on("click", function() {
   $(".area").empty();
-  var name = $("#validationname").val();
-  var city = $("#validationCity").val();
-  var lastname = $("#validationlastname").val();
+  var name = $("#input-name").val();
+  var city = $("#city-option").val();
+  var surname = $("#validationlastname").val();
   var street = $("#validationStreet").val();
   var state = $("#validationState").val();
   var zip = $("#validationZip").val();
@@ -15,7 +15,7 @@ $("#search-btn").on("click", function() {
   var languages = selectLanguage.find("input[type=checkbox]");
   var selectSkill = $("#skills");
   var skills = selectSkill.find("input[type=checkbox]");
-  var variables = [name, lastname, city, street, state, zip, experience];
+  var variables = [name, surname, city, street, state, zip, experience];
   console.log("longvariables: " + variables.length + name + "name");
   for (let i = 0; i < variables.length; i++) {
     if (variables[i] != 0) {
@@ -45,10 +45,10 @@ $("#search-btn").on("click", function() {
   // });
 });
 
-$("#adv-btn").on("click", function() {
-  $(".area").hide();
-});
+// $("#adv-btn").on("click", function() {
+//   $(".area").hide();
+// });
 
-$("#search-btn").on("click", function() {
-  $(".area").show();
-});
+// $("#search-btn").on("click", function() {
+//   $(".area").show();
+// });
