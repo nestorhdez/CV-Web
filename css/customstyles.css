@@ -18,8 +18,9 @@ header {
 }
 
 /* User's Curriculum Scroll */
-#inner-carousel {
-  height: 300px;
+#carouselExampleControls {
+  width: 25em;
+  height: auto;
 }
 
 /* Cards container */
