@@ -21,9 +21,26 @@ footer {
   color: #fff;
 }
 
+#badge-font {
+  font-size: 0.85em;
+}
+
 /* Header */
 #nav-bottom, #nav-top {
   background-color: black !important;
+}
+
+/* body {
+  margin-bottom: 7em;
+} */
+
+header {
+  margin-bottom: 0px;
+}
+
+/* Footer */
+footer {
+  margin-top: 5px;
 }
 
 .navbar-brand>img {
@@ -32,8 +49,9 @@ footer {
 }
 
 /* User's Curriculum Scroll */
-.row-1 {
-  overflow: scroll;
+#carouselExampleControls {
+  width: 18rem;
+  height: auto;
 }
 
 /* disable resize textarea */
@@ -53,7 +71,7 @@ footer {
   max-width: 100%;
 }
 
-.profile-picture{
+.profile-picture {
   width: 5em;
   height: 5em;
 }
@@ -96,4 +114,72 @@ footer {
 
 .text-cobalt {
   color: #3A5199;
+}
+
+/* ============ */
+/* Landpage for companies */
+/* =========== */
+
+.header-bg {
+  background-image: url("../img/desk.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 92vh;
+}
+
+#arrow-div {
+  width: 20px;
+  height: 20px;
+  transform: rotate(-45deg);
+
+}
+
+.text-header {
+  margin-top: 170px;
+}
+
+/* SKILLS */
+.title-skills{
+  height: 80px;
+  width: 100%;
+}
+
+/* Colors */
+.blue-gray {
+  color: #7ba4a8;
+}
+
+.bg-blue-gray{
+  background-color: #7ba4a8;
+}
+
+.btn-blue-gray {
+  background-color: #7ba4a8; 
+  color: white;
+}
+
+.btn-blue-gray:hover {
+  background-color:transparent;
+  color: black;
+}
+/* Buttons */
+.btn-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
+  text-transform: initial!important;
+}
+
+.input-default {
+  padding: .375rem .75rem!important;
+  border-width: 1px!important;
+}
+
+.btn-contact, .btn-sign {
+  width: 155px;
+}
+/* Form Companies */
+
+.form-company {
+  margin: 100px 0;
 }

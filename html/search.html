@@ -53,97 +53,140 @@
             <div class="mb-3" id="">
                 <div class="card card-body">
                     <form class="mt-3 d-flex flex-column" id="adv-search-form" method="POST" action="index.html">
-                        <!-- Revise action attr-->
-                        <div class="d-flex justify-content-between container">
-                            <div class=" d-flex flex-wrap flex-column col-lg-5 mr-2">
-                                <div class="row">
-                                    <label for="input-name" class="col-form-label">Name</label>
-                                    <input type="search" class="form-control " id="input-name" placeholder="Name">
-                                </div>
-
-                                <div class="row">
-                                    <label for="city-option" class="col-form-label">City</label>
-                                    <input type="text" class="form-control " id="city-option" placeholder="City">
-                                </div>
-
-                                <div class="row">
-                                    <label for="experience-option" class="col-form-label">Experience</label>
-                                    <select class="form-control " id="experience">
-                                        <option>Default select</option>
-                                    </select>
-                                </div>
-
+                        <div class="form-group d-flex flex-wrap">
+                            <div class="col-md-3 mb-3">
+                                <label for="validationname">First name</label>
+                                <input type="text" class="form-control" id="input-name" placeholder="First name"
+                                    name="name" value="">
                             </div>
-                            <div class="check-container col-lg-5 ml-2 d-flex justify-content-around align-self-center flex-wrap">
-                                <fieldset class="form-group">
-                                    <h5 class="mb-2">Languages</h5>
-                                    <div class="d-flex flex-wrap flex-column">
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="eng-check">
-                                            <label class="form-check-label mr-5" for="eng-check">
-                                                English
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="french-check">
-                                            <label class="form-check-label mr-5" for="french-check">
-                                                French
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="german-check">
-                                            <label class="form-check-label mr-5" for="german-check">
-                                                German
-                                            </label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="form-group">
-                                    <h5 class="mb-2">Skills</h5>
-                                    <div class="d-flex flex-wrap flex-column">
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="html-check">
-                                            <label class="form-check-label mr-5" for="html-check">
-                                                HTML
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="css-check">
-                                            <label class="form-check-label mr-5" for="css-check">
-                                                CSS
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="sass-check">
-                                            <label class="form-check-label mr-5" for="sass-check">
-                                                SASS
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="javascript-check">
-                                            <label class="form-check-label mr-5" for="javascript-check">
-                                                JavaScript
-                                            </label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" id="react-check">
-                                            <label class="form-check-label mr-5" for="react-check">
-                                                React
-                                            </label>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationlastname">Surname</label>
+                                <input type="text" class="form-control" id="validationlastname" placeholder="Last name"
+                                    name="lastname" value="">
                             </div>
                         </div>
 
-                        <div class="form-group row mt-3">
-                            <div class="container">
-                                <button type="submit" class="btn btn-outline-primary my-2 my-sm-0 border-1 border-white bg-dark text-white"
-                                    id="search-btn">Search</button>
+                        <div class="form-group d-flex flex-wrap justify-content-around">
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCity">City</label>
+                                <input type="text" class="form-control" id="city-option" placeholder="City" name="city"
+                                    value="">
                             </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationStreet">Street</label>
+                                <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
+                                    value="">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label for="validationState">State</label>
+                                <input type="text" class="form-control" id="validationState" placeholder="State" name="state"
+                                    value="">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationZip">Zip</label>
+                                <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
+                                    value="">
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-wrap">
+                            <div class="col-md-3 mb-3">
+                                <label for="experience-option" class="col-form-label">Experience</label>
+                                <select class="form-control custom-select" id="experience">
+                                    <option value="">Years of experience</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="+5">+5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex flex-wrap">
+                            <div class="col-md mb-3">
+                                <fieldset class="form-group">
+                                    <div class="mb-2">Languages</div>
+                                    <div class="d-flex flex-wrap" id="languages">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="eng-check" name="english"
+                                                value="English">
+                                            <label class="form-check-label mr-5" for="eng-check">English</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="french-check" name="french"
+                                                value="French">
+                                            <label class="form-check-label mr-5" for="french-check">French</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="german-check" name="german"
+                                                value="German">
+                                            <label class="form-check-label mr-5" for="german-check">German</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="spanish-check" name="spanish"
+                                                value="Spanish">
+                                            <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group mb-3">
+                                    <div class="mb-2">Skills</div>
+                                    <div class="d-flex flex-wrap" id="skills">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="html-check" name="html"
+                                                value="HTML">
+                                            <label class="form-check-label mr-5" for="html-check">HTML</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="css-check" name="css"
+                                                value="CSS">
+                                            <label class="form-check-label mr-5" for="css-check">CSS</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="sass-check" name="sass"
+                                                value="SASS">
+                                            <label class="form-check-label mr-5" for="sass-check">SASS</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="javascript-check" name="javascript"
+                                                value="JAVASCRIPT">
+                                            <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="react-check" name="react"
+                                                value="REACT">
+                                            <label class="form-check-label mr-5" for="react-check">React</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="git-check" name="git"
+                                                value="GIT">
+                                            <label class="form-check-label mr-5" for="git-check">Git</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="github-check" name="github"
+                                                value="GITHUB">
+                                            <label class="form-check-label mr-5" for="github-check">Github</label>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="ml-2 col-sm-12">
+                                <button type="submit" class="btn btn-primary" id="search-btn">Search</button>
+                            </div>
+                        </div>
+                        <div class="area">
+                            <h5>Search Results:</h5>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -183,8 +226,8 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mx-auto" id="ModalCenterTitle">Marolyn Dayan Guzmán
-                            Álvarez</h5>
+                        <h5 class="modal-title mx-auto" id="ModalCenterTitle">Marolyn Dayan Guzmán Álvarez
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -228,7 +271,8 @@
                     </div>
                 </li>
                 <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#">About</a></li>
-                <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#" data-toggle="modal" data-target="#FormContact">Contact</a></li>
+                <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#"
+                        data-toggle="modal" data-target="#FormContact">Contact</a></li>
             </ul>
             <div class="d-flex justify-content-end flex-sm-column">
                 <ul class="navbar-nav">
@@ -372,6 +416,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/render.js"></script>
     <script src="../js/custom.js"></script>
+    <script src="../js/advanced-search.js"></script>
 </body>
 
 </html>
