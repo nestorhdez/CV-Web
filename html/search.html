@@ -55,28 +55,46 @@
                     <form class="mt-3 d-flex flex-column" id="adv-search-form" method="POST" action="index.html">
                         <div class="form-group d-flex flex-wrap">
                             <div class="col-md-3 mb-3">
-                                <label for="validationname">First name</label>
-                                <input type="text" class="form-control" id="input-name" placeholder="First name"
+                                <label for="validationname">Name</label>
+                                <input type="text" class="form-control" id="input-name" placeholder="Name"
                                     name="name" value="">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <!-- <div class="col-md-3 mb-3">
                                 <label for="validationlastname">Surname</label>
                                 <input type="text" class="form-control" id="validationlastname" placeholder="Last name"
                                     name="lastname" value="">
+                            </div> -->
+                            <div class="col-md-3 mb-3">
+                                <label for="validationusername">Username</label>
+                                <input type="text" class="form-control" id="validationusername" placeholder="Username"
+                                    name="username" value="">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email"
+                                    name="email" value="">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="gender">Gender</label>
+                                <select class="form-control custom-select" id="Gender">
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option vale="I prefer not to say it">I prefer not to say it</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group d-flex flex-wrap justify-content-around">
+                        <div class="form-group d-flex flex-wrap ">
                             <div class="col-md-3 mb-3">
                                 <label for="validationCity">City</label>
                                 <input type="text" class="form-control" id="city-option" placeholder="City" name="city"
                                     value="">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <!-- <div class="col-md-3 mb-3">
                                 <label for="validationStreet">Street</label>
                                 <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
                                     value="">
-                            </div>
+                            </div> -->
 
                             <div class="col-md-3 mb-3">
                                 <label for="validationState">State</label>
@@ -84,12 +102,22 @@
                                     value="">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationZip">Zip</label>
-                                <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
+                                <label for="validationCountry">Country</label>
+                                <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
                                     value="">
                             </div>
                         </div>
                         <div class="form-group d-flex flex-wrap">
+                                <div class="col-md-3 mb-3">
+                                        <label for="validationCompany">Company</label>
+                                        <input type="text" class="form-control" id="validationcompany" placeholder="Company name" name="company"
+                                            value="">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                            <label for="validationJob">Job Title</label>
+                                            <input type="text" class="form-control" id="validationjob" placeholder="Job title" name="job"
+                                                value="">
+                                        </div>
                             <div class="col-md-3 mb-3">
                                 <label for="experience-option" class="col-form-label">Experience</label>
                                 <select class="form-control custom-select" id="experience">
