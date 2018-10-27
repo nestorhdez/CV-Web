@@ -41,7 +41,7 @@ $("#search-btn").on("click", function() {
   }
   // $(".deletion").on("click", function() {
   //   console.log("apretar boton");
-  //   $(".badge").remove();
+  //   $(".badge").parent().remove();
   // });
 });
 
