@@ -49,9 +49,34 @@ footer {
 }
 
 /* User's Curriculum Scroll */
-#carouselExampleControls {
+.carousel-inner > img {
   width: 18rem;
   height: auto;
+}
+.row-equal>div[class*='col-'] {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+.row-equal .card {
+  width: 100%;
+}
+
+.carousel-inner>.row-equal.active,
+.carousel-inner>.row-equal.next,
+.carousel-inner>.row-equal.prev {
+  display: flex;
+}
+
+.carousel-inner>.row-equal.active.left,
+.carousel-inner>.row-equal.active.right {
+  opacity: 0.5;
+  display: flex;
+}
+
+.card-img-top-250 {
+  max-height: 19rem;
+  overflow: hidden;
 }
 
 /* disable resize textarea */
