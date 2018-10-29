@@ -112,9 +112,19 @@ $("#registerSubmit").submit(function(event) {
     profilePicture
   );
   if (!CheckPassword(password)) {
-    $('#inputPassword5').addClass('border-danger is-invalid').focus();;
-    $('#passwordHelpBlock').removeClass('text-muted').addClass('text-danger');
+    $("#inputPassword5")
+      .addClass("border-danger is-invalid")
+      .focus();
+    $("#passwordHelpBlock")
+      .removeClass("text-muted")
+      .addClass("text-danger");
   } else {
+    if ($("#inputPassword5").hasClass('border-danger')) {
+      $("#inputPassword5").removeClass("border-danger is-invalid");
+      $("#passwordHelpBlock")
+        .addClass("text-muted")
+        .removeClass("text-danger");
+    }
     registered = new NewUser(
       name,
       phone,
@@ -134,7 +144,7 @@ $("#registerSubmit").submit(function(event) {
     );
     this.reset();
     return registered;
-  };
+  }
 });
 
 function CheckPassword(inputtxt) {
