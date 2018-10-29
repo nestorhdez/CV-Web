@@ -57,17 +57,13 @@ let registered;
 $("#registerSubmit").submit(function(event) {
   console.log("submit actived...");
   event.preventDefault();
-  if (!CheckPassword(password)) {
-    $('#inputPassword5').addClass('border-danger is-invalid');
-  };
-
+  let password = $("#inputPassword5").val();
   let name = $("#validationname").val();
   let phone = $("#InputPhone").val();
   let zip = $("#validationZip").val();
   let email = $("#validationInputEmail").val();
   let gender = $('#genders input[type="radio"]:checked').val();
   let username = $("#validationUsername").val();
-  let password = $("#inputPassword5").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
   let state = $("#validationState").val();
@@ -115,30 +111,34 @@ $("#registerSubmit").submit(function(event) {
     website,
     profilePicture
   );
-
-  registered = new NewUser(
-    name,
-    phone,
-    zip,
-    email,
-    gender,
-    username,
-    password,
-    city,
-    country,
-    state,
-    experience,
-    languages,
-    skills,
-    website,
-    profilePicture
-  );
-  this.reset();
-  return registered;
+  if (!CheckPassword(password)) {
+    $('#inputPassword5').addClass('border-danger is-invalid').focus();;
+    $('#passwordHelpBlock').removeClass('text-muted').addClass('text-danger');
+  } else {
+    registered = new NewUser(
+      name,
+      phone,
+      zip,
+      email,
+      gender,
+      username,
+      password,
+      city,
+      country,
+      state,
+      experience,
+      languages,
+      skills,
+      website,
+      profilePicture
+    );
+    this.reset();
+    return registered;
+  };
 });
 
 function CheckPassword(inputtxt) {
-  var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
   if (inputtxt.match(passw)) {
     alert("Correct, try another...");
     return true;
