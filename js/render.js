@@ -11,7 +11,6 @@ function ListUsers() {
             dataType: "json"
         }).done( function(data) {
             
-            //this control do optional the callback
             if(typeof callback == "function" ){
                 callback( data );
                 console.log("Callback parameter is a function");
@@ -25,7 +24,7 @@ function ListUsers() {
     
 
     this.renderUsers = function ( arr ) {
-        console.log(arr);
+        // console.log(arr);
         
         //Create a card for each user
         arr.forEach(function(val) {
@@ -63,10 +62,10 @@ function ListUsers() {
         document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
         this.renderModal(arr);
         
-    }.bind(this);
+    }.bind(this);//Bind to ListUsers object.
 
-    //Change the data of the modal when click on a user card
-    //It's indise of renderUsers because it only has to work with the cards that are already rendered.
+    /*Change the data of the modal when click on a user card.
+    It's indise of renderUsers because it only has to work with the cards that are already rendered.*/
     this.renderModal = function(arr) {
         $('.btn-modal').click(function(e){
             // console.log('click done');
@@ -96,19 +95,18 @@ function ListUsers() {
         })
     }
 
-    //Return an array that represent a page of the inital array.
-    //As argument you should pass it the initial array, how many
-    // elementes do you need per page and the page nº that you need.
+    /* Return an array that represent a page of the inital array.
+    As argument you should pass it the initial array, how many
+    elementes do you need per page and the page nº that you need.*/
     this.pagination = function (arr, perpage, page) {     
         return arr.slice(perpage*(page-1), perpage*page);
     }
 
-    //The callback parameter has to be passed on the getAllUsers function
+
     this.filterName = function ( currentPage ){
 
-
-        let promise = new Promise((resolve, reject) => {
-
+        new Promise((resolve, reject) => {
+            //Passing the resolve as a callback.
             this.getAllUsers( resolve );
 
         }).then((allUsers) => {
@@ -123,26 +121,27 @@ function ListUsers() {
 
             if(filterByName.length < 10 ) {
                 $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(filterByName, 10, 0) );
+                this.renderUsers( this.pagination(filterByName, 10, 1) );
                 console.log("less than 10 users");
             }else {
                 
                 this.renderUsers( this.pagination(filterByName, 10, currentPage) );
                 console.log(this.pagination(filterByName, 10, currentPage));
+                console.log('Current page: ' + currentPage);
             }
-        })
+        });
         
-    }.bind(this);
+    }.bind(this);//Bind ListUsers object
 
 }
 
-//Calling the FilterUsers and createCards functions on form submit
 let list = new ListUsers;
 let scroll = new Scrollinfinite(list.filterName).initScroll();
 
+//Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-
+    //The argument passed is the nº of the page that you want to print.
     list.filterName(1);
-})
+});
