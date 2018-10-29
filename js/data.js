@@ -1,11 +1,12 @@
 function NewUser(
   name,
-  phone,
-  zip,
+  //  phone,
+  //  zip,
   email,
   gender,
+  birthDate,
   username,
-  password,
+  //  password,
   city,
   country,
   state,
@@ -16,12 +17,13 @@ function NewUser(
   profilePicture
 ) {
   this.name = name;
-  this.phone = phone;
-  this.zip = zip;
+  //  this.phone = phone;
+  //  this.zip = zip;
   this.email = email;
   this.gender = gender;
+  this.birthDate = birthDate;
   this.username = username;
-  this.password = password;
+  //  this.password = password;
   this.location = {
     city: city,
     state: state,
@@ -63,12 +65,12 @@ $("#registerSubmit").submit(function(event) {
   let zip = $("#validationZip").val();
   let email = $("#validationInputEmail").val();
   let gender = $('#genders input[type="radio"]:checked').val();
+  let birthDate = "1986-02-25T00:00:00.000Z";
   let username = $("#validationUsername").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
   let state = $("#validationState").val();
   let experience = $("#experience").val();
-  let profilePicture = $("#profilePicture").val();
 
   let languages = $('#languages input[type="checkbox"]:checked')
     .map(function() {
@@ -93,6 +95,8 @@ $("#registerSubmit").submit(function(event) {
     .get();
 
   let website = $("#validationRepository").val();
+  // let profilePicture = $("#profilePicture").files[0];
+  let profilePicture = document.querySelector("input[type=file]").files[0];
 
   console.log(
     name,
@@ -100,6 +104,7 @@ $("#registerSubmit").submit(function(event) {
     zip,
     email,
     gender,
+    birthDate,
     username,
     password,
     city,
@@ -119,7 +124,7 @@ $("#registerSubmit").submit(function(event) {
       .removeClass("text-muted")
       .addClass("text-danger");
   } else {
-    if ($("#inputPassword5").hasClass('border-danger')) {
+    if ($("#inputPassword5").hasClass("border-danger")) {
       $("#inputPassword5").removeClass("border-danger is-invalid");
       $("#passwordHelpBlock")
         .addClass("text-muted")
@@ -127,12 +132,13 @@ $("#registerSubmit").submit(function(event) {
     }
     registered = new NewUser(
       name,
-      phone,
-      zip,
+      // phone,
+      // zip,
       email,
       gender,
+      birthDate,
       username,
-      password,
+      // password,
       city,
       country,
       state,
@@ -143,6 +149,7 @@ $("#registerSubmit").submit(function(event) {
       profilePicture
     );
     this.reset();
+    sendNewUser();
     return registered;
   }
 });
@@ -155,6 +162,35 @@ function CheckPassword(inputtxt) {
   } else {
     alert("Wrong...!");
     return false;
+  }
+}
+
+function sendNewUser() {
+  let formBody = registered;
+
+  fetch("https://cv-mobile-api.herokuapp.com/api/users", {
+    method: "POST",
+    body: formBody
+  })
+    .then(res => res.json())
+    .then(response => console.log(response));
+}
+
+function previewFile() {
+  let preview = document.querySelector("#preview");
+  let file = document.querySelector("input[type=file]").files[0];
+  let reader = new FileReader();
+
+  reader.addEventListener(
+    "load",
+    function() {
+      preview.src = reader.result;
+    },
+    false
+  );
+
+  if (file) {
+    reader.readAsDataURL(file);
   }
 }
 
