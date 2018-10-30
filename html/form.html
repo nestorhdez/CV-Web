@@ -241,15 +241,15 @@
 
                     <fieldset class="form-group mb-3">
                         <!-- Save picture user-->
-                        <div class="mb-2">Profile picture</div>
-                        <div class="col-md-6 custom-file">
-                            <input type="file" onchange="previewFile()" class="custom-file-input" id="profilePicture"
-                                lang="en" name="profilePicture" value="" accept="image/x-png,image/gif,image/jpeg">
-                            <label class="custom-file-label" for="profilePicture">Select file</label>
-                        </div>
-                        <div>
-                            <img class="col-md-6 mt-2" id="preview" src="" height="10em" width="" alt="Image preview...">
-                        </div>
+                        <div for="profilePicture" class="mb-2">Profile picture</div>
+                            <div class="col-md-5 custom-file mb-3">
+                                <input type="file" onchange="previewFile()" class="custom-file-input" id="profilePicture"
+                                    lang="en" name="profilePicture" value="" accept="image/x-png,image/gif,image/jpeg">
+                                <label class="custom-file-label" for="profilePicture">Select file</label>
+                            </div>
+                            <div class="col-md-6 m-3">
+                                <img class="img-thumbnail" id="preview" src="" width="150px" height="auto" alt="Image preview...">
+                            </div>
                     </fieldset>
 
                     <div class="form-group mb-2">
