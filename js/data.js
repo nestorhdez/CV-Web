@@ -161,7 +161,6 @@ $("#registerSubmit").submit(function(e) {
     );
 
     function createRequestBody() {
-      let formElement = document.getElementById("registerSubmit");
 
       let formData = new FormData();
 
