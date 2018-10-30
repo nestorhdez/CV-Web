@@ -13,6 +13,8 @@ function NewUser(
   experience,
   languages,
   skills,
+  jobTitle,
+  company,
   website,
   profilePicture
 ) {
@@ -32,6 +34,8 @@ function NewUser(
   this.experience = experience;
   this.languages = languages;
   this.skills = skills;
+  this.jobTitle = jobTitle;
+  this.company = company;
   this.website = website;
   this.profilePicture = profilePicture;
 }
@@ -56,16 +60,16 @@ function NewUser(
 
 let registered;
 
-$("#registerSubmit").submit(function(event) {
+$("#registerSubmit").submit(function(e) {
   console.log("submit actived...");
-  event.preventDefault();
+  e.preventDefault();
   let password = $("#inputPassword5").val();
   let name = $("#validationname").val();
   let phone = $("#InputPhone").val();
   let zip = $("#validationZip").val();
   let email = $("#validationInputEmail").val();
   let gender = $('#genders input[type="radio"]:checked').val();
-  let birthDate = "1986-02-25T00:00:00.000Z";
+  let birthDate = $('#validationbirthDate').val();
   let username = $("#validationUsername").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
@@ -83,6 +87,7 @@ $("#registerSubmit").submit(function(event) {
     })
     .get();
 
+  // Exist this method like alone function to call with id.    
   let skills = $('#skills input[type="checkbox"]:checked')
     .map(function() {
       return $(this)
@@ -93,7 +98,8 @@ $("#registerSubmit").submit(function(event) {
         .join("%20");
     })
     .get();
-
+  let jobTitle = $("#validationJobTitle").val();
+  let company = "Test Company"; // Create field if it's necesary.
   let website = $("#validationRepository").val();
   // let profilePicture = $("#profilePicture").files[0];
   let profilePicture = document.querySelector("input[type=file]").files[0];
@@ -113,6 +119,8 @@ $("#registerSubmit").submit(function(event) {
     experience,
     languages,
     skills,
+    jobTitle,
+    company,
     website,
     profilePicture
   );
@@ -145,35 +153,91 @@ $("#registerSubmit").submit(function(event) {
       experience,
       languages,
       skills,
+      jobTitle,
+      company,
       website,
       profilePicture
     );
-    this.reset();
+    // let testBody = createRequestBody();
     sendNewUser();
+    this.reset();
+    $("#preview").attr("src", "");
     return registered;
   }
 });
 
+function createRequestBody() {
+  let formElement = document.getElementById("registerSubmit");
+
+  let formData = new FormData(formElement);
+
+  // Sent as a string
+  formData.append("name", validationname.value);
+
+  // Sent as a string
+  formData.append("username", validationUsername.value);
+
+  // Sent as a string with email validation
+  formData.append("email", validationInputEmail.value);
+
+  // Sent as a string
+  formData.append("city", validationCity.value);
+
+  // Sent as a string
+  formData.append("gender", $('#genders input[type="radio"]:checked').value);
+
+  // Sent as a string
+  formData.append("country", validationCountry.value);
+
+  // Sent as a string
+  formData.append("jobTitle", validationJobTitle.value);
+
+  // Sent as a string
+  formData.append("website", validationRepository.value);
+
+  // Sent as a string
+  formData.append("company", validationCompany.value);
+
+  // Sent as a string. Choose a value from below.
+  formData.append("experience", experience.value);
+
+  // Pick the value from an input(type="date")
+  formData.append("birthDate", validationbirthDate.value);
+
+  // Pick the value from an input(type="file") that accepts only jpeg and png formats and files under 3MB size
+  formData.append("profilePicture", profilePicture.files[0]);
+
+  // Store all the values selected in the form inside an Array and parse it as a string
+  formData.append("languages", languages.value);
+
+  // Store all the values selected in the form inside an Array and parse it as a string
+  formData.append("skills", skills.value);
+
+  return formData;
+}
+
 function CheckPassword(inputtxt) {
   var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
   if (inputtxt.match(passw)) {
-    alert("Correct, try another...");
+    // alert("Correct, try another...");
     return true;
   } else {
-    alert("Wrong...!");
+    // alert("Wrong...!");
     return false;
   }
 }
 
 function sendNewUser() {
   let formBody = registered;
-
-  fetch("https://cv-mobile-api.herokuapp.com/api/users", {
+  // let formBody = createRequestBody();
+  console.log("This is formBody to send: " + formBody);
+  fetch('https://cv-mobile-api.herokuapp.com/api/users', {
     method: "POST",
     body: formBody
   })
     .then(res => res.json())
-    .then(response => console.log(response));
+    .then(data => console.log("SendNewUser(), data: " + data))
+    .catch(error => console.log(error.message));
 }
 
 function previewFile() {
