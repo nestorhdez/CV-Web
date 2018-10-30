@@ -121,22 +121,38 @@ footer {
 /* =========== */
 
 .header-bg {
-  background-image: url("../img/desk.jpg");
+  background-image: url("../img/team.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 92vh;
+  margin-top: 76.25px;
+  background-color: black;
+  position: relative;
+}
+
+.header-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .4;
 }
 
 #arrow-div {
   width: 20px;
   height: 20px;
   transform: rotate(-45deg);
-
 }
 
 .text-header {
-  margin-top: 170px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 /* SKILLS */
