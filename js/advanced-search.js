@@ -39,11 +39,12 @@ $("#search-btn").on("click", function() {
       $(".area").append(spans + $(input).prop("name") + deletion + finspans);
     }
   }
-  // $(".deletion").on("click", function() {
-  //   console.log("apretar boton");
-  //   $(".badge").parent().remove();
-  // });
+  $(".deletion").on("click", "remove",function() {
+    console.log("apretar boton");
+    $(".badge").parent().remove();
+  });
 });
+
 
 // $("#adv-btn").on("click", function() {
 //   $(".area").hide();
