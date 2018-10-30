@@ -1,3 +1,3 @@
-// $("#prev").on("click",function () {
-
-// })
+$("#prev").on("click",function () {
+    $('.carousel').carousel();
+})
