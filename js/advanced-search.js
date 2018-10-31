@@ -7,7 +7,7 @@ $("#search-btn").on("click", function() {
   var state = $("#validationState").val();
   var zip = $("#validationZip").val();
   var experience = $("#experience").val();
-  var spans = '<span class="badge badge-info mr-2 badge-font">';
+  var spans = '<span class="badge badge-info mr-2 badge-font"';
   var deletion =
     '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
   var finspans = "</span>";
@@ -16,15 +16,16 @@ $("#search-btn").on("click", function() {
   var selectSkill = $("#skills");
   var skills = selectSkill.find("input[type=checkbox]");
   var variables = [name, surname, city, street, state, zip, experience];
+  var idsvariables = ["#input-name","#validationlastname","#city-option", "#validationStreet", "#validationState", "#validationZip","#experience"];
   console.log("longvariables: " + variables.length + name + "name");
   for (let i = 0; i < variables.length; i++) {
     if (variables[i] != 0) {
       if (i == 6) {
         $(".area").append(
-          spans + variables[i] + " " + "year/s" + deletion + finspans
+          spans + 'data-idsvariables="'+ idsvariables[i] +'">' + variables[i] + " " + "year/s" + deletion + finspans
         );
       } else {
-        $(".area").append(spans + variables[i] + deletion + finspans);
+        $(".area").append(spans + 'data-idsvariables="'+ idsvariables[i] +'">' + variables[i] + deletion + finspans);
       }
     }
   }
@@ -39,13 +40,16 @@ $("#search-btn").on("click", function() {
       $(".area").append(spans + $(input).prop("name") + deletion + finspans);
     }
   }
-  $(".deletion").on("click", "remove",function() {
-    console.log("apretar boton");
-    $(".badge").parent().remove();
+  $(".deletion").on("click",function( e ) {
+    console.log("apretar boton", e , $(this).parent().attr("data-idsvariables") );
+    let test = ($(this).parent().attr("data-idsvariables"));
+    $(this).parent().remove();
+    console.log(test);
+    $(test).val("");
   });
-});
+})
 
-
+// TRIGGER CLICK
 // $("#adv-btn").on("click", function() {
 //   $(".area").hide();
 // });
