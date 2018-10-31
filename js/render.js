@@ -1,18 +1,16 @@
-
 //Object List of Users
 function ListUsers() {
 
-    this.url = "https://jsonplaceholder.typicode.com/users";
+    this.url = "https://cv-mobile-api.herokuapp.com/api/users";
 
     //Call the ajax and get the list of users
-    this.getAllUsers = function ( url, callback  ) {
+    this.getAllUsers = function ( callback ) {
 
-        $.ajax ({
-            url: url,
+         $.ajax ({   
+            url: this.url,
             dataType: "json"
         }).done( function(data) {
-
-            //this control do optional the callback
+            
             if(typeof callback == "function" ){
                 callback( data );
                 console.log("Callback parameter is a function");
@@ -20,15 +18,16 @@ function ListUsers() {
                 console.log("Callback parameter isn't a function");
             }
 
+            return data;
         });
-
     };
+    
 
-    this.renderUsers = function ( data ) {
-        // console.log(data);
+    this.renderUsers = function ( arr ) {
+        // console.log(arr);
         
         //Create a card for each user
-        data.forEach(function(val) {
+        arr.forEach(function(val) {
             
             let card = (`
 
@@ -36,19 +35,19 @@ function ListUsers() {
                     <div class="card-body text-center">
                         <div class="d-flex flex-column justify-content-center mb-3">
                             <div class="d-flex mx-auto profile-picture mb-1">
-                                <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
+                                <img class="img-user rounded-circle" src="${val.profilePicture}">
                             </div>
                             <h5 class="card-title d-inline user-name">${val.name}</h5>
                         </div>
                         <div class="text-left">
                             <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0 city-user"><b>City: </b>${val.address.city}</p>
+                            <p class="m-0 city-user"><b>City: </b>${val.location.city}</p>
                             <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
-                            <p><b>Phone: </b>${val.phone}</p>
+                            <p><b>Website: </b>${val.website}</p>
 
                             <div class="d-flex justify-content-between align-items-end">
                                 <button type="button" class="btn btn-info btn-sm">Edit</button>
-                                <button type="button" class="btn btn-modal btn-info btn-sm" id="${val.id}" data-toggle="modal" data-target="#ModalCenter">Detail</button>
+                                <button type="button" class="btn btn-modal btn-info btn-sm" id="${val._id}" data-toggle="modal" data-target="#ModalCenter">Detail</button>
                                 <button type="button" class="btn btn-primary btn-sm">Delete</button>
                             </div>
                         </div>
@@ -59,69 +58,90 @@ function ListUsers() {
         document.getElementById('card-container').innerHTML += card;
 
         });
-    
-        this.renderModal(data);
+        
+        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
+        this.renderModal(arr);
+        
+    }.bind(this);//Bind to ListUsers object.
 
-    };
-
-    //Change the data of the modal when click on a user card
-    this.renderModal = function(data) {
+    /*Change the data of the modal when click on a user card.
+    It's indise of renderUsers because it only has to work with the cards that are already rendered.*/
+    this.renderModal = function(arr) {
         $('.btn-modal').click(function(e){
-            console.log('click done');
-            console.log(data[e.target.id - 1]);
-            console.log('User id ' + e.target.id);
-            let user = data[e.target.id - 1];
-            $('#ModalCenterTitle').empty().html(user.name);
+            // console.log('click done');
+            // console.log('User id ' + e.target.id);
+            arr.forEach( function(val){
+                if(val._id == e.target.id){
+                    let user = val;
 
-            $('#city').empty().html(user.address.city);
+                    $('#ModalCenterTitle').empty().html(user.name);
 
-            $('#street').empty().html(user.address.street);
-            
-            $('#zipcode').empty().html(user.address.zipcode);
+                    $('#city').empty().html(user.location.city);
 
-            $('#email').empty().html(user.email);
+                    $('#street').empty().html(user.location.street);
+                    
+                    $('#zipcode').empty().html(user.location.zipcode);
 
-            $('#phone').empty().html(user.phone);
-           
-            $('#website').empty().html(user.website);
+                    $('#email').empty().html(user.email);
 
-            $('#company').empty().html(user.company.name);
+                    $('#phone').empty().html(user.phone);
+                    
+                    $('#website').empty().html(user.website);
+
+                    $('#company').empty().html(user.company.name);
+                }
+            });
 
         })
     }
 
-}
-
-
-//Object FilterUsers
-function FilterUsers() {
-
-    this.filterName = function ( data ){
-
-        let nameInput = document.querySelector("#input-name").value.toLowerCase();
-
-        let filterName = data.filter(user => user.name.toLowerCase().indexOf(nameInput) != -1);
-        console.log(filterName);
-        
-        let list = new ListUsers;
-        
-        if(filterName.length > 0 ){
-            $( "#card-container" ).empty();
-            list.renderUsers( filterName );
-        }else{
-            $( "#card-container" ).empty().html("<h1>There are not any coincidence</h1>");
-        }
-        
+    /* Return an array that represent a page of the inital array.
+    As argument you should pass it the initial array, how many
+    elementes do you need per page and the page nº that you need.*/
+    this.pagination = function (arr, perpage, page) {     
+        return arr.slice(perpage*(page-1), perpage*page);
     }
+
+
+    this.filterName = function ( currentPage ){
+
+        new Promise((resolve, reject) => {
+            //Passing the resolve as a callback.
+            this.getAllUsers( resolve );
+
+        }).then((allUsers) => {
+
+            console.log(allUsers);
+
+            let nameInput = document.querySelector("#input-name").value.toLowerCase();
+            
+            let filterByName = allUsers.filter(user => user.name.toLowerCase().indexOf(nameInput) != -1);
+
+            console.log( filterByName );  
+
+            if(filterByName.length < 10 ) {
+                $( "#card-container" ).empty();
+                this.renderUsers( this.pagination(filterByName, 10, 1) );
+                console.log("less than 10 users");
+            }else {
+                
+                this.renderUsers( this.pagination(filterByName, 10, currentPage) );
+                console.log(this.pagination(filterByName, 10, currentPage));
+                console.log('Current page: ' + currentPage);
+            }
+        });
+        
+    }.bind(this);//Bind ListUsers object
 
 }
 
 let list = new ListUsers;
-let printUsers = new FilterUsers;
+let scroll = new Scrollinfinite(list.filterName).initScroll();
 
+//Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-
-    list.getAllUsers(list.url, printUsers.filterName);
-})
+    //The argument passed is the nº of the page that you want to print.
+    list.filterName(1);
+});
