@@ -1,12 +1,12 @@
 function NewUser(
   name,
-  //  phone,
-  //  zip,
+  phone,
+  zip,
   email,
   gender,
   birthDate,
   username,
-  //  password,
+  password,
   city,
   country,
   state,
@@ -19,18 +19,16 @@ function NewUser(
   profilePicture
 ) {
   this.name = name;
-  //  this.phone = phone;
-  //  this.zip = zip;
+  this.phone = phone;
+  this.zip = zip;
   this.email = email;
   this.gender = gender;
   this.birthDate = birthDate;
   this.username = username;
-  //  this.password = password;
-  this.location = {
-    city: city,
-    state: state,
-    country: country
-  };
+  this.password = password;
+  this.city = city,
+  this.state = state,
+  this.country = country,
   this.experience = experience;
   this.languages = languages;
   this.skills = skills;
@@ -79,52 +77,45 @@ $("#registerSubmit").submit(function(e) {
 
   let languages = $('#languages input[type="checkbox"]:checked')
     .map(function() {
-      return $(this)
-        .next("label")
-        .text()
-        .toLowerCase()
-        .split(" ")
-        .join("%20");
+      return $(this).val();
     })
     .get();
 
   // Exist this method like alone function to call with id.
   let skills = $('#skills input[type="checkbox"]:checked')
     .map(function() {
-      return $(this)
-        .next("label")
-        .text()
-        .toLowerCase()
-        .split(" ")
-        .join("%20");
+      return $(this).val();
     })
     .get();
+
   let jobTitle = $("#validationJobTitle").val();
-  let company = "Test Company"; // Create field if it's necesary.
+  let company = $("#validationCompany").val();
   let website = $("#validationRepository").val();
-  // let profilePicture = $("#profilePicture").files[0];
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
-  console.log(
-    name,
-    phone,
-    zip,
-    email,
-    gender,
-    birthDate,
-    username,
-    password,
-    city,
-    country,
-    state,
-    experience,
-    languages,
-    skills,
-    jobTitle,
-    company,
-    website,
-    profilePicture
-  );
+  // *** CHECK variables ****
+
+  // console.log(
+  //   name,
+  //   phone,
+  //   zip,
+  //   email,
+  //   gender,
+  //   birthDate,
+  //   username,
+  //   password,
+  //   city,
+  //   country,
+  //   state,
+  //   experience,
+  //   languages,
+  //   skills,
+  //   jobTitle,
+  //   company,
+  //   website,
+  //   profilePicture
+  // );
+
   if (!CheckPassword(password)) {
     $("#inputPassword5")
       .addClass("border-danger is-invalid")
@@ -141,13 +132,13 @@ $("#registerSubmit").submit(function(e) {
     }
     registered = new NewUser(
       name,
-      // phone,
-      // zip,
+      phone,
+      zip,
       email,
       gender,
       birthDate,
       username,
-      // password,
+      password,
       city,
       country,
       state,
@@ -160,11 +151,11 @@ $("#registerSubmit").submit(function(e) {
       profilePicture
     );
 
+    console.log(registered);
+
     function createRequestBody() {
 
       let formData = new FormData();
-
-      console.log(formData);
 
       // Sent as a string
       formData.append("name", registered.name); //* */
@@ -176,16 +167,16 @@ $("#registerSubmit").submit(function(e) {
       formData.append("email", registered.email); //* */
 
       // Sent as a string
-      formData.append("city", registered.location.city);
+      formData.append("city", registered.city);
 
       // Sent as a string
-      formData.append("state", registered.location.state);
+      formData.append("state", registered.state);
 
       // Sent as a string
       formData.append("gender", registered.gender);
 
       // Sent as a string
-      formData.append("country", registered.location.country);
+      formData.append("country", registered.country);
 
       // Sent as a string
       formData.append("jobTitle", registered.jobTitle);
@@ -218,15 +209,14 @@ $("#registerSubmit").submit(function(e) {
       formBody = createRequestBody();
       // let formBody = createRequestBody();
 
-      var testjson = {};
-      for(var pair of formBody.entries()) {
-          console.log(pair[0]+ ', '+ pair[1]);
-          testjson[pair[0]] = pair[1];
-      }
+      // var testjson = {};
+      // for(var pair of formBody.entries()) {
+      //     console.log(pair[0]+ ', '+ pair[1]);
+      //     testjson[pair[0]] = pair[1];
+      // }
 
-      console.log("tj", JSON.stringify(testjson));
+      // console.log("tj", JSON.stringify(testjson));
 
-      console.log("This is formBody to send: ", formBody);
       fetch("https://cv-mobile-api.herokuapp.com/api/users", {
         method: "POST",
         body: formBody
