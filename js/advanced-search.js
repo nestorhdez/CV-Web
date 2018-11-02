@@ -57,8 +57,8 @@ $("#search-btn").on("click", function() {
 
   $(".deletion").on("click",function( e ) {
     $(this).parent().remove();
-    if($('input[type=checkbox]').prop('checked') == true) {
-      ($('#languages').prop('checked',false));
+    if($('languages').prop('checked') == true) {
+      ($(this).prop('checked',false));
 
     }
   })
