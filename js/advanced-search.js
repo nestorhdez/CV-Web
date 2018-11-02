@@ -22,7 +22,7 @@ $("#search-btn").on("click", function() {
     if (variables[i] != 0) {
       if (i == 6) {
         $(".area").append(
-          spans + 'data-idsvariables="'+ idsvariables[i] +'">' + variables[i] + " " + "year/s" + deletion + finspans
+          spans + 'data-idsvariables="'+ idsvariables[i] +'">' + variables[i] + " year/s" + deletion + finspans
         );
       } else {
         $(".area").append(spans + 'data-idsvariables="'+ idsvariables[i] +'">' + variables[i] + deletion + finspans);
@@ -32,21 +32,24 @@ $("#search-btn").on("click", function() {
   for (input of languages) {
     // coge los inputs dentro del array language
     if ($(input).prop("checked") === true) {
-      $(".area").append(spans + $(input).prop("name") + deletion + finspans);
+      $(".area").append(spans + '#languages' + ">" + $(input).prop("name") + deletion + finspans);
     }
   }
   for (input of skills) {
     if ($(input).prop("checked") === true) {
-      $(".area").append(spans + $(input).prop("name") + deletion + finspans);
+      $(".area").append(spans + '#skills' + ">" + $(input).prop("name") + deletion + finspans);
     }
   }
   $(".deletion").on("click",function( e ) {
-    console.log("apretar boton", e , $(this).parent().attr("data-idsvariables") );
-    let test = ($(this).parent().attr("data-idsvariables"));
+    let del_input = ($(this).parent().attr("data-idsvariables"));
     $(this).parent().remove();
-    console.log(test);
-    $(test).val("");
+    $(del_input).val("");
   });
+  $(".deletion").on("click",function( e ) {
+    // let del_lang = ($(this).parent().attr("#languages[type=checkbox]"));
+    $(this).parent().remove();
+    $('#languages').prop('checked',false);
+  })
 })
 
 // TRIGGER CLICK
