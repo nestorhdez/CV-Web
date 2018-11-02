@@ -18,9 +18,11 @@ $("#search-btn").on("click", function() {
   var languages = selectLanguage.find("input[type=checkbox]");
   var selectSkill = $("#skills");
   var skills = selectSkill.find("input[type=checkbox]");
-  var variables = [name, surname, city, street, state, zip, experience];
-  var idsvariables = ["#input-name","#validationlastname","#city-option", "#validationStreet", "#validationState", "#validationZip","#experience"];
+  var variables = [name, username, email, gender, city, state, country, company, job, experience];
+  var idsvariables = ["#input-name",'#validationusername',"#validationemail","#Gender","#city-option", "#validationState", "#validationCountry", "#validationcompany","#validationjob","#experience"];
   console.log("longvariables: " + variables.length + name + "name");
+
+  // to append text inputs
   for (let i = 0; i < variables.length; i++) {
     if (variables[i] != 0) {
       if (i == 9) {
@@ -32,8 +34,9 @@ $("#search-btn").on("click", function() {
       }
     }
   }
+
+  // to append checkeable checkboxs
   for (input of languages) {
-    // coge los inputs dentro del array language
     if ($(input).prop("checked") === true) {
       $(".area").append(spans + '#languages' + ">" + $(input).prop("name") + deletion + finspans);
     }
@@ -43,23 +46,23 @@ $("#search-btn").on("click", function() {
       $(".area").append(spans + '#skills' + ">" + $(input).prop("name") + deletion + finspans);
     }
   }
+
+  // for deleting the inputs that were appended and also its value
   $(".deletion").on("click",function( e ) {
     let del_input = ($(this).parent().attr("data-idsvariables"));
     $(this).parent().remove();
     $(del_input).val("");
   });
+
+
   $(".deletion").on("click",function( e ) {
-    // let del_lang = ($(this).parent().attr("#languages[type=checkbox]"));
     $(this).parent().remove();
-    $('#languages').prop('checked',false);
+    if($('input[type=checkbox]').prop('checked') == true) {
+      ($('#languages').prop('checked',false));
+
+    }
   })
 })
 
 // TRIGGER CLICK
-// $("#adv-btn").on("click", function() {
-//   $(".area").hide();
-// });
 
-// $("#search-btn").on("click", function() {
-//   $(".area").show();
-// });
