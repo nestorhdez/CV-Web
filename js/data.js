@@ -1,3 +1,5 @@
+
+/** Contructor to NewUser */
 function NewUser(
   name,
   phone,
@@ -38,30 +40,23 @@ function NewUser(
   this.profilePicture = profilePicture;
 }
 
-// {
-//     "languages": [ "english", "spanish" ],
-//     "skills": [ "html", "css", "javascript", "node", "express" ],
-//     "_id": "5bbcd6c233daa000153cc81e",
-//     "name": "Patricia Lebsack",
-//     "username": "Kariannes",
-//     "email": "Julianne.OConner@kory.com",
-//     "gender": "male",
-//     "location": { "city": "Leith", "state": "Edimburg", "country": "United Kingdom" },
-//     "company": "Robel-Corkery",
-//     "jobTitle": "Fullstack Developer",
-//     "website": "lebsack.info",
-//     "birthDate": "1986-02-25T00:00:00.000Z",
-//     "experience": "- 1 year",
-//     "registeredDate": 1534149132000,
-//     "profilePicture": "https://cv-mobile-api.herokuapp.com/uploads/500_9.jpeg",
-//     }
-
 let registered;
-let formBody;
 
+/** Listener event to submit*/
 $("#registerSubmit").submit(function(e) {
   console.log("submit actived...");
   e.preventDefault();
+
+  /** 
+  * @name getCheckedBox  Create array with checked inputs in checkbox input. 
+  * @param {string} idinput - id input checkbox.
+  */
+  function getCheckedBox (idinput){
+    return $(idinput +' input[type="checkbox"]:checked').map(function() {
+      return $(this).val();
+    }).get();
+  }
+
   let password = $("#inputPassword5").val();
   let name = $("#validationname").val();
   let phone = $("#InputPhone").val();
@@ -75,26 +70,16 @@ $("#registerSubmit").submit(function(e) {
   let state = $("#validationState").val();
   let experience = $("#experience").val();
 
-  let languages = $('#languages input[type="checkbox"]:checked')
-    .map(function() {
-      return $(this).val();
-    })
-    .get();
-
-  // Exist this method like alone function to call with id.
-  let skills = $('#skills input[type="checkbox"]:checked')
-    .map(function() {
-      return $(this).val();
-    })
-    .get();
+  let languages = getCheckedBox('#languages');
+  let skills = getCheckedBox('#skills');
 
   let jobTitle = $("#validationJobTitle").val();
   let company = $("#validationCompany").val();
   let website = $("#validationRepository").val();
+
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
   // *** CHECK variables ****
-
   // console.log(
   //   name,
   //   phone,
@@ -150,9 +135,10 @@ $("#registerSubmit").submit(function(e) {
       website,
       profilePicture
     );
-
+    
     console.log(registered);
-
+    
+    /** Take values from NewUser object to create formBody */
     function createRequestBody() {
 
       let formData = new FormData();
@@ -205,17 +191,9 @@ $("#registerSubmit").submit(function(e) {
       return formData;
     }
 
+    /** Send info to API */
     function sendNewUser() {
-      formBody = createRequestBody();
-      // let formBody = createRequestBody();
-
-      // var testjson = {};
-      // for(var pair of formBody.entries()) {
-      //     console.log(pair[0]+ ', '+ pair[1]);
-      //     testjson[pair[0]] = pair[1];
-      // }
-
-      // console.log("tj", JSON.stringify(testjson));
+      let formBody = createRequestBody();
 
       fetch("https://cv-mobile-api.herokuapp.com/api/users", {
         method: "POST",
@@ -226,6 +204,8 @@ $("#registerSubmit").submit(function(e) {
         .catch(error => console.log(error.message));
     }
 
+    // Need check the send info before.
+
     sendNewUser();
     // this.reset();
     // $("#preview").attr("src", "");
@@ -233,6 +213,8 @@ $("#registerSubmit").submit(function(e) {
   }
 });
 
+/** Check Password format
+ * @param {string} inputtxt */ 
 function CheckPassword(inputtxt) {
   var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
   if (inputtxt.match(passw)) {
@@ -244,6 +226,7 @@ function CheckPassword(inputtxt) {
   }
 }
 
+/** Create previewFile in form. */
 function previewFile() {
   let preview = document.querySelector("#preview");
   let file = document.querySelector("input[type=file]").files[0];
