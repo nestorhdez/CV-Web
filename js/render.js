@@ -103,7 +103,7 @@ function ListUsers() {
     }
 
 
-    this.filterName = function ( currentPage ){
+    this.filterUsers = function ( currentPage ){
 
         new Promise((resolve, reject) => {
             //Passing the resolve as a callback.
@@ -112,21 +112,92 @@ function ListUsers() {
         }).then((allUsers) => {
 
             console.log(allUsers);
-
+            // Inputs
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
-            
-            let filterByName = allUsers.filter(user => user.name.toLowerCase().indexOf(nameInput) != -1);
-
-            console.log( filterByName );  
-
-            if(filterByName.length < 10 ) {
-                $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(filterByName, 10, 1) );
-                console.log("less than 10 users");
-            }else {
+            let surnameInput = document.querySelector("#validationlastname").value.toLowerCase();
+            let cityInput = document.querySelector("#city-option").value.toLowerCase();
+            let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
+            let stateInput = document.querySelector("#validationState").value.toLowerCase();
+            let experienceSelect = document.querySelector("#experience").value.toLowerCase();
+            //CheckBoxes
+            let languages = document.querySelectorAll('#languages .form-check-input');
+            let checkedLanguages = [...languages].filter(lang => lang.checked == true ).map(lang => lang.defaultValue.toLowerCase());
+            let skills = document.querySelectorAll('#skills .form-check-input');
+            let checkedSkills = [...skills].filter(skill => skill.checked == true).map(skill => skill.defaultValue.toLowerCase());
+      
+            let allFilters = [];
+            //Filters
+            if(nameInput !== '') {
+                var filterByName = allUsers.filter(user => user.name.split(' ')[0].toLowerCase().indexOf(nameInput) != -1);
+            }
+            if(surnameInput !== '') {
+                var filterBySurname = allUsers.filter(user => user.name.split(' ')[1].toLowerCase().indexOf(surnameInput) != -1);
+            }
+            if(cityInput !== '') {
+                var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) != -1);
+            }
+            if(countryInput !== '') {
+                var filterByCountry = allUsers.filter(user =>  user.location.country.toLowerCase() === countryInput);
+            }
+            if(stateInput !== '') {
+                var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() === stateInput);
+            }
+            if(experienceSelect !== '') {
+                var filterByExperience = allUsers.filter(user => user.experience.toLowerCase() === experienceSelect);
+            }
+            if(checkedLanguages.length > 0) {
                 
-                this.renderUsers( this.pagination(filterByName, 10, currentPage) );
-                console.log(this.pagination(filterByName, 10, currentPage));
+                var filterByLanguages = allUsers.filter(user => {
+
+                    let langControl = [];
+
+                    checkedLanguages.forEach( lang => {
+                        langControl.push(user.languages.includes(lang));
+                    })
+    
+                    if(langControl.includes(false)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    
+                });
+
+            }
+            if(checkedSkills.length > 0) {
+                
+                var filterBySkills = allUsers.filter(user => {
+
+                    let skillsControl = [];
+
+                    checkedSkills.forEach( skill => {
+                        skillsControl.push(user.skills.includes(skill));
+                    })
+    
+                    if(skillsControl.includes(false)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    
+                });
+
+            }
+            
+            // let listFilteredUser = new Set(allFilters);
+
+            console.log( allFilters );  
+
+            if( listFilteredUser.length === 0 ){
+                $( "#card-container" ).empty();
+                document.getElementById('card-container').innerHTML += `<h1> There are not any coincidence </h1>`;
+            }else if( listFilteredUser.length < 10 ) {
+                $( "#card-container" ).empty();
+                this.renderUsers( this.pagination(listFilteredUser, 10, 1) );
+                console.log("less than 10 users");
+            }else { undefined
+                this.renderUsers( this.pagination(listFilteredUser, 10, currentPage) );
+                console.log(this.pagination(listFilteredUser, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
         });
@@ -136,12 +207,12 @@ function ListUsers() {
 }
 
 let list = new ListUsers;
-let scroll = new Scrollinfinite(list.filterName).initScroll();
+let scroll = new Scrollinfinite(list.filterUsers).initScroll();
 
 //Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
     //The argument passed is the nº of the page that you want to print.
-    list.filterName(1);
+    list.filterUsers(1);
 });
