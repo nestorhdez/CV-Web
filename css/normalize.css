@@ -6,8 +6,8 @@ http://yuilibrary.com/license/
 */
 
 html {
-    color: #000;
-    background: #000;
+    color:rgba(red, green, blue, 1);
+    background: rgba(red, green, blue, 1);
   }
   
   body,
