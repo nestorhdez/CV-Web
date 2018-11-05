@@ -49,20 +49,23 @@ $("#search-btn").on("click", function() {
 
   // for deleting the inputs that were appended and also its value
   $(".deletion").on("click",function( e ) {
+    console.log("type-of-input: ", $('input[type="text"]'));
+    // if($)
     let del_input = ($(this).parent().attr("data-idsvariables"));
     $(this).parent().remove();
     $(del_input).val("");
   });
 
 
-  $(".deletion").on("click",function( e ) {
-    $(this).parent().remove();
-    if($('languages').prop('checked') == true) {
-      ($(this).prop('checked',false));
+  // $(".deletion").on("click",function( e ) {
+  //   $(this).parent().remove();
+  //   console.log("input-checked: " + $('input[id$="-check"]').prop('checked'));
+  //   if($('input[id$="-check"]').prop('checked') == true) {
+  //     ($(this).prop('checked',false));
 
-    }
+  //   }
   })
-})
+
 
 // TRIGGER CLICK
 
