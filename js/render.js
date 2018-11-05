@@ -125,25 +125,39 @@ function ListUsers() {
             let skills = document.querySelectorAll('#skills .form-check-input');
             let checkedSkills = [...skills].filter(skill => skill.checked == true).map(skill => skill.defaultValue.toLowerCase());
       
-            let allFilters = [];
+
+            function removeFilteredUser(user){
+                if(allFilters.includes(user)){
+                    let i = allFilters.indexOf(user);
+                    allFilters.splice(i, 1);
+                }
+            }
+
+            let allFilters = allUsers;
             //Filters
             if(nameInput !== '') {
-                var filterByName = allUsers.filter(user => user.name.split(' ')[0].toLowerCase().indexOf(nameInput) != -1);
+                var filterByName = allUsers.filter(user => user.name.split(' ')[0].toLowerCase().indexOf(nameInput) == -1);
+                filterByName.forEach(removeFilteredUser);
             }
             if(surnameInput !== '') {
-                var filterBySurname = allUsers.filter(user => user.name.split(' ')[1].toLowerCase().indexOf(surnameInput) != -1);
+                var filterBySurname = allUsers.filter(user => user.name.split(' ')[1].toLowerCase().indexOf(surnameInput) == -1);
+                filterBySurname.forEach(removeFilteredUser)
             }
             if(cityInput !== '') {
-                var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) != -1);
+                var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) == -1);
+                filterByCity.forEach(removeFilteredUser);
             }
             if(countryInput !== '') {
-                var filterByCountry = allUsers.filter(user =>  user.location.country.toLowerCase() === countryInput);
+                var filterByCountry = allUsers.filter(user =>  user.location.country.toLowerCase() !== countryInput);
+                filterByCountry.forEach(removeFilteredUser);
             }
             if(stateInput !== '') {
-                var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() === stateInput);
+                var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() !== stateInput);
+                filterByState.forEach(removeFilteredUser);
             }
             if(experienceSelect !== '') {
-                var filterByExperience = allUsers.filter(user => user.experience.toLowerCase() === experienceSelect);
+                var filterByExperience = allUsers.filter(user => user.experience.toLowerCase() !== experienceSelect);
+                filterByExperience.forEach(removeFilteredUser);
             }
             if(checkedLanguages.length > 0) {
                 
@@ -156,13 +170,14 @@ function ListUsers() {
                     })
     
                     if(langControl.includes(false)){
-                        return false;
-                    } else {
                         return true;
+                    } else {
+                        return false;
                     }
                     
                 });
 
+                filterByLanguages.forEach(removeFilteredUser);
             }
             if(checkedSkills.length > 0) {
                 
@@ -175,29 +190,27 @@ function ListUsers() {
                     })
     
                     if(skillsControl.includes(false)){
-                        return false;
-                    } else {
                         return true;
+                    } else {
+                        return false;
                     }
                     
                 });
-
+                filterBySkills.forEach(removeFilteredUser);
             }
             
-            // let listFilteredUser = new Set(allFilters);
-
             console.log( allFilters );  
 
-            if( listFilteredUser.length === 0 ){
+            if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
                 document.getElementById('card-container').innerHTML += `<h1> There are not any coincidence </h1>`;
-            }else if( listFilteredUser.length < 10 ) {
+            }else if( allFilters.length < 10 ) {
                 $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(listFilteredUser, 10, 1) );
+                this.renderUsers( this.pagination(allFilters, 10, 1) );
                 console.log("less than 10 users");
-            }else { undefined
-                this.renderUsers( this.pagination(listFilteredUser, 10, currentPage) );
-                console.log(this.pagination(listFilteredUser, 10, currentPage));
+            }else {
+                this.renderUsers( this.pagination(allFilters, 10, currentPage) );
+                console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
         });
