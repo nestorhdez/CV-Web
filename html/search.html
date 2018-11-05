@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/theme.min.css">
+    <!-- <link rel="stylesheet" href="../css/theme.min.css"> -->
     <link rel="stylesheet" href="../css/customstyles.css">
 </head>
 
 <body>
-
+    <div class="line-gutter-backdrop"></div>
     <header>
         <!-- Navbar section -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" id="nav-top">
@@ -90,9 +90,9 @@
                                 <input type="text" class="form-control" id="city-option" placeholder="City" name="city"
                                     value="">
                             </div>
-                            <!-- <div class="col-md-3 mb-3">
-                                <label for="validationStreet">Street</label>
-                                <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCountry">Country</label>
+                                <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
                                     value="">
                             </div> -->
 
@@ -122,13 +122,10 @@
                                 <label for="experience-option" class="col-form-label">Experience</label>
                                 <select class="form-control custom-select" id="experience">
                                     <option value="">Years of experience</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="+5">+5</option>
+                                    <option value="- 1 Year">-1 Year</option>
+                                    <option value="1 - 3 Years">1 - 3 Years</option>
+                                    <option value="3 - 5 Years">3 - 5 Years</option>
+                                    <option value="+ 5 Years">+5 Years</option>
                                 </select>
                             </div>
                         </div>
