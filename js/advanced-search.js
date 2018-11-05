@@ -3,7 +3,7 @@ $("#search-btn").on("click", function() {
   var name = $("#input-name").val();
   var username = $("#validationusername").val();
   var email = $("#validationemail").val();
-  var gender = $("#Gender").val();
+  var gender = $("#gender").val();
   var city = $("#city-option").val();
   var state = $("#validationState").val();
   var country = $("#validationCountry").val();
@@ -19,7 +19,7 @@ $("#search-btn").on("click", function() {
   var selectSkill = $("#skills");
   var skills = selectSkill.find("input[type=checkbox]");
   var variables = [name, username, email, gender, city, state, country, company, job, experience];
-  var idsvariables = ["#input-name",'#validationusername',"#validationemail","#Gender","#city-option", "#validationState", "#validationCountry", "#validationcompany","#validationjob","#experience"];
+  var idsvariables = ["#input-name",'#validationusername',"#validationemail","#gender","#city-option", "#validationState", "#validationCountry", "#validationcompany","#validationjob","#experience"];
   console.log("longvariables: " + variables.length + name + "name");
 
   // to append text inputs
@@ -49,11 +49,15 @@ $("#search-btn").on("click", function() {
 
   // for deleting the inputs that were appended and also its value
   $(".deletion").on("click",function( e ) {
-    console.log("type-of-input: ", $('input[type="text"]'));
-    // if($)
-    let del_input = ($(this).parent().attr("data-idsvariables"));
-    $(this).parent().remove();
-    $(del_input).val("");
+    console.log("type-of-input: ", $('form#adv-search-form input[type=text]'));
+    if($('form#adv-search-form input[type=text]')){
+      let del_input = ($(this).parent().attr("data-idsvariables"));
+      $(this).parent().remove();
+      $(del_input).val("");
+    }
+    else {
+      console.log("input-checked: " + $('input[id$="-check"]').prop('checked'));
+    }
   });
 
 
