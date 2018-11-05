@@ -56,8 +56,8 @@
                         <div class="form-group d-flex flex-wrap">
                             <div class="col-md-3 mb-3">
                                 <label for="validationname">First name</label>
-                                <input type="text" class="form-control" id="input-name" placeholder="First name"
-                                    name="name" value="">
+                                <input type="text" class="form-control" id="input-name" placeholder="First name" name="name"
+                                    value="">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationlastname">Surname</label>
@@ -195,21 +195,28 @@
     <!-- Main section -->
     <main class="container-fluid">
         <div id="card-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
-            <div class="card mr-3 mb-3 card-user shadow list-group-item-action" style="width: 18rem;">
+            <div class="card my-1 mx-1 card-user shadow list-group-item-action" style="width: 18rem;">
                 <div class="card-body text-center">
-                    <div class="d-flex flex-column justify-content-center mb-3">
-                        <div class="d-flex mx-auto profile-picture mb-1">
-                            <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
+                    <div class="row">
+                        <div class="d-flex flex-column justify-content-center mb-3">
+                            <div class="d-flex mx-auto profile-picture mb-1">
+                                <img class="img-user rounded-circle" src="../img/FOTITO.jpg">
+                            </div>
+                            <h5 class="card-title d-inline user-name">Marolyn Dayan Guzmán Álvarez</h5>
                         </div>
-                        <h5 class="card-title d-inline user-name">Marolyn Dayan Guzmán Álvarez</h5>
                     </div>
-                    <div class="d-flex flex-column flex-nowrap text-left my-2">
-                        <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                        <p class="m-0"><strong>City: </strong>Somewhere</p>
-                        <p class="m-0"><strong>Country: </strong>Somewhere</p>
-                        <p class="m-0"><strong>State: </strong>Somewhere</p>
-                        <p class="m-0"><strong>Email: </strong><a href="mailto:someone@example.es">someone@example.es</a></p>
-                        <div class="d-flex justify-content-between align-self-end mt-3">
+                    <div class="row px-3">
+                        <div class="d-flex flex-column flex-nowrap text-left my-2">
+                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                            <p class="m-0"><strong>City: </strong>Somewhere</p>
+                            <p class="m-0"><strong>Country: </strong>Somewhere</p>
+                            <p class="m-0"><strong>State: </strong>Somewhere</p>
+                            <p class="m-0 font-italic"><strong>Skills: </strong>Html, css, sass, git, github</p>
+                            <p class="m-0"><strong>Email: </strong><a href="mailto:someone@example.es">someone@example.es</a></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex justify-content-around align-self-end mt-3 mx-auto">
                             <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
                             <button type="button" class="btn btn-info btn-sm mx-1" id="fulldata" data-toggle="modal"
                                 data-target="#ModalCenter">Detail</button>
@@ -248,12 +255,17 @@
                                     <p class="card-text"><strong>City: </strong><span id="city">somewhere</span></p>
                                     <p class="card-text"><strong>Country: </strong><span id="country">Country</span></p>
                                     <p class="card-text"><strong>State: </strong><span id="state">State</span></p>
-                                    <p class="card-text"><strong>Language: </strong><span id="lenguage">English, spanish.</span></p>
-                                    <p class="card-text"><strong>Job Title: </strong><span id="jobTitle">Junior Developer</span></p>
-                                    <p class="card-text"><strong>Experience: </strong><span id="experience"> Less 1 year</span></p>  <!-- Show years, but when is 0 years show this. Perhaps need option "whitout experience"? --> 
+                                    <p class="card-text"><strong>Language: </strong><span id="lenguage">English,
+                                            spanish.</span></p>
+                                    <p class="card-text"><strong>Job Title: </strong><span id="jobTitle">Junior
+                                            Developer</span></p>
+                                    <p class="card-text"><strong>Experience: </strong><span id="experience"> Less 1
+                                            year</span></p>
+                                    <!-- Show years, but when is 0 years show this. Perhaps need option "whitout experience"? -->
                                     <p class="card-text"><strong>Website: </strong><a href="#" id="website">www.websitecompany.com</a></p>
                                     <p class="card-text"><strong>Company: </strong><span id="company">Company Name SL</span></p>
-                                    <p class="card-text"><strong>Skills: </strong><span id="skills">html, css, sass, git, github.</span></p>
+                                    <p class="card-text"><strong>Skills: </strong><span id="skills">html, css, sass,
+                                            git, github.</span></p>
                                 </div>
                             </div>
                         </div>
