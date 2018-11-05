@@ -15,7 +15,6 @@ function Scrollinfinite(callback){
       this.currentpage += 1;
       this.callback(this.currentpage);
       console.log("Creado los 10 elementos.");
-      return currentpage;
     }
 
   }.bind(this);
