@@ -101,8 +101,8 @@ function ListUsers() {
     It's indise of renderUsers because it only has to work with the cards that are already rendered.*/
     this.renderModal = function(arr) {
         $('.btn-modal').click(function(e){
-            // console.log('click done');
-            // console.log('User id ' + e.target.id);
+            console.log('click done');
+            console.log('User id ' + e.target.id);
             arr.forEach( function(val){
                 if(val._id == e.target.id){
                     let user = val;
@@ -111,13 +111,13 @@ function ListUsers() {
 
                     $('#city').empty().html(user.location.city);
 
-                    $('#street').empty().html(user.location.street);
+                    $('#country').empty().html(user.location.country);
                     
-                    $('#zipcode').empty().html(user.location.zipcode);
+                    $('#state').empty().html(user.location.state);
 
                     $('#email').empty().html(user.email);
 
-                    $('#phone').empty().html(user.phone);
+                    $('#jobTitle').empty().html(user.jobTitle);
                     
                     $('#website').empty().html(user.website);
 
