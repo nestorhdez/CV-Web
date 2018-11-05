@@ -58,7 +58,7 @@ function ListUsers() {
             let card = (`
             <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
                 <div class="card-body text-center">
-                <div class="row mb-4">        
+                <div class="row mb-4gi">        
                     <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
                         <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
                         <button type="button" class="btn btn-info btn-sm mx-1" id="fulldata" data-toggle="modal"
