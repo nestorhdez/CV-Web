@@ -114,10 +114,14 @@ function ListUsers() {
             console.log(allUsers);
             // Inputs
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
-            let surnameInput = document.querySelector("#validationlastname").value.toLowerCase();
+            let usernameInput = document.querySelector("#validationusername").value.toLowerCase();
+            let emailInput = document.querySelector("#validationemail").value.toLowerCase();
+            let genderSelect = document.querySelector("#Gender").value.toLowerCase();
             let cityInput = document.querySelector("#city-option").value.toLowerCase();
             let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
             let stateInput = document.querySelector("#validationState").value.toLowerCase();
+            let companyInput = document.querySelector("#validationcompany").value.toLowerCase();
+            let jobTitleInput = document.querySelector("#validationjob").value.toLowerCase();
             let experienceSelect = document.querySelector("#experience").value.toLowerCase();
             //CheckBoxes
             let languages = document.querySelectorAll('#languages .form-check-input');
@@ -136,12 +140,20 @@ function ListUsers() {
             let allFilters = allUsers;
             //Filters
             if(nameInput !== '') {
-                var filterByName = allUsers.filter(user => user.name.split(' ')[0].toLowerCase().indexOf(nameInput) == -1);
+                var filterByName = allUsers.filter(user => user.name.toLowerCase().indexOf(nameInput) == -1);
                 filterByName.forEach(removeFilteredUser);
             }
-            if(surnameInput !== '') {
-                var filterBySurname = allUsers.filter(user => user.name.split(' ')[1].toLowerCase().indexOf(surnameInput) == -1);
-                filterBySurname.forEach(removeFilteredUser)
+            if(usernameInput !== '') {
+                var filterByusername = allUsers.filter(user => user.username.toLowerCase().indexOf(usernameInput) == -1);
+                filterByusername.forEach(removeFilteredUser)
+            }
+            if(emailInput !== '') {
+                var filterByEmail = allUsers.filter(user => user.email.toLowerCase().indexOf(emailInput) == -1);
+                filterByEmail.forEach(removeFilteredUser)
+            }
+            if(genderSelect !== '') {
+                var filterByGender = allUsers.filter(user => user.gender !== genderSelect);
+                filterByGender.forEach(removeFilteredUser);
             }
             if(cityInput !== '') {
                 var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) == -1);
@@ -154,6 +166,14 @@ function ListUsers() {
             if(stateInput !== '') {
                 var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() !== stateInput);
                 filterByState.forEach(removeFilteredUser);
+            }
+            if(companyInput !== '') {
+                var filterByCompany = allUsers.filter(user => user.company.toLowerCase().indexOf(companyInput) == -1);
+                filterByCompany.forEach(removeFilteredUser);
+            }
+            if(jobTitleInput !== '') {
+                var filterByJobTitle = allUsers.filter(user => user.jobTitle.toLowerCase().indexOf(jobTitleInput) == -1);
+                filterByJobTitle.forEach(removeFilteredUser);
             }
             if(experienceSelect !== '') {
                 var filterByExperience = allUsers.filter(user => user.experience.toLowerCase() !== experienceSelect);
@@ -199,7 +219,8 @@ function ListUsers() {
                 filterBySkills.forEach(removeFilteredUser);
             }
             
-            console.log( allFilters );  
+            console.log( allFilters );
+            // console.log( allFilters[0].gender );
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
