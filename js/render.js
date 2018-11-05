@@ -58,6 +58,14 @@ function ListUsers() {
             let card = (`
             <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
                 <div class="card-body text-center">
+                <div class="row mb-4">        
+                    <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                        <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
+                        <button type="button" class="btn btn-info btn-sm mx-1" id="fulldata" data-toggle="modal"
+                            data-target="#ModalCenter">Detail</button>
+                        <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                    </div>
+                </div>
                     <div class="row">
                         <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                             <div class="d-flex mx-auto profile-picture mb-1">
@@ -76,14 +84,6 @@ function ListUsers() {
                             <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
                         </div>
                     </div>    
-                    <div class="row">        
-                        <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                            <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                            <button type="button" class="btn btn-info btn-sm mx-1" id="fulldata" data-toggle="modal"
-                                data-target="#ModalCenter">Detail</button>
-                            <button type="button" class="btn btn-primary btn-sm mx-1">Delete</button>
-                        </div>
-                    </div>
                 </div>
             </div>
             `)
