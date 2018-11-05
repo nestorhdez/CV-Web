@@ -154,6 +154,10 @@ footer {
   left: 50%;
   transform: translate(-50%,-50%);
 }
+.title-header {
+  font-family: sans-serif;
+  font-size: 3rem;
+}
 
 /* SKILLS */
 .title-skills{
@@ -175,8 +179,20 @@ footer {
   color: white;
 }
 
+.btn-blue-gray-header {
+  background-color: #7ba4a8; 
+  color: white;
+}
+
+.btn-blue-gray-header:hover {
+  background-color:transparent;
+  border-color: white;
+  color: white;
+}
+
 .btn-blue-gray:hover {
   background-color:transparent;
+  border-color: #7ba4a8;
   color: black;
 }
 /* Buttons */
