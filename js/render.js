@@ -60,12 +60,10 @@ function ListUsers() {
         });
         
         document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
-        this.renderModal(arr);
         
     }.bind(this);//Bind to ListUsers object.
 
-    /*Change the data of the modal when click on a user card.
-    It's indise of renderUsers because it only has to work with the cards that are already rendered.*/
+    /*Change the data of the modal when click on a user card.*/
     this.renderModal = function(arr) {
         $('.btn-modal').click(function(e){
             // console.log('click done');
@@ -236,6 +234,9 @@ function ListUsers() {
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
+
+            this.renderModal(allUsers);
+
         });
         
     }.bind(this);//Bind ListUsers object
