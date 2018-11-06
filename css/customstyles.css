@@ -146,6 +146,8 @@ footer {
   width: 20px;
   height: 20px;
   transform: rotate(-45deg);
+  border-bottom-width: 2px !important;
+  border-left-width: 2px !important;
 }
 
 .text-header {
