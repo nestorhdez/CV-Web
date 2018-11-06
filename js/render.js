@@ -114,7 +114,7 @@ function ListUsers() {
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
             let usernameInput = document.querySelector("#validationusername").value.toLowerCase();
             let emailInput = document.querySelector("#validationemail").value.toLowerCase();
-            let genderSelect = document.querySelector("#Gender").value.toLowerCase();
+            let genderSelect = document.querySelector("#gender").value.toLowerCase();
             let cityInput = document.querySelector("#city-option").value.toLowerCase();
             let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
             let stateInput = document.querySelector("#validationState").value.toLowerCase();

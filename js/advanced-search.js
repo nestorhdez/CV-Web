@@ -110,7 +110,7 @@ $("#search-btn").on("click", function() {
     $(this)
       .parent()
       .remove();
-    if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]")) {
+    if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("select")) {
       $(id_input).val("");
     } else {
       
