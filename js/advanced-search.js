@@ -3,7 +3,7 @@ $("#search-btn").on("click", function() {
   var name = $("#input-name").val();
   var username = $("#validationusername").val();
   var email = $("#validationemail").val();
-  var gender = $("#Gender").val();
+  var gender = $("#gender").val();
   var city = $("#city-option").val();
   var state = $("#validationState").val();
   var country = $("#validationCountry").val();

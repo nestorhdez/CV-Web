@@ -71,16 +71,16 @@ function ListUsers() {
                             <div class="d-flex mx-auto profile-picture mb-1">
                                 <img class="img-user rounded-circle" src="${val.profilePicture}">
                             </div>
-                            <h5 class="card-title d-inline user-name">${val.name}</h5>
+                            <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
                         </div>
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
                             <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0"><strong>City: </strong>${val.location.city}</p>
-                            <p class="m-0"><strong>Country: </strong>${val.location.country}</p>
-                            <p class="m-0"><strong>State: </strong>${val.location.state}</p>
-                            <p class="m-0 font-italic"><strong>Skills: </strong>${val.skills.join(', ')}</p>
+                            <p class="m-0 text-capitalize"><strong>City: </strong>${val.location.city}</p>
+                            <p class="m-0 text-capitalize"><strong>Country: </strong>${val.location.country}</p>
+                            <p class="m-0 text-capitalize"><strong>State: </strong>${val.location.state}</p>
+                            <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
                             <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
                         </div>
                     </div>    
@@ -102,8 +102,8 @@ function ListUsers() {
             console.log('click done');
             console.log('User id ' + e.target.id);
             arr.forEach( function(val){
-                console.log("val_id: ", val._id);
-                console.log("e.id: ", e.target.id);
+                // console.log("val_id: ", val._id);
+                // console.log("e.id: ", e.target.id);
                 if(val._id == e.target.id){
                     let user = val;
 
@@ -117,6 +117,8 @@ function ListUsers() {
                     
                     $('#state').empty().html(user.location.state);
 
+                    $('#language').empty().html(user.languages.join(', '));
+
                     $('#email').empty().html(user.email);
 
                     $('#jobTitle').empty().html(user.jobTitle);
@@ -125,7 +127,7 @@ function ListUsers() {
 
                     $('#company').empty().html(user.company);
 
-                    $('#skills').empty().html(user.skills.join(', '));
+                    $('#skills-modal').empty().html(user.skills.join(', '));
                     console.log("skills? ", user.skills.join(', '));
                 }
             });
@@ -154,7 +156,7 @@ function ListUsers() {
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
             let usernameInput = document.querySelector("#validationusername").value.toLowerCase();
             let emailInput = document.querySelector("#validationemail").value.toLowerCase();
-            let genderSelect = document.querySelector("#Gender").value.toLowerCase();
+            let genderSelect = document.querySelector("#gender").value.toLowerCase();
             let cityInput = document.querySelector("#city-option").value.toLowerCase();
             let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
             let stateInput = document.querySelector("#validationState").value.toLowerCase();
