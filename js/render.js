@@ -224,12 +224,14 @@ function ListUsers() {
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
-                document.getElementById('card-container').innerHTML += `<h1> There are not any coincidence </h1>`;
+                document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             }else if( allFilters.length < 10 ) {
                 $( "#card-container" ).empty();
                 this.renderUsers( this.pagination(allFilters, 10, 1) );
                 console.log("less than 10 users");
             }else {
+                let titleFailSearch = document.querySelector('#title-fail-search');
+                titleFailSearch ? titleFailSearch.remove() : null;
                 this.renderUsers( this.pagination(allFilters, 10, currentPage) );
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
