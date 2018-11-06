@@ -109,6 +109,14 @@ footer {
   background-color: rgba(49, 55, 62, 0.5);
 }
 
+.bg-warning-opacity {
+  background-color: rgba(255, 188, 62, 0.5);
+}
+
+.bg-info-opacity {
+  background-color: rgba(0, 163, 181, 0.2);
+}
+
 .box-goal {
   min-height: 100%;
   height: 100%;
