@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +15,7 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../css/theme.min.css"> -->
+    <link rel="stylesheet" href="../css/theme.min.css">
     <link rel="stylesheet" href="../css/customstyles.css">
 </head>
 
@@ -44,7 +43,6 @@
                     <button class="btn btn-sm btn-outline-primary my-2 border-1 border-white bg-dark text-white" type="submit">Search</button>
                 </form>
             </div>
-            </div>
         </nav>
     </header>
 
@@ -56,62 +54,64 @@
                     <form class="mt-3 d-flex flex-column" id="adv-search-form" method="POST" action="index.html">
                         <div class="form-group d-flex flex-wrap">
                             <div class="col-md-3 mb-3">
-                                <label for="validationname">Name</label>
-                                <input type="text" class="form-control" id="input-name" placeholder="Name"
-                                    name="name" value="">
+                                <label for="validationname"><strong>Name</strong></label>
+                                <input type="text" class="form-control" id="input-name" placeholder="Name" name="name"
+                                    value="">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationusername">Username</label>
+                                <label for="validationusername"><strong>Username</strong></label>
                                 <input type="text" class="form-control" id="validationusername" placeholder="Username"
                                     name="username" value="">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="validationemail" placeholder="Email"
-                                    name="email" value="">
+                                <label for="email"><strong>Email</strong></label>
+                                <input type="email" class="form-control" id="validationemail" placeholder="Email" name="email"
+                                    value="">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="gender">Gender</label>
+                                <label for="gender"><strong>Gender</strong></label>
                                 <select class="form-control custom-select" id="gender">
                                     <option value="">Gender</option>
                                     <option value="female">Female</option>
                                     <option value="male">Male</option>
-                                    <option vale="none">I prefer not to say it</option>
+                                    <option value="trans">Trans</option>
+                                    <option value="queer">Queer</option>
+                                    <option vale="no reply">I prefer not to say it</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group d-flex flex-wrap ">
                             <div class="col-md-3 mb-3">
-                                <label for="validationCity">City</label>
+                                <label for="validationCity"><strong>City</strong></label>
                                 <input type="text" class="form-control" id="city-option" placeholder="City" name="city"
                                     value="">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationCountry">Country</label>
-                                <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
-                                    value="">
+                                <label for="validationCountry"><strong>Country</strong></label>
+                                <input type="text" class="form-control" id="validationCountry" placeholder="Country"
+                                    name="country" value="">
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <label for="validationState">State</label>
+                                <label for="validationState"><strong>State</strong></label>
                                 <input type="text" class="form-control" id="validationState" placeholder="State" name="state"
                                     value="">
                             </div>
                         </div>
                         <div class="form-group d-flex flex-wrap">
-                                <div class="col-md-3 mb-3">
-                                        <label for="validationCompany">Company</label>
-                                        <input type="text" class="form-control" id="validationcompany" placeholder="Company name" name="company"
-                                            value="">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                            <label for="validationJob">Job Title</label>
-                                            <input type="text" class="form-control" id="validationjob" placeholder="Job title" name="job"
-                                                value="">
-                                        </div>
                             <div class="col-md-3 mb-3">
-                                <label for="experience-option" class="col-form-label">Experience</label>
+                                <label for="validationCompany"><strong>Company</strong></label>
+                                <input type="text" class="form-control" id="validationcompany" placeholder="Company name"
+                                    name="company" value="">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationJob"><strong>Job Title</strong></label>
+                                <input type="text" class="form-control" id="validationjob" placeholder="Job title" name="job"
+                                    value="">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="experience-option" class="col-form-label"><strong>Experience</strong></label>
                                 <select class="form-control custom-select" id="experience">
                                     <option value="">Years of experience</option>
                                     <option value="- 1 Year">-1 Year</option>
@@ -125,7 +125,7 @@
                         <div class="form-group d-flex flex-wrap">
                             <div class="col-md mb-3">
                                 <fieldset class="form-group">
-                                    <div class="mb-2">Languages</div>
+                                    <div class="mb-2"><strong>Languages</strong></div>
                                     <div class="d-flex flex-wrap" id="languages">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="eng-check" name="english"
@@ -151,7 +151,7 @@
                                 </fieldset>
 
                                 <fieldset class="form-group mb-3">
-                                    <div class="mb-2">Skills</div>
+                                    <div class="mb-2"><strong>Skills</strong></div>
                                     <div class="d-flex flex-wrap" id="skills">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="html-check" name="html"
@@ -212,28 +212,40 @@
     <!-- Main section -->
     <main class="container-fluid">
         <div id="card-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
-            <div class="card mr-3 mb-3 card-user shadow list-group-item-action" style="width: 18rem;">
+
+            <!-- Model Card -->
+            <!-- <div class="card my-1 mx-1 card-user shadow list-group-item-action" style="width: 18rem;">
                 <div class="card-body text-center">
-                    <div class="d-flex flex-column justify-content-center mb-3">
-                        <div class="d-flex mx-auto profile-picture mb-1">
-                            <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
-                        </div>
-                        <h5 class="card-title d-inline user-name">Marolyn Dayan Guzmán Álvarez</h5>
-                    </div>
-                    <div class="text-left">
-                        <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                        <p class="m-0 city-user"><b>City: </b>Somewhere</p>
-                        <p class="m-0"><b>Email: </b><a href="mailto:someone@example.es">someone@example.es</a></p>
-                        <p><b>Phone: </b>78</p>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <button type="button" class="btn btn-info btn-sm">Edit</button>
-                            <button type="button" class="btn btn-info btn-sm" id="fulldata" data-toggle="modal"
+                    <div class="row mb-4">
+                        <div class="d-flex justify-content-around align-self-end mt-3 mx-auto">
+                            <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
+                            <button type="button" class="btn btn-modal btn-info btn-sm mx-1" id="iddata" data-toggle="modal"
                                 data-target="#ModalCenter">Detail</button>
-                            <button type="button" class="btn btn-primary btn-sm">Delete</button>
+                            <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex flex-column justify-content-center mb-3">
+                            <div class="d-flex mx-auto profile-picture mb-1">
+                                <img class="img-user rounded-circle" src="../img/FOTITO.jpg">
+                            </div>
+                            <h5 class="card-title d-inline user-name">Marolyn Dayan Guzmán Álvarez</h5>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="d-flex flex-column flex-nowrap text-left my-2">
+                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                            <p class="m-0"><strong>City: </strong>Somewhere</p>
+                            <p class="m-0"><strong>Country: </strong>Somewhere</p>
+                            <p class="m-0"><strong>State: </strong>Somewhere</p>
+                            <p class="m-0 font-italic"><strong>Skills: </strong>Html, css, sass, git, github</p>
+                            <p class="m-0"><strong>Email: </strong><a href="mailto:someone@example.es">someone@example.es</a></p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- End Model Card -->
+
             <div id="loader"></div>
         </div>
 
@@ -251,22 +263,31 @@
                     </div>
                     <div class="modal-body">
                         <div class="card mr-3 mb-3 card-user-full">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <div class="d-flex justify-content-center mb-3">
-                                    <div class="d-flex  profile-picture mb-1">
-                                        <img class="img-user rounded-circle" src="../img/default-profile-picture.jpg">
+                                    <div class="d-flex col-s-4 profile-picture mb-1">
+                                        <img class="img-user rounded-circle" id="profilePicture" src="../img/FOTITO.jpg">
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <h6 class="card-subtitle font-italic mb-3">Contact information</h6>
-                                    <p class="card-text"><b>City: </b><span id="city">somewhere</span></p>
-                                    <p class="card-text"><b>Street: </b><span id="street">Street</span></p>
-                                    <p class="card-text"><b>Zipcode: </b><span id="zipcode">A0000</span></p>
-                                    <p class="card-text"><b>Email: </b><a href="mailto:someone@example.es" id="email">
+                                <div class="text-left">
+                                    <h6 class="card-subtitle text-center font-italic mb-3">Detail information</h6>
+                                    <p class="card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
                                             someone@example.es</a></p>
-                                    <p class="card-text"><b>Phone: </b><span id="phone">+34 78 358 845</span></p>
-                                    <p class="card-text"><b>Website: </b><a href="#" id="website">www.websitecompany.com</a></p>
-                                    <p class="card-text"><b>Company: </b><span id="company">Company Name SL</span></p>
+                                    <p class="card-text text-capitalize"><strong>City: </strong><span id="city">somewhere</span></p>
+                                    <p class="card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></p>
+                                    <p class="card-text text-capitalize"><strong>State: </strong><span id="state">State</span></p>
+                                    <p class="card-text text-capitalize"><strong>Language: </strong><span id="language">English,
+                                            spanish.</span></p>
+                                    <p class="card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle">Junior
+                                            Developer</span></p>
+                                    <p class="card-text"><strong>Experience: </strong><span id="experience"> Less 1
+                                            year</span></p>
+                                    <!-- Show years, but when is 0 years show this. Perhaps need option "whitout experience"? -->
+                                    <p class="card-text"><strong>Website: </strong><a href="#" id="website">www.websitecompany.com</a></p>
+                                    <p class="card-text text-capitalize"><strong>Company: </strong><span id="company">Company
+                                            Name SL</span></p>
+                                    <p class="card-text text-capitalize"><strong>Skills: </strong><span id="skills-modal">html,
+                                            css, sass, git, github</span></p>
                                 </div>
                             </div>
                         </div>
@@ -396,7 +417,7 @@
                     <div class="modal-body">
                         <h2>Personal data protection</h2>
                         <p>
-                            <b>Tech a Lot S.L.</b> (tradenames:
+                            <strong>Tech a Lot S.L.</strong> (tradenames:
                             <em>20H</em>, <em>20H Solutions</em> o <em>20 Talent</em>)
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
                             eveniet,
@@ -405,7 +426,7 @@
                             ipsa.
 
                             <address>
-                                <b>20H Talent</b>
+                                <strong>20H Talent</strong>
                                 <br>Avenida Alcalde José Remírez Bethencourt 17,
                                 <br>CP 35004 - Las Palmas de Gran Canaria, Las Palmas</address>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
