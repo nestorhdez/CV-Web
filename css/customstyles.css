@@ -157,25 +157,9 @@ footer {
   font-family: 'Roboto', sans-serif;
 }
 
-.arrow-div {
-  width: 20px;
-  height: 20px;
-  transform: rotate(-45deg);
-  border-bottom-width: 2px !important;
-  border-left-width: 2px !important;
-}
-
-.icon-div {
-  position: relative;
-}
-
-.icon-header {
-  color: white;
-  font-size: 3rem;
-  position: absolute;
-}
 
 /* SKILLS */
+
 .title-skills{
   height: 80px;
   width: 100%;
