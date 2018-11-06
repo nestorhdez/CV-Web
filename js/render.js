@@ -61,7 +61,7 @@ function ListUsers() {
                 <div class="row mb-4">        
                     <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
                         <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                        <button type="button" class="btn btn-info btn-sm mx-1" id="fulldata" data-toggle="modal"
+                        <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
                             data-target="#ModalCenter">Detail</button>
                         <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
                     </div>
@@ -104,9 +104,13 @@ function ListUsers() {
             console.log('click done');
             console.log('User id ' + e.target.id);
             arr.forEach( function(val){
+                console.log("val_id: ", val._id);
+                console.log("e.id: ", e.target.id);
                 if(val._id == e.target.id){
                     let user = val;
 
+                    $('#profilePicture').attr("src", "../img/default-profile-picture.jpg").attr("src", user.profilePicture);
+                    
                     $('#ModalCenterTitle').empty().html(user.name);
 
                     $('#city').empty().html(user.location.city);
@@ -121,7 +125,10 @@ function ListUsers() {
                     
                     $('#website').empty().html(user.website);
 
-                    $('#company').empty().html(user.company.name);
+                    $('#company').empty().html(user.company);
+
+                    $('#skills').empty().html(user.skills.join(', '));
+                    console.log("skills? ", user.skills.join(', '));
                 }
             });
 
