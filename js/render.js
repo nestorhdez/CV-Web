@@ -60,12 +60,10 @@ function ListUsers() {
         });
         
         document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
-        this.renderModal(arr);
         
     }.bind(this);//Bind to ListUsers object.
 
-    /*Change the data of the modal when click on a user card.
-    It's indise of renderUsers because it only has to work with the cards that are already rendered.*/
+    /*Change the data of the modal when click on a user card.*/
     this.renderModal = function(arr) {
         $('.btn-modal').click(function(e){
             // console.log('click done');
@@ -224,16 +222,21 @@ function ListUsers() {
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
-                document.getElementById('card-container').innerHTML += `<h1> There are not any coincidence </h1>`;
+                document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             }else if( allFilters.length < 10 ) {
                 $( "#card-container" ).empty();
                 this.renderUsers( this.pagination(allFilters, 10, 1) );
                 console.log("less than 10 users");
             }else {
+                let titleFailSearch = document.querySelector('#title-fail-search');
+                titleFailSearch ? titleFailSearch.remove() : null;
                 this.renderUsers( this.pagination(allFilters, 10, currentPage) );
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
+
+            this.renderModal(allUsers);
+
         });
         
     }.bind(this);//Bind ListUsers object
