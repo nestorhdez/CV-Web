@@ -22,7 +22,8 @@ footer {
 }
 
 /* Header */
-#nav-bottom, #nav-top {
+#nav-bottom,
+#nav-top {
   background-color: black !important;
 }
 
@@ -40,7 +41,7 @@ footer {
 
 /* disable resize textarea */
 .noresize {
-  resize: none; 
+  resize: none;
 }
 
 /* Cards container */
@@ -51,13 +52,14 @@ footer {
 }
 
 .img-user {
-  max-height: 100%;
   max-width: 100%;
+  object-fit: cover;
 }
 
 .profile-picture {
   width: 5em;
   height: 5em;
+  border-radius: 50%;
 }
 
 /* Fix Modal in Fixed container */
@@ -74,31 +76,31 @@ footer {
   background-color: #d5d6d2;
 }
 
-.bg-cobalt{
-  background-color: #3A5199;
+.bg-cobalt {
+  background-color: #3a5199;
 }
 
-.border-cobalt{
-  color: #3A5199;
+.border-cobalt {
+  color: #3a5199;
 }
 
-.btn-cobalt{
-  background-color: #3A5199;
-  color:white;
+.btn-cobalt {
+  background-color: #3a5199;
+  color: white;
 }
 
-.btn-cobalt:hover{
+.btn-cobalt:hover {
   background-color: rgb(176, 190, 236);
-  color: #3A5199;
+  color: #3a5199;
 }
 
-.icon-cobalt{
-  background-color: rgba(26,122,255,.1);
-  color: #3A5199;
+.icon-cobalt {
+  background-color: rgba(26, 122, 255, 0.1);
+  color: #3a5199;
 }
 
 .text-cobalt {
-  color: #3A5199;
+  color: #3a5199;
 }
 
 /* =================== */
@@ -159,8 +161,7 @@ footer {
 
 
 /* SKILLS */
-
-.title-skills{
+.title-skills {
   height: 80px;
   width: 100%;
 }
@@ -170,12 +171,12 @@ footer {
   color: #7ba4a8;
 }
 
-.bg-blue-gray{
+.bg-blue-gray {
   background-color: #7ba4a8;
 }
 
 .btn-blue-gray {
-  background-color: #7ba4a8; 
+  background-color: #7ba4a8;
   color: white;
 }
 
@@ -200,17 +201,18 @@ footer {
 }
 /* Buttons */
 .btn-default {
-  padding: .375rem .75rem!important;
-  border-width: 1px!important;
-  text-transform: initial!important;
+  padding: 0.375rem 0.75rem !important;
+  border-width: 1px !important;
+  text-transform: initial !important;
 }
 
 .input-default {
-  padding: .375rem .75rem!important;
-  border-width: 1px!important;
+  padding: 0.375rem 0.75rem !important;
+  border-width: 1px !important;
 }
 
-.btn-contact, .btn-sign {
+.btn-contact,
+.btn-sign {
   width: 155px;
 }
 /* Form Companies */
