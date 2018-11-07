@@ -262,6 +262,8 @@ function ListUsers() {
             console.log( allFilters );
             // console.log( allFilters[0].gender );
 
+            
+
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
                 document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
