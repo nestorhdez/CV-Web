@@ -1,3 +1,8 @@
+// TRIGGER CLICK
+$("#search-btn").trigger("renderUsers");
+
+// Advanced search. When the user inserts his info, when the search button is clicked, it has to be printed in a div.
+
 $("#search-btn").on("click", function() {
   $(".area").empty();
   var name = $("#input-name").val();
@@ -44,7 +49,7 @@ $("#search-btn").on("click", function() {
   ];
   console.log("longvariables: " + variables.length + name + "name");
 
-  // to append text inputs
+  // to print text inputs
   for (let i = 0; i < variables.length; i++) {
     if (variables[i] != 0) {
       if (i == 9) {
@@ -72,7 +77,7 @@ $("#search-btn").on("click", function() {
     }
   }
 
-  // to append checkeable checkboxs
+  // to print checkeable checkboxs
   for (input of languages) {
     if ($(input).prop("checked") === true) {
       $(".area").append(
@@ -80,7 +85,7 @@ $("#search-btn").on("click", function() {
           "#languages=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("name") +
+          $(input).prop("value").toUpperCase() +
           deletion +
           finspans
       );
@@ -93,16 +98,15 @@ $("#search-btn").on("click", function() {
           "#skills=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("name") +
+          $(input).prop("value").toUpperCase() +
           deletion +
           finspans
       );
     }
   }
 
-  // for deleting the inputs and checkboxes that were appended and also delete its value
+  // for deleting the inputs and checkboxes that were printed and also delete its value
   $(".deletion").on("click", function(e) {
-    // AREA TEST
     e.preventDefault();
     let id_input = $(this)
       .parent()
@@ -116,10 +120,12 @@ $("#search-btn").on("click", function() {
       
       var checkboxs = $(this)
         .parent()
-        .text();
+        .text().toLowerCase();
       $("input[name=" + checkboxs + "]").prop("checked", false);
     }
+    $("#search-btn").trigger("click");
   });
 });
 
-// TRIGGER CLICK
+// To show the summary
+
