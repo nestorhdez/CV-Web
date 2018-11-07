@@ -1,3 +1,7 @@
+
+
+
+
 $("#search-btn").on("click", function() {
   $(".area").empty();
   var name = $("#input-name").val();
@@ -80,7 +84,7 @@ $("#search-btn").on("click", function() {
           "#languages=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("name") +
+          $(input).prop("name").toUpperCase() +
           deletion +
           finspans
       );
@@ -93,7 +97,7 @@ $("#search-btn").on("click", function() {
           "#skills=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("name") +
+          $(input).prop("name").toUpperCase() +
           deletion +
           finspans
       );
@@ -121,5 +125,7 @@ $("#search-btn").on("click", function() {
     }
   });
 });
+
+// To show the summary
 
 // TRIGGER CLICK
