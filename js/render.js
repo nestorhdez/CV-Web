@@ -111,15 +111,19 @@ function ListUsers() {
                     
                     $('#ModalCenterTitle').empty().html(user.name);
 
-                    $('#city').empty().html(user.location.city);
-
+                    $('#email').empty().html(user.email);
+                    
+                    $('#phone').empty().html(user.phone);
+                    
                     $('#country').empty().html(user.location.country);
                     
-                    $('#state').empty().html(user.location.state);
+                    $('#city').empty().html(user.location.city);
 
+                    $('#zipcode').empty().html(user.zipcode);
+                    
+                    $('#stree').empty().html(user.location.street);
+                    
                     $('#language').empty().html(user.languages.join(', '));
-
-                    $('#email').empty().html(user.email);
 
                     $('#jobTitle').empty().html(user.jobTitle);
                     
