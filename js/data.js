@@ -152,17 +152,11 @@ $("#registerSubmit").submit(function(e) {
       // Sent as a string with email validation
       formData.append("email", registered.email); //* */
 
-      // Sent as a string
-      formData.append("city", registered.city);
-
-      // Sent as a string
-      formData.append("state", registered.state);
+      // Sent as a objet address
+      formData.append("address", JSON.stringify({"city":registered.city, "street":registered.street, "country":registered.country}));
 
       // Sent as a string
       formData.append("gender", registered.gender);
-
-      // Sent as a string
-      formData.append("country", registered.country);
 
       // Sent as a string
       formData.append("jobTitle", registered.jobTitle);
@@ -194,7 +188,7 @@ $("#registerSubmit").submit(function(e) {
     /** Send info to API */
     function sendNewUser() {
       let formBody = createRequestBody();
-
+      console.log(formBody);
       fetch("https://cv-mobile-api.herokuapp.com/api/users", {
         method: "POST",
         body: formBody

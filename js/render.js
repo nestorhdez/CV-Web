@@ -132,6 +132,10 @@ function ListUsers() {
             .empty()
             .html(user.jobTitle);
 
+          $("#experience")
+            .empty()
+            .html(user.experience);
+
           $("#website")
             .empty()
             .html(user.website);
