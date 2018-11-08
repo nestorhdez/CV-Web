@@ -25,7 +25,7 @@ function ListUsers() {
     //Create a card for each user
     arr.forEach(function(val) {
       let card = `
-            <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
+            <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${val._id}" style="width: 18rem;">
                 <div class="card-body text-center">
                 <div class="row mb-4">        
                     <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
@@ -82,6 +82,7 @@ function ListUsers() {
 
   /*Change the data of the modal when click on a user card.*/
   this.renderModal = function(arr) {
+    /** Listener to show modal detail*/
     $(".btn-modal").click(function(e) {
       console.log("click done");
       console.log("User id " + e.target.id);
@@ -145,6 +146,8 @@ function ListUsers() {
         }
       });
     });
+
+    /** Listener to delete one user. */
     $(".btn-delete").click(function(e) {
       console.log("click done.");
       console.log(
@@ -153,7 +156,9 @@ function ListUsers() {
       );
       let userdelete = $(this)[0].previousElementSibling.id;
       deleteUser(userdelete);
-      console.log('usuario delete.')
+      console.log('usuario deleted.');
+      console.log("This: ", $(this));
+      $("#card_"+userdelete).remove();
     });
   };
 
