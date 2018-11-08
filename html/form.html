@@ -74,13 +74,13 @@
                         </div>
 
 
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="validationname"><strong>First name</strong></label>
                             <input type="text" class="form-control" id="validationname" placeholder="First name" name="name"
                                 value="" required>
                         </div>
 
-                        <div class="form-group mb-3">
+                        <div class="form-group col-md-5 mb-3">
                             <label for="InputPhone"><strong>Phone</strong></label>
                             <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone"
                                 value="" placeholder="Enter phone number">
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="form-row mb-3">
-                            <div class="col-md-7 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="validationInputEmail"><strong>Email address</strong></label>
                                 <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp"
                                     name="email" value="" placeholder="Enter email" required>
@@ -123,8 +123,8 @@
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="validationState"><strong>State</strong></label>
-                            <input type="text" class="form-control" id="validationState" placeholder="State" name="state"
+                            <label for="validationStreet"><strong>Street</strong></label>
+                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
                                 value="" required>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                     <div class="form-row mb-2">
                         <fieldset class="form-group mb-3">
                             <label><strong>Gender</strong></label>
-                            <div class="col-md-4 mb-3">
-                                <div class="d-flex flex-nowrap" id="genders">
+                            <div class="col-12 mb-3">
+                                <div class="d-flex flex-wrap flex-md-row" id="genders">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" id="woman" name="gender" value="woman">
                                         <label class="form-check-label mr-5" for="woman">Woman</label>
@@ -165,13 +165,10 @@
                             <select class="form-control custom-select" id="experience" name="labexp">
                                 b4-se
                                 <option value="">Years of experience</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="+5">+5</option>
+                                <option value="-1 year">-1 year</option>
+                                <option value="1 - 3 years">1 - 3 years</option>
+                                <option value="3 - 5 years">3 - 5 years</option>
+                                <option value="+5 years">+5 years</option>
                             </select>
                         </div>
                     </div>
