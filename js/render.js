@@ -1,5 +1,6 @@
 //Object List of Users
-function ListUsers() {
+function ListUsers(summaryContainer) {
+    this.summaryContainer = summaryContainer;
     this.url = "https://cv-mobile-api.herokuapp.com/api/users";
 
     //Call the ajax and get the list of users
@@ -141,8 +142,8 @@ function ListUsers() {
         return arr.slice(perpage*(page-1), perpage*page);
     }
  
-    this.renderSummaryUsers = function (allFilters) {
-        $(".area:last-child").append("The search result is: " + allFilters.length);
+    function renderSummaryUsers(allFilters, summaryContainer) {
+        $(summaryContainer).html("<br><span class=' badge bg-badge-summ text-badge-summ mt-1 text-white'>The search result is: " + allFilters.length + "</span>");
     };
     
     this.filterUsers = function ( currentPage ){
@@ -263,8 +264,8 @@ function ListUsers() {
             
             console.log( allFilters );
             // console.log( allFilters[0].gender );
-
-            renderSummaryUsers(allFilters.length);
+            console.log(this);
+            renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
@@ -289,7 +290,7 @@ function ListUsers() {
 
 }
 
-let list = new ListUsers("#searchSummaryContainer" );
+let list = new ListUsers( "#searchSummaryContainer" );
 let scroll = new Scrollinfinite(list.filterUsers).initScroll();
 
 //Calling the FilterUsers functions and render users on form's submit
