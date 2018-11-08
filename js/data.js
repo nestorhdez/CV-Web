@@ -11,7 +11,7 @@ function NewUser(
   password,
   city,
   country,
-  state,
+  street,
   experience,
   languages,
   skills,
@@ -29,7 +29,7 @@ function NewUser(
   this.username = username;
   this.password = password;
   this.city = city,
-  this.state = state,
+  this.street = street,
   this.country = country,
   this.experience = experience;
   this.languages = languages;
@@ -67,7 +67,7 @@ $("#registerSubmit").submit(function(e) {
   let username = $("#validationUsername").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
-  let state = $("#validationState").val();
+  let street= $("#validationStreet").val();
   let experience = $("#experience").val();
 
   let languages = getCheckedBox('#languages');
@@ -126,7 +126,7 @@ $("#registerSubmit").submit(function(e) {
       password,
       city,
       country,
-      state,
+      street,
       experience,
       languages,
       skills,
@@ -153,7 +153,7 @@ $("#registerSubmit").submit(function(e) {
       formData.append("email", registered.email); //* */
 
       // Sent as a objet address
-      formData.append("address", JSON.stringify({"city":registered.city, "street":registered.street, "country":registered.country}));
+      formData.append("address", JSON.stringify({country: registered.country, city: registered.city, street: registered.street, zipcode: registered.zip}));
 
       // Sent as a string
       formData.append("gender", registered.gender);
