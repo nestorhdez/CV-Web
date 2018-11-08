@@ -15,7 +15,7 @@ $("#search-btn").on("click", function() {
   var company = $("#validationcompany").val();
   var job = $("#validationjob").val();
   var experience = $("#experience").val();
-  var spans = '<span class="badge badge-info mr-2 badge-font"';
+  var spans = '<span class="badge badge-info mr-2 badge-font" ';
   var deletion =
     '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
   var finspans = "</span>";
