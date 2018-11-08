@@ -20,7 +20,15 @@ footer {
 #badge-font {
   font-size: 0.85em;
 }
+/* Resumen de búsqueda */
+.bg-badge-summ {
+  background-color: #8513E5;
+}
 
+.text-badge-summ {
+  font-size: 1.2em;
+  font-weight: 400;
+}
 /* Header */
 #nav-bottom,
 #nav-top {
