@@ -67,7 +67,7 @@ $("#registerSubmit").submit(function(e) {
   let username = $("#validationUsername").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
-  let street= $("#validationStreet").val();
+  let street = $("#validationStreet").val();
   let experience = $("#experience").val();
 
   let languages = getCheckedBox('#languages');
@@ -80,26 +80,26 @@ $("#registerSubmit").submit(function(e) {
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
   // *** CHECK variables ****
-  // console.log(
-  //   name,
-  //   phone,
-  //   zip,
-  //   email,
-  //   gender,
-  //   birthDate,
-  //   username,
-  //   password,
-  //   city,
-  //   country,
-  //   state,
-  //   experience,
-  //   languages,
-  //   skills,
-  //   jobTitle,
-  //   company,
-  //   website,
-  //   profilePicture
-  // );
+  console.log(
+    name,
+    phone,
+    zip,
+    email,
+    gender,
+    birthDate,
+    username,
+    password,
+    city,
+    country,
+    street,
+    experience,
+    languages,
+    skills,
+    jobTitle,
+    company,
+    website,
+    profilePicture
+  );
 
   if (!CheckPassword(password)) {
     $("#inputPassword5")
@@ -139,59 +139,41 @@ $("#registerSubmit").submit(function(e) {
     console.log(registered);
     
     /** Take values from NewUser object to create formBody */
-    function createRequestBody() {
+    function createRequestBody(userJson) {
 
-      let formData = new FormData();
+      let userData = {};
 
-      // Sent as a string
-      formData.append("name", registered.name); //* */
-
-      // Sent as a string
-      formData.append("username", registered.username); //* */
-
-      // Sent as a string with email validation
-      formData.append("email", registered.email); //* */
-
-      // Sent as a objet address
-      formData.append("address", JSON.stringify({country: registered.country, city: registered.city, street: registered.street, zipcode: registered.zip}));
-
-      // Sent as a string
-      formData.append("gender", registered.gender);
-
-      // Sent as a string
-      formData.append("jobTitle", registered.jobTitle);
-
-      // Sent as a string
-      formData.append("website", registered.website);
-
-      // Sent as a string
-      formData.append("company", registered.company);
-
-      // Sent as a string. Choose a value from below.
-      formData.append("experience", registered.experience);
-
-      // Pick the value from an input(type="date")
-      formData.append("birthDate", registered.birthDate);
-
-      // Pick the value from an input(type="file") that accepts only jpeg and png formats and files under 3MB size
-      formData.append("profilePicture", registered.profilePicture);
-
-      // Store all the values selected in the form inside an Array and parse it as a string
-      formData.append("languages", JSON.stringify(registered.languages));
-
-      // Store all the values selected in the form inside an Array and parse it as a string
-      formData.append("skills", JSON.stringify(registered.skills));
-
-      return formData;
+      userData = {
+        "languages": userJson.languages,
+        "skills": userJson.skills,
+        "name": userJson.name,
+        "username": userJson.username,
+        "email": userJson.email,
+        "gender": userJson.gender,
+        "address": {
+          "city": userJson.city,
+          "street": userJson.street,
+          "country": userJson.country,
+          "zipcode": userJson.zip
+        },
+        "company": userJson.company,
+        "jobTitle": userJson.jobTitle,
+        "website": userJson.website,
+        "birthDate": userJson.birthDate,
+        "experience": userJson.experience,
+        };
+      
+      return userData;
     }
 
     /** Send info to API */
     function sendNewUser() {
-      let formBody = createRequestBody();
-      console.log(formBody);
+      let userBody = createRequestBody(registered);
+      console.log(typeof userBody);
+
       fetch("https://cv-mobile-api.herokuapp.com/api/users", {
         method: "POST",
-        body: formBody
+        body: JSON.stringify(userBody)
       })
         .then(res => res.json())
         .then(response => console.log(response))
