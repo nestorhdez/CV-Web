@@ -143,7 +143,7 @@ function ListUsers(summaryContainer) {
     }
  
     function renderSummaryUsers(allFilters, summaryContainer) {
-        $(summaryContainer).html("<br><span class=' badge bg-badge-summ text-badge-summ mt-1 text-white'>The search result is: " + allFilters.length + "</span>");
+        $(summaryContainer).html("<br><span class=' badge bg-badge-summ text-badge-summ text-white ml-3'>The search result is: " + allFilters.length + "</span>");
     };
     
     this.filterUsers = function ( currentPage ){
@@ -262,9 +262,9 @@ function ListUsers(summaryContainer) {
                 filterBySkills.forEach(removeFilteredUser);
             }
             
-            console.log( allFilters );
+            // console.log( allFilters );
             // console.log( allFilters[0].gender );
-            console.log(this);
+            // console.log(this);
             renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
