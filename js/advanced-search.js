@@ -10,7 +10,7 @@ $("#search-btn").on("click", function() {
   var email = $("#validationemail").val();
   var gender = $("#gender").val();
   var city = $("#city-option").val();
-  var state = $("#validationState").val();
+  var street = $("#validationStreet").val();
   var country = $("#validationCountry").val();
   var company = $("#validationcompany").val();
   var job = $("#validationjob").val();
@@ -19,9 +19,9 @@ $("#search-btn").on("click", function() {
   var deletion =
     '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
   var finspans = "</span>";
-  var selectLanguage = $("#languages");
+  var selectLanguage = $("#languages-search");
   var languages = selectLanguage.find("input[type=checkbox]");
-  var selectSkill = $("#skills");
+  var selectSkill = $("#skills-search");
   var skills = selectSkill.find("input[type=checkbox]");
   var variables = [
     name,
@@ -29,7 +29,7 @@ $("#search-btn").on("click", function() {
     email,
     gender,
     city,
-    state,
+    street,
     country,
     company,
     job,
@@ -41,7 +41,7 @@ $("#search-btn").on("click", function() {
     "#validationemail",
     "#gender",
     "#city-option",
-    "#validationState",
+    "#validationStreet",
     "#validationCountry",
     "#validationcompany",
     "#validationjob",
