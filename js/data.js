@@ -127,17 +127,22 @@ $("#registerSubmit").submit(function(e) {
     fetch("https://cv-mobile-api.herokuapp.com/api/users", {
       method: "POST",
       body: JSON.stringify(userBody),
-      headers:{
-        'Content-Type': 'application/json'
+      headers: {
+        "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
-      .then(response => { let avatar = registered.profile; fetch(`https://cv-mobile-api.herokuapp.com/api/users/${response._id}`, {
-        method: "PUT",
-        body: avatar
-      })})
+      .then(response => {
+        let avatar = {"avatar":registered.profile};
+        fetch(`https://cv-mobile-api.herokuapp.com/api/users/${response._id}`, {
+          method: "PUT",
+          body: avatar
+        })
+          .then(response => console.log("Sucess:", response))
+          .catch(error => console.log("Error:", error.message));
+      })
       // .then(response => console.log("Sucess:", JSON.stringify(response._id)))
-      .then(response => console.log("ID: ", JSON.stringify(response)))
+      .then(response => console.log("Sucess:", response))
       .catch(error => console.log("Error:", error.message));
   }
 
