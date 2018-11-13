@@ -133,10 +133,15 @@ $("#registerSubmit").submit(function(e) {
     })
       .then(res => res.json())
       .then(response => {
-        let avatar = {"avatar":registered.profile};
-        fetch(`https://cv-mobile-api.herokuapp.com/api/users/${response._id}`, {
-          method: "PUT",
-          body: avatar
+        let fileForm = new FormData();
+        console.log("registered: ", registered);
+        fileForm = fileForm.append("profilePicture", document.querySelector("input[type=file]").files[0]);
+        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${response._id}`, {
+          method: "POST",
+          body: fileForm,
+          headers: {
+            "Content-Type": "type/image"
+          }
         })
           .then(response => console.log("Sucess:", response))
           .catch(error => console.log("Error:", error.message));
