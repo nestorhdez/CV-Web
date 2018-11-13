@@ -132,7 +132,12 @@ $("#registerSubmit").submit(function(e) {
       }
     })
       .then(res => res.json())
-      .then(response => console.log("Sucess:", response))
+      .then(response => { let avatar = registered.profile; fetch(`https://cv-mobile-api.herokuapp.com/api/users/${response._id}`, {
+        method: "PUT",
+        body: avatar
+      })})
+      // .then(response => console.log("Sucess:", JSON.stringify(response._id)))
+      .then(response => console.log("ID: ", JSON.stringify(response)))
       .catch(error => console.log("Error:", error.message));
   }
 
