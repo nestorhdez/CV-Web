@@ -16,6 +16,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="../css/theme.min.css">
     <link rel="stylesheet" href="../css/customstyles.css">
+
 </head>
 
 <body>
@@ -47,6 +48,8 @@
 
     <!-- Main section -->
     <main>
+
+        <!-- Carousel -->
         <div id="carouselExampleIndicators" class="carousel slide m-0" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -56,12 +59,30 @@
             <div class="carousel-inner d-inline-block">
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="img/pexels-photo-935977.jpeg" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block rounded bg-dark-opacity p-2">
+                        <h5>Primer objetivo</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quae in expedita repudiandae
+                            quo. Est asperiores deleniti in non eaque, aut iusto quasi ratione deserunt officia vitae,
+                            autem alias molestias.</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="img/pexels-photo-630839.jpeg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block rounded bg-dark-opacity p-2">
+                        <h5>Segundo objetivo</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quae in expedita repudiandae
+                            quo. Est asperiores deleniti in non eaque, aut iusto quasi ratione deserunt officia vitae,
+                            autem alias molestias.</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="img/people-office-group-team.jpg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block rounded bg-dark-opacity p-2">
+                        <h5>Tercer objetivo</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quae in expedita repudiandae
+                            quo. Est asperiores deleniti in non eaque, aut iusto quasi ratione deserunt officia vitae,
+                            autem alias molestias.</p>
+                    </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -73,57 +94,106 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <div class="container-fluid w-100 bg-light mt-4">
-            <div class="container-fluid d-flex justify-content-center p-3 ">
-                <div class="card w-50 mr-3 bg-dark text-white shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">20H Talent</h5>
-                        <h6>Who are we?</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.
-                        </p>
+        <!-- End Carousel -->
+
+        <!-- Main blocks -->
+        <div class="bg-skew bg-skew-dark">
+
+            <div class="container-fluid my-4 mx-auto">
+                <div class="container-fluid flex-md-row d-md-flex justify-content-center p-3 ">
+                    <div class="card w-md-50 m-2 bg-info-opacity text-white shadow">
+                        <div class="card-body p-5">
+                            <h4 class="card-title text-center mx-auto">20H Talent</h4>
+                            <h6 class="font-bold">Who are we?</h6>
+                            <p class="card-text font-italic">We are a company that has created a training project in which you
+                                complete your knowledge about the world of work, we teach you the routines and
+                                procedures that companies expect from their aspiring employees and future workers.</p>
+                            <p class="card-text font-italic">On the other hand, we have listened to companies in the sector to
+                                adapt training to the reality of the labor market. Therefore, if you are a company and
+                                you are looking for a specific profile, we can also help you create a tailored training
+                                plan for your applicants.</p>
+                        </div>
+                        <img class="card-img-bottom rounded-bottom img-fluid " src="./img/language-schools.jpg" alt="Girl in class">
                     </div>
-                </div>
-                <div class="card w-25 shadow bg-dark text-white">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">20H Talent</h5>
-                        <h6>Services</h6>
-                        <ul>
-                            <li>Create CVs</li>
-                            <li>Share CVs in coworkings</li>
-                            <li>Learn to improve CVs</li>
-                            <li>Feedback of professionals about you.</li>
-                        </ul>
-                        <a class="align-self-end p-2 ml-auto" href="html/moreinfo.html">>>See more</a>
-                        <a class=" text-light " href="html/landpage-comp.html"> Information for companies </a>
+
+                    <div class="card w-md-25 m-2 shadow bg-info-opacity text-white">
+                        <img class="card-img-top img-fluid align-self-end" src="./img/20htalent_class3.jpg" alt="20H class">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title mx-auto">Services</h4>
+                            <h6>Alumns</h6>
+                            <ul>
+                                <li><i class="fas fa-caret-right"></i> Create CVs</li>
+                                <li><i class="fas fa-caret-right"></i> Share CVs in coworkings</li>
+                                <li><i class="fas fa-caret-right"></i> Learn to improve CVs</li>
+                                <li><i class="fas fa-caret-right"></i> Feedback of professionals about you.</li>
+                            </ul>
+                            <h5 class="mx-auto"><a class="badge badge-info text-light" href="html/moreinfo.html">Read
+                                    more about</a></h5>
+                            <hr>
+                            <h6>Companies</h6>
+                            <ul>
+                                <li><i class="fas fa-caret-right"></i> We introduce workflows</li>
+                                <li><i class="fas fa-caret-right"></i> We work the necessary skills</li>
+                                <li><i class="fas fa-caret-right"></i> We teach the necessary software</li>
+                                <li><i class="fas fa-caret-right"></i> You can receive feedback on the evolution of
+                                    the applicants</li>
+                            </ul>
+                            <h5 class="mx-auto"><a class="badge badge-info text-light text-truncate" href="html/landpage-comp.html">Read more companies</a></h5   >
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="carouselExampleControls" class="carousel slide m-auto" data-ride="carousel">
-            <div class="carousel-inner" id="inner-carousel">
-                <div class="carousel-item active">
-                    <img class="d-block w-100 h-auto" src="/img/Profilkort_en-1.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100 h-auto" src="/img/Profilkort_en-1.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100 h-auto" src="/img/Profilkort_en-1.jpg" alt="Third slide">
+
+        <!-- Carousel Cards -->
+        <!--<div class="carousel slider" data-ride="carousel" id="postsCarousel">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-right mb-4">
+                        <a data-target="postsCarousel" class="btn btn-outline-secondary carousel-prev" title="go back"
+                            data-slide="prev"><i class="fa fa-lg fa-chevron-left"></i></a>
+                        <a data-target="postsCarousel" class="btn btn-outline-secondary carousel-next" title="more"
+                            data-slide="next"><i class="fa fa-lg fa-chevron-right"></i></a>
+                    </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            <div class="w-100 d-flex flex-column">
-                <a class="align-self-end p-2 ml-auto" href="html/search.html">>>See more</a>
+            <div class="container carousel-inner">
+                <div class="row row-equal carousel-item active mt-0">
+                    <div class="card col-md-4 active">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user1 card">
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user2 card">
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user1 card">
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user1 card">
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user2 card">
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-img-top card-img-top-250">
+                            <img class="img-fluid" src="img/Profilkort_en-1.jpg" alt="user1 card">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div>-->
+        <!-- End Carousel Cards -->
+
     </main>
 
     <!-- Footer section -->
@@ -137,7 +207,8 @@
                     </div>
                 </li>
                 <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#">About</a></li>
-                <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#" data-toggle="modal" data-target="#FormContact">Contact</a></li>
+                <li class="nav-item nav-link my-2 my-sm-0 mx-2 mx-sm-0 flex-md-fill"><a class="text-white" href="#"
+                        data-toggle="modal" data-target="#FormContact">Contact</a></li>
             </ul>
             <div class="d-flex justify-content-end flex-sm-column">
                 <ul class="navbar-nav">
@@ -277,6 +348,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="/js/2ndcarousel.js"></script>
 </body>
 
 </html>
