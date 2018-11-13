@@ -352,7 +352,8 @@ function deleteUser(iduser) {
     method: "DELETE"
   })
     .then(response => response.json())
-    .then(jsonResponse => console.log(jsonResponse));
+    .then(jsonResponse => console.log(jsonResponse))
+    .catch(error => console.error('Error:', error));
 }
 
 //Calling the FilterUsers functions and render users on form's submit
