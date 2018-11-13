@@ -7,6 +7,7 @@ footer {
   margin-top: 5px;
 }
 
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -21,8 +22,19 @@ footer {
   font-size: 0.85em;
 }
 
+
+/* Resumen de búsqueda */
+.bg-badge-summ {
+  background-color: #8513E5;
+}
+
+.text-badge-summ {
+  font-size: 1.2em;
+  font-weight: 400;
+}
 /* Header */
-#nav-bottom, #nav-top {
+#nav-bottom,
+#nav-top {
   background-color: black !important;
 }
 
@@ -32,15 +44,42 @@ footer {
   width: auto;
 }
 
+
 /* User's Curriculum Scroll */
-#carouselExampleControls {
+/* .carousel-inner > img {
   width: 18rem;
   height: auto;
+} */
+.row-equal>div[class*='col-'] {
+  display: flex;
+  flex: 1 0 auto;
 }
+
+.row-equal .card {
+  width: 100%;
+}
+
+.carousel-inner>.row-equal.active,
+.carousel-inner>.row-equal.next,
+.carousel-inner>.row-equal.prev {
+  display: flex;
+}
+
+.carousel-inner>.row-equal.active.left,
+.carousel-inner>.row-equal.active.right {
+  opacity: 0.5;
+  display: flex;
+}
+
+.card-img-top-250 {
+  max-height: 19rem;
+  overflow: hidden;
+}
+
 
 /* disable resize textarea */
 .noresize {
-  resize: none; 
+  resize: none;
 }
 
 /* Cards container */
@@ -51,14 +90,16 @@ footer {
 }
 
 .img-user {
-  max-height: 100%;
   max-width: 100%;
+  object-fit: cover;
 }
 
 .profile-picture {
   width: 5em;
   height: 5em;
+  border-radius: 50%;
 }
+
 
 /* Fix Modal in Fixed container */
 .modal-backdrop {
@@ -74,32 +115,33 @@ footer {
   background-color: #d5d6d2;
 }
 
-.bg-cobalt{
-  background-color: #3A5199;
+.bg-cobalt {
+  background-color: #3a5199;
 }
 
-.border-cobalt{
-  color: #3A5199;
+.border-cobalt {
+  color: #3a5199;
 }
 
-.btn-cobalt{
-  background-color: #3A5199;
-  color:white;
+.btn-cobalt {
+  background-color: #3a5199;
+  color: white;
 }
 
-.btn-cobalt:hover{
+.btn-cobalt:hover {
   background-color: rgb(176, 190, 236);
-  color: #3A5199;
+  color: #3a5199;
 }
 
-.icon-cobalt{
-  background-color: rgba(26,122,255,.1);
-  color: #3A5199;
+.icon-cobalt {
+  background-color: rgba(26, 122, 255, 0.1);
+  color: #3a5199;
 }
 
 .text-cobalt {
-  color: #3A5199;
+  color: #3a5199;
 }
+
 
 /* =================== */
 /* Landpage for alumns */
@@ -129,26 +171,45 @@ footer {
 /* ====================== */
 
 .header-bg {
-  background-image: url("../img/desk.jpg");
+  background-image: url("../img/team-2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 92vh;
+  margin-top: 76.25px;
+  background-color: black;
+  position: relative;
 }
 
-#arrow-div {
-  width: 20px;
-  height: 20px;
-  transform: rotate(-45deg);
-
+.header-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .5;
 }
 
 .text-header {
-  margin-top: 170px;
+  margin-top: 5rem !important;
+  z-index: 1;
 }
 
+.title-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.subtitle-header {
+  font-family: 'Roboto', sans-serif;
+}
+
+
 /* SKILLS */
-.title-skills{
+.title-skills {
   height: 80px;
   width: 100%;
 }
@@ -158,36 +219,53 @@ footer {
   color: #7ba4a8;
 }
 
-.bg-blue-gray{
+.bg-blue-gray {
   background-color: #7ba4a8;
 }
 
 .btn-blue-gray {
-  background-color: #7ba4a8; 
+  background-color: #7ba4a8;
   color: white;
+}
+
+.btn-blue-gray-header {
+  /* background-color: #7ba4a8;  */
+  background-image: transparent;
+  border-color: white;
+  color: white;
+  padding: 10px 15px;
+}
+
+.btn-blue-gray-header:hover {
+  background-color:white;
+  border-color: white;
+  color: black;
 }
 
 .btn-blue-gray:hover {
   background-color:transparent;
+  border-color: #7ba4a8;
   color: black;
 }
+
 /* Buttons */
 .btn-default {
-  padding: .375rem .75rem!important;
-  border-width: 1px!important;
-  text-transform: initial!important;
+  padding: 0.375rem 0.75rem !important;
+  border-width: 1px !important;
+  text-transform: initial !important;
 }
 
 .input-default {
-  padding: .375rem .75rem!important;
-  border-width: 1px!important;
+  padding: 0.375rem 0.75rem !important;
+  border-width: 1px !important;
 }
 
-.btn-contact, .btn-sign {
+.btn-contact,
+.btn-sign {
   width: 155px;
 }
-/* Form Companies */
 
+/* Form Companies */
 .form-company {
   margin: 100px 0;
 }
