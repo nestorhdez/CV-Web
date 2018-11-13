@@ -47,7 +47,6 @@ $("#search-btn").on("click", function() {
     "#validationjob",
     "#experience"
   ];
-  console.log("longvariables: " + variables.length + name + "name");
 
   // to print text inputs
   for (let i = 0; i < variables.length; i++) {
@@ -128,4 +127,9 @@ $("#search-btn").on("click", function() {
 });
 
 // To show the summary
+
+$("#reset-btn").on("click", function() {
+  $("#adv-search-form")[0].reset();
+  $(".area").empty();
+})
 

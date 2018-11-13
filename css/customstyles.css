@@ -12,9 +12,11 @@ footer {
   text-decoration: none;
   color: #343a40;
 }
-#search-btn {
+#search-btn,
+#reset-btn {
   background-color: #6610f2;
   color: #fff;
+  width:  9em;
 }
 
 #badge-font {
