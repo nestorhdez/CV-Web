@@ -27,10 +27,10 @@ function NewUser(
   this.birthDate = birthDate;
   this.username = username;
   this.password = password;
-  (this.city = city),
-    (this.street = street),
-    (this.country = country),
-    (this.experience = experience);
+  this.city = city,
+  this.street = street,
+  this.country = country,
+  this.experience = experience;
   this.languages = languages;
   this.skills = skills;
   this.jobTitle = jobTitle;
@@ -134,14 +134,12 @@ $("#registerSubmit").submit(function(e) {
       .then(res => res.json())
       .then(response => {
         let fileForm = new FormData();
-        console.log("registered: ", registered);
-        fileForm = fileForm.append("profilePicture", document.querySelector("input[type=file]").files[0]);
+        console.log("registered,", registered.profilePicture);
+        fileForm.append("img", registered.profilePicture);
+        console.log("fileForm,", typeof fileForm);
         fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${response._id}`, {
           method: "POST",
-          body: fileForm,
-          headers: {
-            "Content-Type": "type/image"
-          }
+          body: fileForm
         })
           .then(response => console.log("Sucess:", response))
           .catch(error => console.log("Error:", error.message));
