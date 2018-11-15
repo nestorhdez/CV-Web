@@ -133,15 +133,21 @@ $("#registerSubmit").submit(function(e) {
     })
       .then(res => res.json())
       .then(response => {
+        let pong = response;
         let fileForm = new FormData();
-        console.log("registered,", registered.profilePicture);
         fileForm.append("img", registered.profilePicture);
-        console.log("fileForm,", typeof fileForm);
-        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${response._id}`, {
+        let id_user = response._id;
+        console.log("ID: ", id_user, ". Pong: ", pong);
+        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${id_user}`, {
           method: "POST",
           body: fileForm
         })
-          .then(response => console.log("Sucess:", response))
+          .then(response => {console.log("Sucess:", response);
+          if (response.status==200) {
+            alert('Enviado correctamente');
+          } else {
+            alert(`Error en el envio. ${response.statusText}`);
+          }})
           .catch(error => console.log("Error:", error.message));
       })
       // .then(response => console.log("Sucess:", JSON.stringify(response._id)))
