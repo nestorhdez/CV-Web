@@ -52,23 +52,29 @@
             <div class="mb-3" id="">
                 <div class="card card-body">
                     <form class="mt-3 d-flex flex-row" id="adv-search-form" method="POST" action="index.html">
-                        <div>
+                        <!-- First column-->
+                        <div class="w-75 col-6">
                             <div class="form-group d-flex flex-wrap">
                                 <div class="col-md-3 mb-3">
                                     <label for="validationname"><strong>Name</strong></label>
                                     <input type="text" class="form-control" id="input-name" placeholder="Name" name="name"
                                         value="">
                                 </div>
+        
                                 <div class="col-md-3 mb-3">
                                     <label for="validationusername"><strong>Username</strong></label>
                                     <input type="text" class="form-control" id="validationusername" placeholder="Username"
                                         name="username" value="">
                                 </div>
+    
                                 <div class="col-md-3 mb-3">
                                     <label for="email"><strong>Email</strong></label>
                                     <input type="email" class="form-control" id="validationemail" placeholder="Email" name="email"
                                         value="">
                                 </div>
+                            </div>
+        
+                            <div class="form-group d-flex flex-wrap">
                                 <div class="col-md-3 mb-3">
                                     <label for="gender"><strong>Gender</strong></label>
                                     <select class="form-control custom-select" id="gender">
@@ -80,14 +86,13 @@
                                         <option vale="no reply">I prefer not to say it</option>
                                     </select>
                                 </div>
-                            </div>
 
-                            <div class="form-group d-flex flex-wrap ">
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCity"><strong>City</strong></label>
                                     <input type="text" class="form-control" id="city-option" placeholder="City" name="city"
                                         value="">
                                 </div>
+    
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCountry"><strong>Country</strong></label>
                                     <input type="text" class="form-control" id="validationCountry" placeholder="Country"
@@ -99,113 +104,54 @@
                                     <input type="text" class="form-control" id="validationState" placeholder="State" name="state"
                                         value="">
                                 </div>
-                                
                             </div>
-                            <div class="col-sm-12 mb-3">
-                                    <button type="submit" class="btn btn-primary" id="search-btn">Search</button>
-                            </div>
-                            <div class="area ml-3 mt-2">
-                                        <h5>Search Results:</h5>
-                            </div>
-                                <div id="searchSummaryContainer"></div>
+
+                            <button type="submit" class="btn btn-primary" id="search-btn">Search</button>
+
+                            <div id="searchSummaryContainer"></div>
                         </div>
-                        <div class="flex-column">
-                                    <div class="form-group d-flex flex-wrap">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationCompany"><strong>Company</strong></label>
-                                            <input type="text" class="form-control" id="validationcompany" placeholder="Company name"
-                                                name="company" value="">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationJob"><strong>Job Title</strong></label>
-                                            <input type="text" class="form-control" id="validationjob" placeholder="Job title" name="job"
-                                                value="">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="experience-option" class="col-form-label pb-1"><strong>Experience</strong></label>
-                                            <select class="form-control custom-select" id="experience">
-                                                <option value="">Years of experience</option>
-                                                <option value="- 1 Year">-1 Year</option>
-                                                <option value="1 - 3 Years">1 - 3 Years</option>
-                                                <option value="3 - 5 Years">3 - 5 Years</option>
-                                                <option value="+ 5 Years">+5 Years</option>
-                                            </select>
-                                        </div>
+                        
+                        <!-- Second Column-->
+                        <div>
+                            <div class="form-group flex-column d-flex flex-wrap">
+                                <div class="col-md-6 mb-3">
+                                    <label for="experience-option" class=""><strong>Experience</strong></label>
+                                    <select class="form-control custom-select" id="experience-search">
+                                        <option value="">Years of experience</option>
+                                        <option value="- 1 Year">-1 Year</option>
+                                        <option value="1 - 3 Years">1 - 3 Years</option>
+                                        <option value="3 - 5 Years">3 - 5 Years</option>
+                                        <option value="+ 5 Years">+5 Years</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCompany"><strong>Company</strong></label>
+                                    <input type="text" class="form-control" id="validationcompany" placeholder="Company name" name="company" value="">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                        <label for="validationjob"><strong>Job</strong></label>
+                                        <input type="text" class="form-control" id="validationjob" placeholder="Job name" name="job" value="">
                                     </div>
-                                    <div class="form-group d-flex flex-wrap">
-                                        <div class="col-md mb-3">
-                                            <fieldset class="form-group">
-                                            <div class="mb-2"><strong>Languages</strong></div>
-                                            <div class="d-flex flex-wrap" id="languages">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="eng-check" name="english"
-                                                        value="English">
-                                                    <label class="form-check-label mr-5" for="eng-check">English</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="french-check" name="french"
-                                                        value="French">
-                                                    <label class="form-check-label mr-5" for="french-check">French</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="german-check" name="german"
-                                                        value="German">
-                                                    <label class="form-check-label mr-5" for="german-check">German</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="spanish-check" name="spanish"
-                                                        value="Spanish">
-                                                    <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
-                                                </div>
-                                            </div>
-                                            </fieldset>
+                            </div>
 
-                                            <fieldset class="form-group mb-3">
-                                            <div class="mb-2"><strong>Skills</strong></div>
-                                            <div class="d-flex flex-wrap" id="skills">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="html-check" name="html"
-                                                        value="html">
-                                                    <label class="form-check-label mr-5" for="html-check">HTML</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="css-check" name="css"
-                                                        value="css">
-                                                    <label class="form-check-label mr-5" for="css-check">CSS</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="sass-check" name="sass"
-                                                        value="sass">
-                                                    <label class="form-check-label mr-5" for="sass-check">SASS</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="javascript-check" name="javascript"
-                                                        value="javascript">
-                                                    <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="react-check" name="react"
-                                                        value="react">
-                                                    <label class="form-check-label mr-5" for="react-check">React</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="git-check" name="git"
-                                                        value="git">
-                                                    <label class="form-check-label mr-5" for="git-check">Git</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="github-check" name="github"
-                                                        value="github">
-                                                    <label class="form-check-label mr-5" for="github-check">Github</label>
-                                                </div>
-                                            </div>
+                            <div class="form-group d-flex flex-wrap">
 
-                                            </fieldset>
-                                        </div>
+                                <fieldset class="form-group">
+                                    <div class="mb-2"><strong>Languages</strong></div>
+                                    <div class="d-flex flex-wrap" id="languages-search">
+                                        <!-- Content -->
                                     </div>
-
-                                    
-                                    
+                                </fieldset>
+            
+                                <fieldset class="form-group mb-3">
+                                    <div class="mb-2"><strong>Skills</strong></div>
+                                    <div class="d-flex flex-wrap" id="skills">
+                                        <!-- Content -->
+                                    </div>
+                                </fieldset> 
+                            </div>          
                         </div>
                     </form>
 
@@ -274,13 +220,13 @@
                                         <img class="img-user rounded-circle" id="profilePicture" src="../img/FOTITO.jpg">
                                     </div>
                                 </div>
-                                <div class="text-left">
-                                    <h6 class="card-subtitle text-center font-italic mb-3">Detail information</h6>
+                                <div class="text-left card-body-text">
+                                    <h6 class="modal-subtitle card-subtitle text-center font-italic mb-3">Detail information</h6>
                                     <p class="card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
                                             someone@example.es</a></p>
                                     <p class="card-text text-capitalize"><strong>City: </strong><span id="city">somewhere</span></p>
                                     <p class="card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></p>
-                                    <p class="card-text text-capitalize"><strong>State: </strong><span id="state">State</span></p>
+                                    <p class="card-text text-capitalize"><strong>Street: </strong><span id="street">Street</span></p>
                                     <p class="card-text text-capitalize"><strong>Language: </strong><span id="language">English,
                                             spanish.</span></p>
                                     <p class="card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle">Junior
