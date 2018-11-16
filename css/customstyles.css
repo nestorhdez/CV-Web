@@ -7,6 +7,7 @@ footer {
   margin-top: 5px;
 }
 
+
 /* Advanced Search */
 #adv-btn {
   text-decoration: none;
@@ -20,6 +21,8 @@ footer {
 #badge-font {
   font-size: 0.85em;
 }
+
+
 /* Resumen de búsqueda */
 .bg-badge-summ {
   background-color: #8513E5;
@@ -40,6 +43,7 @@ footer {
   max-height: 50px;
   width: auto;
 }
+
 
 /* User's Curriculum Scroll */
 /* .carousel-inner > img {
@@ -72,6 +76,7 @@ footer {
   overflow: hidden;
 }
 
+
 /* disable resize textarea */
 .noresize {
   resize: none;
@@ -94,6 +99,7 @@ footer {
   height: 5em;
   border-radius: 50%;
 }
+
 
 /* Fix Modal in Fixed container */
 .modal-backdrop {
@@ -136,12 +142,21 @@ footer {
   color: #3a5199;
 }
 
+
 /* =================== */
 /* Landpage for alumns */
 /* =================== */
 
 .bg-dark-opacity {
   background-color: rgba(49, 55, 62, 0.5);
+}
+
+.bg-warning-opacity {
+  background-color: rgba(255, 188, 62, 0.5);
+}
+
+.bg-info-opacity {
+  background-color: rgba(0, 163, 181, 0.2);
 }
 
 .box-goal {
@@ -232,6 +247,7 @@ footer {
   border-color: #7ba4a8;
   color: black;
 }
+
 /* Buttons */
 .btn-default {
   padding: 0.375rem 0.75rem !important;
@@ -248,8 +264,8 @@ footer {
 .btn-sign {
   width: 155px;
 }
-/* Form Companies */
 
+/* Form Companies */
 .form-company {
   margin: 100px 0;
 }

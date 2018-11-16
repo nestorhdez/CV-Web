@@ -128,4 +128,3 @@ $("#search-btn").on("click", function() {
 });
 
 // To show the summary
-
