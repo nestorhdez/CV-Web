@@ -85,15 +85,15 @@ function ListUsers(summaryContainer) {
 
           $("#city")
             .empty()
-            .html(user.location.city);
+            .html(user.address.city);
 
           $("#country")
             .empty()
-            .html(user.location.country);
+            .html(user.address.country);
 
           $("#stree")
             .empty()
-            .html(user.location.street);
+            .html(user.address.street);
 
           $("#language")
             .empty()
