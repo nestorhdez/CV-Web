@@ -39,6 +39,40 @@ function NewUser(
   this.profilePicture = profilePicture;
 }
 
+/** Render all items from one objetct 
+ * @name getAllElements - function return element from object list.
+ * @param url - field need fill in html.
+*/
+getAllElements = function(url) {
+  $.ajax({
+    url: `https://cv-mobile-api.herokuapp.com/api/`+url,
+    dataType: "json"
+  }).done(function(data) {
+    console.log(data);
+    /** checkbox element*/
+    /** clean container */
+    console.log("¿Scoope?, ", url);
+    $('#'+url).empty();
+    /** insert value */
+    data.forEach(function(val) {
+      let check = `<div class="form-check custom-checkbox">
+        <input class="form-check-input" type="checkbox" id='${val.label.toLowerCase()}-check' name='${url}[]' value='${val._id}'>
+        <label class="form-check-label mr-5" for='${val.label.toLowerCase()}-check'>${val.label}</label>
+      </div>`;
+
+      document.getElementById(url).innerHTML += check;
+    });
+
+    return data;
+  });
+}
+
+skills = getAllElements("skills");
+languages = getAllElements("langs");
+
+console.log("skills:", skills);
+console.log("languages:", languages);
+
 let registered;
 
 /** Check Password format
