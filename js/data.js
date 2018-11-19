@@ -57,6 +57,13 @@ $("#registerSubmit").submit(function(e) {
     }).get();
   }
 
+  function showModal() {
+    console.log('Se muestra Modal');
+    $('#nosubmit').attr("id", "confirm-submit");
+  }
+
+  showModal();
+
   let password = $("#inputPassword5").val();
   let name = $("#validationname").val();
   let phone = $("#InputPhone").val();
@@ -115,6 +122,8 @@ $("#registerSubmit").submit(function(e) {
         .addClass("text-muted")
         .removeClass("text-danger");
     }
+
+    /** Take all values in NewUser */
     registered = new NewUser(
       name,
       phone,
@@ -203,10 +212,10 @@ $("#registerSubmit").submit(function(e) {
         .then(response => console.log(response))
         .catch(error => console.log(error.message));
     }
-
-    // Need check the send info before.
-
-    sendNewUser();
+    let confirm = false;
+    // Need check the send info before. 
+   
+    !confirm ? console.log('No se envia') : sendNewUser();
     // this.reset();
     // $("#preview").attr("src", "");
     return registered;
