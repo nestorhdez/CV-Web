@@ -1,40 +1,26 @@
-//Object List of Users
-function ListUsers() {
+class Users extends Model{
 
-    this.url = "https://cv-mobile-api.herokuapp.com/api/users";
+    constructor( url ) {
+        super(url);
+    }
 
-    //Call the ajax and get the list of users
-    this.getAllUsers = function ( callback ) {
+    /* Return an array that represent a page of the inital array.
+    As argument you should pass it the initial array, how many
+    elementes do you need per page and the page nº that you need.*/
+    pagination (arr, perpage, page) {     
+        return arr.slice(perpage*(page-1), perpage*page);
+    }
 
-         $.ajax ({   
-            url: this.url,
-            dataType: "json"
-        }).done( function(data) {
-            
-            if(typeof callback == "function" ){
-                callback( data );
-            }else{
-                console.log("Callback parameter isn't a function");
-            }
+    createHtmlUserCard(user, skills, langs) {
 
-            return data;
-        });
-    };
-    
-
-    this.renderUsers = function ( arr ) {
-  
-        //Create a card for each user
-        arr.forEach(function(val) {
-
-            let card = (`
-            <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
+        let card = (`
+            <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${user._id}" style="width: 18rem;">
                 <div class="card-body text-center">
                 <div class="row mb-4">        
                     <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                        <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="${val._id}" data-toggle="modal"
+                        <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="${user._id}" data-toggle="modal"
                         data-target="#ModalCenter">Edit</button>
-                        <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
+                        <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
                             data-target="#ModalCenter">Detail</button>
                         <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
                     </div>
@@ -42,35 +28,56 @@ function ListUsers() {
                     <div class="row">
                         <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                             <div class="d-flex mx-auto profile-picture mb-1">
-                                <img class="img-user rounded-circle" src="${val.avatar}">
+                                <img class="img-user rounded-circle" src="${user.avatar}">
                             </div>
-                            <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
+                            <h5 class="card-title d-inline user-name text-capitalize">${user.name}</h5>
                         </div>
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
                             <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
-                            <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
-                            <p class="m-0 text-capitalize"><strong>State: </strong>${val.address.state}</p>
-                            <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
-                            <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
+                            <p class="m-0 text-capitalize"><strong>City: </strong>${user.address.city}</p>
+                            <p class="m-0 text-capitalize"><strong>Country: </strong>${user.address.country}</p>
+                            <p class="m-0 text-capitalize"><strong>State: </strong>${user.address.state}</p>
+                            <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${skills.join(', ')}</p>
+                            <p class="m-0 font-italic text-capitalize"><strong>Languages: </strong>${langs.join(', ')}</p>
+                            <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
                         </div>
                     </div>    
                 </div>
             </div>
             `)
+            
+        return card;
+    }
 
-        document.getElementById('card-container').innerHTML += card;
+    renderUsers(arrayUsers) {
+        
+        let apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
+        let apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
+
+        let skillsPromise = new Promise ((resolve) => apiSkills.getEntityApi( resolve ));
+        let langsPromise = new Promise ((resolve) => apiLangs.getEntityApi( resolve ));
+        
+        Promise.all([skillsPromise, langsPromise])
+        .then( (results) => {
+            let resolvedSkills = results[0];
+            let resolvedLangs = results[1];
+
+            //Create a card for each user
+            arrayUsers.forEach((user) => {
+                let skills = apiSkills.returnUserPropertyLabels(user.skills, resolvedSkills);
+                let langs = apiLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
+                document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skills, langs);
+            });
+
+            document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
 
         });
-        
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
-        
-    }.bind(this);//Bind to ListUsers object.
+    }
 
     /*Change the data of the modal when click on a user card.*/
-    this.renderModal = function(arr) {
+    renderModal(arr) {
         $('.btn-modal').click(function(e){
             // console.log('click done');
             // console.log('User id ' + e.target.id);
@@ -108,18 +115,11 @@ function ListUsers() {
         })
     }
 
-    /* Return an array that represent a page of the inital array.
-    As argument you should pass it the initial array, how many
-    elementes do you need per page and the page nº that you need.*/
-    this.pagination = function (arr, perpage, page) {     
-        return arr.slice(perpage*(page-1), perpage*page);
-    }
-
-    this.filterUsers = function ( currentPage ){
-
+    filterUsers( currentPage ){
+        
         new Promise((resolve, reject) => {
-            //Passing the resolve as a callback.
-            this.getAllUsers( resolve );
+
+            this.getEntityApi( resolve );
 
         }).then((allUsers) => {
 
@@ -167,15 +167,15 @@ function ListUsers() {
                 filterByGender.forEach(removeFilteredUser);
             }
             if(cityInput !== '') {
-                var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) == -1);
+                var filterByCity = allUsers.filter(user => user.address.city.toLowerCase().indexOf(cityInput) == -1);
                 filterByCity.forEach(removeFilteredUser);
             }
             if(countryInput !== '') {
-                var filterByCountry = allUsers.filter(user =>  user.location.country.toLowerCase() !== countryInput);
+                var filterByCountry = allUsers.filter(user =>  user.address.country.toLowerCase() !== countryInput);
                 filterByCountry.forEach(removeFilteredUser);
             }
             if(stateInput !== '') {
-                var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() !== stateInput);
+                var filterByState = allUsers.filter(user =>  user.address.state.toLowerCase() !== stateInput);
                 filterByState.forEach(removeFilteredUser);
             }
             if(companyInput !== '') {
@@ -250,43 +250,9 @@ function ListUsers() {
 
         });
         
-    }.bind(this);//Bind ListUsers object
-
-    this.getUserValue = function (val, callback){
-        fetch(`https://cv-mobile-api.herokuapp.com/api/${val}`)
-        .then(res => res.json())
-        .then(data => {
-            callback(data);
-        });
     }
 
-    this.createCheckBoxes = function ( arr ){
-        let checkBoxArr = [];
-        arr.forEach(val => {
-            let checkBox =
-            `<div class="form-check">
-                <input class="form-check-input" type="checkbox" id="${val.label}-check" name="${val.type}"
-                    value="${val._id}">
-                <label class="form-check-label mr-5" for="${val.label}-check">${val.label}</label>
-            </div>`;
-            checkBoxArr.push(checkBox);
-        })
-        return checkBoxArr;
-    }
-
-    this.renderCheckBoxArr = function (container, val){
-        
-        new Promise ( (resolve, reject) => {
-            this.getUserValue(val, resolve);
-        }).then((val) => {
-            let checkbox = this.createCheckBoxes( val );
-            checkbox.forEach(val =>{
-                $(container).append(val);
-            });
-        });
-    }.bind(this);
-
-    this.createFormEditUser = function(user) {
+    createFormEditUser(user) {
 
         $('#ModalCenterTitle').empty().html(user.name);
         $('#profilePicture').attr("src", user.avatar);
@@ -329,33 +295,34 @@ function ListUsers() {
                     <button type="submit" class="btn btn-sm btn-info" id="edit-user-btn">Search</button>
                 </div>`
         ); 
-    }.bind(this);
+    }
 
-    this.editUsers = function (){
+    editUsers() {
+    
         $('.btn-edit').click(function(e){
             console.log('click done');
             console.log('User id ' + e.target.id);
             
-            $.ajax(`https://cv-mobile-api.herokuapp.com/api/users/${e.target.id}`)
-            .done( user => {
+            new Promise ((resolve, reject) => {
+                this.getEntityApi(`users/${e.target.id}`, resolve);
+            }).then( user => {
                 console.log(user);
-                this.createFormEditUser(user); 
+                this.createFormEditUser(user);
             })
-        }.bind(this));
-    }.bind(this);
+        });
+    }
 
 
 }
 
-let list = new ListUsers;
-list.renderCheckBoxArr('#languages-search', 'langs');
-list.renderCheckBoxArr('#skills', 'skills');
-let scroll = new Scrollinfinite(list.filterUsers).initScroll();
+const listUsers = new Users( 'https://cv-mobile-api.herokuapp.com/api/users');
+
+const scroll = new ScrollInfinite(listUsers ,'filterUsers').initScroll();
 
 //Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-    //The argument passed is the nº of the page that you want to print.
-    list.filterUsers(1);
+
+    listUsers.filterUsers(1);
 });
