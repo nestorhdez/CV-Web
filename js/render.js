@@ -41,7 +41,7 @@ function ListUsers(summaryContainer) {
         //                 </div>
         //                 <div class="d-flex flex-column flex-nowrap text-left my-2">
         //                     <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-        //                     <p class="m-0 city-user"><b>City: </b>${val.location.city}</p>
+        //                     <p class="m-0 city-user"><b>City: </b>${val.address.city}</p>
         //                     <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
         //                     <p><b>Website: </b>${val.website}</p>
 
@@ -77,9 +77,9 @@ function ListUsers(summaryContainer) {
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
                             <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0 text-capitalize"><strong>City: </strong>${val.location.city}</p>
-                            <p class="m-0 text-capitalize"><strong>Country: </strong>${val.location.country}</p>
-                            <p class="m-0 text-capitalize"><strong>State: </strong>${val.location.state}</p>
+                            <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
+                            <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
+                            <p class="m-0 text-capitalize"><strong>Street: </strong>${val.address.street}</p>
                             <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
                             <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
                         </div>
@@ -111,11 +111,11 @@ function ListUsers(summaryContainer) {
                     
                     $('#ModalCenterTitle').empty().html(user.name);
 
-                    $('#city').empty().html(user.location.city);
+                    $('#city').empty().html(user.address.city);
 
-                    $('#country').empty().html(user.location.country);
+                    $('#country').empty().html(user.address.country);
                     
-                    $('#state').empty().html(user.location.state);
+                    $('#street').empty().html(user.address.street);
 
                     $('#language').empty().html(user.languages.join(', '));
 
@@ -162,7 +162,7 @@ function ListUsers(summaryContainer) {
             let genderSelect = document.querySelector("#gender").value.toLowerCase();
             let cityInput = document.querySelector("#city-option").value.toLowerCase();
             let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
-            let stateInput = document.querySelector("#validationState").value.toLowerCase();
+            let streetInput = document.querySelector("#validationStreet").value.toLowerCase();
             let companyInput = document.querySelector("#validationcompany").value.toLowerCase();
             let jobTitleInput = document.querySelector("#validationjob").value.toLowerCase();
             let experienceSelect = document.querySelector("#experience").value.toLowerCase();
@@ -199,16 +199,16 @@ function ListUsers(summaryContainer) {
                 filterByGender.forEach(removeFilteredUser);
             }
             if(cityInput !== '') {
-                var filterByCity = allUsers.filter(user => user.location.city.toLowerCase().indexOf(cityInput) == -1);
+                var filterByCity = allUsers.filter(user => user.address.city.toLowerCase().indexOf(cityInput) == -1);
                 filterByCity.forEach(removeFilteredUser);
             }
             if(countryInput !== '') {
-                var filterByCountry = allUsers.filter(user =>  user.location.country.toLowerCase() !== countryInput);
+                var filterByCountry = allUsers.filter(user =>  user.address.country.toLowerCase() !== countryInput);
                 filterByCountry.forEach(removeFilteredUser);
             }
-            if(stateInput !== '') {
-                var filterByState = allUsers.filter(user =>  user.location.state.toLowerCase() !== stateInput);
-                filterByState.forEach(removeFilteredUser);
+            if(streetInput !== '') {
+                var filterByStreet = allUsers.filter(user =>  user.address.street.toLowerCase() !== streetInput);
+                filterByStreet.forEach(removeFilteredUser);
             }
             if(companyInput !== '') {
                 var filterByCompany = allUsers.filter(user => user.company.toLowerCase().indexOf(companyInput) == -1);
