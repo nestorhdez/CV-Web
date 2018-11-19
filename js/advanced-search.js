@@ -126,6 +126,7 @@ $("#search-btn").on("click", function() {
   });
 });
 
+<<<<<<< HEAD
 // To delete the form when a button is clicked, also the badges and search again the users
 
 $("#reset-btn").on("click", function() {
@@ -133,3 +134,6 @@ $("#reset-btn").on("click", function() {
   $(".area").empty();
 })
 
+=======
+// To show the summary
+>>>>>>> development

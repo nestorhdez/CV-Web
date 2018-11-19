@@ -56,20 +56,22 @@ function ListUsers(summaryContainer) {
         // `);
 
             let card = (`
-            <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
-                <div class="card-body text-center">
-                <div class="row mb-4">        
-                    <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                        <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                        <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
-                            data-target="#ModalCenter">Detail</button>
-                        <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
+                    <div class="card-body text-center">
+                    <div class="row mb-4">        
+                        <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                            <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
+                            <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
+                                data-target="#ModalCenter">Detail</button>
+                            <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                        </div>
                     </div>
-                </div>
-                    <div class="row">
-                        <div class="d-flex flex-column mx-auto justify-content-center mb-3">
-                            <div class="d-flex mx-auto profile-picture mb-1">
-                                <img class="img-user rounded-circle" src="${val.profilePicture}">
+                        <div class="row">
+                            <div class="d-flex flex-column mx-auto justify-content-center mb-3">
+                                <div class="d-flex mx-auto profile-picture mb-1">
+                                    <img class="img-user rounded-circle" src="${val.profilePicture}">
+                                </div>
+                                <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
                             </div>
                             <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
                         </div>
@@ -85,8 +87,7 @@ function ListUsers(summaryContainer) {
                         </div>
                     </div>    
                 </div>
-            </div>
-            `)
+                `)
 
         document.getElementById('card-container').innerHTML += card;
 
@@ -171,7 +172,6 @@ function ListUsers(summaryContainer) {
             let checkedLanguages = [...languages].filter(lang => lang.checked == true ).map(lang => lang.defaultValue.toLowerCase());
             let skills = document.querySelectorAll('#skills .form-check-input');
             let checkedSkills = [...skills].filter(skill => skill.checked == true).map(skill => skill.defaultValue.toLowerCase());
-      
 
             function removeFilteredUser(user){
                 if(allFilters.includes(user)){
