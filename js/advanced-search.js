@@ -47,7 +47,6 @@ $("#search-btn").on("click", function() {
     "#validationjob",
     "#experience-search"
   ];
-  console.log("longvariables: " + variables.length + name + "name");
 
   // to print text inputs
   for (let i = 0; i < variables.length; i++) {
@@ -77,7 +76,7 @@ $("#search-btn").on("click", function() {
     }
   }
 
-  // to print checkeable checkboxs
+  // to print checkboxs
   for (input of languages) {
     if ($(input).prop("checked") === true) {
       $(".area").append(
@@ -105,7 +104,7 @@ $("#search-btn").on("click", function() {
     }
   }
 
-  // for deleting the inputs and checkboxes that were printed and also delete its value
+  // for deleting the value of inputs and checkboxes that were printed
   $(".deletion").on("click", function(e) {
     e.preventDefault();
     let id_input = $(this)
@@ -127,4 +126,10 @@ $("#search-btn").on("click", function() {
   });
 });
 
-// To show the summary
+// To delete the form when a button is clicked, also the badges and search again the users
+
+$("#reset-btn").on("click", function() {
+  $("#adv-search-form")[0].reset();
+  $(".area").empty();
+})
+
