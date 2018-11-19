@@ -32,13 +32,13 @@ function ListUsers(summaryContainer) {
                 <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
                     <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
                     <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"data-target="#ModalCenter">Detail</button>
-                    <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                    <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
                 </div>
             </div>
                 <div class="row">
                     <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                         <div class="d-flex mx-auto profile-picture mb-1">
-                            <img class="img-user rounded-circle" src="${val.profilePicture}">
+                            <img class="img-user rounded-circle" src="${val.avatar}">
                         </div>
                         <h5 class="card-title d-inline user-name text-capitalize">${ val.name}</h5>
                     </div>
@@ -46,9 +46,9 @@ function ListUsers(summaryContainer) {
                 <div class="row px-3">    
                     <div class="d-flex flex-column flex-nowrap text-left my-2">
                         <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                        <p class="m-0 text-capitalize"><strong>City: </strong>${val.location.city}</p>
-                        <p class="m-0 text-capitalize"><strong>Country: </strong>${val.location.country}</p>
-                        <p class="m-0 text-capitalize"><strong>Street: </strong>${val.location.street}</p>
+                        <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
+                        <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
+                        <p class="m-0 text-capitalize"><strong>Street: </strong>${val.address.street}</p>
                         <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(", ")}</p>
                         <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
                     </div>
@@ -133,6 +133,7 @@ function ListUsers(summaryContainer) {
       console.log("usuario deleted.");
       console.log("This: ", $(this));
       $("#card_" + userdelete).remove();
+      // $("#search-btn").trigger("click"); // If this trigger run, It's lost focus in cards.
     });
   };
 

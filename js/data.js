@@ -55,7 +55,8 @@ getAllElements = function(url) {
     $('#'+url).empty();
     /** insert value */
     data.forEach(function(val) {
-      let check = `<div class="form-check custom-checkbox">
+      let check = `
+      <div class="form-check custom-checkbox">
         <input class="form-check-input" type="checkbox" id='${val.label.toLowerCase()}-check' name='${url}[]' value='${val._id}'>
         <label class="form-check-label mr-5" for='${val.label.toLowerCase()}-check'>${val.label}</label>
       </div>`;
