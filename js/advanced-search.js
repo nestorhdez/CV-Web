@@ -14,7 +14,7 @@ $("#search-btn").on("click", function() {
   var country = $("#validationCountry").val();
   var company = $("#validationcompany").val();
   var job = $("#validationjob").val();
-  var experience = $("#experience").val();
+  var experience = $("#experience-search").val();
   var spans = '<span class="badge badge-info mr-2 badge-font" ';
   var deletion =
     '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
@@ -45,7 +45,7 @@ $("#search-btn").on("click", function() {
     "#validationCountry",
     "#validationcompany",
     "#validationjob",
-    "#experience"
+    "#experience-search"
   ];
 
   // to print text inputs
@@ -81,7 +81,7 @@ $("#search-btn").on("click", function() {
     if ($(input).prop("checked") === true) {
       $(".area").append(
         spans +
-          "#languages=" +
+          "#languages-search=" +
           $(input).prop("id") +
           '">' +
           $(input).prop("value").toUpperCase() +
@@ -94,7 +94,7 @@ $("#search-btn").on("click", function() {
     if ($(input).prop("checked") === true) {
       $(".area").append(
         spans +
-          "#skills=" +
+          "#skills-search=" +
           $(input).prop("id") +
           '">' +
           $(input).prop("value").toUpperCase() +
