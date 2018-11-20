@@ -58,36 +58,35 @@ function ListUsers(summaryContainer) {
             let card = (`
                 <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
                     <div class="card-body text-center">
-                    <div class="row mb-4">        
-                        <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                            <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                            <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
-                                data-target="#ModalCenter">Detail</button>
-                            <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                        <div class="row mb-4">        
+                            <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                                <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
+                                <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
+                                    data-target="#ModalCenter">Detail</button>
+                                <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
+                            </div>
                         </div>
-                    </div>
                         <div class="row">
                             <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                                 <div class="d-flex mx-auto profile-picture mb-1">
-                                    <img class="img-user rounded-circle" src="${val.profilePicture}">
+                                    <img class="img-user rounded-circle" src="${val.avatar}">
                                 </div>
                                 <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
                             </div>
-                            <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
-                        </div>
-                    </div>   
-                    <div class="row px-3">    
-                        <div class="d-flex flex-column flex-nowrap text-left my-2">
-                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
-                            <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
-                            <p class="m-0 text-capitalize"><strong>Street: </strong>${val.address.street}</p>
-                            <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
-                            <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
-                        </div>
-                    </div>    
+                        </div>   
+                        <div class="row px-3">    
+                            <div class="d-flex flex-column flex-nowrap text-left my-2">
+                                <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                                <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
+                                <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
+                                <p class="m-0 text-capitalize"><strong>Street: </strong>${val.address.street}</p>
+                                <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
+                                <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
+                            </div>
+                        </div>    
+                    </div>
                 </div>
-                `)
+            `)
 
         document.getElementById('card-container').innerHTML += card;
 
@@ -166,7 +165,7 @@ function ListUsers(summaryContainer) {
             let streetInput = document.querySelector("#validationStreet").value.toLowerCase();
             let companyInput = document.querySelector("#validationcompany").value.toLowerCase();
             let jobTitleInput = document.querySelector("#validationjob").value.toLowerCase();
-            let experienceSelect = document.querySelector("#experience").value.toLowerCase();
+            let experienceSelect = document.querySelector("#experience-search").value.toLowerCase();
             //CheckBoxes
             let languages = document.querySelectorAll('#languages .form-check-input');
             let checkedLanguages = [...languages].filter(lang => lang.checked == true ).map(lang => lang.defaultValue.toLowerCase());
