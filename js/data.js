@@ -41,75 +41,21 @@ function NewUser(
 
 let registered;
 
-/** 
+/**
  * Listener that take control when show modal with data user.
  */
-$('#invalidCheck2').click(function(e) {
-    //Check input
-    if (!$("#invalidCheck2").is(":checked")) {
-      console.log("is not checked.");
-      $("#confirm-submit").attr("id", "nosubmit");
-    } else {
-      console.log("is checked.");
-      // Inser content in body:
-      let confirmBody = `
-      <div class="container-fluid">
-        <div class="row">
-          <fieldset>
-            <legend>Login data</legend>
-              <p><strong>Username: <strong>${registered.username}</p>
-
-              Password:
-
-              Name and surname: 
-
-              Birth Date:
-
-              Gender:
-          </fieldset>
-        </div>
-        <div class="row">
-          <address>
-            <legend>Address data</legend>
-            <div class="row">
-              <div class="col">
-                <City:
-
-                Country:
-              </div>
-              <div class="col">
-                Street:
-
-                Zip:
-              </div>
-            </div>
-            <div class="row">
-                Phone:
-
-                Email address:
-            </div>
-          </address>
-        </div>
-        <div class="row">
-          <legend>Experience data</legend>
-          <div class="row">
-            Laboral Experience:
-
-            Job Title:
-          </div>
-          <div class="row">
-            Skills: 
-
-            Languages:
-          </div>
-        </div>
-      <div>
-      `;
-      $("#modal-confirm").empty().html(confirmBody);
-      $("#nosubmit").attr("id", "confirm-submit");
-      console.log("Se muestra Modal");
+$("#invalidCheck2").click(function(e) {
+  //Check input
+  if (!$("#invalidCheck2").is(":checked")) {
+    console.log("is not checked.");
+    $("#confirm-submit").attr("id", "nosubmit");
+  } else {
+    console.log("is checked.");
+    // Inser content in body:
+    $("#nosubmit").attr("id", "confirm-submit");
+    console.log("Se muestra Modal");
   }
-})
+});
 
 /** Listener event to submit*/
 $("#registerSubmit").submit(function(e) {
@@ -152,7 +98,7 @@ $("#registerSubmit").submit(function(e) {
   let username = $("#validationUsername").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
-  let state = $("#validationState").val();
+  let state = $("#validationStreet").val();
   let experience = $("#experience").val();
 
   let languages = getCheckedBox("#languages");
@@ -224,6 +170,64 @@ $("#registerSubmit").submit(function(e) {
     );
 
     console.log(registered);
+
+    function renderModalConfirm(){
+      console.log("Inserted modal html.");
+      let confirmBody = `
+      <div class="container-fluid">
+        <div class="row mb-1">
+          <fieldset>
+            <legend>Login data</legend>
+            <div class="col">
+              <p><strong>Username: </strong>${registered.username}</p>
+              <p><strong>Password: </strong>${registered.password}</p>
+              <p><strong>Name and surname: </strong>${registered.name}</p>
+              <p><strong>Birth Date: </strong>${registered.birthDate}</p>
+              <p><strong>Gender: </strong>${registered.gender}</p>
+            </div>
+          </fieldset>
+        </div>
+        <div class="row mb-1">
+          <address>
+            <legend>Address data</legend>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <p><strong>City: </strong>${registered.city}</p>
+                  <p><strong>Country: </strong>${registered.country}</p>
+                </div>
+                <div class="col">
+                  <p><strong>Street: </strong>${registered.country}</p>
+                  <p><strong>Zip: </strong>${registered.country}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <p><strong>Phone: </strong>${registered.phone}</p>
+              <p><strong>Email: </strong>${registered.email}</p>
+            </div> 
+          </address>
+        </div>
+        <div class="row mb-1">
+          <fieldset>
+            <legend>Experience data</legend>
+            <div class="col">
+              <p><strong>Laboral Experience: </strong>${registered.experience}</p>
+              <p><strong>Job Title: </strong>${registered.jobTitle}</p>
+              <p><strong>Skills: </strong>${registered.skills.join(', ')}</p>
+              <p><strong>Languages: </strong>${registered.languages.join(', ')}</p>
+            </div>
+          </fieldset>
+        </div>
+      <div>
+      `;
+    $("#modal-confirm")
+      .empty()
+      .html(confirmBody);
+    };
+
+    renderModalConfirm();
+
 
     /** Take values from NewUser object to create formBody */
     function createRequestBody() {
