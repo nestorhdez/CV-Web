@@ -41,6 +41,16 @@ class FeaturesModel extends Model {
             });
         });
     }
+
+    getSkillsAndLangs(callback) {
+        let apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
+        let apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
+
+        let skillsPromise = new Promise ((resolve) => apiSkills.getEntityApi( resolve ));
+        let langsPromise = new Promise ((resolve) => apiLangs.getEntityApi( resolve ));
+        
+        return Promise.all([skillsPromise, langsPromise]);
+    }
   
 }
 

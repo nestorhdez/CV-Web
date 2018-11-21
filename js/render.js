@@ -18,7 +18,7 @@ class Users extends Model{
                 <div class="card-body text-center">
                 <div class="row mb-4">        
                     <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                        <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="${user._id}" data-toggle="modal"
+                        <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
                         data-target="#ModalCenter">Edit</button>
                         <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
                             data-target="#ModalCenter">Detail</button>
@@ -52,67 +52,77 @@ class Users extends Model{
     }
 
     renderUsers(arrayUsers) {
-        
-        let apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
-        let apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
+    
+        let skillsAndLangs = new FeaturesModel;
 
-        let skillsPromise = new Promise ((resolve) => apiSkills.getEntityApi( resolve ));
-        let langsPromise = new Promise ((resolve) => apiLangs.getEntityApi( resolve ));
-        
-        Promise.all([skillsPromise, langsPromise])
-        .then( (results) => {
+        return skillsAndLangs.getSkillsAndLangs()
+        .then( results => {
             let resolvedSkills = results[0];
             let resolvedLangs = results[1];
 
             //Create a card for each user
             arrayUsers.forEach((user) => {
-                let skills = apiSkills.returnUserPropertyLabels(user.skills, resolvedSkills);
-                let langs = apiLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
+                let skills = skillsAndLangs.returnUserPropertyLabels(user.skills, resolvedSkills);
+                let langs = skillsAndLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
                 document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skills, langs);
             });
 
-            document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
+            document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+        });
+    }
 
+    createHtmlUserModal(user, skills, langs) {
+
+        let bodyModal = (`
+            <h6 class="modal-subtitle card-subtitle text-center font-italic mb-3">Detail information</h6>
+            <span class="d-block card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
+                    someone@example.es</a></span>
+            ${user.address.city ? '<span class="d-block card-text text-capitalize"><strong>City: </strong><span id="city">' + user.address.city + '</span></span>' : '' }
+            <span class="d-block card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></span>
+            ${user.address.street ? '<span class="d-block card-text text-capitalize"><strong>Street: </strong><span id="street">' + user.address.street + '</span></span>' : ''}
+            ${langs.length > 0 ? '<span class="d-block card-text text-capitalize"><strong>Language: </strong><span id="language">' + langs.join(', ') + '</span></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle"></span></span>' : ''}
+            <span class="d-block card-text"><strong>Experience: </strong><span id="experience"> ${user.experience ? user.experience + ' year/s' : 'Has no experience'}</span></span>
+            ${user.website ? '<span class="d-block card-text"><strong>Website: </strong><a href="#" id="website">' + user.website + '</a></span>' : ''}
+            ${user.company ? '<span class="d-block card-text text-capitalize"><strong>Company: </strong><span id="company">' + user.company + '</span></span>' : ''}
+            ${skills.length > 0 ? '<span class="d-block card-text text-capitalize"><strong>Skills: </strong><span id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
+        `);
+
+        return bodyModal;
+    }
+
+    setListenerModal(arr, callback){     
+        $('.btn-modal').click((e) =>{
+            callback(e, arr);
         });
     }
 
     /*Change the data of the modal when click on a user card.*/
-    renderModal(arr) {
-        $('.btn-modal').click(function(e){
-            // console.log('click done');
-            // console.log('User id ' + e.target.id);
-            arr.forEach( function(val){
-                // console.log("val_id: ", val._id);
-                // console.log("e.id: ", e.target.id);
-                if(val._id == e.target.id){
-                    let user = val;
+    renderModal(e, arr) {
 
-                    $('#profilePicture').attr("src", "../img/default-profile-picture.jpg").attr("src", user.profilePicture);
-                    
-                    $('#ModalCenterTitle').empty().html(user.name);
+            let skillsAndLangs = new FeaturesModel;
 
-                    $('#city').empty().html(user.address.city);
+            skillsAndLangs.getSkillsAndLangs()
+            .then( results => {
+                let resolvedSkills = results[0];
+                let resolvedLangs = results[1];
+                let userInstance = new Users;
 
-                    $('#country').empty().html(user.address.country);
-                    
-                    $('#street').empty().html(user.address.street);
+                arr.forEach( (user) => {
 
-                    $('#language').empty().html(user.languages.join(', '));
-
-                    $('#email').empty().html(user.email);
-
-                    $('#jobTitle').empty().html(user.jobTitle);
-                    
-                    $('#website').empty().html(user.website);
-
-                    $('#company').empty().html(user.company);
-
-                    $('#skills-modal').empty().html(user.skills.join(', '));
-                    console.log("skills? ", user.skills.join(', '));
-                }
-            });
-
-        })
+                    let skills = skillsAndLangs.returnUserPropertyLabels(user.skills, resolvedSkills);
+                    let langs = skillsAndLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
+                    if(user._id == e.target.id){
+    
+                        $('#profilePicture').attr("src", "../img/default-profile-picture.jpg").attr("src", user.profilePicture);
+                        
+                        $('#ModalCenterTitle').empty().html(user.name);
+                        
+                        $('.modal-user-body').empty().html(userInstance.createHtmlUserModal(user, skills, langs));
+                    }
+                });
+            })
+        // })
     }
 
     filterUsers( currentPage ){
@@ -236,17 +246,20 @@ class Users extends Model{
                 document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             }else if( allFilters.length < 10 ) {
                 $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(allFilters, 10, 1) );
+                this.renderUsers( this.pagination(allFilters, 10, 1) )
+                .then(() => {
+                    this.setListenerModal( allFilters, this.renderModal );
+                });
                 console.log("less than 10 users");
             }else {
                 if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
-                this.renderUsers( this.pagination(allFilters, 10, currentPage) );
+                this.renderUsers( this.pagination(allFilters, 10, currentPage) )
+                .then(() => {
+                    this.setListenerModal( allFilters, this.renderModal );
+                });
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
-
-            this.renderModal(allUsers);
-            this.editUsers(allUsers);
 
         });
         
