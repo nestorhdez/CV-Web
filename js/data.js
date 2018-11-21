@@ -51,6 +51,61 @@ $('#invalidCheck2').click(function(e) {
       $("#confirm-submit").attr("id", "nosubmit");
     } else {
       console.log("is checked.");
+      // Inser content in body:
+      let confirmBody = `
+      <div class="container-fluid">
+        <div class="row">
+          <fieldset>
+            <legend>Login data</legend>
+              <p><strong>Username: <strong>${registered.username}</p>
+
+              Password:
+
+              Name and surname: 
+
+              Birth Date:
+
+              Gender:
+          </fieldset>
+        </div>
+        <div class="row">
+          <address>
+            <legend>Address data</legend>
+            <div class="row">
+              <div class="col">
+                <City:
+
+                Country:
+              </div>
+              <div class="col">
+                Street:
+
+                Zip:
+              </div>
+            </div>
+            <div class="row">
+                Phone:
+
+                Email address:
+            </div>
+          </address>
+        </div>
+        <div class="row">
+          <legend>Experience data</legend>
+          <div class="row">
+            Laboral Experience:
+
+            Job Title:
+          </div>
+          <div class="row">
+            Skills: 
+
+            Languages:
+          </div>
+        </div>
+      <div>
+      `;
+      $("#modal-confirm").empty().html(confirmBody);
       $("#nosubmit").attr("id", "confirm-submit");
       console.log("Se muestra Modal");
   }
