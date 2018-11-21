@@ -74,18 +74,17 @@ class Users extends Model{
     createHtmlUserModal(user, skills, langs) {
 
         let bodyModal = (`
-            <h6 class="modal-subtitle card-subtitle text-center font-italic mb-3">Detail information</h6>
-            <span class="d-block card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
-                    someone@example.es</a></span>
-            ${user.address.city ? '<span class="d-block card-text text-capitalize"><strong>City: </strong><span id="city">' + user.address.city + '</span></span>' : '' }
-            <span class="d-block card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></span>
-            ${user.address.street ? '<span class="d-block card-text text-capitalize"><strong>Street: </strong><span id="street">' + user.address.street + '</span></span>' : ''}
-            ${langs.length > 0 ? '<span class="d-block card-text text-capitalize"><strong>Language: </strong><span id="language">' + langs.join(', ') + '</span></span>' : ''}
-            ${user.jobTitle ? '<span class="d-block card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle"></span></span>' : ''}
-            <span class="d-block card-text"><strong>Experience: </strong><span id="experience"> ${user.experience ? user.experience + ' year/s' : 'Has no experience'}</span></span>
-            ${user.website ? '<span class="d-block card-text"><strong>Website: </strong><a href="#" id="website">' + user.website + '</a></span>' : ''}
-            ${user.company ? '<span class="d-block card-text text-capitalize"><strong>Company: </strong><span id="company">' + user.company + '</span></span>' : ''}
-            ${skills.length > 0 ? '<span class="d-block card-text text-capitalize"><strong>Skills: </strong><span id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
+            <h4 class="modal-subtitle card-subtitle text-center mb-3">Detail information</h4>
+            <span class="d-block mt-2 card-text"><strong>Email: </strong><a class="pl-1" href="mailto:${user.email}" id="email">${user.email}</a></span>
+            ${user.address.city ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>City: </strong><span class="pl-1" id="city">' + user.address.city + '</span></span>' : '' }
+            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country">${user.address.country}</span></span>
+            ${user.address.street ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street">' + user.address.street + '</span></span>' : ''}
+            ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language">' + langs.join(', ') + '</span></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobTitle"></span></span>' : ''}
+            <span class="d-block d-flex mt-2 card-text"><strong>Experience: </strong><span class="pl-1" id="experience"> ${user.experience ? user.experience + ' year/s' : 'Has no experience'}</span></span>
+            ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website">' + user.website + '</a></span>' : ''}
+            ${user.company ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company">' + user.company + '</span></span>' : ''}
+            ${skills.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><span class="pl-1" id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
         `);
 
         return bodyModal;
