@@ -2,6 +2,8 @@ class Users extends Model{
 
     constructor( url ) {
         super(url);
+        this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
+        this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
     }
 
     /* Return an array that represent a page of the inital array.
@@ -51,24 +53,17 @@ class Users extends Model{
         return card;
     }
 
-    renderUsers(arrayUsers) {
-    
-        let skillsAndLangs = new FeaturesModel;
+    renderUsers(arrayUsers, skills, langs) {
 
-        return skillsAndLangs.getSkillsAndLangs()
-        .then( results => {
-            let resolvedSkills = results[0];
-            let resolvedLangs = results[1];
+        let feature = new FeaturesModel;
 
-            //Create a card for each user
-            arrayUsers.forEach((user) => {
-                let skills = skillsAndLangs.returnUserPropertyLabels(user.skills, resolvedSkills);
-                let langs = skillsAndLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
-                document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skills, langs);
-            });
-
-            document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+        arrayUsers.forEach((user) => {
+            let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+            let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+            document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
         });
+
+        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
     }
 
     createHtmlUserModal(user, skills, langs) {
@@ -80,7 +75,7 @@ class Users extends Model{
             <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country">${user.address.country}</span></span>
             ${user.address.street ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street">' + user.address.street + '</span></span>' : ''}
             ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language">' + langs.join(', ') + '</span></span>' : ''}
-            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobTitle"></span></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobTitle">' + user.jobTitle + '</span></span>' : ''}
             <span class="d-block d-flex mt-2 card-text"><strong>Experience: </strong><span class="pl-1" id="experience"> ${user.experience ? user.experience + ' year/s' : 'Has no experience'}</span></span>
             ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website">' + user.website + '</a></span>' : ''}
             ${user.company ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company">' + user.company + '</span></span>' : ''}
@@ -90,47 +85,91 @@ class Users extends Model{
         return bodyModal;
     }
 
-    setListenerModal(arr, callback){     
-        $('.btn-modal').click((e) =>{
-            callback(e, arr);
+    setListenerModal(element, arr, skills, langs, callback){ 
+        var self = this;    
+        $(element).click((e) =>{
+            callback(e, arr, skills, langs);
         });
     }
 
     /*Change the data of the modal when click on a user card.*/
-    renderModal(e, arr) {
+    renderModal(e, arr, skills, langs) {
 
-            let skillsAndLangs = new FeaturesModel;
+        let feature = new FeaturesModel;
 
-            skillsAndLangs.getSkillsAndLangs()
-            .then( results => {
-                let resolvedSkills = results[0];
-                let resolvedLangs = results[1];
-                let userInstance = new Users;
+        let userInstance = new Users;
 
-                arr.forEach( (user) => {
+        arr.forEach( (user) => {
 
-                    let skills = skillsAndLangs.returnUserPropertyLabels(user.skills, resolvedSkills);
-                    let langs = skillsAndLangs.returnUserPropertyLabels(user.languages, resolvedLangs);
-                    if(user._id == e.target.id){
+            
+            if(user._id == e.target.id){
+                let skillsLabel = feature.returnUserPropertyLabels(user.skills, skills);
+                let langsLabel = feature.returnUserPropertyLabels(user.languages, langs);
     
-                        $('#profilePicture').attr("src", `${user.avatar}`);
-                        
-                        $('#ModalCenterTitle').empty().html(user.name);
-                        
-                        $('.modal-user-body').empty().html(userInstance.createHtmlUserModal(user, skills, langs));
-                    }
-                });
-            })
-        // })
+                $('#profilePicture').attr("src", `${user.avatar}`);
+                    
+                $('#ModalCenterTitle').empty().html(user.name);
+                    
+                $('.modal-user-body').empty().html(userInstance.createHtmlUserModal(user, skillsLabel, langsLabel));
+                
+            }
+        });
+        
+
     }
+    
+    createFormEditUser(user, skills, langs) {
+
+        let bodyModal = (`
+            <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
+            <span class="d-block d-flex mt-2 card-text"><strong>Email: </strong><input placeholder="${user.email}" class="pl-1 ml-auto" id="email"></input></span>
+            ${user.address.city ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>City: </strong><input placeholder="' + user.address.city + '" class="pl-1 ml-auto" id="city"></input></span>' : '' }
+            <span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><input placeholder="${user.address.country}" class="pl-1 ml-auto" id="country"></input></span>
+            ${user.address.street ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><input placeholder="' + user.address.street + '" class="pl-1 ml-auto" id="street"></input></span>' : ''}
+            ${langs.length > 0 ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><input placeholder="' + langs.join(', ') + '" class="pl-1 ml-auto" id="language"></input></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><input placeholder="' + user.jobTitle + '" class="pl-1 ml-auto" id="jobTitle"></input></span>' : ''}
+            <span class="d-block d-flex d-flex mt-2 card-text"><strong>Experience: </strong><input placeholder="${user.experience ? user.experience + ' year/s' : 'Has no experience'}" class="pl-1 ml-auto" id="experience"></input></span>
+            ${user.website ? '<span class="d-block d-flex d-flex mt-2 card-text"><strong>Website: </strong><input placeholder="' + user.website + '" class="pl-1 ml-auto" id="website"></input></span>' : ''}
+            ${user.company ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><input placeholder="' + user.company + '" class="pl-1 ml-auto" id="company"></input></span>' : ''}
+            ${skills.length > 0 ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><input placeholder="' + skills.join(', ') + '" class="pl-1 ml-auto" id="skills-modal"></input></span>' : ''}
+        `);
+
+        $('#ModalCenterTitle').empty().html(user.name);
+        $('#profilePicture').attr("src", user.avatar);
+        $('.modal-user-body').empty().html(bodyModal);
+        $('.mdoal-user-body').has('.btn-edit-container').length > 0 ? null :
+            $('.card-body-text').append( 
+                `<div class="btn-edit-container">
+                    <button type="submit" class="btn btn-sm btn-info" id="edit-user-btn">Search</button>
+                </div>`
+        );
+    }
+
+    renderEditUsers(e, arr, skills, langs) {
+
+        let feature = new FeaturesModel;
+        
+        arr.forEach(user => {
+            
+            if(user._id === e.target.nextElementSibling.id) {
+                let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+                let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+                listUsers.createFormEditUser(user, skillsLabels, langsLabels);    
+            }
+        })
+    };
 
     filterUsers( currentPage ){
         
-        new Promise((resolve, reject) => {
+        let userPromise = new Promise((resolve, reject) => this.getEntityApi( resolve ));
+        let skillsPromise = new Promise ((resolve) => this.apiSkills.getEntityApi( resolve ));
+        let langsPromise = new Promise ((resolve) => this.apiLangs.getEntityApi( resolve ));
 
-            this.getEntityApi( resolve );
-
-        }).then((allUsers) => {
+        Promise.all([userPromise, skillsPromise, langsPromise]).then((results) => {
+            
+            let allUsers = results[0];
+            let allSkills = results[1];
+            let allLangs = results[2];
 
             // Inputs
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
@@ -243,85 +282,17 @@ class Users extends Model{
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
                 document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
-            }else if( allFilters.length < 10 ) {
-                $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(allFilters, 10, 1) )
-                .then(() => {
-                    this.setListenerModal( allFilters, this.renderModal );
-                });
-                console.log("less than 10 users");
-            }else {
+            } else {
                 if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
-                this.renderUsers( this.pagination(allFilters, 10, currentPage) )
-                .then(() => {
-                    this.setListenerModal( allFilters, this.renderModal );
-                });
+                this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                this.setListenerModal('.btn-modal', allFilters, allSkills, allLangs, this.renderModal );
+                this.setListenerModal('.btn-edit', allFilters, allSkills, allLangs, this.renderEditUsers );
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
 
         });
         
-    }
-
-    createFormEditUser(user) {
-
-        $('#ModalCenterTitle').empty().html(user.name);
-        $('#profilePicture').attr("src", user.avatar);
-        $('.modal-subtitle').empty().html('Edit information');
-
-        for (let key in user){
-            // console.log(key);
-            switch (key) {
-                case '_id':
-                case 'registeredDate':
-                case 'profilePicture':
-                case '__v':
-                    null
-                    break;
-                case 'skills':
-                    $('#skills-modal').empty();
-                    this.renderCheckBoxArr('#skills-modal', 'skills');
-                    break;
-                case 'languages':
-                    $('#language').empty();
-                    this.renderCheckBoxArr('#language', 'langs');
-                    break;
-                    
-                case 'address':
-                    for (let val in user[key]) {
-                        let addressKey = user[key];
-                        $(`#${val}`).empty().html(`<input style="display: block" value="" name="${val}" placeholder="${addressKey[val]}"></input>`)
-                    }
-                    break;
-                
-                default:
-                $(`#${key}`).empty().html(`<input style="display: block" value="" name="${key}" placeholder="${user[key]}"></input>`);
-                    break;
-            }
-        }
-
-        $('.card-body-text').has('.btn-edit-container').length > 0 ? null :
-            $('.card-body-text').append( 
-                `<div class="btn-edit-container">
-                    <button type="submit" class="btn btn-sm btn-info" id="edit-user-btn">Search</button>
-                </div>`
-        ); 
-    }
-
-    editUsers() {
-    
-        $('.btn-edit').click(function(e){
-            console.log('click done');
-            console.log('User id ' + e.target.id);
-            
-            new Promise ((resolve, reject) => {
-                this.getEntityApi(`users/${e.target.id}`, resolve);
-            }).then( user => {
-                console.log(user);
-                this.createFormEditUser(user);
-            })
-        });
     }
 
 
