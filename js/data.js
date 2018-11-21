@@ -1,4 +1,3 @@
-
 /** Contructor to NewUser */
 function NewUser(
   name,
@@ -28,10 +27,10 @@ function NewUser(
   this.birthDate = birthDate;
   this.username = username;
   this.password = password;
-  this.city = city,
-  this.state = state,
-  this.country = country,
-  this.experience = experience;
+  (this.city = city),
+    (this.state = state),
+    (this.country = country),
+    (this.experience = experience);
   this.languages = languages;
   this.skills = skills;
   this.jobTitle = jobTitle;
@@ -42,27 +41,48 @@ function NewUser(
 
 let registered;
 
+$('#invalidCheck2').click(function(e) {
+    //Check input
+    if (!$("#invalidCheck2").is(":checked")) {
+      console.log("is not checked.");
+      $("#confirm-submit").attr("id", "nosubmit");
+    } else {
+      console.log("is checked.");
+      $("#nosubmit").attr("id", "confirm-submit");
+      console.log("Se muestra Modal");
+  }
+})
+
 /** Listener event to submit*/
 $("#registerSubmit").submit(function(e) {
   console.log("submit actived...");
   e.preventDefault();
 
-  /** 
-  * @name getCheckedBox  Create array with checked inputs in checkbox input. 
-  * @param {string} idinput - id input checkbox.
-  */
-  function getCheckedBox (idinput){
-    return $(idinput +' input[type="checkbox"]:checked').map(function() {
-      return $(this).val();
-    }).get();
+  /**
+   * @name getCheckedBox  Create array with checked inputs in checkbox input.
+   * @param {string} idinput - id input checkbox.
+   */
+  function getCheckedBox(idinput) {
+    return $(idinput + ' input[type="checkbox"]:checked')
+      .map(function() {
+        return $(this).val();
+      })
+      .get();
   }
 
-  function showModal() {
-    console.log('Se muestra Modal');
-    $('#nosubmit').attr("id", "confirm-submit");
-  }
+  /** Check Password format
+   * @param {string} inputtxt */
 
-  showModal();
+  function CheckPassword(inputtxt) {
+    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+    if (inputtxt.match(passw)) {
+      // alert("Correct, try another...");
+      return true;
+    } else {
+      // alert("Wrong...!");
+      return false;
+    }
+  }
 
   let password = $("#inputPassword5").val();
   let name = $("#validationname").val();
@@ -77,8 +97,8 @@ $("#registerSubmit").submit(function(e) {
   let state = $("#validationState").val();
   let experience = $("#experience").val();
 
-  let languages = getCheckedBox('#languages');
-  let skills = getCheckedBox('#skills');
+  let languages = getCheckedBox("#languages");
+  let skills = getCheckedBox("#skills");
 
   let jobTitle = $("#validationJobTitle").val();
   let company = $("#validationCompany").val();
@@ -144,12 +164,11 @@ $("#registerSubmit").submit(function(e) {
       website,
       profilePicture
     );
-    
+
     console.log(registered);
-    
+
     /** Take values from NewUser object to create formBody */
     function createRequestBody() {
-
       let formData = new FormData();
 
       // Sent as a string
@@ -213,27 +232,14 @@ $("#registerSubmit").submit(function(e) {
         .catch(error => console.log(error.message));
     }
     let confirm = false;
-    // Need check the send info before. 
-   
-    !confirm ? console.log('No se envia') : sendNewUser();
+    // Need check the send info before.
+    !confirm ? console.log("No se envia") : sendNewUser();
     // this.reset();
     // $("#preview").attr("src", "");
+    // Change class in submit to no luncha again modal.
     return registered;
   }
 });
-
-/** Check Password format
- * @param {string} inputtxt */ 
-function CheckPassword(inputtxt) {
-  var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
-  if (inputtxt.match(passw)) {
-    // alert("Correct, try another...");
-    return true;
-  } else {
-    // alert("Wrong...!");
-    return false;
-  }
-}
 
 /** Create previewFile in form. */
 function previewFile() {
