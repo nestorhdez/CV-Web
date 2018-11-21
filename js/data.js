@@ -41,6 +41,9 @@ function NewUser(
 
 let registered;
 
+/** 
+ * Listener that take control when show modal with data user.
+ */
 $('#invalidCheck2').click(function(e) {
     //Check input
     if (!$("#invalidCheck2").is(":checked")) {
