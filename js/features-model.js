@@ -55,5 +55,7 @@ class FeaturesModel extends Model {
 }
 
 
-// listUsers.renderCheckBoxesArr('#languages-search', 'langs');
-// listUsers.renderCheckBoxesArr('#skills', 'skills');
+let featureSkills = new FeaturesModel('https://cv-mobile-api.herokuapp.com/api/skills');
+featureSkills.renderCheckBoxesArr('#skills');
+let featureLangs = new FeaturesModel('https://cv-mobile-api.herokuapp.com/api/langs');
+featureLangs.renderCheckBoxesArr('#languages-search');
