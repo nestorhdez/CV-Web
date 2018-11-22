@@ -57,6 +57,19 @@ $("#invalidCheck2").click(function(e) {
   }
 });
 
+$("#inputGroupPrependPSW").click(function (e) {
+  var x = document.getElementById("inputPassword5");
+  if (x.type === "password") {
+    x.type = "text";
+    console.log($(this));
+    $("#inputGroupPrependPSW").empty().html('<i id="eyePSW" class="far fa-eye-slash"></i>');
+  } else {
+    x.type = "password";
+    $("#inputGroupPrependPSW").empty().html('<i id="eyePSW" class="far fa-eye"></i>');
+
+  }
+});
+
 /** Listener event to submit*/
 $("#registerSubmit").submit(function(e) {
   console.log("submit actived...");
@@ -132,6 +145,7 @@ $("#registerSubmit").submit(function(e) {
   //   profilePicture
   // );
 
+
   if (!CheckPassword(password)) {
     $("#inputPassword5")
       .addClass("border-danger is-invalid")
@@ -171,7 +185,7 @@ $("#registerSubmit").submit(function(e) {
 
     console.log(registered);
 
-    function renderModalConfirm(){
+    function renderModalConfirm() {
       console.log("Inserted modal html.");
       let confirmBody = `
       <div class="container-fluid">
@@ -212,22 +226,25 @@ $("#registerSubmit").submit(function(e) {
           <fieldset>
             <legend>Experience data</legend>
             <div class="col">
-              <p><strong>Laboral Experience: </strong>${registered.experience}</p>
+              <p><strong>Laboral Experience: </strong>${
+                registered.experience
+              }</p>
               <p><strong>Job Title: </strong>${registered.jobTitle}</p>
-              <p><strong>Skills: </strong>${registered.skills.join(', ')}</p>
-              <p><strong>Languages: </strong>${registered.languages.join(', ')}</p>
+              <p><strong>Skills: </strong>${registered.skills.join(", ")}</p>
+              <p><strong>Languages: </strong>${registered.languages.join(
+                ", "
+              )}</p>
             </div>
           </fieldset>
         </div>
       <div>
       `;
-    $("#modal-confirm")
-      .empty()
-      .html(confirmBody);
-    };
+      $("#modal-confirm")
+        .empty()
+        .html(confirmBody);
+    }
 
     renderModalConfirm();
-
 
     /** Take values from NewUser object to create formBody */
     function createRequestBody() {
