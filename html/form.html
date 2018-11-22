@@ -51,7 +51,7 @@
                 <form id="registerSubmit" class="p-2">
                     <div class="form-row mb-2">
                         <div class="form-row mb-2">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="validationUsername"><strong>Username</strong></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="inputPassword5"><strong>Password</strong></label>
                                 <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
                                 <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20
@@ -71,58 +71,58 @@
                             </div>
                         </div>
 
-
-                        <div class="col-md-6 mb-3">
-                            <label for="validationname"><strong>Name and surname</strong></label>
-                            <input type="text" class="form-control" id="validationname" placeholder="Name with surname" name="name"
-                                value="" required>
-                        </div>
-
-                        <div class="form-group col-md-4 mb-3">
-                            <label for="InputPhone"><strong>Phone</strong></label>
-                            <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone"
-                                value="" placeholder="Enter phone number">
-                            <small id="numberHelp" class="form-text text-muted">We'll never share your phone with
-                                anyone else.</small>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
-                            <label for="validationZip"><strong>Zip</strong></label>
-                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
-                                value="" required>
-                        </div>
-
                         <div class="form-row mb-3">
-                            <div class="col-md-6 mb-2">
-                                <label for="validationInputEmail"><strong>Email address</strong></label>
-                                <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp"
-                                    name="email" value="" placeholder="Enter email" required>
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                    else.</small>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationname"><strong>Name and surname</strong></label>
+                                <input type="text" class="form-control" id="validationname" placeholder="Name with surname" name="name" value=""
+                                    required>
                             </div>
-                            <div class="col-md-5 mb-2">
+
+                            <div class="col-md-6 mb-2">
                                 <label for="validationbirthDate"><strong>Birth Date</strong></label>
                                 <input type="date" class="form-control" id="validationbirthDate" aria-describedby="birthDate" name="birthDate" value="">
                             </div>
                         </div>
 
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="InputPhone"><strong>Phone</strong></label>
+                            <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone"
+                                value="" placeholder="Enter number">
+                            <small id="numberHelp" class="form-text text-muted">We'll never share your phone with
+                                anyone else.</small>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <label for="validationInputEmail"><strong>Email address</strong></label>
+                            <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp"
+                                name="email" value="" placeholder="Enter email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
                     </div>
+                    
                     <div class="form-row mb-2">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-sm-12 mb-3">
                             <label for="validationCity"><strong>City</strong></label>
                             <input type="text" class="form-control" id="validationCity" placeholder="City" name="city"
                                 value="" required>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-sm-12 mb-3">
                             <label for="validationCountry"><strong>Country</strong></label>
                             <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
                                 value="" required>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-sm-12 mb-3">
                             <label for="validationStreet"><strong>Street</strong></label>
                             <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
+                                value="" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationZip"><strong>Zip</strong></label>
+                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
                                 value="" required>
                         </div>
                     </div>
@@ -158,15 +158,15 @@
                     </div>
 
                     <div class="form-row mb-2">
-                        <div class="col-md-4 mb-3">
+                        <div class="col col-md-6 col-sm-12  mb-3">
                             <label for="validationDefault06"><strong>Laboral Experience</strong></label>
                             <select class="form-control custom-select" id="experience" name="labexp">
                                 b4-se
                                 <option value="">Years of experience</option>
-                                <option value="-1 year">-1 year</option>
+                                <option value="- 1 year">-1 year</option>
                                 <option value="1 - 3 years">1 - 3 years</option>
                                 <option value="3 - 5 years">3 - 5 years</option>
-                                <option value="+5 years">+5 years</option>
+                                <option value="+ 5 years">+5 years</option>
                             </select>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
 
                     <div class="form-row mb-4">
                         <div class="col-md-6">
-                            <label for="validationRepository"><strong>Personal Repository</strong></label>
+                            <label for="validationRepository"><strong>Website or Personal Repository</strong></label>
                             <input type="text" class="form-control" id="validationRepository" placeholder="Web direction"
                                 name="repository" value="">
                         </div>
