@@ -203,7 +203,7 @@ $("#registerSubmit").submit(function(e) {
         </div>
         <div class="row mb-1">
           <address>
-            <legend>Address data</legend>
+            <legend>Contact data</legend>
             <div class="col">
               <div class="row">
                 <div class="col">
