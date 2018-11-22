@@ -10,18 +10,18 @@ $("#search-btn").on("click", function() {
   var email = $("#validationemail").val();
   var gender = $("#gender").val();
   var city = $("#city-option").val();
-  var state = $("#validationState").val();
+  var street = $("#validationStreet").val();
   var country = $("#validationCountry").val();
   var company = $("#validationcompany").val();
   var job = $("#validationjob").val();
-  var experience = $("#experience").val();
+  var experience = $("#experience-search").val();
   var spans = '<span class="badge badge-info mr-2 badge-font" ';
   var deletion =
     '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
   var finspans = "</span>";
-  var selectLanguage = $("#languages");
+  var selectLanguage = $("#languages-search");
   var languages = selectLanguage.find("input[type=checkbox]");
-  var selectSkill = $("#skills");
+  var selectSkill = $("#skills-search");
   var skills = selectSkill.find("input[type=checkbox]");
   var variables = [
     name,
@@ -29,7 +29,7 @@ $("#search-btn").on("click", function() {
     email,
     gender,
     city,
-    state,
+    street,
     country,
     company,
     job,
@@ -41,13 +41,12 @@ $("#search-btn").on("click", function() {
     "#validationemail",
     "#gender",
     "#city-option",
-    "#validationState",
+    "#validationStreet",
     "#validationCountry",
     "#validationcompany",
     "#validationjob",
-    "#experience"
+    "#experience-search"
   ];
-  console.log("longvariables: " + variables.length + name + "name");
 
   // to print text inputs
   for (let i = 0; i < variables.length; i++) {
@@ -77,12 +76,12 @@ $("#search-btn").on("click", function() {
     }
   }
 
-  // to print checkeable checkboxs
+  // to print checkboxs
   for (input of languages) {
     if ($(input).prop("checked") === true) {
       $(".area").append(
         spans +
-          "#languages=" +
+          "#languages-search=" +
           $(input).prop("id") +
           '">' +
           $(input).prop("value").toUpperCase() +
@@ -95,7 +94,7 @@ $("#search-btn").on("click", function() {
     if ($(input).prop("checked") === true) {
       $(".area").append(
         spans +
-          "#skills=" +
+          "#skills-search=" +
           $(input).prop("id") +
           '">' +
           $(input).prop("value").toUpperCase() +
@@ -105,7 +104,7 @@ $("#search-btn").on("click", function() {
     }
   }
 
-  // for deleting the inputs and checkboxes that were printed and also delete its value
+  // for deleting the value of inputs and checkboxes that were printed
   $(".deletion").on("click", function(e) {
     e.preventDefault();
     let id_input = $(this)
@@ -127,4 +126,10 @@ $("#search-btn").on("click", function() {
   });
 });
 
-// To show the summary
+// To delete the form when a button is clicked, also the badges and search again the users
+
+$("#reset-btn").on("click", function() {
+  $("#adv-search-form")[0].reset();
+  $(".area").empty();
+})
+

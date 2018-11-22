@@ -13,9 +13,11 @@ footer {
   text-decoration: none;
   color: #343a40;
 }
-#search-btn {
+#search-btn,
+#reset-btn {
   background-color: #6610f2;
   color: #fff;
+  width:  9em;
 }
 
 #badge-font {
@@ -32,6 +34,10 @@ footer {
   font-size: 1.2em;
   font-weight: 400;
 }
+
+/* input[type=text] {
+  padding: 0.3em, 0.3em, 0em, 0.3em;
+} */
 /* Header */
 #nav-bottom,
 #nav-top {
