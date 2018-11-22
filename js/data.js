@@ -192,7 +192,8 @@ $("#registerSubmit").submit(function(e) {
         <div class="row mb-1">
           <fieldset>
             <legend>Login data</legend>
-            <div class="col">
+            <div id="imgavatar" class="col-6 m-3"> </div>
+            <div class="col-6">
               <p><strong>Username: </strong>${registered.username}</p>
               <p><strong>Password: </strong>${registered.password}</p>
               <p><strong>Name and surname: </strong>${registered.name}</p>
@@ -226,22 +227,21 @@ $("#registerSubmit").submit(function(e) {
           <fieldset>
             <legend>Experience data</legend>
             <div class="col">
-              <p><strong>Laboral Experience: </strong>${
-                registered.experience
-              }</p>
+              <p><strong>Laboral Experience: </strong>${registered.experience}</p>
               <p><strong>Job Title: </strong>${registered.jobTitle}</p>
-              <p><strong>Skills: </strong>${registered.skills.join(", ")}</p>
-              <p><strong>Languages: </strong>${registered.languages.join(
-                ", "
-              )}</p>
+              <p><strong>Skills: </strong>${registered.skills.join(", ").replace(/^(.)|\s(.)/g, ($1) => $1.toUpperCase())}</p>
+              <p><strong>Languages: </strong>${registered.languages.join(", ").replace(/^(.)|\s(.)/g, ($1) => $1.toUpperCase())}</p>
             </div>
           </fieldset>
         </div>
       <div>
       `;
+      
       $("#modal-confirm")
-        .empty()
-        .html(confirmBody);
+      .empty()
+      .html(confirmBody);
+
+      $( "#preview" ).clone().appendTo( "#imgavatar" );
     }
 
     renderModalConfirm();
