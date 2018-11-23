@@ -148,6 +148,9 @@ footer {
   color: #3a5199;
 }
 
+.bg-gradient-cobalt {
+    background-image: linear-gradient(0deg, rgba(176, 190, 236, 1), rgba(255,255,255,0));
+}
 
 /* =================== */
 /* Landpage for alumns */

@@ -190,10 +190,10 @@ $("#registerSubmit").submit(function(e) {
       let confirmBody = `
       <div class="container-fluid">
         <div class="row mb-1">
-          <fieldset>
+          <fieldset class="mx-auto">
             <legend>Login data</legend>
-            <div id="imgavatar" class="col-6 m-3"> </div>
-            <div class="col-6">
+            <div id="imgavatar" class="col-6 mb-4"></div>
+            <div class="col">
               <p><strong>Username: </strong>${registered.username}</p>
               <p><strong>Password: </strong>${registered.password}</p>
               <p><strong>Name and surname: </strong>${registered.name}</p>
@@ -201,9 +201,7 @@ $("#registerSubmit").submit(function(e) {
               <p><strong>Gender: </strong>${registered.gender}</p>
             </div>
           </fieldset>
-        </div>
-        <div class="row mb-1">
-          <address>
+          <address class="mx-auto">
             <legend>Contact data</legend>
             <div class="col">
               <div class="row">
@@ -223,7 +221,7 @@ $("#registerSubmit").submit(function(e) {
             </div> 
           </address>
         </div>
-        <div class="row mb-1">
+        <div class="row mb-1 mx-auto">
           <fieldset>
             <legend>Experience data</legend>
             <div class="col">
@@ -310,9 +308,16 @@ $("#registerSubmit").submit(function(e) {
         .then(response => console.log(response))
         .catch(error => console.log(error.message));
     }
-    let confirm = false;
     // Need check the send info before.
-    !confirm ? console.log("No se envia") : sendNewUser();
+    // let confirm = false;
+    // !confirm ? console.log("No se envia") : sendNewUser();
+    
+    $("#userConfirmed").click(function() {
+      sendNewUser();
+      $("registerSubmit").reset();
+      $("#preview").attr("src", "");
+      $("#confirm-submit").attr("id", "nosubmit");
+    })
     // this.reset();
     // $("#preview").attr("src", "");
     // Change class in submit to no luncha again modal.
