@@ -16,26 +16,27 @@ class FeaturesModel extends Model {
         return userCollection;
     }
 
-    createCheckBoxes(arr) {
+    createCheckBoxes(arr, labelFor) {
         let checkBoxesArr = [];
         arr.forEach(val => {
             let checkBox =
             `<div class="form-check">
-                <input class="form-check-input" type="checkbox" id="${val.label}-check" name="${val.type}"
+                <input class="form-check-input" type="checkbox" id="${val.label + '-' + labelFor}" name="${val.type}"
                     value="${val._id}">
-                <label class="form-check-label mr-5" for="${val.label}-check">${val.label}</label>
+                <label class="form-check-label mr-5" for="${val.label + '-' + labelFor}">${val.label}</label>
             </div>`;
             checkBoxesArr.push(checkBox);
         })
         return checkBoxesArr;
     }
 
-    renderCheckBoxesArr(container) {
+    renderCheckBoxesArr(container, labelFor) {
         
         new Promise ( (resolve, reject) => {
             this.getEntityApi( resolve);
         }).then((checks) => {
-            let arrayHtmlCheckboxes = this.createCheckBoxes( checks );
+            let arrayHtmlCheckboxes = this.createCheckBoxes( checks, labelFor );
+            $(container).empty();
             arrayHtmlCheckboxes.forEach(checkBox =>{
                 $(container).append(checkBox);
             });
@@ -46,6 +47,6 @@ class FeaturesModel extends Model {
 
 
 let featureSkills = new FeaturesModel('https://cv-mobile-api.herokuapp.com/api/skills');
-featureSkills.renderCheckBoxesArr('#skills');
+featureSkills.renderCheckBoxesArr('#skills', 'search');
 let featureLangs = new FeaturesModel('https://cv-mobile-api.herokuapp.com/api/langs');
-featureLangs.renderCheckBoxesArr('#languages-search');
+featureLangs.renderCheckBoxesArr('#languages-search', 'search');

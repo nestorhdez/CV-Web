@@ -4,6 +4,7 @@ class Users extends Model{
         super(url);
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
+        this.renderModal = this.renderModal.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
@@ -70,16 +71,17 @@ class Users extends Model{
 
         let bodyModal = (`
             <h4 class="modal-subtitle card-subtitle text-center mb-3">Detail information</h4>
-            <span class="d-block mt-2 card-text"><strong>Email: </strong><a class="pl-1" href="mailto:${user.email}" id="email">${user.email}</a></span>
-            ${user.address.city ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>City: </strong><span class="pl-1" id="city">' + user.address.city + '</span></span>' : '' }
-            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country">${user.address.country}</span></span>
-            ${user.address.street ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street">' + user.address.street + '</span></span>' : ''}
-            ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language">' + langs.join(', ') + '</span></span>' : ''}
-            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobTitle">' + user.jobTitle + '</span></span>' : ''}
-            <span class="d-block d-flex mt-2 card-text"><strong>Experience: </strong><span class="pl-1" id="experience"> ${user.experience ? user.experience + ' year/s' : 'Has no experience'}</span></span>
-            ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website">' + user.website + '</a></span>' : ''}
-            ${user.company ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company">' + user.company + '</span></span>' : ''}
+            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Username: </strong><span class="pl-1" id="username-modal">${user.username}</span></span>
+            <span class="d-block mt-2 card-text"><strong>Email: </strong><a class="pl-1" href="mailto:${user.email}" id="email-modal">${user.email}</a></span>
+            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country-modal">${user.address.country}</span></span>
+            ${user.address.city ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>City: </strong><span class="pl-1" id="city-modal">' + user.address.city + '</span></span>' : '' }
+            ${user.address.street ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street-modal">' + user.address.street + '</span></span>' : ''}
+            <span class="d-block d-flex mt-2 card-text"><strong>Experience: </strong><span class="pl-1" id="experience-modal"> ${user.experience ? user.experience : 'Has no experience'}</span></span>
+            ${user.company ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company-modal">' + user.company + '</span></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobtitle-modal">' + user.jobTitle + '</span></span>' : ''}
+            ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website-modal">' + user.website + '</a></span>' : ''}
             ${skills.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><span class="pl-1" id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
+            ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language-modal">' + langs.join(', ') + '</span></span>' : ''}
         `);
 
         return bodyModal;
@@ -97,8 +99,6 @@ class Users extends Model{
 
         let feature = new FeaturesModel;
 
-        let userInstance = new Users;
-
         arr.forEach( (user) => {
 
             
@@ -110,7 +110,7 @@ class Users extends Model{
                     
                 $('#ModalCenterTitle').empty().html(user.name);
                     
-                $('.modal-user-body').empty().html(userInstance.createHtmlUserModal(user, skillsLabel, langsLabel));
+                $('.modal-user-body').empty().html(this.createHtmlUserModal(user, skillsLabel, langsLabel));
                 
             }
         });
@@ -118,43 +118,48 @@ class Users extends Model{
 
     }
     
-    createFormEditUser(user, skills, langs) {
-
+    createFormEditUser(user) {
+        
         let bodyModal = (`
             <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
-            <span class="d-block d-flex mt-2 card-text"><strong>Email: </strong><input placeholder="${user.email}" class="pl-1 ml-auto" id="email"></input></span>
-            ${user.address.city ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>City: </strong><input placeholder="' + user.address.city + '" class="pl-1 ml-auto" id="city"></input></span>' : '' }
-            <span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><input placeholder="${user.address.country}" class="pl-1 ml-auto" id="country"></input></span>
-            ${user.address.street ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><input placeholder="' + user.address.street + '" class="pl-1 ml-auto" id="street"></input></span>' : ''}
-            ${langs.length > 0 ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><input placeholder="' + langs.join(', ') + '" class="pl-1 ml-auto" id="language"></input></span>' : ''}
-            ${user.jobTitle ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><input placeholder="' + user.jobTitle + '" class="pl-1 ml-auto" id="jobTitle"></input></span>' : ''}
-            <span class="d-block d-flex d-flex mt-2 card-text"><strong>Experience: </strong><input placeholder="${user.experience ? user.experience + ' year/s' : 'Has no experience'}" class="pl-1 ml-auto" id="experience"></input></span>
-            ${user.website ? '<span class="d-block d-flex d-flex mt-2 card-text"><strong>Website: </strong><input placeholder="' + user.website + '" class="pl-1 ml-auto" id="website"></input></span>' : ''}
-            ${user.company ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><input placeholder="' + user.company + '" class="pl-1 ml-auto" id="company"></input></span>' : ''}
-            ${skills.length > 0 ? '<span class="d-block d-flex d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><input placeholder="' + skills.join(', ') + '" class="pl-1 ml-auto" id="skills-modal"></input></span>' : ''}
+            <form id="form-edit-user">
+                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 ml-auto" id="email-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 ml-auto" id="username-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 ml-auto" id="country-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 ml-auto" id="city-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 ml-auto" id="street-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 ml-auto" id="company-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 ml-auto" id="jobtitle-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="url" class="pl-1 ml-auto" id="website-edit"></label>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'editUser')}</div>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'editUser')}</div>
+                <label class="d-block d-flex d-flex mt-3 card-text" for="experience-edit"><strong>Experience </strong></label>
+                <select class="form-control custom-select" id="experience-edit">
+                    <option value="">Years of experience</option>
+                    <option value="- 1 Year">-1 Year</option>
+                    <option value="1 - 3 Years">1 - 3 Years</option>
+                    <option value="3 - 5 Years">3 - 5 Years</option>
+                    <option value="+ 5 Years">+5 Years</option>
+                </select>
+                <div class="mt-4 d-flex btn-edit-container">
+                    <button type="submit" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
+                </div>
+            </form>
         `);
 
         $('#ModalCenterTitle').empty().html(user.name);
         $('#profilePicture').attr("src", user.avatar);
+        $('.user-avatar-container').append(`<label for="edit-avatar" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" form="form-edit-user" type="file" id="edit-avatar" name="edit-avatar" accept="image/png, image/jpeg">`)
         $('.modal-user-body').empty().html(bodyModal);
-        $('.mdoal-user-body').has('.btn-edit-container').length > 0 ? null :
-            $('.card-body-text').append( 
-                `<div class="btn-edit-container">
-                    <button type="submit" class="btn btn-sm btn-info" id="edit-user-btn">Search</button>
-                </div>`
-        );
     }
 
-    renderEditUsers(e, arr, skills, langs) {
-
-        let feature = new FeaturesModel;
+    renderEditUsers(e, arr) {
         
         arr.forEach(user => {
             
             if(user._id === e.target.nextElementSibling.id) {
-                let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
-                let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-                listUsers.createFormEditUser(user, skillsLabels, langsLabels);    
+                
+                listUsers.createFormEditUser(user);    
             }
         })
     };
@@ -309,3 +314,36 @@ $( "#adv-search-form" ).on( "submit", function(e) {
 
     listUsers.filterUsers(1);
 });
+
+// for (let key in user){
+        //     // console.log(key);
+        //     switch (key) {
+        //         case '_id':
+        //         case 'registeredDate':
+        //         case 'profilePicture':
+        //         case '__v':
+        //             null
+        //             break;
+        //         case 'skills':
+        //             $('#skills-modal').empty();
+        //             this.renderCheckBoxArr('#skills-modal', 'skills');
+        //             break;
+        //         case 'languages':
+        //             $('#language').empty();
+        //             this.renderCheckBoxArr('#language', 'langs');
+        //             break;
+                    
+        //         case 'address':
+        //             for (let val in user[key]) {
+        //                 let addressKey = user[key];
+        //                 $(`#${val}`).empty().html(`<input style="display: block" value="" name="${val}" placeholder="${addressKey[val]}"></input>`)
+        //             }
+        //             break;
+                
+        //         default:
+        //         $(`#${key}`).empty().html(`<input style="display: block" value="" name="${key}" placeholder="${user[key]}"></input>`);
+        //             break;
+        //     }
+        // }
+        
+        // <input value="${skills.length > 0 ? skills.join(', ') : ''}" class="pl-1 ml-auto" id="skills-modal"></input>
