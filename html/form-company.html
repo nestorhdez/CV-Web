@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>CV Web - New profile</title>
+    <title>CV Web - New company</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -38,16 +38,12 @@
     <main>
         <div class="container-fluid">
             <div class="form-company mx-auto bg-light w-75 p-3 shadow">
-                <form action="/" id="registerSubmit">
+                <form action="/" id="registerCompanySubmit">
                     <div class="form-row mb-2">
+                        <legend>Contact Data</legend>
                         <div class="col-md-4 mb-3">
-                            <label for="validationname">First name</label>
-                            <input type="text" class="form-control" id="validationname" placeholder="First name" name="name" value="" required>
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="validationlastname">Last name</label>
-                            <input type="text" class="form-control" id="validationlastname" placeholder="Last name" name="lastname" value="" required>
+                            <label for="validationCompname">Company name</label>
+                            <input type="text" class="form-control" id="validationCompname" placeholder="Your company name" name="name" value="" required>
                         </div>
 
                         <div class="form-group">
@@ -56,9 +52,18 @@
                             <small id="numberHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationZip">Zip</label>
-                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip" value="" required>
+                        <div class="form-group col-md-2">
+                            <label for="SelectDocType">Type Document</label>
+                            <select class="form-control custom-select" id="SelectDocType" name="doctype">
+                                    <option value="">Document ID</option>
+                                    <option value="NIF">NIF</option>
+                                    <option value="NIF">CIF</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="docNumber">Number Document</label>
+                            <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID">
                         </div>
 
                         <div class="form-group">
@@ -70,61 +75,51 @@
                     </div>
 
                     <div class="form-row mb-2">
-                        <div class="col-md-3 mb-3">
-                            <label for="validationCity">City</label>
-                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city" value="" required>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
+                        <legend>Address Data</legend>
+                        <div class="col-md-4 mb-3">
                             <label for="validationStreet">Street</label>
-                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="" required>
+                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="">
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="validationZip">Zip</label>
+                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip" value="">
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCity">City</label>
+                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city" value="" >
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationState">State</label>
-                            <input type="text" class="form-control" id="validationState" placeholder="State" name="state" value="" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row mb-2">
-                        <div class="col-md-3 mb-3">
-                            <label for="validationUsername">Username</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                </div>
-                                <input type="text" class="form-control" id="validationUsername" value="" name="username" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
-                            <label for="validationInputPassword">Password</label>
-                            <input type="password" class="form-control" id="validationInputPassword" name="password" value="" placeholder="Password" required>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationState">Country</label>
+                            <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country" value="" required>
                         </div>
                     </div>
 
                     <div class="form-row mb-2">
-                        <div class="col-md-3 mb-3">
-                            <label for="validationDefault06">Company</label>
-                            <input type="text" class="form-control" placeholder="Company">
-                        </div>
-                    </div>
-
-                    <div class="form-row mb-2">
-                        <div class="col-md-3 mb-3">
+                        <legend>Bio company</legend>
+                        <div class="col-md-4 mb-3">
                             <label for="validationRepository">Web direction</label>
                             <input type="text" class="form-control" id="validationRepository" placeholder="Web direction" name="repository" value="">
                         </div>
-                    </div>
+                        
+                        <fieldset class="form-group mb-3">
+                            <!-- Save picture user-->
+                            <div for="logopicture" class="mb-2">Logo picture</div>
 
-                    <fieldset class="form-group mb-3">
-                        <!-- Save picture user-->
-                        <div class="mb-2">Profile picture</div>
-                        <div class="custom-file col-lg-3 col-md-4">
-                            <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="pictureprofile" value="">
-                            <label class="custom-file-label" for="customFileLang">Select file</label>
+                            <div class="custom-file col-lg-6 col-md-4">
+                                <input type="file" class="custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
+                                <label class="custom-file-label" for="customFileLogo">Select file</label>
+                            </div>
+                        </fieldset>
+
+                        <div class="col-md-4 mb-3">
+                                <label for="validationBio">Bio</label>
+                                <input type="textare" class="form-control" id="Bio" placeholder="Enter description about you..." name="bio" value="" >
                         </div>
-                    </fieldset>
+
+                    </div>
 
                     <div class="form-group mb-2">
                         <div class="form-check ml-4">

@@ -28,9 +28,9 @@ function NewUser(
   this.birthDate = birthDate;
   this.username = username;
   this.password = password;
-  this.city = city,
-  this.state = state,
-  this.country = country,
+  this.city = city;
+  this.state = state;
+  this.country = country;
   this.experience = experience;
   this.languages = languages;
   this.skills = skills;
