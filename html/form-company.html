@@ -54,7 +54,7 @@
 
                         <div class="form-group col-md-2">
                             <label for="SelectDocType">Type Document</label>
-                            <select class="form-control custom-select" id="SelectDocType" name="doctype">
+                            <select class="form-control custom-select" id="SelectDocType" name="doctype" required>
                                     <option value="">Document ID</option>
                                     <option value="NIF">NIF</option>
                                     <option value="NIF">CIF</option>
@@ -63,7 +63,7 @@
 
                         <div class="col-md-2 mb-3">
                             <label for="docNumber">Number Document</label>
-                            <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID">
+                            <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID" required>
                         </div>
 
                         <div class="form-group">
@@ -109,14 +109,19 @@
                             <div for="logopicture" class="mb-2">Logo picture</div>
 
                             <div class="custom-file col-lg-6 col-md-4">
-                                <input type="file" class="custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
+                                <input type="file" class="form-control custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
                                 <label class="custom-file-label" for="customFileLogo">Select file</label>
                             </div>
                         </fieldset>
 
-                        <div class="col-md-4 mb-3">
-                                <label for="validationBio">Bio</label>
-                                <input type="textare" class="form-control" id="Bio" placeholder="Enter description about you..." name="bio" value="" >
+                        <div class="form-group col-md-4 mb-3">
+                            <label for="validationBio">Bio</label>
+                            <textarea class="form-control" name="bio" id="validationBio" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group col-md-4 mb-3">
+                            <label for="validationemployees">Number of employees</label>
+                            <input type="number" class="form-control" name="employees" id="validationemployees" value='0'>
                         </div>
 
                     </div>
@@ -124,8 +129,7 @@
                     <div class="form-group mb-2">
                         <div class="form-check ml-4">
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions" required>
-                            <label class="form-check-label" for="invalidCheck2">
-                                Agree to terms and conditions
+                            <label class="form-check-label" for="invalidCheck2">Agree to terms and conditions
                                 <!-- Need linked to terms and conditions. -->
                             </label>
                         </div>
