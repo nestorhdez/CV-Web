@@ -50,12 +50,11 @@ footer {
   width: auto;
 }
 
+/* User Curriculum Scroll */
 
-/* User's Curriculum Scroll */
-/* .carousel-inner > img {
-  width: 18rem;
-  height: auto;
-} */
+
+
+
 .row-equal>div[class*='col-'] {
   display: flex;
   flex: 1 0 auto;
