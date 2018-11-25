@@ -40,7 +40,7 @@ $("#registerCompanySubmit").submit(function(e) {
   let name = $("#validationCompname").val();
   let phone = $("#InputPhone").val();
   let email = $("#validationInputEmail").val();
-  let docType = $("#SelectDocType").val(); // CIF-NIF
+  let docType = $("#SelectDocType").val().toLowerCase(); // CIF-NIF
   let docNumber = $("#docNumber").val();// String
   let zip = $("#validationZip").val();
   let street = $("#validationStreet").val();
@@ -56,7 +56,7 @@ $("#registerCompanySubmit").submit(function(e) {
   $("input[type=url]").each(function() {
     let key = $(this).attr("name");
     let url = $(this).val();
-    socialUrls.push({plataform: key, url: url});
+    socialUrls.push({"platform": key, "url": url});
   })
   console.log("SM", socialUrls);
   // let socialUrls = []
@@ -97,5 +97,44 @@ $("#registerCompanySubmit").submit(function(e) {
     employes,
     socialUrls,
   )
+
+  function createRequestBody() {
+    let body = {
+    "name": registered.name,
+    "phone": registered.phone,
+    "email": registered.email,
+    "docType": registered.docType,
+    "docNumber": registered.docNumber,
+    "address": {
+      "country": registered.country,
+      "street": registered.street,
+      "city": registered.city,
+      "zipcode": registered.zip,
+    },
+    "website":registered. website,
+    "logo": "",
+    "bio": registered.bio,
+    "employes": registered.employes,
+    "socialUrls": registered.socialUrls,
+    }
+    return body;
+  }
+
+  function sendNewCompany() {
+    let BodyCompany = createRequestBody();
+
+    fetch("https://cv-mobile-api.herokuapp.com/api/companies", {
+        method: "POST",
+        body: JSON.stringify(BodyCompany),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.json())
+        .then(response => console.log(response))
+        .catch(error => console.log(error.message));
+  }
+
+  sendNewCompany();
 
 })
