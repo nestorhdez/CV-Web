@@ -34,7 +34,7 @@ function NewCompany(
 $("#registerCompanySubmit").submit(function(e) {
   console.log("sumit actived.");
   e.preventDefault();
-
+  
   // Need check CIF-NIF
 
   let name = $("#validationCompname").val();
@@ -46,14 +46,42 @@ $("#registerCompanySubmit").submit(function(e) {
   let street = $("#validationStreet").val();
   let city = $("#validationCity").val();
   let country = $("#validationCountry").val();
-  let website = $("validationWebsite").val();
-  let logo = "";
-  let bio = $("#validationBio").text();
+  let website = $("#validationWebsite").val();
+  let logo = document.querySelector("input[type=file]").files[0];;
+  let bio = $("#validationBio").val();
   let jobOffers = []; // Objeto?
   let employes = $("#validationemployees").val(); // Numbers
-  let socialUrls = []
+
+  let socialUrls = [];
+  $("input[type=url]").each(function() {
+    let key = $(this).attr("name");
+    let url = $(this).val();
+    socialUrls.push({plataform: key, url: url});
+  })
+  console.log("SM", socialUrls);
+  // let socialUrls = []
+
+  
 
   console.log(
+    name,
+    phone,
+    email,
+    docType,
+    docNumber,
+    zip,
+    street,
+    city,
+    country,
+    "web: ", website,
+    logo,
+    "bio", bio,
+    jobOffers,
+    employes,
+    socialUrls,
+  );
+
+  registered = new NewCompany(
     name,
     phone,
     email,
@@ -66,9 +94,8 @@ $("#registerCompanySubmit").submit(function(e) {
     website,
     logo,
     bio,
-    jobOffers,
     employes,
     socialUrls,
-  );
+  )
 
 })
