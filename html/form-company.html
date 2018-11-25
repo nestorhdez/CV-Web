@@ -5,162 +5,182 @@
     <title>CV Web - New company</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    <!-- Goole fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700%7CMerriweather+Sans:300,400,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/theme.min.css">
     <link rel="stylesheet" href="../css/customstyles.css">
-</head>
 
 <body>
 
     <!-- Header section -->
     <header>
-        <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" id="nav-top">
+            <!-- Navbar section -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav-top">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
                     aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="../index.html" class="navbar-brand ml-3"><img class="rounded-circle" src="../img/logo.png" alt="20H Talent Logo" width="50">
+                <a href="../index.html" class="navbar-brand ml-3"><img class="rounded-circle" src="../img/logo.png" alt="20H Talent Logo">
                     Talent</a>
                 <div class="collapse navbar-collapse" id="navbarToggler">
                     <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-default btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Log in</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Login</button>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 border-1 border-white bg-dark text-white">Logout</button>
                         </li>
                     </ul>
+                    <form id="nav-main-search" action="html/search.html" method="get" role="search" class="form-inline my-lg-0 p-sm-1">
+                        <input class="form-control form-control-sm my-2 mr-sm-2" type="search" placeholder="Search">
+                        <button class="btn btn-sm btn-outline-primary my-2 border-1 border-white bg-dark text-white" type="submit">Search</button>
+                    </form>
+                </div>
                 </div>
             </nav>
-    </header>
+        </header>
 
     <!-- Main Content -->
     <main>
-        <div class="container-fluid">
-            <div class="form-company mx-auto bg-light w-75 p-4 shadow">
-                <form action="/" id="registerCompanySubmit">
-                    <div class="form-row mb-2">
-                        <legend>Contact Data</legend>
-                        <div class="col-md-4 mb-3">
-                            <label for="validationCompname">Company name</label>
-                            <input type="text" class="form-control" id="validationCompname" placeholder="Your company name" name="name" value="" required>
+        <div class="bg-skew bg-skew-light">
+
+            <div class="container-fluid my-4 mx-auto">
+                <div class="form-company mx-auto bg-light w-75 p-4 shadow">
+                    <form action="" method=POST id="registerCompanySubmit">
+                        <div class="form-row mb-2">
+                            <legend>Contact Data</legend>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCompname">Company name</label>
+                                <input type="text" class="form-control" id="validationCompname" placeholder="Your company name" name="name" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="InputPhone">Phone</label>
+                                <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone" value="" placeholder="Enter phone number">
+                                <small id="numberHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
+                            </div>
+
+                            <div class="form-group col-4">
+                                <label for="SelectDocType">ID Type</label>
+                                <select class="form-control custom-select" id="SelectDocType" name="doctype" required>
+                                        <option value="">ID</option>
+                                        <option value="NIF">NIF</option>
+                                        <option value="CIF">CIF</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6 mb-3">
+                                <label for="docNumber">ID Number</label>
+                                <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="validationInputEmail">Email address</label>
+                                <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp" name="email" value="" placeholder="Enter email" required>
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label for="InputPhone">Phone</label>
-                            <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone" value="" placeholder="Enter phone number">
-                            <small id="numberHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
-                        </div>
-
-                        <div class="form-group col-4">
-                            <label for="SelectDocType">ID Type</label>
-                            <select class="form-control custom-select" id="SelectDocType" name="doctype" required>
-                                    <option value="">ID</option>
-                                    <option value="NIF">NIF</option>
-                                    <option value="CIF">CIF</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-6 mb-3">
-                            <label for="docNumber">ID Number</label>
-                            <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="validationInputEmail">Email address</label>
-                            <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp" name="email" value="" placeholder="Enter email" required>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-
-                    </div>
-
-                    <div class="form-row mb-2">
-                        <legend>Address Data</legend>
-                        <div class="col-md-4 mb-3">
-                            <label for="validationStreet">Street</label>
-                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="">
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <label for="validationZip">Zip</label>
-                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip" value="">
-                        </div>
-                        
-                        <div class="col-md-4 mb-3">
-                            <label for="validationCity">City</label>
-                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city" value="" >
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="validationState">Country</label>
-                            <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country" value="" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row mb-2">
-                        <div class="col-6 col-lg-6 col-sm-12">
-                            <div class="form-group mb-3">
-                                <legend>Bio company</legend>
-                                <label for="validationWebsite">Website</label>
-                                <input type="text" class="form-control" id="validationWebsite" placeholder="Website" name="website" value="">
+                        <div class="form-row mb-2">
+                            <legend>Address Data</legend>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationStreet">Street</label>
+                                <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="">
                             </div>
                             
-                            <fieldset class="form-group mb-3">
-                                <!-- Save picture user-->
-                                <div><label for="customFileLogo" class="mb-2">Logo picture</label></div>
-                                <div class="custom-file col-6">
-                                    <label class="custom-file-label" for="customFileLogo">Select file</label>
-                                    <input type="file" class="form-control custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
-                                </div>
-                            </fieldset>
-
-                            <div class="form-row">
-                                <div class="col-8 mb-3">
-                                    <label for="validationBio">Bio</label>
-                                    <textarea class="form-control" name="bio" id="validationBio" rows="3"></textarea>
-                                </div>
-
-                                <div class="col-md-2 mb-3">
-                                    <label for="validationemployees">Employees</label>
-                                    <input type="number" class="form-control" name="employees" id="validationemployees" value='0'>
-                                </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationZip">Zip</label>
+                                <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip" value="">
                             </div>
-                        </div>
-                        <div class="col-6 col-lg-6 col-sm-12">
-                            <div class="form-group col-12">
-                                <legend>Social Media</legend>
-                                <div class="input-group-prepend mb-3">
-                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-facebook"></i><input class="form-control ml-1" type="url" name="facebook" placeholder="Facebook page" value=""></span>
-                                </div>
-                                <div class="input-group-prepend mb-3">
-                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-twitter-square"></i><input class="form-control ml-1" type="url" name="twitter" placeholder="Twitter account" value=""></span>
-                                </div>
-                                <div class="input-group-prepend mb-3">
-                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-instagram"></i><input class="form-control ml-1" type="url" name="instagram" placeholder="Instagram account" value=""></span>
-                                </div>
-                                <div class="input-group-prepend mb-3">
-                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-linkedin"></i><input class="form-control ml-1" type="url" name="linkedin" placeholder="Linkedin account" value=""></span>
-                                </div>
-                                <div class="input-group-prepend mb-3">
-                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-youtube-square"></i><input class="form-control ml-1" type="url" name="youtube" placeholder="Youtube channel" value=""></span>
-                                </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCity">City</label>
+                                <input type="text" class="form-control" id="validationCity" placeholder="City" name="city" value="" >
                             </div>
 
+                            <div class="col-md-4 mb-3">
+                                <label for="validationState">Country</label>
+                                <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country" value="" required>
+                            </div>
                         </div>
 
-                    <div class="form-group mb-2">
-                        <div class="form-check ml-4">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions" required>
-                            <label class="form-check-label" for="invalidCheck2">Agree to terms and conditions
-                                <!-- Need linked to terms and conditions. -->
-                            </label>
-                        </div>
-                    </div>
+                        <div class="form-row mb-2">
+                            <div class="col-6 col-lg-6 col-sm-12">
+                                <div class="form-group mb-3">
+                                    <legend>Bio company</legend>
+                                    <label for="validationWebsite">Website</label>
+                                    <input type="text" class="form-control" id="validationWebsite" placeholder="Website" name="website" value="">
+                                </div>
+                                
+                                <fieldset class="form-group mb-3">
+                                    <!-- Save picture user-->
+                                    <div><label for="customFileLogo" class="mb-2">Logo picture</label></div>
+                                    <div class="custom-file col-6">
+                                        <label class="custom-file-label" for="customFileLogo">Select file</label>
+                                        <input type="file" class="form-control custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
+                                    </div>
+                                </fieldset>
 
-                    <button class="btn btn-primary ml-4" type="submit">Submit form</button>
-                </form>
-            </div>
+                                <div class="form-row">
+                                    <div class="col-8 mb-3">
+                                        <label for="validationBio">Bio</label>
+                                        <textarea class="form-control" name="bio" id="validationBio" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationemployees">Employees</label>
+                                        <input type="number" class="form-control" name="employees" id="validationemployees" value='0'>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-6 col-sm-12">
+                                <div class="form-group col-12">
+                                    <legend>Social Media</legend>
+                                    <div class="input-group-prepend mb-3">
+                                        <i class="fa-3x fab fa-facebook"></i><input class="form-control ml-1" type="url" name="facebook" placeholder="Facebook page" value="">
+                                    </div>
+
+                                    <div class="input-group-prepend mb-3">
+                                        <i class="fa-3x fab fa-twitter-square"></i><input class="form-control ml-1" type="url" name="twitter" placeholder="Twitter account" value="">
+                                    </div>
+
+                                    <div class="input-group-prepend mb-3">
+                                        <i class="fa-3x fab fa-instagram"></i><input class="form-control ml-1" type="url" name="instagram" placeholder="Instagram account" value="">
+                                    </div>
+
+                                    <div class="input-group-prepend mb-3">
+                                        <i class="fa-3x fab fa-linkedin"></i><input class="form-control ml-1" type="url" name="linkedin" placeholder="Linkedin account" value="">
+                                    </div>
+
+                                    <div class="input-group-prepend mb-3">
+                                        <i class="fa-3x fab fa-youtube-square"></i><input class="form-control ml-1" type="url" name="youtube" placeholder="Youtube channel" value=""></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="form-group mb-2">
+                            <div class="form-check ml-4">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions" required>
+                                <label class="form-check-label" for="invalidCheck2">Agree to terms and conditions
+                                    <!-- Need linked to terms and conditions. -->
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-sign btn-blue-gray ml-4" type="submit">Submit form</button>
+                    </form>
+                </div>
+            </div>  
         </div>
+
     </main>
 
     <!-- Footer section -->
@@ -233,7 +253,7 @@
         crossorigin="anonymous"></script>
     <!-- <script src="../js/render.js"></script>
     <script src="../js/custom.js"></script> -->
-    <script src="../js/data.js"></script>
+    <script src="../js/data_company.js"></script>
 </body>
 
 </html>
