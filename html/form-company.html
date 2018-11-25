@@ -37,7 +37,7 @@
     <!-- Main Content -->
     <main>
         <div class="container-fluid">
-            <div class="form-company mx-auto bg-light w-75 p-3 shadow">
+            <div class="form-company mx-auto bg-light w-75 p-4 shadow">
                 <form action="/" id="registerCompanySubmit">
                     <div class="form-row mb-2">
                         <legend>Contact Data</legend>
@@ -52,17 +52,17 @@
                             <small id="numberHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="SelectDocType">Type Document</label>
+                        <div class="form-group col-4">
+                            <label for="SelectDocType">ID Type</label>
                             <select class="form-control custom-select" id="SelectDocType" name="doctype" required>
-                                    <option value="">Document ID</option>
+                                    <option value="">ID</option>
                                     <option value="NIF">NIF</option>
-                                    <option value="NIF">CIF</option>
+                                    <option value="CIF">CIF</option>
                             </select>
                         </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label for="docNumber">Number Document</label>
+                        <div class="form-group col-6 mb-3">
+                            <label for="docNumber">ID Number</label>
                             <input type="text" class="form-control" id="docNumber" name="docNumber" value="" placeholder="Enter number ID" required>
                         </div>
 
@@ -98,33 +98,55 @@
                     </div>
 
                     <div class="form-row mb-2">
-                        <legend>Bio company</legend>
-                        <div class="col-md-4 mb-3">
-                            <label for="validationRepository">Web direction</label>
-                            <input type="text" class="form-control" id="validationRepository" placeholder="Web direction" name="repository" value="">
-                        </div>
-                        
-                        <fieldset class="form-group mb-3">
-                            <!-- Save picture user-->
-                            <div for="logopicture" class="mb-2">Logo picture</div>
-
-                            <div class="custom-file col-lg-6 col-md-4">
-                                <input type="file" class="form-control custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
-                                <label class="custom-file-label" for="customFileLogo">Select file</label>
+                        <div class="col-6 col-lg-6 col-sm-12">
+                            <div class="form-group mb-3">
+                                <legend>Bio company</legend>
+                                <label for="validationWebsite">Website</label>
+                                <input type="text" class="form-control" id="validationWebsite" placeholder="Website" name="website" value="">
                             </div>
-                        </fieldset>
+                            
+                            <fieldset class="form-group mb-3">
+                                <!-- Save picture user-->
+                                <div><label for="customFileLogo" class="mb-2">Logo picture</label></div>
+                                <div class="custom-file col-6">
+                                    <label class="custom-file-label" for="customFileLogo">Select file</label>
+                                    <input type="file" class="form-control custom-file-input" id="customFileLogo" lang="en" name="logopicture" value="">
+                                </div>
+                            </fieldset>
 
-                        <div class="form-group col-md-4 mb-3">
-                            <label for="validationBio">Bio</label>
-                            <textarea class="form-control" name="bio" id="validationBio" rows="3"></textarea>
+                            <div class="form-row">
+                                <div class="col-8 mb-3">
+                                    <label for="validationBio">Bio</label>
+                                    <textarea class="form-control" name="bio" id="validationBio" rows="3"></textarea>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationemployees">Employees</label>
+                                    <input type="number" class="form-control" name="employees" id="validationemployees" value='0'>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-6 col-lg-6 col-sm-12">
+                            <div class="form-group col-12">
+                                <legend>Social Media</legend>
+                                <div class="input-group-prepend mb-3">
+                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-facebook"></i><input class="form-control ml-1" type="url" name="facebook" placeholder="Facebook page" value=""></span>
+                                </div>
+                                <div class="input-group-prepend mb-3">
+                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-twitter-square"></i><input class="form-control ml-1" type="url" name="twitter" placeholder="Twitter account" value=""></span>
+                                </div>
+                                <div class="input-group-prepend mb-3">
+                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-instagram"></i><input class="form-control ml-1" type="url" name="instagram" placeholder="Instagram account" value=""></span>
+                                </div>
+                                <div class="input-group-prepend mb-3">
+                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-linkedin"></i><input class="form-control ml-1" type="url" name="linkedin" placeholder="Linkedin account" value=""></span>
+                                </div>
+                                <div class="input-group-prepend mb-3">
+                                    <span class="input-group-text form-control" id="inputGroupPrepend"><i class="fa-2x fab fa-youtube-square"></i><input class="form-control ml-1" type="url" name="youtube" placeholder="Youtube channel" value=""></span>
+                                </div>
+                            </div>
 
-                        <div class="form-group col-md-4 mb-3">
-                            <label for="validationemployees">Number of employees</label>
-                            <input type="number" class="form-control" name="employees" id="validationemployees" value='0'>
                         </div>
-
-                    </div>
 
                     <div class="form-group mb-2">
                         <div class="form-check ml-4">
@@ -180,7 +202,7 @@
                                 quo fugiat temporibus adipisci quisquam totam maxime deleniti dolor
                                 distinctio ea provident tempora, ut modi rem cupiditate sunt blanditiis
                                 ipsa.
-    
+
                                 <address>
                                     <b>20H Talent</b>
                                     <br>Avenida Alcalde José Remírez Bethencourt 17,
@@ -189,8 +211,7 @@
                                 minima
                                 veniam officia inventore nesciunt assumenda dolorum quisquam ipsa eaque
                                 deleniti quod tenetur facilis ea, fugiat vitae architecto in. Facere,
-                                error!
-                            </p>
+                                error!</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
