@@ -203,7 +203,7 @@ $("#registerSubmit").submit(function(e) {
   let street = $("#validationStreet").val();
   let experience = $("#experience").val();
 
-  let languages = getCheckedBox("#languages");
+  let languages = getCheckedBox("#langs");
   let skills = getCheckedBox("#skills");
 
   let jobTitle = $("#validationJobTitle").val();
