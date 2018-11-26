@@ -79,12 +79,14 @@ $("#search-btn").on("click", function() {
   // to print checkboxs
   for (input of languages) {
     if ($(input).prop("checked") === true) {
+      let textBadge = input.id.split('-')[1];
+      console.log();
       $(".area").append(
         spans +
           "#languages-search=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("value").toUpperCase() +
+          textBadge.toUpperCase() +
           deletion +
           finspans
       );
@@ -92,12 +94,13 @@ $("#search-btn").on("click", function() {
   }
   for (input of skills) {
     if ($(input).prop("checked") === true) {
+      let textBadge = input.id.split('-')[1];
       $(".area").append(
         spans +
           "#skills-search=" +
           $(input).prop("id") +
           '">' +
-          $(input).prop("value").toUpperCase() +
+          textBadge.toUpperCase() +
           deletion +
           finspans
       );
@@ -120,7 +123,8 @@ $("#search-btn").on("click", function() {
       var checkboxs = $(this)
         .parent()
         .text().toLowerCase();
-      $("input[name=" + checkboxs + "]").prop("checked", false);
+        console.log(checkboxs);
+      $("input[id=" + 'search-' + checkboxs + "]").prop("checked", false);
     }
     $("#search-btn").trigger("click");
   });
