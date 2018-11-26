@@ -20,10 +20,10 @@ class FeaturesModel extends Model {
         let checkBoxesArr = [];
         arr.forEach(val => {
             let checkBox =
-            `<div class="form-check">
-                <input class="form-check-input" ${user ? user.skills.includes(val._id) ? 'checked' : null : null} ${user ? user.languages.includes(val._id) ? 'checked' : null : null} type="checkbox" id="${labelFor + '-' + val.label}" name="${val.type}"
+            `<div class="form-check col-m-3 col-sm-4 col-s-6">
+                <input class="form-check-input" ${user ? user.skills.includes(val._id) ? 'checked' : '' : ''} ${user ? user.languages.includes(val._id) ? 'checked' : null : null} type="checkbox" id="${labelFor + '-' + val.label.toLowerCase()}" name="${val.type}"
                     value="${val._id}">
-                <label class="form-check-label mr-5" for="${labelFor + '-' + val.label}">${val.label}</label>
+                <label class="form-check-label mr-5" for="${labelFor + '-' + val.label.toLowerCase()}">${val.label}</label>
             </div>`;
             checkBoxesArr.push(checkBox);
         })

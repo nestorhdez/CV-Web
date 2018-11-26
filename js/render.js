@@ -84,6 +84,7 @@ class Users extends Model{
             ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website-modal">' + user.website + '</a></span>' : ''}
             ${skills.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><span class="pl-1" id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
             ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language-modal">' + langs.join(', ') + '</span></span>' : ''}
+            ${user.gender ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Gender: </strong><span class="pl-1" id="gender-modal">' + user.gender + '</span></span>' : ''}
         `);
 
         return bodyModal;
@@ -109,7 +110,7 @@ class Users extends Model{
     
                 $('#profilePicture').attr("src", `${user.avatar}`);
                     
-                $('#ModalCenterTitle').empty().html(user.name);
+                $('#ModalCenterTitleUser').empty().html(user.name);
                     
                 $('.modal-user-body').empty().html(this.createHtmlUserModal(user, skillsLabel, langsLabel));
                 
@@ -142,19 +143,27 @@ class Users extends Model{
                     <option value="3 - 5 years">3 - 5 Years</option>
                     <option value="+ 5 years">+5 Years</option>
                 </select>
+                <label class="d-block d-flex d-flex mt-3 card-text" for="gender-edit"><strong>Gender </strong></label>
+                <select class="form-control custom-select" id="gender-edit">
+                    <option value="">Gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="trans">Trans</option>
+                    <option value="queer">Queer</option>
+                    <option vale="no reply">I prefer not to say it</option>
+                </select>
                 <div class="mt-4 d-flex btn-edit-container">
                     <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
                 </div>
             </form>
         `);
 
-        $('#ModalCenterTitle').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
+        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
         $('.user-avatar-container').append(`<label for="avatar-edit" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
         $('.modal-user-body').empty().html(bodyModal);
-        if(user.experience !== ''){
-            document.querySelector('#experience-edit').value = user.experience;
-        }
+        user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
+        user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
 
     }
 
@@ -168,7 +177,6 @@ class Users extends Model{
                
                 $('#edit-user-btn').click((e) =>{
                     e.preventDefault();
-                    console.log(listUsers.editUserImage());
                     listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
                     listUsers.sendEditedImg(user);
                 });   
@@ -182,7 +190,8 @@ class Users extends Model{
 
         for (let key in form) {
 
-            if(key <= 24) {
+            if(key.length < 3) {
+                
                 let label = form[key].id.split('-')[0];
                 switch (label) {
                     case 'country':
@@ -208,10 +217,6 @@ class Users extends Model{
                             userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
                         };
                     break;
-                    case 'experience':
-                        console.log(form[key].value);
-                        userEdited.experience = form[key].value;
-                        break;
                     default:
                         let formVal = form[key].id.split('-')[0];
                         userEdited[formVal] = form[key].value;

@@ -34,6 +34,7 @@
                 <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
                     <li class="nav-item">
                         <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Login</button>
+                    </li>    
                     <li class="nav-item">
                         <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 border-1 border-white bg-dark text-white">Logout</button>
                     </li>
@@ -124,26 +125,7 @@
                                 <fieldset class="form-group">
                                     <div class="mb-2"><strong>Languages</strong></div>
                                     <div class="d-flex flex-wrap" id="languages-search">
-                                       <!-- <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="eng-check" name="english"
-                                                        value="English">
-                                            <label class="form-check-label mr-5" for="eng-check">English</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="french-check" name="french"
-                                                        value="French">
-                                            <label class="form-check-label mr-5" for="french-check">French</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="german-check" name="german"
-                                                        value="German">
-                                            <label class="form-check-label mr-5" for="german-check">German</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="spanish-check" name="spanish"
-                                                        value="Spanish">
-                                            <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
-                                        </div> -->
+                                       <!-- Render checkboxes by javascript-->
                                     </div>
                                 </fieldset>
                             </div>
@@ -151,41 +133,7 @@
                                 <fieldset class="form-group">
                                     <div class="mb-2"><strong>Skills</strong></div>
                                     <div class="d-flex flex-wrap" id="skills-search">
-                                        <!-- <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="html-check" name="html"
-                                            value="html">
-                                            <label class="form-check-label mr-5" for="html-check">HTML</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="css-check" name="css"
-                                            value="css">
-                                            <label class="form-check-label mr-5" for="css-check">CSS</label>
-                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sass-check" name="sass"
-                                            value="sass">
-                                            <label class="form-check-label mr-5" for="sass-check">SASS</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="javascript-check" name="javascript"
-                                            value="javascript">
-                                            <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="react-check" name="react"
-                                            value="react">
-                                            <label class="form-check-label mr-5" for="react-check">React</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="git-check" name="git"
-                                            value="git">
-                                            <label class="form-check-label mr-5" for="git-check">Git</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="github-check" name="github"
-                                            value="github">
-                                            <label class="form-check-label mr-5" for="github-check">Github</label>
-                                        </div> -->
+                                        <!-- Render checkboxes by javascript-->
                                     </div>
                                 </fieldset>
                             </div>
@@ -254,7 +202,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header position-relative">
-                        <h5 class="modal-title mx-auto" id="ModalCenterTitle">Marolyn Dayan Guzmán Álvarez
+                        <h5 class="modal-title mx-auto" id="ModalCenterTitleUser">Marolyn Dayan Guzmán Álvarez
                         </h5>
                         <button type="button" class="close position-absolute" style="right: 20px;" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -269,24 +217,7 @@
                                     </div>
                                 </div>
                                 <div class="text-left card-body-text modal-user-body">
-                                    <!-- <h6 class="modal-subtitle card-subtitle text-center font-italic mb-3">Detail information</h6>
-                                    <p class="card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
-                                            someone@example.es</a></p>
-                                    <p class="card-text text-capitalize"><strong>City: </strong><span id="city">somewhere</span></p>
-                                    <p class="card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></p>
-                                    <p class="card-text text-capitalize"><strong>Street: </strong><span id="street">Street</span></p>
-                                    <p class="card-text text-capitalize"><strong>Language: </strong><span id="language">English,
-                                            spanish.</span></p>
-                                    <p class="card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle">Junior
-                                            Developer</span></p>
-                                    <p class="card-text"><strong>Experience: </strong><span id="experience"> Less 1
-                                            year</span></p>
-                                    <-- Show years, but when is 0 years show this. Perhaps need option "whitout experience"? ->
-                                    <p class="card-text"><strong>Website: </strong><a href="#" id="website">www.websitecompany.com</a></p>
-                                    <p class="card-text text-capitalize"><strong>Company: </strong><span id="company">Company
-                                            Name SL</span></p>
-                                    <p class="card-text text-capitalize"><strong>Skills: </strong><span id="skills-modal">html,
-                                            css, sass, git, github</span></p> -->
+                                    <!-- Render by Javascript -->
                                 </div>
                             </div>
                         </div>
@@ -336,7 +267,7 @@
                     <div class="modal-body">
                         <!-- Contact Form-->
                         <!--Form with header-->
-                        <form action="#"" method=" post">
+                        <form action="#" method=" post">
                             <div class="card border-primary rounded-0">
                                 <div class="card-header p-0">
                                     <div class="bg-cobalt text-white text-center py-2">
