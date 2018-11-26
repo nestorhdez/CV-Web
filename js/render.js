@@ -1,7 +1,8 @@
 class Users extends Model{
 
-    constructor( url ) {
+    constructor( url, summaryContainer ) {
         super(url);
+        this.summaryContainer = summaryContainer;
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
         this.renderModal = this.renderModal.bind(this);
@@ -50,7 +51,6 @@ class Users extends Model{
                         </div>
                     </div>    
                 </div>
-            </div>
             `)
             
         return card;
@@ -254,6 +254,10 @@ class Users extends Model{
         .then( response => console.log(response));
     }
 
+    renderSummaryUsers(allFilters, summaryContainer) {
+        $(summaryContainer).html("<br><span class=' badge bg-badge-summ text-badge-summ text-white ml-3'>The search result is: " + allFilters.length + "</span>");
+    };
+
     filterUsers( currentPage ){
         
         let userPromise = new Promise((resolve, reject) => this.getEntityApi( resolve ));
@@ -273,16 +277,15 @@ class Users extends Model{
             let genderSelect = document.querySelector("#gender").value.toLowerCase();
             let cityInput = document.querySelector("#city-option").value.toLowerCase();
             let countryInput = document.querySelector("#validationCountry").value.toLowerCase();
-            let stateInput = document.querySelector("#validationState").value.toLowerCase();
+            let streetInput = document.querySelector("#validationStreet").value.toLowerCase();
             let companyInput = document.querySelector("#validationcompany").value.toLowerCase();
             let jobTitleInput = document.querySelector("#validationjob").value.toLowerCase();
             let experienceSelect = document.querySelector("#experience-search").value.toLowerCase();
             //CheckBoxes
-            let languages = document.querySelectorAll('#languages .form-check-input');
+            let languages = document.querySelectorAll('#languages-search .form-check-input');
             let checkedLanguages = [...languages].filter(lang => lang.checked == true ).map(lang => lang.defaultValue.toLowerCase());
-            let skills = document.querySelectorAll('#skills .form-check-input');
+            let skills = document.querySelectorAll('#skills-search .form-check-input');
             let checkedSkills = [...skills].filter(skill => skill.checked == true).map(skill => skill.defaultValue.toLowerCase());
-      
 
             function removeFilteredUser(user){
                 if(allFilters.includes(user)){
@@ -317,9 +320,9 @@ class Users extends Model{
                 var filterByCountry = allUsers.filter(user =>  user.address.country.toLowerCase() !== countryInput);
                 filterByCountry.forEach(removeFilteredUser);
             }
-            if(stateInput !== '') {
-                var filterByState = allUsers.filter(user =>  user.address.state.toLowerCase() !== stateInput);
-                filterByState.forEach(removeFilteredUser);
+            if(streetInput !== '') {
+                var filterByStreet = allUsers.filter(user =>  user.address.street.toLowerCase() !== streetInput);
+                filterByStreet.forEach(removeFilteredUser);
             }
             if(companyInput !== '') {
                 var filterByCompany = allUsers.filter(user => user.company.toLowerCase().indexOf(companyInput) == -1);
@@ -372,7 +375,8 @@ class Users extends Model{
                 });
                 filterBySkills.forEach(removeFilteredUser);
             }
-
+            
+            this.renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
@@ -393,9 +397,10 @@ class Users extends Model{
 
 }
 
-const listUsers = new Users( 'https://cv-mobile-api.herokuapp.com/api/users');
+const listUsers = new Users( 'https://cv-mobile-api.herokuapp.com/api/users', '#searchSummaryContainer');
 
 const scroll = new ScrollInfinite(listUsers ,'filterUsers').initScroll();
+
 
 //Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
