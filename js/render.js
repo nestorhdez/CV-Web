@@ -5,6 +5,8 @@ class Users extends Model{
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
         this.renderModal = this.renderModal.bind(this);
+        this.createFormEditUser = this.createFormEditUser.bind(this);
+        this.createObjectEditUser = this.createObjectEditUser.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
@@ -87,8 +89,7 @@ class Users extends Model{
         return bodyModal;
     }
 
-    setListenerModal(element, arr, skills, langs, callback){ 
-        var self = this;    
+    setListenerModal(element, arr, skills, langs, callback){     
         $(element).click((e) =>{
             callback(e, arr, skills, langs);
         });
@@ -130,27 +131,31 @@ class Users extends Model{
                 <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 ml-auto" id="street-edit"></label>
                 <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 ml-auto" id="company-edit"></label>
                 <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 ml-auto" id="jobtitle-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="url" class="pl-1 ml-auto" id="website-edit"></label>
-                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'editUser')}</div>
-                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'editUser')}</div>
+                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 ml-auto" id="website-edit"></label>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'skills-edit-user', user)}</div>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'langs-edit-user', user)}</div>
                 <label class="d-block d-flex d-flex mt-3 card-text" for="experience-edit"><strong>Experience </strong></label>
                 <select class="form-control custom-select" id="experience-edit">
                     <option value="">Years of experience</option>
-                    <option value="- 1 Year">-1 Year</option>
-                    <option value="1 - 3 Years">1 - 3 Years</option>
-                    <option value="3 - 5 Years">3 - 5 Years</option>
-                    <option value="+ 5 Years">+5 Years</option>
+                    <option value="- 1 year">-1 Year</option>
+                    <option value="1 - 3 years">1 - 3 Years</option>
+                    <option value="3 - 5 years">3 - 5 Years</option>
+                    <option value="+ 5 years">+5 Years</option>
                 </select>
                 <div class="mt-4 d-flex btn-edit-container">
-                    <button type="submit" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
+                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
                 </div>
             </form>
         `);
 
-        $('#ModalCenterTitle').empty().html(user.name);
+        $('#ModalCenterTitle').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
-        $('.user-avatar-container').append(`<label for="edit-avatar" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" form="form-edit-user" type="file" id="edit-avatar" name="edit-avatar" accept="image/png, image/jpeg">`)
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
         $('.modal-user-body').empty().html(bodyModal);
+        if(user.experience !== ''){
+            document.querySelector('#experience-edit').value = user.experience;
+        }
+
     }
 
     renderEditUsers(e, arr) {
@@ -159,10 +164,95 @@ class Users extends Model{
             
             if(user._id === e.target.nextElementSibling.id) {
                 
-                listUsers.createFormEditUser(user);    
+                listUsers.createFormEditUser(user);
+               
+                $('#edit-user-btn').click((e) =>{
+                    e.preventDefault();
+                    console.log(listUsers.editUserImage());
+                    listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
+                    listUsers.sendEditedImg(user);
+                });   
             }
         })
     };
+
+    createObjectEditUser(user) {
+        let userEdited = user;
+        let form = document.getElementById("form-edit-user").elements;
+
+        for (let key in form) {
+
+            if(key <= 24) {
+                let label = form[key].id.split('-')[0];
+                switch (label) {
+                    case 'country':
+                        userEdited.address.country = form[key].value;
+                        break;
+                    case 'city':
+                        userEdited.address.city = form[key].value;
+                        break;
+                    case 'street':
+                        userEdited.address.street = form[key].value;
+                        break;
+                    case 'skills':
+                        if(form[key].checked) {
+                            userEdited.skills.includes(form[key].value) ? null : userEdited.skills.push(form[key].value);
+                        } else {
+                            userEdited.skills.includes(form[key].value) ? userEdited.skills.pop(form[key].value) : null;
+                        };
+                        break;
+                    case 'langs':
+                        if(form[key].checked) {
+                            userEdited.languages.includes(form[key].value) ? null : userEdited.languages.push(form[key].value);
+                        } else {
+                            userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
+                        };
+                    break;
+                    case 'experience':
+                        console.log(form[key].value);
+                        userEdited.experience = form[key].value;
+                        break;
+                    default:
+                        let formVal = form[key].id.split('-')[0];
+                        userEdited[formVal] = form[key].value;
+                        break;
+                }
+            }
+        }
+
+        return userEdited;
+    }
+
+    sendEditedUser(user) {
+        
+        fetch(`https://cv-mobile-api.herokuapp.com/api/users/${user._id}`, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+            headers: { "Content-Type": "application/json; charset=utf-8" }
+        })
+        .then( res => res.json())
+        .then( response => console.log(response));
+    }
+
+    editUserImage() {
+        let img = document.querySelector('#avatar-edit');
+        let formData = new FormData();
+        formData.append('img', img.files[0]);
+        return formData;
+    }
+
+    sendEditedImg(user) {
+        let imgInput = document.querySelector('#avatar-edit');
+        let formData = new FormData();
+        formData.append('img', imgInput.files[0]);
+        
+        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
+            method: 'POST',
+            body: formData,
+        })
+        .then( res => res.json())
+        .then( response => console.log(response));
+    }
 
     filterUsers( currentPage ){
         
@@ -314,36 +404,3 @@ $( "#adv-search-form" ).on( "submit", function(e) {
 
     listUsers.filterUsers(1);
 });
-
-// for (let key in user){
-        //     // console.log(key);
-        //     switch (key) {
-        //         case '_id':
-        //         case 'registeredDate':
-        //         case 'profilePicture':
-        //         case '__v':
-        //             null
-        //             break;
-        //         case 'skills':
-        //             $('#skills-modal').empty();
-        //             this.renderCheckBoxArr('#skills-modal', 'skills');
-        //             break;
-        //         case 'languages':
-        //             $('#language').empty();
-        //             this.renderCheckBoxArr('#language', 'langs');
-        //             break;
-                    
-        //         case 'address':
-        //             for (let val in user[key]) {
-        //                 let addressKey = user[key];
-        //                 $(`#${val}`).empty().html(`<input style="display: block" value="" name="${val}" placeholder="${addressKey[val]}"></input>`)
-        //             }
-        //             break;
-                
-        //         default:
-        //         $(`#${key}`).empty().html(`<input style="display: block" value="" name="${key}" placeholder="${user[key]}"></input>`);
-        //             break;
-        //     }
-        // }
-        
-        // <input value="${skills.length > 0 ? skills.join(', ') : ''}" class="pl-1 ml-auto" id="skills-modal"></input>
