@@ -30,6 +30,24 @@ function NewCompany(
     this.socialUrls = socialUrls; // Array de objectos
   }
 
+  /** Create previewFile in form. */
+function previewFile() {
+  let preview = document.querySelector("#preview");
+  let file = document.querySelector("input[type=file]").files[0];
+  let reader = new FileReader();
+
+  reader.addEventListener(
+    "load",
+    function() {
+      preview.src = reader.result;
+    },
+    false
+  );
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
 
 $("#registerCompanySubmit").submit(function(e) {
   console.log("sumit actived.");
@@ -74,7 +92,7 @@ $("#registerCompanySubmit").submit(function(e) {
     city,
     country,
     "web: ", website,
-    logo,
+    "logo: ", logo,
     "bio", bio,
     jobOffers,
     employes,
@@ -130,10 +148,20 @@ $("#registerCompanySubmit").submit(function(e) {
           "Content-Type": "application/json"
         }
       })
-        .then(res => res.json())
+      .then(res => res.json())
+      .then(response => {
+        let pong = response;
+        let fileForm = new FormData();
+        fileForm.append("img", registered.logo);
+        let id_company = response._id;
+        console.log("ID: ", id_company, ". Pong: ", pong);
+        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/company/${id_company}`, {
+          method: "POST",
+          body: fileForm
+        })
         .then(response => console.log(response))
         .catch(error => console.log(error.message));
-  }
+  })}
 
   sendNewCompany();
 
