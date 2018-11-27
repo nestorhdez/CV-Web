@@ -275,3 +275,9 @@ footer {
 .form-company {
   margin: 100px 0;
 }
+
+.tooltip-inner {
+  border: 1px solid red;
+  color: red;
+  background-color: wheat;
+}

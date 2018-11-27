@@ -54,6 +54,17 @@ $("#registerCompanySubmit").submit(function(e) {
   e.preventDefault();
   
   // Need check CIF-NIF
+  // método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
+
+String.prototype.isNif=function()
+{
+  return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
+};
+
+// ejemplo de uso 
+  //  alert("12341234H".isNif());  // devolverá false
+  //  alert("00000000T".isNif()); // devolverá true
+
 
   let name = $("#validationCompname").val();
   let phone = $("#InputPhone").val();
@@ -79,8 +90,6 @@ $("#registerCompanySubmit").submit(function(e) {
   console.log("SM", socialUrls);
   // let socialUrls = []
 
-  
-
   console.log(
     name,
     phone,
@@ -98,6 +107,22 @@ $("#registerCompanySubmit").submit(function(e) {
     employes,
     socialUrls,
   );
+
+  if (!(docNumber.isNif())) {
+    $("#docNumber")
+      .addClass("border-danger is-invalid").prop('title', 'No valid number.')
+      .focus();
+      $('[data-toggle="tooltip"]').tooltip('show');
+    // $("#passwordHelpBlock")
+    //   .removeClass("text-muted")
+    //   .addClass("text-danger");
+  } else {
+    if ($("#docNumber").hasClass("border-danger")) {
+      $("#docNumber").removeClass("border-danger is-invalid").prop('title', '');
+      // $("#passwordHelpBlock")
+      //   .addClass("text-muted")
+      //   .removeClass("text-danger");
+    }
 
   registered = new NewCompany(
     name,
@@ -164,5 +189,5 @@ $("#registerCompanySubmit").submit(function(e) {
   })}
 
   sendNewCompany();
-
+  }
 })
