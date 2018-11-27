@@ -185,7 +185,7 @@ footer {
   background-size: cover;
   background-position: center;
   height: 92vh;
-  margin-top: 76.25px;
+  /* margin-top: 76.25px; */
   background-color: black;
   position: relative;
 }
@@ -277,4 +277,10 @@ footer {
 /* Form Companies */
 .form-company {
   margin: 100px 0;
+}
+
+.tooltip-inner {
+  border: 1px solid red;
+  color: red;
+  background-color: wheat;
 }
