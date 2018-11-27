@@ -71,6 +71,9 @@ getAllElements = function(url) {
 getAllElements("skills");
 getAllElements("langs");
 
+/**Specific function to collect the marked checkbox labels.
+ * @param name_Input - value of attribute name.
+ */
 getAllInputsLabel = function (name_Input) {
     return $(`input[name="${name_Input}"][type="checkbox"]:checked`)
       .map(function() {
@@ -83,7 +86,6 @@ let registered;
 
 /** Check Password format
  * @param {string} inputtxt */
-
 function CheckPassword(inputtxt) {
   var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
   if (inputtxt.match(passw)) {
@@ -114,7 +116,6 @@ function previewFile() {
   }
 }
 
-
 /**
  * Listener that take control when show modal with data user.
  */
@@ -131,6 +132,7 @@ $("#invalidCheck2").click(function(e) {
   }
 });
 
+/** Listener to show o hidden password */
 $("#inputGroupPrependPSW").click(function (e) {
   var x = document.getElementById("inputPassword5");
   if (x.type === "password") {
@@ -165,7 +167,9 @@ $("#registerSubmit").submit(function(e) {
       .get();
   }
 
-  /** Take values from NewUser object to create formBody */
+  /** Take values from NewUser object to create formBody
+   * @param userJson - It's NewUser object to build Json
+   */
   function createRequestBody(userJson) {
     let userData = {};
 
@@ -242,25 +246,43 @@ $("#registerSubmit").submit(function(e) {
     }
   }
 
-  let password = $("#inputPassword5").val();
-  let name = $("#validationname").val();
+  /**
+   * Function to sanitaze strings before to input.
+   * @param {string} string 
+   * @returns {string} string sanitaze.
+   */
+  function sanitarize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+  }
+
+  let password = sanitarize($("#inputPassword5").val());
+  let name = sanitarize($("#validationname").val());
   let phone = $("#InputPhone").val();
-  let zip = $("#validationZip").val();
+  let zip = sanitarize($("#validationZip").val());
   let email = $("#validationInputEmail").val();
   let gender = $('#genders input[type="radio"]:checked').val();
   let birthDate = $("#validationbirthDate").val();
-  let username = $("#validationUsername").val();
-  let city = $("#validationCity").val();
-  let country = $("#validationCountry").val();
-  let street = $("#validationStreet").val();
-  let experience = $("#experience").val();
+  let username = sanitarize($("#validationUsername").val());
+  let city = sanitarize($("#validationCity").val());
+  let country = sanitarize($("#validationCountry").val());
+  let street = sanitarize($("#validationStreet").val());
+  let experience = sanitarize($("#experience").val());
 
   let languages = getCheckedBox("#langs");
   let skills = getCheckedBox("#skills");
 
-  let jobTitle = $("#validationJobTitle").val();
-  let company = $("#validationCompany").val();
-  let website = $("#validationRepository").val();
+  let jobTitle = sanitarize($("#validationJobTitle").val());
+  let company = sanitarize($("#validationCompany").val());
+  let website = sanitarize($("#validationRepository").val());
 
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
@@ -383,58 +405,6 @@ $("#registerSubmit").submit(function(e) {
 
     renderModalConfirm();
 
-    /** Take values from NewUser object to create formBody */
-    // function createRequestBody() {
-    //   let formData = new FormData();
-
-    //   // Sent as a string
-    //   formData.append("name", registered.name); //* */
-
-    //   // Sent as a string
-    //   formData.append("username", registered.username); //* */
-
-    //   // Sent as a string with email validation
-    //   formData.append("email", registered.email); //* */
-
-    //   // Sent as a string
-    //   formData.append("city", registered.city);
-
-    //   // Sent as a string
-    //   formData.append("state", registered.state);
-
-    //   // Sent as a string
-    //   formData.append("gender", registered.gender);
-
-    //   // Sent as a string
-    //   formData.append("country", registered.country);
-
-    //   // Sent as a string
-    //   formData.append("jobTitle", registered.jobTitle);
-
-    //   // Sent as a string
-    //   formData.append("website", registered.website);
-
-    //   // Sent as a string
-    //   formData.append("company", registered.company);
-
-    //   // Sent as a string. Choose a value from below.
-    //   formData.append("experience", registered.experience);
-
-    //   // Pick the value from an input(type="date")
-    //   formData.append("birthDate", registered.birthDate);
-
-    //   // Pick the value from an input(type="file") that accepts only jpeg and png formats and files under 3MB size
-    //   formData.append("profilePicture", registered.profilePicture);
-
-    //   // Store all the values selected in the form inside an Array and parse it as a string
-    //   formData.append("languages", JSON.stringify(registered.languages));
-
-    //   // Store all the values selected in the form inside an Array and parse it as a string
-    //   formData.append("skills", JSON.stringify(registered.skills));
-
-    //   return formData;
-    // }
-
     // Need check the send info before.
     // let confirm = false;
     // !confirm ? console.log("No se envia") : sendNewUser();
@@ -442,8 +412,11 @@ $("#registerSubmit").submit(function(e) {
     $("#userConfirmed").click(function() {
       sendNewUser();
       document.getElementById("registerSubmit").reset();
-      $("#preview").attr("src", "");
+      $(".close").trigger('click');
+      $("#modal-confirm").empty().html("...");
       $("#confirm-submit").attr("id", "nosubmit");
+      $("#preview").attr("src", "");
+
     })
     
     // Change class in submit to no luncha again modal.
