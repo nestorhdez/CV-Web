@@ -65,19 +65,37 @@ $("#registerCompanySubmit").submit(function(e) {
   //  alert("12341234H".isNif());  // devolverá false
   //  alert("00000000T".isNif()); // devolverá true
 
+  /**
+   * Function to sanitaze strings before to input.
+   * @param {string} string 
+   * @returns {string} string sanitaze.
+   */
+  function sanitarize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+  }
 
-  let name = $("#validationCompname").val();
+
+  let name = sanitarize($("#validationCompname").val());
   let phone = $("#InputPhone").val();
   let email = $("#validationInputEmail").val();
   let docType = $("#SelectDocType").val().toLowerCase(); // CIF-NIF
-  let docNumber = $("#docNumber").val();// String
-  let zip = $("#validationZip").val();
-  let street = $("#validationStreet").val();
-  let city = $("#validationCity").val();
-  let country = $("#validationCountry").val();
+  let docNumber = sanitarize($("#docNumber").val());// String
+  let zip = sanitarize($("#validationZip").val());
+  let street = sanitarize($("#validationStreet").val());
+  let city = sanitarize($("#validationCity").val());
+  let country = sanitarize($("#validationCountry").val());
   let website = $("#validationWebsite").val();
   let logo = document.querySelector("input[type=file]").files[0];;
-  let bio = $("#validationBio").val();
+  let bio = sanitarize($("#validationBio").val());
   let jobOffers = []; // Objeto?
   let employes = $("#validationemployees").val(); // Numbers
 
