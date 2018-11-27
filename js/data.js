@@ -72,7 +72,7 @@ getAllElements("skills");
 getAllElements("langs");
 
 getAllInputsLabel = function (name_Input) {
-    return $(`input[name="${name_Input}"]`)
+    return $(`input[name="${name_Input}"][type="checkbox"]:checked`)
       .map(function() {
         return $(this).prop('id').split('-check').join("");
       })
@@ -330,7 +330,7 @@ $("#registerSubmit").submit(function(e) {
       console.log("Inserted modal html.");
       let confirmBody = `
       <div class="container-fluid">
-        <div class="row mb-1">
+        <div class="col mb-1">
           <fieldset class="mx-auto">
             <legend>Login data</legend>
             <div id="imgavatar" class="col-6 mb-4"></div>
@@ -361,9 +361,7 @@ $("#registerSubmit").submit(function(e) {
               <p><strong>Email: </strong>${registered.email}</p>
             </div> 
           </address>
-        </div>
-        <div class="row mb-1 mx-auto">
-          <fieldset>
+          <fieldset class="mx-auto">
             <legend>Experience data</legend>
             <div class="col">
               <p><strong>Laboral Experience: </strong>${registered.experience}</p>

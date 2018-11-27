@@ -22,26 +22,26 @@ class Users extends Model{
         let card = (`
             <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${user._id}" style="width: 18rem;">
                 <div class="card-body text-center">
-                <div class="row mb-4">        
-                    <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                        <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
-                        data-target="#ModalCenter">Edit</button>
-                        <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
+                    <div class="row mb-4">        
+                        <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                            <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
+                            data-target="#ModalCenter">Edit</button>
+                            <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
                             data-target="#ModalCenter">Detail</button>
-                        <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
+                            <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
+                        </div>
                     </div>
-                </div>
                     <div class="row">
                         <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                             <div class="d-flex mx-auto profile-picture mb-1">
                                 <img class="img-user rounded-circle" src="${user.avatar}">
                             </div>
                             <h5 class="card-title d-inline user-name text-capitalize">${user.name}</h5>
+                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
                         </div>
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
-                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
                             ${user.address.city ? '<span class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</span>' : ''}
                             ${user.address.country ? '<span class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</span>' : ''}
                             ${user.address.state ? '<span class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</span>' : ''}
@@ -51,6 +51,7 @@ class Users extends Model{
                         </div>
                     </div>    
                 </div>
+            </div>
             `)
             
         return card;
