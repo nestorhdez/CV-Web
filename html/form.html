@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <!-- Header content -->
     <header>
         <!-- Navbar section -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" id="nav-top">
@@ -64,10 +65,15 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="inputPassword5"><strong>Password</strong></label>
-                                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-                                <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20
-                                    characters long, contain letters and numbers, and must not contain spaces, special
-                                    characters, or emoji.</small>
+                                <div class="input-group">
+                                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrependPSW"><i id="eyePSW" class="far fa-eye"></i></span>
+                                    </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20
+                                        characters long, contain letters and numbers, and must not contain spaces, special
+                                        characters, or emoji.</small>
+                                </div>
                             </div>
                         </div>
 
@@ -130,7 +136,7 @@
                     <div class="form-row mb-2">
                         <fieldset class="form-group mb-3">
                             <label><strong>Gender</strong></label>
-                            <div class="col-12 mb-3">
+                            <div class="col-auto mb-3">
                                 <div class="d-flex flex-wrap flex-md-row" id="genders">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" id="woman" name="gender" value="woman">
@@ -173,58 +179,15 @@
 
                     <fieldset class="form-group mb-4">
                         <div class="mb-2"><strong>Languages</strong></div>
-                        <div class="d-flex flex-wrap col-sm-6 col-md-8 col-lg-12" id="langs">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="eng-check" name="langs[]" value="5be46546f5b12b001b4770cc">
-                                <label class="form-check-label mr-5" for="eng-check">English</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="french-check" name="langs[]" value="5be465b5f5b12b001b4770ce">
-                                <label class="form-check-label mr-5" for="french-check">French</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="german-check" name="langs[]" value="5be465b9f5b12b001b4770cf">
-                                <label class="form-check-label mr-5" for="german-check">German</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="spanish-check" name="langs[]" value="5be4653ff5b12b001b4770cb">
-                                <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
-                            </div>
+                        <div class="d-flex flex-wrap col" id="langs">
+                            <!-- Render languages from API -->
                         </div>
                     </fieldset>
 
                     <fieldset class="form-group mb-4">
                         <div class="mb-2"><strong>Skills</strong></div>
-                        <div class="d-flex flex-wrap" id="skills">
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="html-check" name="skills[]" value="5be43c8ba60442001b2638e2">
-                                <label class="form-check-label mr-5" for="html-check">HTML</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="css-check" name="skills[]" value="5be43ca4a60442001b2638e3">
-                                <label class="form-check-label mr-5" for="css-check">CSS</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="sass-check" name="skills[]" value="5be43d0ca60442001b2638e9">
-                                <label class="form-check-label mr-5" for="sass-check">SASS</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="javascript-check" name="skills[]"
-                                    value="5be43cb0a60442001b2638e4">
-                                <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="react-check" name="skills[]" value="5be43cc9a60442001b2638e6">
-                                <label class="form-check-label mr-5" for="react-check">React</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="git-check" name="skills[]" value="5be43df7a60442001b2638f2">
-                                <label class="form-check-label mr-5" for="git-check">Git</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="jQuery-check" name="skills[]" value="5be43cc1a60442001b2638e5">
-                                <label class="form-check-label mr-5" for="jQuery-check">jQuery</label>
-                            </div>
+                        <div class="d-flex flex-wrap col" id="skills">
+                            <!-- Render skills from API -->
                         </div>
                     </fieldset>
 
@@ -273,8 +236,32 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-cobalt ml-4" type="submit">Submit form</button>
+                    <button class="btn btn-cobalt ml-4" type="submit" data-toggle="modal" data-target="#confirm-submit">Submit form</button>
+
+                    <!-- Insert Modal-->
+                    <!-- This modal dont see show if no complet information-->
+
+                    <div class="modal fade" id="nosubmit" tabindex="-1" role="dialog" aria-labelledby="formComfirm" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLongTitle">Is the information correct?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div id="modal-confirm" class="modal-body bg-gradient-cobalt">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>
+                                    <button type="button" id="userConfirmed" class="btn btn-cobalt">Confirmed</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+
             </div>
         </div>
     </main>
