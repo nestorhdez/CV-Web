@@ -56,10 +56,10 @@ $("#registerCompanySubmit").submit(function(e) {
   // Need check CIF-NIF
   // método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
 
-String.prototype.isNif=function()
-{
-  return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
-};
+  String.prototype.isNif=function()
+  {
+    return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
+  };
 
 // ejemplo de uso 
   //  alert("12341234H".isNif());  // devolverá false
