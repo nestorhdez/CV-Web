@@ -42,11 +42,11 @@ class Users extends Model{
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
-                            ${user.address.city ? '<span class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</span>' : ''}
-                            ${user.address.country ? '<span class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</span>' : ''}
-                            ${user.address.state ? '<span class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</span>' : ''}
-                            ${skills.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</span>' : ''}
-                            ${langs.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</span>' : ''}
+                            ${user.address.city ? '<p class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</p>' : ''}
+                            ${user.address.country ? '<p class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</p>' : ''}
+                            ${user.address.state ? '<p class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</p>' : ''}
+                            ${skills.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</p>' : ''}
+                            ${langs.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</p>' : ''}
                             <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
                         </div>
                     </div>    
