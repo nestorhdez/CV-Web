@@ -51,12 +51,12 @@
 
     <!-- Advanced Search section -->
     <section>
-            <div class="container-fluid">
-                <div class="card card-body p-4">
+            <div class="container-fluid mb-3">
+                <div class="card card-body shadow p-4 bg-light">
                     <form class="" id="adv-search-company" method="POST" action="search-company.html">
                         <legend> Advanced Search Companies</legend>
-                        <div class="row col-md">
-                            <div class="form-group row col-md mr-3">
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group col">
                                     <label for="nameCompany">Name of Company</label>
                                     <input type="text" class="form-control" name="nameCompany" id="nameCompany" placeholder="Enter name...">
@@ -74,7 +74,7 @@
                                     <input type="phone" class="form-control" name="phoneCompany" id="phoneCompany" placeholder="Enter phone...">    
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="col-md-4">
                                 <div class="form-group col">
                                     <label for="country">Country</label>
                                     <input type="text" class="form-control" name="country" id="country" placeholder="Enter country...">
@@ -92,34 +92,33 @@
                                     <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="Enter zipcode...">
                                 </div>
                             </div>
-        
+                            <div class="col-md-4">
+                                <div class="form-group col">
+                                    <label class="mr-2">Choose Social Media: </label>
+                                    <select id="platform">
+                                        <option value="">Select SM platform</option>
+                                        <option value="facebook">Facebook</option>
+                                        <option value="twitter">Twitter</option>
+                                        <option value="instagram">Instagram</option>
+                                        <option value="linkedin">Linkedin</option>
+                                        <option value="youtube">Youtube</option>
+                                    </select>
+                                    <input id="urlplatform" type="text" class="form-control" name="platform" placeholder="Enter url about or leave empty to search only platform">
+                                </div>
+                                <div class="form-group col p-4">
+                                    <label for=""><input type="checkbox" class="mr-2" name="onlyJobOffers" id="onlyJobOffers" aria-describedby="helpId" placeholder="">Search companies with JobOffers only</label>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="row col-md">
-                            <div class="form-group col">
-                                <label class="mr-2">Choose Social Media: </label>
-                                <select id="platform">
-                                    <option value="">Select SM platform</option>
-                                    <option value="facebook">Facebook</option>
-                                    <option value="twitter">Twitter</option>
-                                    <option value="instagram">Instagram</option>
-                                    <option value="linkedin">Linkedin</option>
-                                    <option value="youtube">Youtube</option>
-                                </select>
-                                <input id="urlplatform" type="text" class="form-control" name="platform" placeholder="Enter url about or leave empty to search only platform">
-                            </div>
-                            <div class="form-group">
-                            <label for="">Search companies with JobOffers only</label>
-                            <input type="checkbox" class="form-control" name="onlyJobOffers" id="onlyJobOffers" aria-describedby="helpId" placeholder="">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        
+                        <button type="submit" class="btn btn-gray">Search</button>
                     </form>
                 </div>
             </div>   
-        </section>
+    </section>
 
-        <div id="cards-container" class="container-fluid card-deck d-flex flex-wrap flex-row justify-content-center scrolleable">
+    <div id="cards-container" class="container-fluid card-deck d-flex flex-wrap flex-row justify-content-center scrolleable">
 
             <!-- Model Card Comany-->
             <div class="card shadow" style="max-width: 30rem;">
