@@ -237,6 +237,16 @@ footer {
   color: white;
 }
 
+.btn-gray {
+  background-color: #7ba4a8;
+  color: white;
+}
+
+.btn-gray:hover {
+  background-color: #37494b;
+  color: white;
+}
+
 .btn-blue-gray-header {
   /* background-color: #7ba4a8;  */
   background-image: transparent;
