@@ -1,160 +1,304 @@
-//Object List of Users
-function ListUsers(summaryContainer) {
-    this.summaryContainer = summaryContainer;
-    this.url = "https://cv-mobile-api.herokuapp.com/api/users";
+class Users extends Model{
 
-    //Call the ajax and get the list of users
-    this.getAllUsers = function ( callback ) {
-
-        $.ajax ({   
-            url: this.url,
-            dataType: "json"
-        }).done( function(data) {
-            
-            if(typeof callback == "function" ){
-                callback( data );
-                console.log("Callback parameter is a function");
-            }else{
-                console.log("Callback parameter isn't a function");
-            }
-
-            return data;
-        });
-    };
-    
-
-    this.renderUsers = function ( arr ) {
-        // console.log(arr);
-        
-        //Create a card for each user
-        arr.forEach(function(val) {
-            
-        //     let card = (`
-
-        //         <div class="card mr-3 mb-3 card-user shadow list-group-item-action" style="width: 18rem;">
-        //             <div class="card-body text-center">
-        //                 <div class="d-flex flex-column justify-content-center mb-3">
-        //                     <div class="d-flex mx-auto profile-picture mb-1">
-        //                         <img class="img-user rounded-circle" src="${val.profilePicture}">
-        //                     </div>
-        //                     <h5 class="card-title d-inline user-name">${val.name}</h5>
-        //                 </div>
-        //                 <div class="d-flex flex-column flex-nowrap text-left my-2">
-        //                     <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-        //                     <p class="m-0 city-user"><b>City: </b>${val.address.city}</p>
-        //                     <p class="m-0"><b>Email: </b><a href="mailto:${val.email}">${val.email}</a></p>
-        //                     <p><b>Website: </b>${val.website}</p>
-
-        //                     <div class="d-flex justify-content-between align-items-end">
-        //                         <button type="button" class="btn btn-info btn-sm">Edit</button>
-        //                         <button type="button" class="btn btn-modal btn-info btn-sm" id="${val._id}" data-toggle="modal" data-target="#ModalCenter">Detail</button>
-        //                         <button type="button" class="btn btn-primary btn-sm">Delete</button>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        // `);
-
-            let card = (`
-                <div class="card mx-1 my-1 card-user shadow list-group-item-action" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <div class="row mb-4">        
-                            <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                                <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                                <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${val._id}" data-toggle="modal"
-                                    data-target="#ModalCenter">Detail</button>
-                                <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex flex-column mx-auto justify-content-center mb-3">
-                                <div class="d-flex mx-auto profile-picture mb-1">
-                                    <img class="img-user rounded-circle" src="${val.avatar}">
-                                </div>
-                                <h5 class="card-title d-inline user-name text-capitalize">${val.name}</h5>
-                            </div>
-                        </div>   
-                        <div class="row px-3">    
-                            <div class="d-flex flex-column flex-nowrap text-left my-2">
-                                <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                                <p class="m-0 text-capitalize"><strong>City: </strong>${val.address.city}</p>
-                                <p class="m-0 text-capitalize"><strong>Country: </strong>${val.address.country}</p>
-                                <p class="m-0 text-capitalize"><strong>Street: </strong>${val.address.street}</p>
-                                <p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>${val.skills.join(', ')}</p>
-                                <p class="m-0"><strong>Email: </strong><a href="mailto:${val.email}">${val.email}</a></p>
-                            </div>
-                        </div>    
-                    </div>
-                </div>
-            `)
-
-        document.getElementById('card-container').innerHTML += card;
-
-        });
-        
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";
-        
-    }.bind(this);//Bind to ListUsers object.
-
-    /*Change the data of the modal when click on a user card.*/
-    this.renderModal = function(arr) {
-        $('.btn-modal').click(function(e){
-            console.log('click done');
-            console.log('User id ' + e.target.id);
-            arr.forEach( function(val){
-                // console.log("val_id: ", val._id);
-                // console.log("e.id: ", e.target.id);
-                if(val._id == e.target.id){
-                    let user = val;
-
-                    $('#profilePicture').attr("src", "../img/default-profile-picture.jpg").attr("src", user.profilePicture);
-                    
-                    $('#ModalCenterTitle').empty().html(user.name);
-
-                    $('#city').empty().html(user.address.city);
-
-                    $('#country').empty().html(user.address.country);
-                    
-                    $('#street').empty().html(user.address.street);
-
-                    $('#language').empty().html(user.languages.join(', '));
-
-                    $('#email').empty().html(user.email);
-
-                    $('#jobTitle').empty().html(user.jobTitle);
-                    
-                    $('#website').empty().html(user.website);
-
-                    $('#company').empty().html(user.company);
-
-                    $('#skills-modal').empty().html(user.skills.join(', '));
-                    console.log("skills? ", user.skills.join(', '));
-                }
-            });
-
-        })
+    constructor( url, summaryContainer ) {
+        super(url);
+        this.summaryContainer = summaryContainer;
+        this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
+        this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
+        this.renderModal = this.renderModal.bind(this);
+        this.createFormEditUser = this.createFormEditUser.bind(this);
+        this.createObjectEditUser = this.createObjectEditUser.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
     As argument you should pass it the initial array, how many
     elementes do you need per page and the page nº that you need.*/
-    this.pagination = function (arr, perpage, page) {     
+    pagination (arr, perpage, page) {     
         return arr.slice(perpage*(page-1), perpage*page);
     }
- 
-    function renderSummaryUsers(allFilters, summaryContainer) {
+
+    createHtmlUserCard(user, skills, langs) {
+
+        let card = (`
+            <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${user._id}" style="width: 18rem;">
+                <div class="card-body text-center">
+                    <div class="row mb-4">        
+                        <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                            <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
+                            data-target="#ModalCenter">Edit</button>
+                            <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
+                            data-target="#ModalCenter">Detail</button>
+                            <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex flex-column mx-auto justify-content-center mb-3">
+                            <div class="d-flex mx-auto profile-picture mb-1">
+                                <img class="img-user rounded-circle" src="${user.avatar}">
+                            </div>
+                            <h5 class="card-title d-inline user-name text-capitalize">${user.name}</h5>
+                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                        </div>
+                    </div>   
+                    <div class="row px-3">    
+                        <div class="d-flex flex-column flex-nowrap text-left my-2">
+                            ${user.address.city ? '<p class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</p>' : ''}
+                            ${user.address.country ? '<p class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</p>' : ''}
+                            ${user.address.state ? '<p class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</p>' : ''}
+                            ${skills.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</p>' : ''}
+                            ${langs.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</p>' : ''}
+                            <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            `)
+            
+        return card;
+    }
+
+    renderUsers(arrayUsers, skills, langs) {
+
+        let feature = new FeaturesModel;
+
+        arrayUsers.forEach((user) => {
+            let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+            let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+            document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
+        });
+
+        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+    }
+
+    deleteUser(e) {
+            console.log("click done.");
+            console.log(
+              "User will be delete: ",
+              $(e.target)[0].previousElementSibling.id
+            );
+            let userdelete = $(e.target)[0].previousElementSibling.id;
+            const del = new Users();
+            del.sendDeleteUser(userdelete);
+            console.log("usuario deleted.");
+            console.log("This: ", $(e.target));
+            $("#card_" + userdelete).remove();
+    }
+
+    createHtmlUserModal(user, skills, langs) {
+
+        let bodyModal = (`
+            <h4 class="modal-subtitle card-subtitle text-center mb-3">Detail information</h4>
+            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Username: </strong><span class="pl-1" id="username-modal">${user.username}</span></span>
+            <span class="d-block mt-2 card-text"><strong>Email: </strong><a class="pl-1" href="mailto:${user.email}" id="email-modal">${user.email}</a></span>
+            <span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country-modal">${user.address.country}</span></span>
+            ${user.address.city ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>City: </strong><span class="pl-1" id="city-modal">' + user.address.city + '</span></span>' : '' }
+            ${user.address.street ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street-modal">' + user.address.street + '</span></span>' : ''}
+            <span class="d-block d-flex mt-2 card-text"><strong>Experience: </strong><span class="pl-1" id="experience-modal"> ${user.experience ? user.experience : 'Has no experience'}</span></span>
+            ${user.company ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company-modal">' + user.company + '</span></span>' : ''}
+            ${user.jobTitle ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobtitle-modal">' + user.jobTitle + '</span></span>' : ''}
+            ${user.website ? '<span class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + user.website + '" id="website-modal">' + user.website + '</a></span>' : ''}
+            ${skills.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Skills: </strong><span class="pl-1" id="skills-modal">' + skills.join(', ') + '</span></span>' : ''}
+            ${langs.length > 0 ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Language: </strong><span class="pl-1" id="language-modal">' + langs.join(', ') + '</span></span>' : ''}
+            ${user.gender ? '<span class="d-block d-flex mt-2 card-text text-capitalize"><strong>Gender: </strong><span class="pl-1" id="gender-modal">' + user.gender + '</span></span>' : ''}
+        `);
+
+        return bodyModal;
+    }
+
+    setListenerModal(element, arr, skills, langs, callback){     
+        $(element).click((e) =>{
+            callback(e, arr, skills, langs);
+        });
+    }
+
+    /*Change the data of the modal when click on a user card.*/
+    renderModal(e, arr, skills, langs) {
+
+        let feature = new FeaturesModel;
+
+        arr.forEach( (user) => {
+
+            
+            if(user._id == e.target.id){
+                let skillsLabel = feature.returnUserPropertyLabels(user.skills, skills);
+                let langsLabel = feature.returnUserPropertyLabels(user.languages, langs);
+    
+                $('#profilePicture').attr("src", `${user.avatar}`);
+                    
+                $('#ModalCenterTitleUser').empty().html(user.name);
+                    
+                $('.modal-user-body').empty().html(this.createHtmlUserModal(user, skillsLabel, langsLabel));
+                
+            }
+        });
+        
+
+    }
+    
+    createFormEditUser(user) {
+        
+        let bodyModal = (`
+            <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
+            <form id="form-edit-user">
+                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 ml-auto" id="email-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 ml-auto" id="username-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 ml-auto" id="country-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 ml-auto" id="city-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 ml-auto" id="street-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 ml-auto" id="company-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 ml-auto" id="jobtitle-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 ml-auto" id="website-edit"></label>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'skills-edit-user', user)}</div>
+                <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'langs-edit-user', user)}</div>
+                <label class="d-block d-flex d-flex mt-3 card-text" for="experience-edit"><strong>Experience </strong></label>
+                <select class="form-control custom-select" id="experience-edit">
+                    <option value="">Years of experience</option>
+                    <option value="- 1 year">-1 Year</option>
+                    <option value="1 - 3 years">1 - 3 Years</option>
+                    <option value="3 - 5 years">3 - 5 Years</option>
+                    <option value="+ 5 years">+5 Years</option>
+                </select>
+                <label class="d-block d-flex d-flex mt-3 card-text" for="gender-edit"><strong>Gender </strong></label>
+                <select class="form-control custom-select" id="gender-edit">
+                    <option value="">Gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="trans">Trans</option>
+                    <option value="queer">Queer</option>
+                    <option vale="no reply">I prefer not to say it</option>
+                </select>
+                <div class="mt-4 d-flex btn-edit-container">
+                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
+                </div>
+            </form>
+        `);
+
+        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
+        $('#profilePicture').attr("src", user.avatar);
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('.modal-user-body').empty().html(bodyModal);
+        user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
+        user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
+
+    }
+
+    renderEditUsers(e, arr) {
+        
+        arr.forEach(user => {
+            
+            if(user._id === e.target.nextElementSibling.id) {
+                
+                listUsers.createFormEditUser(user);
+               
+                $('#edit-user-btn').click((e) =>{
+                    e.preventDefault();
+                    listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
+                    listUsers.sendEditedImg(user);
+                });   
+            }
+        })
+    };
+
+    createObjectEditUser(user) {
+        let userEdited = user;
+        let form = document.getElementById("form-edit-user").elements;
+
+        for (let key in form) {
+
+            if(key.length < 3) {
+                
+                let label = form[key].id.split('-')[0];
+                switch (label) {
+                    case 'country':
+                        userEdited.address.country = form[key].value;
+                        break;
+                    case 'city':
+                        userEdited.address.city = form[key].value;
+                        break;
+                    case 'street':
+                        userEdited.address.street = form[key].value;
+                        break;
+                    case 'skills':
+                        if(form[key].checked) {
+                            userEdited.skills.includes(form[key].value) ? null : userEdited.skills.push(form[key].value);
+                        } else {
+                            userEdited.skills.includes(form[key].value) ? userEdited.skills.pop(form[key].value) : null;
+                        };
+                        break;
+                    case 'langs':
+                        if(form[key].checked) {
+                            userEdited.languages.includes(form[key].value) ? null : userEdited.languages.push(form[key].value);
+                        } else {
+                            userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
+                        };
+                    break;
+                    default:
+                        let formVal = form[key].id.split('-')[0];
+                        userEdited[formVal] = form[key].value;
+                        break;
+                }
+            }
+        }
+
+        return userEdited;
+    }
+
+    sendEditedUser(user) {
+        
+        fetch(`https://cv-mobile-api.herokuapp.com/api/users/${user._id}`, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+            headers: { "Content-Type": "application/json; charset=utf-8" }
+        })
+        .then( res => res.json())
+        .then( response => console.log(response));
+    }
+
+    sendDeleteUser(user) {
+        fetch("https://cv-mobile-api.herokuapp.com/api/users/" + user, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(jsonResponse => console.log(jsonResponse))
+            .catch(error => console.error("Error:", error));
+    }
+
+    editUserImage() {
+        let img = document.querySelector('#avatar-edit');
+        let formData = new FormData();
+        formData.append('img', img.files[0]);
+        return formData;
+    }
+
+    sendEditedImg(user) {
+        let imgInput = document.querySelector('#avatar-edit');
+        let formData = new FormData();
+        formData.append('img', imgInput.files[0]);
+        
+        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
+            method: 'POST',
+            body: formData,
+        })
+        .then( res => res.json())
+        .then( response => console.log(response));
+    }
+
+    renderSummaryUsers(allFilters, summaryContainer) {
         $(summaryContainer).html("<br><span class=' badge bg-badge-summ text-badge-summ text-white ml-3'>The search result is: " + allFilters.length + "</span>");
     };
-    
-    this.filterUsers = function ( currentPage ){
 
-        new Promise((resolve, reject) => {
-            //Passing the resolve as a callback.
-            this.getAllUsers( resolve );
+    filterUsers( currentPage ){
+        
+        let userPromise = new Promise((resolve, reject) => this.getEntityApi( resolve ));
+        let skillsPromise = new Promise ((resolve) => this.apiSkills.getEntityApi( resolve ));
+        let langsPromise = new Promise ((resolve) => this.apiLangs.getEntityApi( resolve ));
 
-        }).then((allUsers) => {
+        Promise.all([userPromise, skillsPromise, langsPromise]).then((results) => {
+            
+            let allUsers = results[0];
+            let allSkills = results[1];
+            let allLangs = results[2];
 
-            console.log(allUsers);
             // Inputs
             let nameInput = document.querySelector("#input-name").value.toLowerCase();
             let usernameInput = document.querySelector("#validationusername").value.toLowerCase();
@@ -167,9 +311,9 @@ function ListUsers(summaryContainer) {
             let jobTitleInput = document.querySelector("#validationjob").value.toLowerCase();
             let experienceSelect = document.querySelector("#experience-search").value.toLowerCase();
             //CheckBoxes
-            let languages = document.querySelectorAll('#languages .form-check-input');
+            let languages = document.querySelectorAll('#languages-search .form-check-input');
             let checkedLanguages = [...languages].filter(lang => lang.checked == true ).map(lang => lang.defaultValue.toLowerCase());
-            let skills = document.querySelectorAll('#skills .form-check-input');
+            let skills = document.querySelectorAll('#skills-search .form-check-input');
             let checkedSkills = [...skills].filter(skill => skill.checked == true).map(skill => skill.defaultValue.toLowerCase());
 
             function removeFilteredUser(user){
@@ -261,41 +405,37 @@ function ListUsers(summaryContainer) {
                 filterBySkills.forEach(removeFilteredUser);
             }
             
-            // console.log( allFilters );
-            // console.log( allFilters[0].gender );
-            // console.log(this);
-            renderSummaryUsers(allFilters , this.summaryContainer);
+            this.renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
                 $( "#card-container" ).empty();
                 document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
-            }else if( allFilters.length < 10 ) {
-                $( "#card-container" ).empty();
-                this.renderUsers( this.pagination(allFilters, 10, 1) );
-                console.log("less than 10 users");
-            }else {
-                let titleFailSearch = document.querySelector('#title-fail-search');
-                titleFailSearch ? titleFailSearch.remove() : null;
-                this.renderUsers( this.pagination(allFilters, 10, currentPage) );
+            } else {
+                if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
+                this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                this.setListenerModal('.btn-modal', allFilters, allSkills, allLangs, this.renderModal );
+                this.setListenerModal('.btn-edit', allFilters, allSkills, allLangs, this.renderEditUsers );
+                this.setListenerModal('.btn-delete', allFilters, allSkills, allLangs, this.deleteUser );
                 console.log(this.pagination(allFilters, 10, currentPage));
                 console.log('Current page: ' + currentPage);
             }
 
-            this.renderModal(allUsers);
-
         });
         
-    }.bind(this);//Bind ListUsers object
+    }
+
 
 }
 
-let list = new ListUsers( "#searchSummaryContainer" );
-let scroll = new Scrollinfinite(list.filterUsers).initScroll();
+const listUsers = new Users( 'https://cv-mobile-api.herokuapp.com/api/users', '#searchSummaryContainer');
+
+const scroll = new ScrollInfinite(listUsers ,'filterUsers').initScroll();
+
 
 //Calling the FilterUsers functions and render users on form's submit
 $( "#adv-search-form" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-    //The argument passed is the nº of the page that you want to print.
-    list.filterUsers(1);
+
+    listUsers.filterUsers(1);
 });

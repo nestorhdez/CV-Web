@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>CV Web</title>
+    <title>CV Web - Search Profiles</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -34,6 +34,7 @@
                 <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
                     <li class="nav-item">
                         <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Login</button>
+                    </li>    
                     <li class="nav-item">
                         <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 border-1 border-white bg-dark text-white">Logout</button>
                     </li>
@@ -104,8 +105,7 @@
                             </div>
                             <div class="col-md-2 mb-1 pr-1 pl-1">
                                 <label for="validationState"><strong>Street</strong></label>
-                                <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
-                                 value="">
+                                <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street" value="">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="gender"><strong>Gender</strong></label>
@@ -124,26 +124,7 @@
                                 <fieldset class="form-group">
                                     <div class="mb-2"><strong>Languages</strong></div>
                                     <div class="d-flex flex-wrap" id="languages-search">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="eng-check" name="english"
-                                                        value="English">
-                                            <label class="form-check-label mr-5" for="eng-check">English</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="french-check" name="french"
-                                                        value="French">
-                                            <label class="form-check-label mr-5" for="french-check">French</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="german-check" name="german"
-                                                        value="German">
-                                            <label class="form-check-label mr-5" for="german-check">German</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="spanish-check" name="spanish"
-                                                        value="Spanish">
-                                            <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
-                                        </div>
+                                        <!-- Render checkboxes by javascript-->
                                     </div>
                                 </fieldset>
                             </div>
@@ -151,41 +132,7 @@
                                 <fieldset class="form-group">
                                     <div class="mb-2"><strong>Skills</strong></div>
                                     <div class="d-flex flex-wrap" id="skills-search">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="html-check" name="html"
-                                            value="html">
-                                            <label class="form-check-label mr-5" for="html-check">HTML</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="css-check" name="css"
-                                            value="css">
-                                            <label class="form-check-label mr-5" for="css-check">CSS</label>
-                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sass-check" name="sass"
-                                            value="sass">
-                                            <label class="form-check-label mr-5" for="sass-check">SASS</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="javascript-check" name="javascript"
-                                            value="javascript">
-                                            <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="react-check" name="react"
-                                            value="react">
-                                            <label class="form-check-label mr-5" for="react-check">React</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="git-check" name="git"
-                                            value="git">
-                                            <label class="form-check-label mr-5" for="git-check">Git</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="github-check" name="github"
-                                            value="github">
-                                            <label class="form-check-label mr-5" for="github-check">Github</label>
-                                        </div>
+                                        <!-- Render checkboxes by javascript-->
                                     </div>
                                 </fieldset>
                             </div>
@@ -201,6 +148,7 @@
                             </div>
                             <div id="searchSummaryContainer"></div>
                         </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -212,36 +160,38 @@
         <div id="card-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
 
             <!-- Model Card -->
-            <!-- <div class="card my-1 mx-1 card-user shadow list-group-item-action" style="width: 18rem;">
-                <div class="card-body text-center">
-                    <div class="row mb-4">
-                        <div class="d-flex justify-content-around align-self-end mt-3 mx-auto">
-                            <button type="button" class="btn btn-info btn-sm mx-1">Edit</button>
-                            <button type="button" class="btn btn-modal btn-info btn-sm mx-1" id="iddata" data-toggle="modal"
+            <!-- <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${user._id}" style="width: 18rem;">
+                    <div class="card-body text-center">
+                        <div class="row mb-4">        
+                            <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
+                                <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
+                                data-target="#ModalCenter">Edit</button>
+                                <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
                                 data-target="#ModalCenter">Detail</button>
-                            <button type="button" class="btn btn-cobalt btn-sm mx-1">Delete</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex flex-column justify-content-center mb-3">
-                            <div class="d-flex mx-auto profile-picture mb-1">
-                                <img class="img-user rounded-circle" src="../img/FOTITO.jpg">
+                                <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
                             </div>
-                            <h5 class="card-title d-inline user-name">Marolyn Dayan Guzmán Álvarez</h5>
                         </div>
+                        <div class="row">
+                            <div class="d-flex flex-column mx-auto justify-content-center mb-3">
+                                <div class="d-flex mx-auto profile-picture mb-1">
+                                    <img class="img-user rounded-circle" src="${user.avatar}">
+                                </div>
+                                <h5 class="card-title d-inline user-name text-capitalize">${user.name}</h5>
+                                <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
+                            </div>
+                        </div>   
+                        <div class="row px-3">    
+                            <div class="d-flex flex-column flex-nowrap text-left my-2">
+                                ${user.address.city ? '<span class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</span>' : ''}
+                                ${user.address.country ? '<span class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</span>' : ''}
+                                ${user.address.state ? '<span class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</span>' : ''}
+                                ${skills.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</span>' : ''}
+                                ${langs.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</span>' : ''}
+                                <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
+                            </div>
+                        </div>    
                     </div>
-                    <div class="row px-3">
-                        <div class="d-flex flex-column flex-nowrap text-left my-2">
-                            <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            <p class="m-0"><strong>City: </strong>Somewhere</p>
-                            <p class="m-0"><strong>Country: </strong>Somewhere</p>
-                            <p class="m-0"><strong>State: </strong>Somewhere</p>
-                            <p class="m-0 font-italic"><strong>Skills: </strong>Html, css, sass, git, github</p>
-                            <p class="m-0"><strong>Email: </strong><a href="mailto:someone@example.es">someone@example.es</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+                </div> -->
             <!-- End Model Card -->
 
             <div id="loader"></div>
@@ -252,40 +202,23 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title mx-auto" id="ModalCenterTitle">Marolyn Dayan Guzmán Álvarez
+                    <div class="modal-header position-relative">
+                        <h5 class="modal-title mx-auto" id="ModalCenterTitleUser">Marolyn Dayan Guzmán Álvarez
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close position-absolute" style="right: 20px;" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="card mr-3 mb-3 card-user-full">
                             <div class="card-body text-center bg-light">
-                                <div class="d-flex justify-content-center mb-3">
+                                <div class="d-flex justify-content-center user-avatar-container position-relative mb-3">
                                     <div class="d-flex col-s-4 profile-picture mb-1">
                                         <img class="img-user rounded-circle" id="profilePicture" src="../img/FOTITO.jpg">
                                     </div>
                                 </div>
-                                <div class="text-left">
-                                    <h6 class="card-subtitle text-center font-italic mb-3">Detail information</h6>
-                                    <p class="card-text"><strong>Email: </strong><a href="mailto:someone@example.es" id="email">
-                                            someone@example.es</a></p>
-                                    <p class="card-text text-capitalize"><strong>City: </strong><span id="city">somewhere</span></p>
-                                    <p class="card-text text-capitalize"><strong>Country: </strong><span id="country">Country</span></p>
-                                    <p class="card-text text-capitalize"><strong>State: </strong><span id="state">State</span></p>
-                                    <p class="card-text text-capitalize"><strong>Language: </strong><span id="language">English,
-                                            spanish.</span></p>
-                                    <p class="card-text text-capitalize"><strong>Job Title: </strong><span id="jobTitle">Junior
-                                            Developer</span></p>
-                                    <p class="card-text"><strong>Experience: </strong><span id="experience"> Less 1
-                                            year</span></p>
-                                    <!-- Show years, but when is 0 years show this. Perhaps need option "whitout experience"? -->
-                                    <p class="card-text"><strong>Website: </strong><a href="#" id="website">www.websitecompany.com</a></p>
-                                    <p class="card-text text-capitalize"><strong>Company: </strong><span id="company">Company
-                                            Name SL</span></p>
-                                    <p class="card-text text-capitalize"><strong>Skills: </strong><span id="skills-modal">html,
-                                            css, sass, git, github</span></p>
+                                <div class="text-left card-body-text modal-user-body">
+                                    <!-- Render by Javascript -->
                                 </div>
                             </div>
                         </div>
@@ -335,7 +268,7 @@
                     <div class="modal-body">
                         <!-- Contact Form-->
                         <!--Form with header-->
-                        <form action="#"" method=" post">
+                        <form action="#" method=" post">
                             <div class="card border-primary rounded-0">
                                 <div class="card-header p-0">
                                     <div class="bg-cobalt text-white text-center py-2">
@@ -450,6 +383,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/model.js"></script>
+    <script src="../js/features-model.js"></script>
     <script src="../js/custom.js"></script>
     <script src="../js/render.js"></script>
     <script src="../js/advanced-search.js"></script>

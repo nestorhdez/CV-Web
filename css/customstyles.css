@@ -147,6 +147,9 @@ footer {
   color: #3a5199;
 }
 
+.bg-gradient-cobalt {
+    background-image: linear-gradient(0deg, rgba(176, 190, 236, 1), rgba(255,255,255,0));
+}
 
 /* =================== */
 /* Landpage for alumns */
@@ -181,7 +184,7 @@ footer {
   background-size: cover;
   background-position: center;
   height: 92vh;
-  margin-top: 76.25px;
+  /* margin-top: 76.25px; */
   background-color: black;
   position: relative;
 }
@@ -233,6 +236,16 @@ footer {
   color: white;
 }
 
+.btn-gray {
+  background-color: #7ba4a8;
+  color: white;
+}
+
+.btn-gray:hover {
+  background-color: #37494b;
+  color: white;
+}
+
 .btn-blue-gray-header {
   /* background-color: #7ba4a8;  */
   background-image: transparent;
@@ -273,4 +286,10 @@ footer {
 /* Form Companies */
 .form-company {
   margin: 100px 0;
+}
+
+.tooltip-inner {
+  border: 1px solid red;
+  color: red;
+  background-color: wheat;
 }
