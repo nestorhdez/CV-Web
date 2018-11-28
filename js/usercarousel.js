@@ -13,7 +13,8 @@ class Carousel {
 
     // ListUsers().renderUsers(data);
 
-    
+    let list = new ListUsers(this.getAllUsers(this.renderUsers(data)));
+    console.log("esto: " + list)
     // Function for a button when is clicked next
     next() {
         this.displacement * this.innerdivwidth; 
