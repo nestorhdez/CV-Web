@@ -11,10 +11,6 @@ class Carousel {
         $(prevButton).click(this.previous);
     }
 
-    // ListUsers().renderUsers(data);
-
-    let list = new ListUsers(this.getAllUsers(this.renderUsers(data)));
-    console.log("esto: " + list)
     // Function for a button when is clicked next
     next() {
         this.displacement * this.innerdivwidth; 
@@ -32,9 +28,22 @@ class Carousel {
         return widthdiv;
     }
 
+    renderUsers(arrayUsers, skills, langs) {
+        var users = [];
+        let feature = new FeaturesModel;
+        arrayUsers.forEach((user) => {
+            let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+            let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+            // document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
+			users.push(this.createHtmlUserCard(user, skillsLabels, langsLabels));
+        });
+        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+}
+
     // To show the information of each card, each one in his own div
     render() {
         var info = [];
+
         this.data.forEach(function(currentValue, index) {
              info.push('<div id="carouselelement' + index +'">' + currentValue + '</div>'); 
         });
@@ -49,4 +58,3 @@ class Carousel {
     }
 }
 
-// let list = new ListUsers(list.ListUsers).init();
