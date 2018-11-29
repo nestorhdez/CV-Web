@@ -192,7 +192,7 @@ class Companies extends Model{
                 
                 if(this.pagination(filteredCompanies, 10, currentPage).length === 0){
                     let title = document.getElementById('end-of-companies');
-                    title ? '' : document.getElementById('card-container').innerHTML += `<h1 id="end-of-companies" class="h2 text-center col-12 mt-3"> There are not more companies to show </h1>`;
+                    title ? '' : document.getElementById('card-container').innerHTML += `<p id="end-of-companies" class="text-center col-12 mt-3"> There are not more companies to show </p>`;
                 } else {
                 this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
                 }
