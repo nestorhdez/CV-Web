@@ -104,18 +104,50 @@ class Companies extends Model{
 
     createHtmlCompanyModal(company) {
         let bodyModal = (`
-            <h4 class="modal-subtitle card-subtitle text-center mb-3">Detail information</h4>
-            ${company.bio ? '<p class="d-block d-flex mt-2 mb-0 card-text text-capitalize"><strong>Description: </strong><p class="pl-1" id="bio-modal">' + company.bio + '</p></p>' : ''}
-            <p class="d-block mt-2 card-text"><strong>Email: </strong><a class="pl-1" href="mailto:${company.email}" id="email-modal">${company.email}</a></p>
-            <p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Country: </strong><span class="pl-1" id="country-modal">${company.address.country}</span></p>
-            ${company.address.city ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>City: </strong><span class="pl-1" id="city-modal">' + company.address.city + '</span></p>' : '' }
-            ${company.address.street ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Street: </strong><span class="pl-1" id="street-modal">' + company.address.street + '</span></p>' : ''}
-            ${company.company ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Company: </strong><span class="pl-1" id="company-modal">' + company.company + '</span></p>' : ''}
-            ${company.jobTitle ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Title: </strong><span class="pl-1" id="jobtitle-modal">' + company.jobTitle + '</span></p>' : ''}
-            ${company.website ? '<p class="d-block d-flex mt-2 card-text"><strong>Website: </strong><a class="pl-1" target="blank" href="' + company.website + '" id="website-modal">' + company.website + '</a></p>' : ''}
-            ${company.phone ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Phone Number: </strong><span class="pl-1" id="phone-modal">' + company.phone + '</span></p>' : ''}
-            ${company.socialUrls.length > 0 ? '<div class="d-flex mt-2">' + this.createLinksToSocialMedia(company).join(' ') + '</div>' : ''}
-            ${company.jobOffers.length > 0 ? '<p class="d-block d-flex mt-2 card-text text-capitalize"><strong>Job Offers:  ' + company.jobOffers.length + '</strong></p>' : ''}
+            <div class ="row mb-2">
+                <div class="col mb-3">
+                    <h6 class="mb-2">Address data</h6>
+                    <div class="card-text">
+                        ${company.address.country ? `<p class="m-0 text-capitalize"><strong>country: </strong>${company.address.country}</p>` : ''}
+                        ${company.address.street ? `<p class="m-0 text-capitalize"><strong>street: </strong>${company.address.street}</p>` : ''}
+                        ${company.address.city ? `<p class="m-0 text-capitalize"><strong>city: </strong>${company.address.city}</p>` : ''}
+                        ${company.address.zipcode ? `<p class="m-0 text-capitalize"><strong>zipcode: </strong>${company.address.zipcode}</p>` : ''}
+                    </div>  
+                </div>
+            <div class="col mb-3">
+                <h6 lass="mb-2">Contact</h6>
+                <div class="card-text">
+                    ${company.email ? `<p class="m-0 text-capitalize"><strong>Email: </strong>${company.email}</p>` : ''}
+                    ${company.phone ? `<p class="m-0 text-capitalize"><strong>Phone: </strong>${company.email}</p>` : ''}
+                    ${company.url ? `<p class="m-0"><strong>Website: </strong><a href="${company.url}" target="_blank" title="Know us">${company.url}</a></p>` : ''}
+                    <label for=""><strong>Social Media:</strong></label>
+                    <div class="col">
+                        <!-- Only need show when have url-->
+                        ${company.socialUrls.length > 0 ? this.createLinksToSocialMedia(company).join(' ') : ''}
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <h6>About us:</h6>
+                    ${company.bio ? `<p class="card-text">
+                        ${company.bio}
+                    </p>` : '<p class="card-text"> No info. </p>'}
+                </div>
+            </div>
+            <div class="row">
+                <div class="row mx-auto">
+                    <!-- Only show when have Offert Jobs o search employees -->
+                    <div class="col">
+                        <p class="mr-3"><i class="fas fa-search mr-2"></i><a href="url">Search employees</a></p>
+                        <p class="form-control my-2"> Content about Search employes.</p>
+                    </div>
+                    <div class="col">
+                    ${company.jobOffers.length > 0 ? `<p class="mr-2"><i class="fas fa-file-signature mr-2"></i><a href="url">Offert job: ${company.jobOffers.length}</a></p><p class="form-control my-2"> Content about Offert job.</p>`: '<p class="mr-2"><i class="fas fa-file-signature mr-2"></i>Offert job: None by currently</p>'}
+                    </div>
+                </div>
+            </div>       
         `);
 
         return bodyModal;
