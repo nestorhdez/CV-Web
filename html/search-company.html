@@ -51,143 +51,82 @@
 
     <!-- Advanced Search section -->
     <section>
-            <div class="container-fluid mb-3">
-                <div class="card card-body shadow p-4 bg-light">
-                    <form class="" id="adv-search-company" method="POST" action="search-company.html">
-                        <legend> Advanced Search Companies</legend>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group col">
-                                    <label for="nameCompany">Name of Company</label>
-                                    <input type="text" class="form-control" name="nameCompany" id="nameCompany" placeholder="Enter name...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="nameWebsite">Website</label>
-                                    <input type="url" class="form-control" name="nameWebsite" id="nameWebsite" placeholder="Enter url...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="emailCompany">Email</label>
-                                    <input type="email" class="form-control" name="emailCompany" id="emailCompany" placeholder="Enter email...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="phoneCompany">Phone</label>
-                                    <input type="phone" class="form-control" name="phoneCompany" id="phoneCompany" placeholder="Enter phone...">    
-                                </div>
+        <div class="container-fluid mb-3">
+            <div class="card card-body shadow p-4 bg-light">
+                <form class="" id="adv-search-company">
+                    <legend> Advanced Search Companies</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group col">
+                                <label for="nameCompany">Name of Company</label>
+                                <input type="text" class="form-control" name="nameCompany" id="name-search" placeholder="Enter name...">
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group col">
-                                    <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" id="country" placeholder="Enter country...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="city">City</label>
-                                    <input type="text" class="form-control" name="city" id="city" placeholder="Enter city...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="street">Street</label>
-                                    <input type="text" class="form-control" name="street" id="street" placeholder="Enter street...">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="zipcode">Zipcode</label>
-                                    <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="Enter zipcode...">
-                                </div>
+                            <div class="form-group col">
+                                <label for="nameWebsite">Website</label>
+                                <input type="text" class="form-control" name="nameWebsite" id="website-search" placeholder="Enter url...">
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group col">
-                                    <label class="mr-2">Choose Social Media: </label>
-                                    <select id="platform">
-                                        <option value="">Select SM platform</option>
-                                        <option value="facebook">Facebook</option>
-                                        <option value="twitter">Twitter</option>
-                                        <option value="instagram">Instagram</option>
-                                        <option value="linkedin">Linkedin</option>
-                                        <option value="youtube">Youtube</option>
-                                    </select>
-                                    <input id="urlplatform" type="text" class="form-control" name="platform" placeholder="Enter url about or leave empty to search only platform">
-                                </div>
-                                <div class="form-group col p-4">
-                                    <label for=""><input type="checkbox" class="mr-2" name="onlyJobOffers" id="onlyJobOffers" aria-describedby="helpId" placeholder="">Search companies with JobOffers only</label>
-                                </div>
+                            <div class="form-group col">
+                                <label for="emailCompany">Email</label>
+                                <input type="email" class="form-control" name="emailCompany" id="email-search" placeholder="Enter email...">
+                            </div>
+                            <div class="form-group col">
+                                <label for="phoneCompany">Phone</label>
+                                <input type="phone" class="form-control" name="phoneCompany" id="phone-search" placeholder="Enter phone...">    
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group col">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" name="country" id="address-country-search" placeholder="Enter country...">
+                            </div>
+                            <div class="form-group col">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" name="city" id="address-city-search" placeholder="Enter city...">
+                            </div>
+                            <div class="form-group col">
+                                <label for="street">Street</label>
+                                <input type="text" class="form-control" name="street" id="address-street-search" placeholder="Enter street...">
+                            </div>
+                            <div class="form-group col">
+                                <label for="zipcode">Zipcode</label>
+                                <input type="text" class="form-control" name="zipcode" id="address-zipcode-search" placeholder="Enter zipcode...">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group col">
+                                <label class="mr-2" for="platform-search">Choose Social Media: </label>
+                                <select id="social-platform-search">
+                                    <option value="">Select SM platform</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="linkedin">Linkedin</option>
+                                    <option value="youtube">Youtube</option>
+                                </select>
+                                <input id="urlplatform" type="text" class="form-control" name="platform" placeholder="Leave empty to search only platform">
+                            </div>
+                            <div class="form-group col p-4">
+                                <label><input type="checkbox" class="mr-2" name="onlyJobOffers" id="jobOffers-search" aria-describedby="helpId" placeholder="">Search companies with JobOffers only</label>
+                            </div>
+                        </div>
+                    </div>
 
-                        
-                        <button type="submit" class="btn btn-gray">Search</button>
-                                                
-                        <button type="reset" class="btn btn-cobalt">Reset</button>
+                    
+                    <button type="submit" class="btn btn-gray">Search</button>
+                                            
+                    <button type="reset" class="btn btn-cobalt">Reset</button>
 
-                    </form>
-                </div>
-            </div>   
+                </form>
+            </div>
+        </div>   
     </section>
 
     <div id="cards-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
-            <!-- Model Card Company-->
-            <!-- <div class="card shadow" style="max-width: 30rem;">
-                <div class="card-body">
-    
-                        <div class="row justify-content-between mx-2 mb-2">
-                            <button type="button" class="btn-edit btn btn-gray btn-sm mx-1" id="" data-toggle="modal" data-target="#ModalCenter">Edit</button>
-                            <button type="button" class="btn btn-gray btn-modal btn-sm mx-1" id="detailModal" data-toggle="modal" data-target="#ModalCompany">Detail</button>
-                            <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
-                        </div>
+            
+        <!-- Here rebder Model Card Company-->
 
-                    <div class="card-header row justify-content-start align-items-center">
-                        <img class="logo profile-picture mr-3" src="../img/logos/256px-Skynet.svg.png" alt="logo company">
-                        <h5 class="card-title">Name of Company</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class ="row mb-2">
-                            <div class="col mb-3">
-                                <h6 class="mb-2">Address data</h6>
-                                <div class="card-text">
-                                    <p class="m-0 text-capitalize"><strong>country: </strong>Japan</p>
-                                    <p class="m-0 text-capitalize"><strong>street: </strong>2-2-1, Gakuen-Minami</p>
-                                    <p class="m-0 text-capitalize"><strong>city: </strong>Tsukuba</p>
-                                    <p class="m-0 text-capitalize"><strong>zipcode: </strong>0818</p>
-                                </div>  
-                            </div>
-                            <div class="col mb-3">
-                                <h6 lass="mb-2">Contact</h6>
-                                <div class="card-text">
-                                    <p class="m-0 text-capitalize"><strong>Email: </strong>recruit@cyberdyne.jp</p>
-                                    <p class="m-0 text-capitalize"><strong>Phone: </strong>+1-507-263-4770</p>
-                                    <p class="m-0"><strong>Website: </strong><a href="https://www.cyberdyne.jp" target="_blank" title="Know us">https://www.cyberdyne.jp</a></p>
-                                    <label for=""><strong>Social Media:</strong></label>
-                                    <div class="col">
-                                        Only need show when have url
-                                        <a href="https://www.facebook.com" target="_blank" title="Go to facebook page."><i class="fab fa-facebook"></i></a>
-                                        <a href="https://www.twitter.com" target="_blank" title="Go to twitter page."><i class="fab fa-twitter"></i></a>
-                                        <a href="https://www.instagram.com" target="_blank" title="Go to instagram page."><i class="fab fa-instagram"></i></a>
-                                        <a href="https://www.youtube.com" target="_blank" title="Go to youtube page."><i class="fab fa-youtube-square"></i></a>
-                                        <a href="https://www.linkedin.com" target="_blank" title="Go to linkedin page."><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <h6>About us</h6>
-                                <p class="card-text">
-                                    Research and Development of equipments and systems in following areas: Medical, Welfare (Treatment device to improve and regenerate the brain-neuro-physical functions. Rescue Supports in disaster sites), Entertainments (Heavy labor Supports in factories, plants.), Related Businesses, Production, Leasing, Sale, Maintenance.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="row pl-5">
-                                Only show when have Offert Jobs o search employees
-                                <p class="mr-3"><i class="fas fa-search mr-2"></i><a href="url">Search employees</a></p>
-                                <p class="mr-2"><i class="fas fa-file-signature mr-2"></i><a href="url">Offert job</a></p>
-                            </div>
-                        </div>               
-                    </div>
-                </div>
-            </div> -->
-                
-            <!-- End Model Card -->
-
-            <div id="loader"></div>
-        </div>
+        <div id="loader"></div>
+    </div>
 
         <!-- Modal Company-->
         <div class="modal fade" id="ModalCompany" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"

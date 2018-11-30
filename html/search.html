@@ -157,42 +157,9 @@
 
     <!-- Main section -->
     <main class="container-fluid">
-        <div id="card-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
+        <div id="cards-container" class="container-fluid d-flex flex-wrap flex-row justify-content-center scrolleable">
 
-            <!-- Model Card -->
-            <!-- <div class="card mx-1 my-1 card-user shadow list-group-item-action" id="card_${user._id}" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <div class="row mb-4">        
-                            <div class="d-flex justify-content-between align-self-end mt-3 mx-auto">
-                                <button type="button" class="btn-edit btn btn-info btn-sm mx-1" id="" data-toggle="modal"
-                                data-target="#ModalCenter">Edit</button>
-                                <button type="button" class="btn btn-info btn-modal btn-sm mx-1" id="${user._id}" data-toggle="modal"
-                                data-target="#ModalCenter">Detail</button>
-                                <button type="button" class="btn btn-delete btn-cobalt btn-sm mx-1">Delete</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex flex-column mx-auto justify-content-center mb-3">
-                                <div class="d-flex mx-auto profile-picture mb-1">
-                                    <img class="img-user rounded-circle" src="${user.avatar}">
-                                </div>
-                                <h5 class="card-title d-inline user-name text-capitalize">${user.name}</h5>
-                                <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
-                            </div>
-                        </div>   
-                        <div class="row px-3">    
-                            <div class="d-flex flex-column flex-nowrap text-left my-2">
-                                ${user.address.city ? '<span class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</span>' : ''}
-                                ${user.address.country ? '<span class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</span>' : ''}
-                                ${user.address.state ? '<span class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</span>' : ''}
-                                ${skills.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</span>' : ''}
-                                ${langs.length > 0 ? '<span class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</span>' : ''}
-                                <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
-                            </div>
-                        </div>    
-                    </div>
-                </div> -->
-            <!-- End Model Card -->
+            <!-- Here Render Model Card -->
 
             <div id="loader"></div>
         </div>
@@ -218,7 +185,7 @@
                                     </div>
                                 </div>
                                 <div class="text-left card-body-text modal-user-body">
-                                    <!-- Render by Javascript -->
+                                    <!-- Here render body modal -->
                                 </div>
                             </div>
                         </div>

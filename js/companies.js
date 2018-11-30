@@ -3,6 +3,11 @@ class Companies extends Model{
     constructor( url, summaryContainer ) {
         super( url );
         this.summaryContainer = summaryContainer;
+        this.createHtmlCompanyModal = this.createHtmlCompanyModal.bind(this);
+    }
+
+    pagination (arr, perpage, page) {     
+        return arr.slice(perpage*(page-1), perpage*page);
     }
 
     createLinksToSocialMedia(company) {
@@ -102,6 +107,12 @@ class Companies extends Model{
         })
     }
 
+    setListenerModal(element, arr, callback){     
+        $(element).click((e) =>{
+            callback(e, arr);
+        });
+    }
+
     createHtmlCompanyModal(company) {
         let bodyModal = (`
             <div class ="row mb-2">
@@ -155,6 +166,7 @@ class Companies extends Model{
 
     renderCompanyModal(e, arrayCompanies) {
 
+        const comp = new Companies();
         arrayCompanies.forEach( (company) => {
             
             if(company._id == e.target.id){
@@ -163,25 +175,98 @@ class Companies extends Model{
                     
                 $('#Title-company').empty().html(company.name);
                     
-                $('.modal-company-body').empty().html(this.createHtmlCompanyModal(company));
+                $('.modal-company-body').empty().html(comp.createHtmlCompanyModal(company));
                 
             }
         });
     }
+
+    filterCompany(currentPage) {
+        
+        new Promise((resolve) => this.getEntityApi(resolve))
+        .then(result => {
+
+            let form = document.querySelector('#adv-search-company').elements;
+            let arrayForm = [];
+            for (let i = 0; i < form.length; i++) {
+                arrayForm.push(form[i]);
+            }
+
+            function removeFilteredCompany(company){
+                if(filteredCompanies.includes(company)){
+                    let i = filteredCompanies.indexOf(company);
+                    filteredCompanies.splice(i, 1);
+                }
+            }
+
+            let filteredCompanies = result;
+
+            arrayForm.forEach(input => {
+                let propertyOfInput = input.id.split('-')[0];
+
+                filteredCompanies.forEach(() => {
+
+                    switch (propertyOfInput) {
+                        case 'address':
+                            let propertyAddress = input.id.split('-')[1];
+                            let filterAddress = filteredCompanies.filter(company => company[propertyOfInput][propertyAddress].toLowerCase().indexOf(input.value.toLowerCase()) == -1);
+                            filterAddress.forEach(company => removeFilteredCompany(company));
+                            break;
+                        case 'jobOffers':
+                            if( input.checked ) {;
+                                let filterJobOffers = filteredCompanies.filter(company => company.jobOffers.length === 0 );
+                                filterJobOffers.forEach(company => removeFilteredCompany(company));
+                            }  
+                            break;
+                        case 'social':
+                            if(input.value !== ''){
+                                let filterSocial = filteredCompanies.filter(company => {
+                                    let socialControl = []
+                                    company.socialUrls.forEach(social => socialControl.push(social.platform.includes(input.value)));
+                                    
+                                    if(socialControl.includes(true)){ 
+                                        return false
+                                    } else {
+                                        return true
+                                    }
+                                });
+                                filterSocial.forEach(company => removeFilteredCompany(company));
+                            };
+                            break;
+                        default:
+                            let filterDefault = filteredCompanies.filter(company => company[propertyOfInput] !== undefined ? company[propertyOfInput].toLowerCase().indexOf( input.value.toLowerCase() ) == -1 : '');
+                            filterDefault.forEach(company => removeFilteredCompany(company));
+                            break;
+                    }
+                });
+            });
+
+            if( filteredCompanies.length === 0 ){
+                $( "#cards-container" ).empty();
+                document.getElementById('cards-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
+            } else {
+                currentPage === 1 ? $( "#cards-container" ).empty() : '';
+                
+                if(this.pagination(filteredCompanies, 10, currentPage).length === 0){
+                    let title = document.getElementById('end-of-companies');
+                    title ? '' : document.getElementById('cards-container').innerHTML += `<p id="end-of-companies" class="text-center col-12 mt-3"> There are not more companies to show </p>`;
+                } else {
+                this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
+                }
+                this.setListenerModal('.btn-modal', filteredCompanies, this.renderCompanyModal );
+            }
+
+        });
+    };
+
 }
 
 const company = new Companies('https://cv-mobile-api.herokuapp.com/api/companies');
+const scroll = new ScrollInfinite(company ,'filterCompany').initScroll();
 
 $( "#adv-search-company" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-    $("#card-container").empty();
-    new Promise((resolve) => company.getEntityApi(resolve))
-    .then(result => {
-        company.renderCompaniesCards(result);
-        $('.btn-modal').click((e) => {
-            company.renderCompanyModal(e, result);
-        })
-    });
+    company.filterCompany(1);
     
 });
