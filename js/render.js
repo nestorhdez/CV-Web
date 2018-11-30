@@ -64,10 +64,10 @@ class Users extends Model{
         arrayUsers.forEach((user) => {
             let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
             let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-            document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
+            document.getElementById('cards-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
         });
 
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+        document.getElementById('cards-container').innerHTML += "<div id='loader'><div>";                
     }
 
     deleteUser(e) {
@@ -408,10 +408,10 @@ class Users extends Model{
             this.renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
-                $( "#card-container" ).empty();
-                document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
+                $( "#cards-container" ).empty();
+                document.getElementById('cards-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             } else {
-                if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
+                if(currentPage === 1 ){ $( "#cards-container" ).empty()}; 
                 this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
                 this.setListenerModal('.btn-modal', allFilters, allSkills, allLangs, this.renderModal );
                 this.setListenerModal('.btn-edit', allFilters, allSkills, allLangs, this.renderEditUsers );
