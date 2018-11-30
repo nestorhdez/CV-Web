@@ -118,7 +118,7 @@ class Companies extends Model{
                 <h6 lass="mb-2">Contact</h6>
                 <div class="card-text">
                     ${company.email ? `<p class="m-0 text-capitalize"><strong>Email: </strong>${company.email}</p>` : ''}
-                    ${company.phone ? `<p class="m-0 text-capitalize"><strong>Phone: </strong>${company.email}</p>` : ''}
+                    ${company.phone ? `<p class="m-0 text-capitalize"><strong>Phone: </strong>${company.phone}</p>` : ''}
                     ${company.url ? `<p class="m-0"><strong>Website: </strong><a href="${company.url}" target="_blank" title="Know us">${company.url}</a></p>` : ''}
                     <label for=""><strong>Social Media:</strong></label>
                     <div class="col">
