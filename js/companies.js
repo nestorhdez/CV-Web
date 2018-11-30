@@ -127,9 +127,9 @@ class Companies extends Model{
             
             if(company._id == e.target.id){
     
-                $('#logo-company').attr("src", `${company.avatar}`);
+                $('#logo-company').attr("src", `${company.logo}`);
                     
-                $('#ModalCenterTitleCompany').empty().html(company.name);
+                $('#Title-company').empty().html(company.name);
                     
                 $('.modal-company-body').empty().html(this.createHtmlCompanyModal(company));
                 
