@@ -220,17 +220,22 @@ $("#registerSubmit").submit(function(e) {
           method: "POST",
           body: fileForm
         })
-          .then(response => {console.log("Sucess:", response);
+          .then(response => {console.log("Sucess new User:", response);
           if (response.status==200) {
             alert('Enviado correctamente');
+            document.getElementById("registerSubmit").reset();
+            $(".close").trigger('click');
+            $("#modal-confirm").empty().html("...");
+            $("#confirm-submit").attr("id", "nosubmit");
+            $("#preview").attr("src", "");
           } else {
             alert(`Error en el envio. ${response.statusText}`);
           }})
-          .catch(error => console.log("Error:", error.message));
+          .catch(error => console.log("Error upload picture:", error.message));
       })
       // .then(response => console.log("Sucess:", JSON.stringify(response._id)))
-      .then(response => console.log("Sucess:", response))
-      .catch(error => console.log("Error:", error.message));
+      .then(response => console.log("Sucess New user with picture:", response))
+      .catch(error => console.log("Error Fulluser:", error.message));
   }
 
   /** Check Password format
@@ -411,11 +416,11 @@ $("#registerSubmit").submit(function(e) {
     
     $("#userConfirmed").click(function() {
       sendNewUser();
-      document.getElementById("registerSubmit").reset();
-      $(".close").trigger('click');
-      $("#modal-confirm").empty().html("...");
-      $("#confirm-submit").attr("id", "nosubmit");
-      $("#preview").attr("src", "");
+      // document.getElementById("registerSubmit").reset();
+      // $(".close").trigger('click');
+      // $("#modal-confirm").empty().html("...");
+      // $("#confirm-submit").attr("id", "nosubmit");
+      // $("#preview").attr("src", "");
 
     })
     
