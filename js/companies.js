@@ -81,7 +81,7 @@ class Companies extends Model{
                     <div class="row">
                         <div class="d-flex flex-column mx-auto justify-content-center mb-3">
                             <div class="d-flex mx-auto profile-picture mb-1">
-                                <img id="logo-company-card" class="img-company rounded-circle" style="max-width: 100%;" src="${company.logo}" onerror="setDefaultImgOnError(this)">
+                                <img id="logo-company-card" class="img-company rounded-circle" style="max-width: 100%;" src="${company.logo}">
                             </div>
                             <h5 class="card-title d-inline company-name text-capitalize">${company.name}</h5>
                             <h6 class="card-subtitle mb-3 text-center">Contact information</h6>
@@ -195,7 +195,7 @@ class Companies extends Model{
         company.docType !== '' ? document.querySelector('#docType-edit').value = company.docType : '';
 
         this.addDeleteBtnLinks();
-        
+
         $('#btn-add-social').click((e) => {
             e.preventDefault();
             this.addLinkOnEditCompany();
@@ -205,23 +205,6 @@ class Companies extends Model{
             this.deleteSocialLinks(e);
         });
     }
-
-    renderEditCompany(e, arr) {
-        
-        arr.forEach(company => {
-            
-            if(company._id === e.target.nextElementSibling.id) {
-                
-                listCompany.createFormEditCompany(company);
-               
-                $('#edit-company-btn').click((e) =>{
-                    e.preventDefault();
-                    listCompany.sendEditedCompany(listCompany.createObjectEditCompany(company));
-                    // listCompany.sendEditedImg(company);
-                });   
-            }
-        })
-    };
 
     createObjectEditCompany(company) {
         let companyEdited = company;
@@ -286,6 +269,38 @@ class Companies extends Model{
         .then( res => res.json())
         .then( response => console.log(response));
     }
+
+    sendEditedImg(company) {
+        let imgInput = document.querySelector('#avatar-edit');
+        if(imgInput.files.length > 0){
+            let formData = new FormData();
+            formData.append('img', imgInput.files[0]);
+            
+            fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/company/${company._id}`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then( res => res.json())
+            .then( response => console.log(response));
+        }
+    }
+
+    renderEditCompany(e, arr) {
+        
+        arr.forEach(company => {
+            
+            if(company._id === e.target.nextElementSibling.id) {
+                
+                listCompany.createFormEditCompany(company);
+               
+                $('#edit-company-btn').click((e) =>{
+                    e.preventDefault();
+                    listCompany.sendEditedCompany(listCompany.createObjectEditCompany(company));
+                    listCompany.sendEditedImg(company);
+                });   
+            }
+        })
+    };
 
     filterCompany(currentPage) {
         

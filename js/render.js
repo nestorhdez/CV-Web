@@ -265,24 +265,19 @@ class Users extends Model{
             .catch(error => console.error("Error:", error));
     }
 
-    editUserImage() {
-        let img = document.querySelector('#avatar-edit');
-        let formData = new FormData();
-        formData.append('img', img.files[0]);
-        return formData;
-    }
-
     sendEditedImg(user) {
         let imgInput = document.querySelector('#avatar-edit');
-        let formData = new FormData();
-        formData.append('img', imgInput.files[0]);
-        
-        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
-            method: 'POST',
-            body: formData,
-        })
-        .then( res => res.json())
-        .then( response => console.log(response));
+        if(imgInput.files.length > 0) {
+            let formData = new FormData();
+            formData.append('img', imgInput.files[0]);
+            
+            fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then( res => res.json())
+            .then( response => console.log(response));
+        }
     }
 
     renderSummaryUsers(allFilters, summaryContainer) {
