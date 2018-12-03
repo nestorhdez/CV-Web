@@ -39,6 +39,8 @@ function NewUser(
   this.profilePicture = profilePicture;
 }
 
+let tracer = false;
+
 /** Render all items from one objetct 
  * @name getAllElements - function return element from object list.
  * @param url - field need fill in html.
@@ -48,10 +50,10 @@ getAllElements = function(url) {
     url: `https://cv-mobile-api.herokuapp.com/api/`+url,
     dataType: "json"
   }).done(function(data) {
-    console.log(data);
+    if (tracer) {console.log(data);}
     /** checkbox element*/
     /** clean container */
-    console.log("¿Scoope?, ", url);
+    if (tracer) {console.log("¿Scoope?, ", url);}
     $('#'+url).empty();
     /** insert value */
     data.forEach(function(val) {
@@ -122,13 +124,13 @@ function previewFile() {
 $("#invalidCheck2").click(function(e) {
   //Check input
   if (!$("#invalidCheck2").is(":checked")) {
-    console.log("is not checked.");
+    if (tracer){console.log("is not checked.");}
     $("#confirm-submit").attr("id", "nosubmit");
   } else {
-    console.log("is checked.");
+    if (tracer) {console.log("is checked.");}
     // Inser content in body:
     $("#nosubmit").attr("id", "confirm-submit");
-    console.log("Se muestra Modal");
+    if (tracer){console.log("Se muestra Modal");}
   }
 });
 
@@ -147,7 +149,7 @@ $("#inputGroupPrependPSW").click(function (e) {
 
 /** Listener event to submit*/
 $("#registerSubmit").submit(function(e) {
-  console.log("submit actived...");
+  if (tracer){console.log("submit actived...");}
   e.preventDefault();
   
   let labelslangs = getAllInputsLabel("langs[]");
@@ -198,7 +200,6 @@ $("#registerSubmit").submit(function(e) {
   /** Send info to API */
   function sendNewUser() {
     let userBody = createRequestBody(registered);
-    console.log(typeof userBody, userBody);
 
     fetch("https://cv-mobile-api.herokuapp.com/api/users", {
       method: "POST",
@@ -213,7 +214,7 @@ $("#registerSubmit").submit(function(e) {
         let fileForm = new FormData();
         fileForm.append("img", registered.profilePicture);
         let id_user = response._id;
-        console.log("ID: ", id_user, ". Pong: ", pong);
+        if (tracer) {console.log("ID: ", id_user, ". Pong: ", pong);}
         fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${id_user}`, {
           method: "POST",
           body: fileForm
@@ -291,29 +292,6 @@ $("#registerSubmit").submit(function(e) {
 
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
-  // *** CHECK variables ****
-  // console.log(
-  //   name,
-  //   phone,
-  //   zip,
-  //   email,
-  //   gender,
-  //   birthDate,
-  //   username,
-  //   password,
-  //   city,
-  //   country,
-  //   street,
-  //   experience,
-  //   languages,
-  //   skills,
-  //   jobTitle,
-  //   company,
-  //   website,
-  //   profilePicture
-  // );
-
-
   if (!CheckPassword(password)) {
     $("#inputPassword5")
       .addClass("border-danger is-invalid")
@@ -351,10 +329,9 @@ $("#registerSubmit").submit(function(e) {
       profilePicture
     );
 
-    console.log(registered);
+    if (tracer) {console.log(registered);}
 
     function renderModalConfirm() {
-      console.log("Inserted modal html.");
       let confirmBody = `
       <div class="container-fluid">
         <div class="col mb-1">
@@ -409,24 +386,11 @@ $("#registerSubmit").submit(function(e) {
     }
 
     renderModalConfirm();
-
-    // Need check the send info before.
-    // let confirm = false;
-    // !confirm ? console.log("No se envia") : sendNewUser();
     
     $("#userConfirmed").click(function() {
       sendNewUser();
-      // document.getElementById("registerSubmit").reset();
-      // $(".close").trigger('click');
-      // $("#modal-confirm").empty().html("...");
-      // $("#confirm-submit").attr("id", "nosubmit");
-      // $("#preview").attr("src", "");
-
     })
     
-    // Change class in submit to no luncha again modal.
     return registered;
   }
 });
-
-console.log(NewUser);
