@@ -124,6 +124,8 @@ class Users extends Model{
                 let langsLabel = feature.returnUserPropertyLabels(user.languages, langs);
     
                 $('#profilePicture').attr("src", `${user.avatar}`);
+                $('.icon-container') ? $('.icon-container').remove() : '';
+                $('#avatar-edit') ? $('#avatar-edit').remove() : '';
                     
                 $('#ModalCenterTitleUser').empty().html(user.name);
                     
@@ -175,7 +177,7 @@ class Users extends Model{
 
         $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
-        $('.user-avatar-container').append(`<label for="avatar-edit" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
         $('.modal-user-body').empty().html(bodyModal);
         user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
         user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
