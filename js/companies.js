@@ -14,7 +14,7 @@ class Companies extends Model{
         let arrayLinks = [];
         let urls = company.socialUrls;
         urls.forEach(social => {
-            switch (social.platform) {   //<a href="https://www.facebook.com" target="_blank" title="Go to facebook page."><i class="fab fa-facebook"></i></a>
+            switch (social.platform) { 
                 case 'twitter':
                     arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-twitter"></i></a>`);
                     break;
