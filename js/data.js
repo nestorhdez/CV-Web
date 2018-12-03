@@ -153,8 +153,6 @@ $("#registerSubmit").submit(function(e) {
   let labelslangs = getAllInputsLabel("langs[]");
   let labelsskills = getAllInputsLabel("skills[]");
 
-  console.log("labels:", labelslangs);
-
   /**
    * @name getCheckedBox  Create array with checked inputs in checkbox input.
    * @param {string} idinput - id input checkbox.
@@ -229,6 +227,7 @@ $("#registerSubmit").submit(function(e) {
             $("#confirm-submit").attr("id", "nosubmit");
             $("#preview").attr("src", "");
             window.location.pathname = "../html/moreinfo.html";
+            
           } else {
             alert(`Error en el envio. ${response.statusText}`);
           }})
