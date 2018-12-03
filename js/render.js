@@ -64,10 +64,10 @@ class Users extends Model{
         arrayUsers.forEach((user) => {
             let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
             let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-            document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
+            document.getElementById('cards-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
         });
 
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+        document.getElementById('cards-container').innerHTML += "<div id='loader'><div>";                
     }
 
     deleteUser(e) {
@@ -142,14 +142,14 @@ class Users extends Model{
         let bodyModal = (`
             <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
             <form id="form-edit-user">
-                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 ml-auto" id="email-edit"></label>
-                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 ml-auto" id="username-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 ml-auto" id="country-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 ml-auto" id="city-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 ml-auto" id="street-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 ml-auto" id="company-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 ml-auto" id="jobtitle-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 ml-auto" id="website-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 input-default edit-input form-control ml-auto" id="email-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 input-default edit-input form-control ml-auto" id="username-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 input-default edit-input form-control ml-auto" id="country-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="city-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="street-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="company-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="jobtitle-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="website-edit"></label>
                 <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'skills-edit-user', user)}</div>
                 <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'langs-edit-user', user)}</div>
                 <label class="d-block d-flex d-flex mt-3 card-text" for="experience-edit"><strong>Experience </strong></label>
@@ -170,12 +170,12 @@ class Users extends Model{
                     <option vale="no reply">I prefer not to say it</option>
                 </select>
                 <div class="mt-4 d-flex btn-edit-container">
-                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
+                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Save</button>
                 </div>
             </form>
         `);
 
-        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
+        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center input-default edit-title form-control" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
         $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
         $('.modal-user-body').empty().html(bodyModal);
@@ -405,16 +405,19 @@ class Users extends Model{
             this.renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
-                $( "#card-container" ).empty();
-                document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
+                $( "#cards-container" ).empty();
+                document.getElementById('cards-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             } else {
-                if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
-                this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                currentPage === 1 ? $( "#cards-container" ).empty() : '';
+                if(this.pagination(allFilters, 10, currentPage).length === 0){
+                    let title = document.getElementById('end-of-users');
+                    title ? '' : document.getElementById('cards-container').innerHTML += `<p id="end-of-users" class="text-center col-12 mt-3"> There are not more users to show </p>`;
+                } else{
+                    this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                }
                 this.setListenerModal('.btn-modal', allFilters, allSkills, allLangs, this.renderModal );
                 this.setListenerModal('.btn-edit', allFilters, allSkills, allLangs, this.renderEditUsers );
                 this.setListenerModal('.btn-delete', allFilters, allSkills, allLangs, this.deleteUser );
-                console.log(this.pagination(allFilters, 10, currentPage));
-                console.log('Current page: ' + currentPage);
             }
 
         });

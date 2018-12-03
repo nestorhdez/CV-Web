@@ -444,6 +444,5 @@ const scroll = new ScrollInfinite(listCompany ,'filterCompany').initScroll();
 $( "#adv-search-company" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-    listCompany.filterCompany(1);
-    
+    listCompany.filterCompany(1);  
 });
