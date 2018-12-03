@@ -228,6 +228,7 @@ $("#registerSubmit").submit(function(e) {
             $("#modal-confirm").empty().html("...");
             $("#confirm-submit").attr("id", "nosubmit");
             $("#preview").attr("src", "");
+            window.location.pathname = "../html/moreinfo.html";
           } else {
             alert(`Error en el envio. ${response.statusText}`);
           }})
