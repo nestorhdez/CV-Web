@@ -181,6 +181,29 @@ class Companies extends Model{
         });
     }
 
+    deleteCompany(e) {
+        console.log("click done.");
+        console.log(
+            "User will be delete: ",
+            $(e.target)[0].previousElementSibling.id
+        );
+        let companydelete = $(e.target)[0].previousElementSibling.id;
+        const del = new Companies();
+        del.sendDeleteCompany(companydelete);
+        console.log("Company deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + companydelete).remove();
+}
+
+sendDeleteCompany(user) {
+    fetch("https://cv-mobile-api.herokuapp.com/api/companies/" + user, {
+        method: "DELETE"
+    })
+        .then(response => response.json())
+        .then(jsonResponse => console.log(jsonResponse))
+        .catch(error => console.error("Error:", error));
+}
+
     filterCompany(currentPage) {
         
         new Promise((resolve) => this.getEntityApi(resolve))
@@ -254,6 +277,8 @@ class Companies extends Model{
                 this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
                 }
                 this.setListenerModal('.btn-modal', filteredCompanies, this.renderCompanyModal );
+                this.setListenerModal('.btn-delete', filteredCompanies, this.deleteCompany );
+
             }
 
         });

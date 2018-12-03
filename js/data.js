@@ -222,7 +222,7 @@ $("#registerSubmit").submit(function(e) {
         })
           .then(response => {console.log("Sucess new User:", response);
           if (response.status==200) {
-            alert('Enviado correctamente');
+            alert('Registered information.');
             document.getElementById("registerSubmit").reset();
             $(".close").trigger('click');
             $("#modal-confirm").empty().html("...");

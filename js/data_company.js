@@ -202,7 +202,18 @@ $("#registerCompanySubmit").submit(function(e) {
           method: "POST",
           body: fileForm
         })
-        .then(response => console.log(response))
+        .then(response => {console.log(response);
+        if (response.status==200) {
+          alert('Registered information.');
+          document.getElementById("registerCompanySubmit").reset();
+          //$(".close").trigger('click');
+          //$("#modal-confirm").empty().html("...");
+          $("#preview").attr("src", "");
+          window.location.pathname = "../html/landpage-comp.html";
+        } else {
+          alert(`Error when sending. ${response.statusText}`);
+        }
+        })
         .catch(error => console.log(error.message));
   })}
 
