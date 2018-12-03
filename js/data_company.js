@@ -115,7 +115,9 @@ $("#registerCompanySubmit").submit(function(e) {
   $("input[type=url]").each(function() {
     let key = $(this).attr("name");
     let url = $(this).val();
-    socialUrls.push({"platform": key, "url": url});
+    if (url != "") {
+      socialUrls.push({"platform": key, "url": url});
+    }
   })
   console.log("SM", socialUrls);
   // let socialUrls = []
@@ -177,26 +179,28 @@ $("#registerCompanySubmit").submit(function(e) {
     <div class="container-fluid">
       <div class="col mb-1">
         <fieldset class="mx-auto">
-          <legend>Login data</legend>
+          <legend>Company</legend>
           <div id="imgavatar" class="col-6 mb-4"></div>
           <div class="col">
             <p><strong>Name: </strong>${registered.name}</p>
           </div>
         </fieldset>
         <address class="mx-auto">
-          <legend>Contact data</legend>
-            <div class="row">
-              <div class="col">
-                <h6 class="mb-2">Address data</h6>
-                <p><strong>City: </strong>${registered.city}</p>
-                <p><strong>Country: </strong>${registered.country}</p>
-                <p><strong>Street: </strong>${registered.street}</p>
-                <p><strong>Zip: </strong>${registered.zip}</p>
-              </div>
-              <div class="col">
-                <p>Aquí va el render de las urls socials</p>
+          <legend>Address data</legend>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <p><strong>City: </strong>${registered.city}</p>
+                  <p><strong>Country: </strong>${registered.country}</p>
+                  <p><strong>Street: </strong>${registered.street}</p>
+                  <p><strong>Zip: </strong>${registered.zip}</p>
+                </div>
+                <div class="col">
+                  <p>Aquí va el render de las urls socials</p>
+                </div>
               </div>
             </div>
+            
         </address>
         <fieldset class="mx-auto">
           <legend>Contact data</legend>
@@ -273,7 +277,7 @@ $("#registerCompanySubmit").submit(function(e) {
           //$(".close").trigger('click');
           //$("#modal-confirm").empty().html("...");
           $("#preview").attr("src", "");
-          window.location.pathname = "../html/landpage-comp.html";
+          // Comment to see console, delete when run. window.location.pathname = "../html/landpage-comp.html";
         } else {
           alert(`Error when sending. ${response.statusText}`);
         }
