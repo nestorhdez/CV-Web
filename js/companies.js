@@ -3,7 +3,8 @@ class Companies extends Model{
     constructor( url, summaryContainer ) {
         super( url );
         this.summaryContainer = summaryContainer;
-        this.createHtmlCompanyModal = this.createHtmlCompanyModal.bind(this);
+        this.renderCompanyModal = this.renderCompanyModal.bind(this);
+        this.renderEditCompany = this.renderEditCompany.bind(this);
     }
 
     pagination (arr, perpage, page) {     
@@ -193,7 +194,6 @@ class Companies extends Model{
 
     renderCompanyModal(e, arrayCompanies) {
 
-        const comp = new Companies();
         arrayCompanies.forEach( (company) => {
             
             if(company._id == e.target.id){
@@ -202,7 +202,7 @@ class Companies extends Model{
                 $('.icon-container') ? $('.icon-container').remove() : '';
                 $('#avatar-edit') ? $('#avatar-edit').remove() : '';          
                 $('#Title-company').empty().html(company.name);
-                $('.modal-company-body').empty().html(comp.createHtmlCompanyModal(company));
+                $('.modal-company-body').empty().html(this.createHtmlCompanyModal(company));
                 
             }
         });
@@ -346,12 +346,12 @@ class Companies extends Model{
             
             if(company._id === e.target.nextElementSibling.id) {
                 
-                listCompany.createFormEditCompany(company);
+                this.createFormEditCompany(company);
                
                 $('#edit-company-btn').click((e) =>{
                     e.preventDefault();
-                    listCompany.sendEditedCompany(listCompany.createObjectEditCompany(company));
-                    listCompany.sendEditedImg(company);
+                    this.sendEditedCompany(this.createObjectEditCompany(company));
+                    this.sendEditedImg(company);
                 });   
             }
         })

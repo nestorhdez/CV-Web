@@ -6,8 +6,8 @@ class Users extends Model{
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
         this.renderModal = this.renderModal.bind(this);
-        this.createFormEditUser = this.createFormEditUser.bind(this);
-        this.createObjectEditUser = this.createObjectEditUser.bind(this);
+        this.renderEditUsers = this.renderEditUsers.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
@@ -68,20 +68,6 @@ class Users extends Model{
         });
 
         document.getElementById('cards-container').innerHTML += "<div id='loader'><div>";                
-    }
-
-    deleteUser(e) {
-            console.log("click done.");
-            console.log(
-              "User will be delete: ",
-              $(e.target)[0].previousElementSibling.id
-            );
-            let userdelete = $(e.target)[0].previousElementSibling.id;
-            const del = new Users();
-            del.sendDeleteUser(userdelete);
-            console.log("usuario deleted.");
-            console.log("This: ", $(e.target));
-            $("#card_" + userdelete).remove();
     }
 
     createHtmlUserModal(user, skills, langs) {
@@ -190,12 +176,12 @@ class Users extends Model{
             
             if(user._id === e.target.nextElementSibling.id) {
                 
-                listUsers.createFormEditUser(user);
+                this.createFormEditUser(user);
 
                 $('#edit-user-btn').click((e) =>{
                     e.preventDefault();
-                    listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
-                    listUsers.sendEditedImg(user);
+                    this.sendEditedUser(this.createObjectEditUser(user));
+                    this.sendEditedImg(user);
                 });   
             }
         })
@@ -256,15 +242,6 @@ class Users extends Model{
         .then( response => console.log(response));
     }
 
-    sendDeleteUser(user) {
-        fetch("https://cv-mobile-api.herokuapp.com/api/users/" + user, {
-            method: "DELETE"
-        })
-            .then(response => response.json())
-            .then(jsonResponse => console.log(jsonResponse))
-            .catch(error => console.error("Error:", error));
-    }
-
     sendEditedImg(user) {
         let imgInput = document.querySelector('#avatar-edit');
         if(imgInput.files.length > 0) {
@@ -278,6 +255,28 @@ class Users extends Model{
             .then( res => res.json())
             .then( response => console.log(response));
         }
+    }
+
+    deleteUser(e) {
+        console.log("click done.");
+        console.log(
+          "User will be delete: ",
+          $(e.target)[0].previousElementSibling.id
+        );
+        let userdelete = $(e.target)[0].previousElementSibling.id;
+        this.sendDeleteUser(userdelete);
+        console.log("usuario deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + userdelete).remove();
+    }
+
+    sendDeleteUser(user) {
+        fetch("https://cv-mobile-api.herokuapp.com/api/users/" + user, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(jsonResponse => console.log(jsonResponse))
+            .catch(error => console.error("Error:", error));
     }
 
     renderSummaryUsers(allFilters, summaryContainer) {
