@@ -191,7 +191,7 @@ class Users extends Model{
             if(user._id === e.target.nextElementSibling.id) {
                 
                 listUsers.createFormEditUser(user);
-               
+
                 $('#edit-user-btn').click((e) =>{
                     e.preventDefault();
                     listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
