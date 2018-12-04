@@ -294,6 +294,7 @@ $("#registerCompanySubmit").submit(function(e) {
   renderModalConfirm();
 
   $("#CompanyConfirmed").click(function() {
+    console.log("Confirmed.")
     sendNewCompany();
   });
 }

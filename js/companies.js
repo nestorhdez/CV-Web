@@ -64,7 +64,7 @@ class Companies extends Model{
                             <div class="card-text">
                                 ${company.address.country ? `<p class="m-0 text-capitalize"><strong>country: </strong>${company.address.country}</p>` : ''}
                                 ${company.address.street ? `<p class="m-0 text-capitalize"><strong>street: </strong>${company.address.street}</p>` : ''}
-                                ${company.address.city ? `<p class="m-0 text-capitalize"><strong>city: </strong>${company.address.street}</p>` : ''}
+                                ${company.address.city ? `<p class="m-0 text-capitalize"><strong>city: </strong>${company.address.city}</p>` : ''}
                                 ${company.address.zipcode ? `<p class="m-0 text-capitalize"><strong>zipcode: </strong>${company.address.zipcode}</p>` : ''}
                             </div>  
                         </div>
@@ -82,19 +82,6 @@ class Companies extends Model{
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <h6>About us</h6>
-                            ${company.bio ? `<p class="card-text">${company.bio}</p>` : '' }
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="row pl-5">
-                        <!--Only show when have Offert Jobs o search employees-->
-                        <p class="mr-3"><i class="fas fa-search mr-2"></i><a href="url">Search employees</a></p>
-                        ${company.jobOffers.length > 0 ? `<p class="mr-2"><i class="fas fa-file-signature mr-2"></i><a href="url">Offert job: ${company.jobOffers.length}</a></p>`: ''}
-                    </div>
-                </div>
                 </div>
             </div>
             `)
