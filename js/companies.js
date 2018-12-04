@@ -14,7 +14,7 @@ class Companies extends Model{
         let arrayLinks = [];
         let urls = company.socialUrls;
         urls.forEach(social => {
-            switch (social.platform) {   //<a href="https://www.facebook.com" target="_blank" title="Go to facebook page."><i class="fab fa-facebook"></i></a>
+            switch (social.platform) { 
                 case 'twitter':
                     arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-twitter"></i></a>`);
                     break;
@@ -181,6 +181,29 @@ class Companies extends Model{
         });
     }
 
+    deleteCompany(e) {
+        console.log("click done.");
+        console.log(
+            "User will be delete: ",
+            $(e.target)[0].previousElementSibling.id
+        );
+        let companydelete = $(e.target)[0].previousElementSibling.id;
+        const del = new Companies();
+        del.sendDeleteCompany(companydelete);
+        console.log("Company deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + companydelete).remove();
+}
+
+sendDeleteCompany(user) {
+    fetch("https://cv-mobile-api.herokuapp.com/api/companies/" + user, {
+        method: "DELETE"
+    })
+        .then(response => response.json())
+        .then(jsonResponse => console.log(jsonResponse))
+        .catch(error => console.error("Error:", error));
+}
+
     filterCompany(currentPage) {
         
         new Promise((resolve) => this.getEntityApi(resolve))
@@ -254,6 +277,8 @@ class Companies extends Model{
                 this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
                 }
                 this.setListenerModal('.btn-modal', filteredCompanies, this.renderCompanyModal );
+                this.setListenerModal('.btn-delete', filteredCompanies, this.deleteCompany );
+
             }
 
         });

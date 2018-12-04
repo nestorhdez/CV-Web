@@ -49,13 +49,25 @@ function previewFile() {
   }
 }
 
+$("#invalidCheck2").click(function(e) {
+  //Check input
+  if (!$("#invalidCheck2").is(":checked")) {
+    console.log("is not checked.");
+    $("#confirm-submit").attr("id", "nosubmit");
+  } else {
+    console.log("is checked.");
+    // Inser content in body:
+    $("#nosubmit").attr("id", "confirm-submit");
+    console.log("Se muestra Modal");
+  }
+});
+
 $("#registerCompanySubmit").submit(function(e) {
   console.log("sumit actived.");
   e.preventDefault();
   
   // Need check CIF-NIF
-  // método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
-
+  // Método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
   String.prototype.isNif=function()
   {
     return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
@@ -103,7 +115,9 @@ $("#registerCompanySubmit").submit(function(e) {
   $("input[type=url]").each(function() {
     let key = $(this).attr("name");
     let url = $(this).val();
-    socialUrls.push({"platform": key, "url": url});
+    if (url != "") {
+      socialUrls.push({"platform": key, "url": url});
+    }
   })
   console.log("SM", socialUrls);
   // let socialUrls = []
@@ -159,6 +173,60 @@ $("#registerCompanySubmit").submit(function(e) {
     socialUrls,
   )
 
+  function renderModalConfirm() {
+    console.log("Inserted modal html.");
+    let confirmBody = `
+    <div class="container-fluid">
+      <div class="col mb-1">
+        <fieldset class="mx-auto">
+          <legend>Company</legend>
+          <div id="imgavatar" class="col-6 mb-4"></div>
+          <div class="col">
+            <p><strong>Name: </strong>${registered.name}</p>
+          </div>
+        </fieldset>
+        <address class="mx-auto">
+          <legend>Address data</legend>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <p><strong>City: </strong>${registered.city}</p>
+                  <p><strong>Country: </strong>${registered.country}</p>
+                  <p><strong>Street: </strong>${registered.street}</p>
+                  <p><strong>Zip: </strong>${registered.zip}</p>
+                </div>
+                <div class="col">
+                  <p>Aquí va el render de las urls socials</p>
+                </div>
+              </div>
+            </div>
+            
+        </address>
+        <fieldset class="mx-auto">
+          <legend>Contact data</legend>
+          <div class="col">
+            <p><strong>Phone: </strong>${registered.phone}</p>
+            <p><strong>Email: </strong>${registered.email}</p>
+          </div>
+        </fieldset>
+        <fieldset class="mx-auto">
+          <legend>Bio info:</legend>
+          <div class="col">
+            <p><strong>Employees: </strong>${registered.employes}</p>
+            <p><strong>About us: </strong>${registered.bio}</p>
+          </div>
+        </fieldset>
+      </div>
+    <div>
+    `;
+    
+    $("#modal-confirm")
+    .empty()
+    .html(confirmBody);
+
+    $( "#preview" ).clone().appendTo( "#imgavatar" );
+  }
+
   function createRequestBody() {
     let body = {
     "name": registered.name,
@@ -202,10 +270,25 @@ $("#registerCompanySubmit").submit(function(e) {
           method: "POST",
           body: fileForm
         })
-        .then(response => console.log(response))
+        .then(response => {console.log(response);
+        if (response.status==200) {
+          alert('Registered information.');
+          document.getElementById("registerCompanySubmit").reset();
+          //$(".close").trigger('click');
+          //$("#modal-confirm").empty().html("...");
+          $("#preview").attr("src", "");
+          // Comment to see console, delete when run. window.location.pathname = "../html/landpage-comp.html";
+        } else {
+          alert(`Error when sending. ${response.statusText}`);
+        }
+        })
         .catch(error => console.log(error.message));
   })}
 
-  sendNewCompany();
-  }
+  renderModalConfirm();
+
+  $("#CompanyConfirmed").click(function() {
+    sendNewCompany();
+  });
+}
 })
