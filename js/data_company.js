@@ -122,7 +122,7 @@ $("#registerCompanySubmit").submit(function(e) {
     }
   })
 
-  console.log(
+  console.log("Valores registrados: ",
     name,
     phone,
     email,
@@ -134,7 +134,7 @@ $("#registerCompanySubmit").submit(function(e) {
     country,
     "web: ", website,
     "logo: ", logo,
-    "bio", bio,
+    "bio: ", bio,
     jobOffers,
     employes,
     socialUrls,

@@ -245,7 +245,7 @@ class Companies extends Model{
                 <label class="d-block d-flex mt-3 card-text" for="platform-edit"><strong class="align-self-center">Platform</strong> <input name="" value="" placeholder="Facebook, Twitter..." type="text" id="platform-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <label class="d-block d-flex mt-1 card-text" for="url-edit"><strong class="align-self-center">URL</strong> <input name="" value="" type="text" id="url-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <button id="btn-add-social" class="btn-transparent">Add link  <i class="fas fa-plus-circle"></i></button>
-                ${company.socialUrls.length > 0 ? '<div class="edit-link-container d-flex mt-2 mb-2">' + this.renderLinkSocial(company).join(' ') + '</div>' : ''}
+                ${company.socialUrls.length > 0 ? `<div class="edit-link-container d-flex mt-2 mb-2">${this.renderLinkSocial(company).join(' ')}</div>` : ''}
                 </div>
                 <div class="mt-4 d-flex btn-edit-container">
                     <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-company-btn">Save</button>
