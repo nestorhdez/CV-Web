@@ -280,10 +280,10 @@ $("#registerCompanySubmit").submit(function(e) {
         if (response.status==200) {
           alert('Registered information.');
           document.getElementById("registerCompanySubmit").reset();
-          //$(".close").trigger('click');
-          //$("#modal-confirm").empty().html("...");
+          $(".close").trigger('click');
+          $("#modal-confirm").empty().html("...");
           $("#preview").attr("src", "");
-          // Comment to see console, delete when run. window.location.pathname = "../html/landpage-comp.html";
+          window.location.pathname = "../html/landpage-comp.html";
         } else {
           alert(`Error when sending. ${response.statusText}`);
         }

@@ -79,7 +79,7 @@ class Companies extends Model{
                     </div>
                     <div class="card-header d-inline-flex justify-content-start align-items-center">
                         <div class="profile-picture mr-3">
-                            <img class="logo img-user rounded-circle" src="${company.logo}" alt="logo company">
+                            <img class="logo profile-picture rounded-circle" src="${company.logo}" alt="logo company">
                         </div>
                         <h5 class="card-title company-name text-capitalize">${company.name}</h5>
                     </div>  
