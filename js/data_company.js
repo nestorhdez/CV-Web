@@ -50,23 +50,38 @@ function previewFile() {
 }
 
 /** Listener to activate modal if all info is complete. */
-$("#invalidCheck2").click(function(e) {
+function ShowModal() {
   //Check input
-  if (!$("#invalidCheck2").is(":checked")) {
-    console.log("is not checked.");
-    $("#confirm-submit").attr("id", "nosubmit");
-  } else {
-    console.log("is checked.");
+  // if (!$("#invalidCheck2").is(":checked")) {
+  //   console.log("is not checked.");
+  //   $("#confirm-submit").attr("id", "nosubmit");
+  // } else {
+  //   console.log("is checked.");
     // Inser content in body:
-    $("#nosubmit").attr("id", "confirm-submit");
+    $("#confirm-submit").modal('show');
     console.log("Se muestra Modal");
-  }
-});
+  // }
+}
 
 $("#registerCompanySubmit").submit(function(e) {
-  console.log("sumit actived.");
   e.preventDefault();
-  
+  console.log("sumit actived.");
+  let inputtrue = true;
+  /** Check inputs */
+  $(".input-validate").each(function(index, element){
+    // console.log($(this));
+    if($(this)[0].validity.valid == false){
+      console.log($(element)[0].validationMessage);
+      $(element).addClass("border-danger").prop('title', $(element)[0].validationMessage);
+      $(element).tooltip('show');
+      inputtrue = false;
+    } else {
+      console.log("Remove class bd.");
+      $(element).removeClass("border-danger is-invalid");
+    };
+
+  });
+
   // Need check CIF-NIF
   // Método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
   String.prototype.isNif=function()
@@ -95,7 +110,6 @@ $("#registerCompanySubmit").submit(function(e) {
     const reg = /[&<>"'/]/ig;
     return string.replace(reg, (match)=>(map[match]));
   }
-
 
   let name = sanitarize($("#validationCompname").val());
   let phone = $("#InputPhone").val();
@@ -290,6 +304,9 @@ $("#registerCompanySubmit").submit(function(e) {
         })
         .catch(error => console.log(error.message));
   })}
+
+  if (inputtrue) { 
+    ShowModal()};
 
   renderModalConfirm();
 
