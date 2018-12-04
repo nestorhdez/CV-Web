@@ -10,30 +10,57 @@ class Companies extends Model{
         return arr.slice(perpage*(page-1), perpage*page);
     }
 
-    createLinksToSocialMedia(company) {
+    createArrayOfForm(form, array) {
+        for (let i = 0; i < form.length; i++) {
+            array.push(form[i]);
+        }
+    }
+
+    createLinkSocial(social) {
+        return `<a href="${social.url}" title="${social.url}" id="${social.platform.toLowerCase()}-link" class="icon-link mr-3" target="_blank"><i class="fab fa-${social.platform.toLowerCase()}"></i></a>`;
+    }
+
+    addLinkOnEditCompany() {
+        let platform = document.querySelector('#platform-edit').value;
+        let url = document.querySelector('#url-edit').value;
+        let social = {
+            platform: platform,
+            url: url,
+        }
+        platform && url !== '' ? document.querySelector('.edit-link-container').innerHTML += this.createLinkSocial(social) : '';
+        document.querySelector('#platform-edit').value = '';
+        document.querySelector('#url-edit').value = '';
+        this.addDeleteBtnLinks();
+        $('.delete-link').click((e) => {
+            e.preventDefault();
+            this.deleteSocialLinks(e);
+        });
+    }
+
+    addDeleteBtnLinks() {
+        let links = document.querySelectorAll('.edit-link-container')[0].childNodes;
+        links.forEach((link) => {
+
+            if(link.childNodes.length <= 1) {
+                link.className += ' position-relative';
+                link.innerHTML += (`
+                    <button class="delete-link position-absolute btn-transparent btn-delete-link" style="">
+                        <i class="icon-delete-link far fa-times-circle"></i>
+                    </button>
+                `);
+            }
+        });
+    }
+
+    deleteSocialLinks(e) {
+        e.target.parentNode.parentNode.remove();
+    }
+
+    renderLinkSocial(company) {
         let arrayLinks = [];
         let urls = company.socialUrls;
         urls.forEach(social => {
-            switch (social.platform) { 
-                case 'twitter':
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-twitter"></i></a>`);
-                    break;
-                case 'facebook':
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-facebook"></i></a>`);
-                    break;
-                case 'instagram':
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-instagram"></i></a>`);
-                    break;
-                case 'linkedin':
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-linkedin"></i></a>`);
-                    break;
-                case 'youtube':
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-youtube"></i></a>`);
-                    break;
-                default:
-                    arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url} page" target="_blank" class="mr-1"><i class="fab fa-${social.platform.toLowerCase()}"></i></a>`);
-                    break;
-            }
+            arrayLinks.push(this.createLinkSocial(social));
         })
         return arrayLinks;
     }
@@ -77,7 +104,7 @@ class Companies extends Model{
                                 <label class="mb-1"><strong>Social Media:</strong></label>
                                 <div class="col pl-0">
                                     <!--Only need show when have url -->
-                                    ${company.socialUrls.length > 0 ? this.createLinksToSocialMedia(company).join(' ') : ''}
+                                    ${company.socialUrls.length > 0 ? this.renderLinkSocial(company).join(' ') : ''}
                                 </div>
                             </div>
                         </div>
@@ -121,7 +148,7 @@ class Companies extends Model{
                     <label for=""><strong>Social Media:</strong></label>
                     <div class="col">
                         <!-- Only need show when have url-->
-                        ${company.socialUrls.length > 0 ? this.createLinksToSocialMedia(company).join(' ') : ''}
+                        ${company.socialUrls.length > 0 ? this.renderLinkSocial(company).join(' ') : ''}
                     </div>
                 </div>
             </div>
@@ -159,9 +186,9 @@ class Companies extends Model{
             if(company._id == e.target.id){
     
                 $('#logo-company').attr("src", `${company.logo}`);
-                    
+                $('.icon-container') ? $('.icon-container').remove() : '';
+                $('#avatar-edit') ? $('#avatar-edit').remove() : '';          
                 $('#Title-company').empty().html(company.name);
-                    
                 $('.modal-company-body').empty().html(comp.createHtmlCompanyModal(company));
                 
             }
@@ -180,16 +207,165 @@ class Companies extends Model{
         console.log("Company deleted.");
         console.log("This: ", $(e.target));
         $("#card_" + companydelete).remove();
-}
+    }  
 
-sendDeleteCompany(user) {
-    fetch("https://cv-mobile-api.herokuapp.com/api/companies/" + user, {
-        method: "DELETE"
-    })
-        .then(response => response.json())
-        .then(jsonResponse => console.log(jsonResponse))
-        .catch(error => console.error("Error:", error));
-}
+    sendDeleteCompany(user) {
+        fetch("https://cv-mobile-api.herokuapp.com/api/companies/" + user, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(jsonResponse => console.log(jsonResponse))
+            .catch(error => console.error("Error:", error));
+    }
+
+    createFormEditCompany(company) {
+        
+        let bodyModal = (`
+            <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
+            <form id="form-edit-company">
+                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input name="email" value="${company.email}" required type="email" class="pl-1 input-default edit-input form-control ml-auto" id="email-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Phone </strong><input name="phone" value="${company.phone}" type="tel" class="pl-1 input-default edit-input form-control ml-auto" id="phone-edit"></label>
+                <label class="d-block d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input name="address-country" value="${company.address.country}" required type="text" class="pl-1 input-default edit-input form-control ml-auto" id="country-edit"></label>
+                <label class="d-block d-flex mt-3 card-text text-capitalize"><strong>City </strong><input name="address-city" value="${company.address.city ? company.address.city : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="city-edit"></label>
+                <label class="d-block d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input name="address-street" value="${company.address.street ? company.address.street : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="street-edit"></label>
+                <label class="d-block d-flex mt-3 card-text text-capitalize"><strong>Zip </strong><input name="address-zipcode" value="${company.address.zipcode ? company.address.zipcode : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="zip-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Website </strong><input name="website" value="${company.website ? company.website : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="website-edit"></label>
+                <label class="d-block d-flex mt-3 card-text" for="docType-edit"><strong>Document type </strong>
+                    <select name="docType" id="docType-edit" class="ml-auto form-control input-default edit-input custom-select">
+                        <option value="">Doc type</option>
+                        <option value="nif">NIF</option>
+                        <option value="cif">CIF</option>
+                    </select>
+                </label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Document number</strong><input name="docNumber" value="${company.docNumber ? company.docNumber : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="docNumber-edit"></label>
+                <label for="bio-edit" name="bio" class="d-block d-flex mt-3 card-text"><strong>Bio</strong></label>
+                <textarea name="bio" id="bio-edit" rows="4" cols="50" class="pl-1 input-default form-control">${company.bio ? company.bio : ''}</textarea>
+                <p class="mt-3 font-weight-bold card-text" > Social Media </p>
+                <div class="d-flex flex-column social-edit-container">
+                <label class="d-block d-flex mt-3 card-text" for="platform-edit"><strong class="align-self-center">Platform</strong> <input name="" value="" placeholder="Facebook, Twitter..." type="text" id="platform-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
+                <label class="d-block d-flex mt-1 card-text" for="url-edit"><strong class="align-self-center">URL</strong> <input name="" value="" type="text" id="url-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
+                <button id="btn-add-social" class="btn-transparent">Add link  <i class="fas fa-plus-circle"></i></button>
+                ${company.socialUrls.length > 0 ? '<div class="edit-link-container d-flex mt-2 mb-2">' + this.renderLinkSocial(company).join(' ') + '</div>' : ''}
+                </div>
+                <div class="mt-4 d-flex btn-edit-container">
+                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-company-btn">Save</button>
+                </div>
+            </form>
+        `);
+
+        $('#Title-company').empty().html(`<input name="name" value="${company.name}" class="input-default edit-title form-control text-center" form="form-edit-company" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
+        $('#logo-company').attr("src", company.logo);
+        $('.company-logo-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('.modal-company-body').empty().html(bodyModal);
+        company.docType !== '' ? document.querySelector('#docType-edit').value = company.docType : '';
+
+        this.addDeleteBtnLinks();
+
+        $('#btn-add-social').click((e) => {
+            e.preventDefault();
+            this.addLinkOnEditCompany();
+        });
+        $('.delete-link').click((e) => {
+            e.preventDefault();
+            this.deleteSocialLinks(e);
+        });
+    }
+
+    createObjectEditCompany(company) {
+        let companyEdited = company;
+        let form = document.querySelector('#form-edit-company').elements;
+        let arrayForm = [];
+        this.createArrayOfForm(form, arrayForm);
+
+        arrayForm.forEach((input) => {
+
+            if(input.name !== ''){
+
+                let name = input.name.split('-')[0]
+                switch (name) {
+                    case  'address':
+                        companyEdited[input.name.split('-')[0]][input.name.split('-')[1]] = input.value;
+                        break;
+                    default:
+                        companyEdited[input.name] = input.value;
+                        break;
+                }   
+            }
+        });
+
+        let socialEditedArray = [];
+        let platformEditedArray = [];
+        document.querySelector('.edit-link-container').querySelectorAll('.icon-link').forEach(social => socialEditedArray.push(social));
+        let platformCompanyArray = [];
+        let urlCompanyArray = [];
+
+        companyEdited.socialUrls.forEach(social => {
+            platformCompanyArray.push(social.platform); 
+            urlCompanyArray.push(social.url);
+        });
+
+        socialEditedArray.forEach(social => {
+            let platformEditedSocial = social.id.split('-')[0];
+            platformEditedArray.push(platformEditedSocial);
+            if(platformCompanyArray.includes(platformEditedSocial)){
+                urlCompanyArray.includes(social.title) ? '' : companyEdited[platformCompanyArray.indexOf(platformEditedSocial)].url = social.title;
+            }else{
+                let newSocial = {
+                    platform: platformEditedSocial,
+                    url: social.title,
+                }
+                companyEdited.socialUrls.push(newSocial);
+            }
+        }); 
+        platformCompanyArray.forEach(platform => {
+            platformEditedArray.includes(platform) ? '' : companyEdited.socialUrls.splice(platformCompanyArray.indexOf(platform), 1);
+        })
+        console.log("Edited: ", companyEdited);
+        return companyEdited;
+    }
+
+    sendEditedCompany(company) {
+        
+        fetch(`https://cv-mobile-api.herokuapp.com/api/companies/${company._id}`, {
+            method: 'PUT',
+            body: JSON.stringify(company),
+            headers: { "Content-Type": "application/json; charset=utf-8" }
+        })
+        .then( res => res.json())
+        .then( response => console.log(response));
+    }
+
+    sendEditedImg(company) {
+        let imgInput = document.querySelector('#avatar-edit');
+        if(imgInput.files.length > 0){
+            let formData = new FormData();
+            formData.append('img', imgInput.files[0]);
+            
+            fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/company/${company._id}`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then( res => res.json())
+            .then( response => console.log(response));
+        }
+    }
+
+    renderEditCompany(e, arr) {
+        
+        arr.forEach(company => {
+            
+            if(company._id === e.target.nextElementSibling.id) {
+                
+                listCompany.createFormEditCompany(company);
+
+                $('#edit-company-btn').click((e) =>{
+                    e.preventDefault();
+                    listCompany.sendEditedCompany(listCompany.createObjectEditCompany(company));
+                    listCompany.sendEditedImg(company);
+                });   
+            }
+        })
+    };
 
     filterCompany(currentPage) {
         
@@ -198,9 +374,7 @@ sendDeleteCompany(user) {
 
             let form = document.querySelector('#adv-search-company').elements;
             let arrayForm = [];
-            for (let i = 0; i < form.length; i++) {
-                arrayForm.push(form[i]);
-            }
+            this.createArrayOfForm(form, arrayForm);
 
             function removeFilteredCompany(company){
                 if(filteredCompanies.includes(company)){
@@ -263,9 +437,10 @@ sendDeleteCompany(user) {
                 } else {
                 this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
                 }
+
                 this.setListenerModal('.btn-modal', filteredCompanies, this.renderCompanyModal );
                 this.setListenerModal('.btn-delete', filteredCompanies, this.deleteCompany );
-
+                this.setListenerModal('.btn-edit', filteredCompanies, this.renderEditCompany );
             }
 
         });
@@ -273,12 +448,11 @@ sendDeleteCompany(user) {
 
 }
 
-const company = new Companies('https://cv-mobile-api.herokuapp.com/api/companies');
-const scroll = new ScrollInfinite(company ,'filterCompany').initScroll();
+const listCompany = new Companies('https://cv-mobile-api.herokuapp.com/api/companies');
+const scroll = new ScrollInfinite(listCompany ,'filterCompany').initScroll();
 
 $( "#adv-search-company" ).on( "submit", function(e) {
     //Don't refresh the page when submit
     e.preventDefault();
-    company.filterCompany(1);
-    
+    listCompany.filterCompany(1);  
 });
