@@ -112,6 +112,7 @@ class Users extends Model{
                 $('#profilePicture').attr("src", `${user.avatar}`);
                 $('.icon-container') ? $('.icon-container').remove() : '';
                 $('#avatar-edit') ? $('#avatar-edit').remove() : '';
+                $('#confirmation-img') ? $('#confirmation-img').remove() : '';
                     
                 $('#ModalCenterTitleUser').empty().html(user.name);
                     
@@ -163,7 +164,8 @@ class Users extends Model{
 
         $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center input-default edit-title form-control" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
-        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('#confirmation-img') ? $('#confirmation-img').remove() : '';
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`);
         $('.modal-user-body').empty().html(bodyModal);
         user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
         user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
@@ -232,18 +234,23 @@ class Users extends Model{
     }
 
     sendEditedUser(user) {
-        
+        let confirmation = document.querySelector('#confirmation-edit');
+
         fetch(`https://cv-mobile-api.herokuapp.com/api/users/${user._id}`, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: { "Content-Type": "application/json; charset=utf-8" }
         })
         .then( res => res.json())
-        .then( response => console.log(response));
+        .then( response => console.log(response))
+        .then(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: green;" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .catch(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
     sendEditedImg(user) {
+        let imgConfirmation = document.querySelector('#confirmation-img');
         let imgInput = document.querySelector('#avatar-edit');
+
         if(imgInput.files.length > 0) {
             let formData = new FormData();
             formData.append('img', imgInput.files[0]);
@@ -253,7 +260,9 @@ class Users extends Model{
                 body: formData,
             })
             .then( res => res.json())
-            .then( response => console.log(response));
+            .then( response => console.log(response))
+            .then(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: green;" class="text-center mt-2 mb-0">Image saved correctly</p>'))
+            .catch(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: red;" class="text-center mt-2 mb-0">Error to save the new image</p>'));
         }
     }
 

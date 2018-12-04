@@ -315,6 +315,7 @@ class Companies extends Model{
     }
 
     sendEditedCompany(company) {
+        let confirmation = document.querySelector('#confirmation-edit');
         
         fetch(`https://cv-mobile-api.herokuapp.com/api/companies/${company._id}`, {
             method: 'PUT',
@@ -322,11 +323,15 @@ class Companies extends Model{
             headers: { "Content-Type": "application/json; charset=utf-8" }
         })
         .then( res => res.json())
-        .then( response => console.log(response));
+        .then( response => console.log(response))
+        .then(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .catch(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
     sendEditedImg(company) {
+        let imgConfirmation = document.querySelector('#confirmation-img');
         let imgInput = document.querySelector('#avatar-edit');
+
         if(imgInput.files.length > 0){
             let formData = new FormData();
             formData.append('img', imgInput.files[0]);
@@ -336,7 +341,8 @@ class Companies extends Model{
                 body: formData,
             })
             .then( res => res.json())
-            .then( response => console.log(response));
+            .then( response => console.log(response))
+            .catch(() => imgConfirmation ? '' : $('.modal-company-body').append('<p id="confirmation-img" class="text-center mt-2 mb-2">Error to save the new image</p>'));
         }
     }
 
