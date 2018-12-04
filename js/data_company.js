@@ -49,6 +49,7 @@ function previewFile() {
   }
 }
 
+/** Listener to activate modal if all info is complete. */
 $("#invalidCheck2").click(function(e) {
   //Check input
   if (!$("#invalidCheck2").is(":checked")) {
@@ -112,6 +113,7 @@ $("#registerCompanySubmit").submit(function(e) {
   let employes = $("#validationemployees").val(); // Numbers
 
   let socialUrls = [];
+
   $("input[type=url]").each(function() {
     let key = $(this).attr("name");
     let url = $(this).val();
@@ -119,8 +121,6 @@ $("#registerCompanySubmit").submit(function(e) {
       socialUrls.push({"platform": key, "url": url});
     }
   })
-  console.log("SM", socialUrls);
-  // let socialUrls = []
 
   console.log(
     name,
@@ -173,6 +173,15 @@ $("#registerCompanySubmit").submit(function(e) {
     socialUrls,
   )
 
+  function renderSocialLinks(company) {
+    let arrayLinks = [];
+    let urls = company.socialUrls;
+    urls.forEach(social => {
+        arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url}" id="${social.platform.toLowerCase()}-link" class="icon-link mr-1" target="_blank"><i class="fab fa-${social.platform.toLowerCase()}"></i></a>`);
+    })
+    return arrayLinks;
+  }
+
   function renderModalConfirm() {
     console.log("Inserted modal html.");
     let confirmBody = `
@@ -187,26 +196,23 @@ $("#registerCompanySubmit").submit(function(e) {
         </fieldset>
         <address class="mx-auto">
           <legend>Address data</legend>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <p><strong>City: </strong>${registered.city}</p>
-                  <p><strong>Country: </strong>${registered.country}</p>
-                  <p><strong>Street: </strong>${registered.street}</p>
-                  <p><strong>Zip: </strong>${registered.zip}</p>
-                </div>
-                <div class="col">
-                  <p>Aquí va el render de las urls socials</p>
-                </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <p><strong>City: </strong>${registered.city}</p>
+                <p><strong>Country: </strong>${registered.country}</p>
+                <p><strong>Street: </strong>${registered.street}</p>
+                <p><strong>Zip: </strong>${registered.zip}</p>
               </div>
             </div>
-            
+          </div>            
         </address>
         <fieldset class="mx-auto">
           <legend>Contact data</legend>
           <div class="col">
             <p><strong>Phone: </strong>${registered.phone}</p>
             <p><strong>Email: </strong>${registered.email}</p>
+            <p><strong>Social Media: </strong>${registered.socialUrls.length > 0 ? renderSocialLinks(registered).join(' ') : ''}</p>                  
           </div>
         </fieldset>
         <fieldset class="mx-auto">
