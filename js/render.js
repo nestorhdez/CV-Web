@@ -6,8 +6,8 @@ class Users extends Model{
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
         this.renderModal = this.renderModal.bind(this);
-        this.createFormEditUser = this.createFormEditUser.bind(this);
-        this.createObjectEditUser = this.createObjectEditUser.bind(this);
+        this.renderEditUsers = this.renderEditUsers.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
@@ -42,9 +42,9 @@ class Users extends Model{
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
-                            ${user.address.city ? '<p class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</p>' : ''}
                             ${user.address.country ? '<p class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</p>' : ''}
-                            ${user.address.state ? '<p class="m-0 text-capitalize"><strong>State: </strong>' + user.address.state + '</p>' : ''}
+                            ${user.address.city ? '<p class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</p>' : ''}
+                            ${user.address.street ? '<p class="m-0 text-capitalize"><strong>Street: </strong>' + user.address.street + '</p>' : ''}
                             ${skills.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</p>' : ''}
                             ${langs.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</p>' : ''}
                             <p class="m-0"><strong>Email: </strong><a href="mailto:${user.email}">${user.email}</a></p>
@@ -64,24 +64,10 @@ class Users extends Model{
         arrayUsers.forEach((user) => {
             let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
             let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-            document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
+            document.getElementById('cards-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
         });
 
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
-    }
-
-    deleteUser(e) {
-            console.log("click done.");
-            console.log(
-              "User will be delete: ",
-              $(e.target)[0].previousElementSibling.id
-            );
-            let userdelete = $(e.target)[0].previousElementSibling.id;
-            const del = new Users();
-            del.sendDeleteUser(userdelete);
-            console.log("usuario deleted.");
-            console.log("This: ", $(e.target));
-            $("#card_" + userdelete).remove();
+        document.getElementById('cards-container').innerHTML += "<div id='loader'><div>";                
     }
 
     createHtmlUserModal(user, skills, langs) {
@@ -124,6 +110,9 @@ class Users extends Model{
                 let langsLabel = feature.returnUserPropertyLabels(user.languages, langs);
     
                 $('#profilePicture').attr("src", `${user.avatar}`);
+                $('.icon-container') ? $('.icon-container').remove() : '';
+                $('#avatar-edit') ? $('#avatar-edit').remove() : '';
+                $('#confirmation-img') ? $('#confirmation-img').remove() : '';
                     
                 $('#ModalCenterTitleUser').empty().html(user.name);
                     
@@ -140,14 +129,14 @@ class Users extends Model{
         let bodyModal = (`
             <h4 class="modal-subtitle card-subtitle text-center mb-3">Edit information</h4>
             <form id="form-edit-user">
-                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 ml-auto" id="email-edit"></label>
-                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 ml-auto" id="username-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 ml-auto" id="country-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 ml-auto" id="city-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 ml-auto" id="street-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 ml-auto" id="company-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 ml-auto" id="jobtitle-edit"></label>
-                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 ml-auto" id="website-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Email </strong><input value="${user.email}" required type="email" class="pl-1 input-default edit-input form-control ml-auto" id="email-edit"></label>
+                <label class="d-block d-flex mt-3 card-text"><strong>Username </strong><input value="${user.username}" required type="text" class="pl-1 input-default edit-input form-control ml-auto" id="username-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Country </strong><input value="${user.address.country}" required type="text" class="pl-1 input-default edit-input form-control ml-auto" id="country-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>City </strong><input value="${user.address.city ? user.address.city : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="city-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Street </strong><input value="${user.address.street ? user.address.street : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="street-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Company </strong><input value="${user.company ? user.company : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="company-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Job Title </strong><input value="${user.jobTitle ? user.jobTitle : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="jobtitle-edit"></label>
+                <label class="d-block d-flex d-flex mt-3 card-text"><strong>Website </strong><input value="${user.website ? user.website : ''}" type="text" class="pl-1 input-default edit-input form-control ml-auto" id="website-edit"></label>
                 <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Skills </strong></span><div class="d-flex flex-wrap" id="skills-edit">${this.apiSkills.renderCheckBoxesArr('#skills-edit', 'skills-edit-user', user)}</div>
                 <span class="d-block d-flex d-flex mt-3 card-text text-capitalize"><strong>Languages </strong></span><div class="d-flex flex-wrap" id="languages-edit">${this.apiLangs.renderCheckBoxesArr('#languages-edit', 'langs-edit-user', user)}</div>
                 <label class="d-block d-flex d-flex mt-3 card-text" for="experience-edit"><strong>Experience </strong></label>
@@ -168,14 +157,15 @@ class Users extends Model{
                     <option vale="no reply">I prefer not to say it</option>
                 </select>
                 <div class="mt-4 d-flex btn-edit-container">
-                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Edit</button>
+                    <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-user-btn">Save</button>
                 </div>
             </form>
         `);
 
-        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
+        $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center input-default edit-title form-control" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
-        $('.user-avatar-container').append(`<label for="avatar-edit" class="position-absolute" style="cursor: pointer; top: 0px; left:245px;" ><i class="fas fa-plus-circle"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('#confirmation-img') ? $('#confirmation-img').remove() : '';
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`);
         $('.modal-user-body').empty().html(bodyModal);
         user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
         user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
@@ -188,12 +178,12 @@ class Users extends Model{
             
             if(user._id === e.target.nextElementSibling.id) {
                 
-                listUsers.createFormEditUser(user);
-               
+                this.createFormEditUser(user);
+
                 $('#edit-user-btn').click((e) =>{
                     e.preventDefault();
-                    listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
-                    listUsers.sendEditedImg(user);
+                    this.sendEditedUser(this.createObjectEditUser(user));
+                    this.sendEditedImg(user);
                 });   
             }
         })
@@ -222,14 +212,14 @@ class Users extends Model{
                         if(form[key].checked) {
                             userEdited.skills.includes(form[key].value) ? null : userEdited.skills.push(form[key].value);
                         } else {
-                            userEdited.skills.includes(form[key].value) ? userEdited.skills.pop(form[key].value) : null;
+                            userEdited.skills.includes(form[key].value) ? userEdited.skills.splice(userEdited.skills.indexOf(form[key].value), 1) : null;
                         };
                         break;
                     case 'langs':
                         if(form[key].checked) {
                             userEdited.languages.includes(form[key].value) ? null : userEdited.languages.push(form[key].value);
                         } else {
-                            userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
+                            userEdited.languages.includes(form[key].value) ? userEdited.languages.splice(userEdited.languages.indexOf(form[key].value), 1) : null;
                         };
                     break;
                     default:
@@ -244,14 +234,50 @@ class Users extends Model{
     }
 
     sendEditedUser(user) {
-        
+        let confirmation = document.querySelector('#confirmation-edit');
+
         fetch(`https://cv-mobile-api.herokuapp.com/api/users/${user._id}`, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: { "Content-Type": "application/json; charset=utf-8" }
         })
         .then( res => res.json())
-        .then( response => console.log(response));
+        .then( response => console.log(response))
+        .then(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: green;" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .then(() => $("#search-btn").trigger("click"))
+        .catch(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-0">Error to save changes</p>'));
+    }
+
+    sendEditedImg(user) {
+        let imgConfirmation = document.querySelector('#confirmation-img');
+        let imgInput = document.querySelector('#avatar-edit');
+
+        if(imgInput.files.length > 0) {
+            let formData = new FormData();
+            formData.append('img', imgInput.files[0]);
+            
+            fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then( res => res.json())
+            .then( response => console.log(response))
+            .then(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: green;" class="text-center mt-2 mb-0">Image saved correctly</p>'))
+            .catch(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: red;" class="text-center mt-2 mb-0">Error to save the new image</p>'));
+        }
+    }
+
+    deleteUser(e) {
+        console.log("click done.");
+        console.log(
+          "User will be delete: ",
+          $(e.target)[0].previousElementSibling.id
+        );
+        let userdelete = $(e.target)[0].previousElementSibling.id;
+        this.sendDeleteUser(userdelete);
+        console.log("usuario deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + userdelete).remove();
     }
 
     sendDeleteUser(user) {
@@ -261,26 +287,6 @@ class Users extends Model{
             .then(response => response.json())
             .then(jsonResponse => console.log(jsonResponse))
             .catch(error => console.error("Error:", error));
-    }
-
-    editUserImage() {
-        let img = document.querySelector('#avatar-edit');
-        let formData = new FormData();
-        formData.append('img', img.files[0]);
-        return formData;
-    }
-
-    sendEditedImg(user) {
-        let imgInput = document.querySelector('#avatar-edit');
-        let formData = new FormData();
-        formData.append('img', imgInput.files[0]);
-        
-        fetch(`https://cv-mobile-api.herokuapp.com/api/files/upload/user/${user._id}`, {
-            method: 'POST',
-            body: formData,
-        })
-        .then( res => res.json())
-        .then( response => console.log(response));
     }
 
     renderSummaryUsers(allFilters, summaryContainer) {
@@ -408,16 +414,19 @@ class Users extends Model{
             this.renderSummaryUsers(allFilters , this.summaryContainer);
 
             if( allFilters.length === 0 ){
-                $( "#card-container" ).empty();
-                document.getElementById('card-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
+                $( "#cards-container" ).empty();
+                document.getElementById('cards-container').innerHTML += `<h1 id="title-fail-search"> There are not any coincidence </h1>`;
             } else {
-                if(currentPage === 1 ){ $( "#card-container" ).empty()}; 
-                this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                currentPage === 1 ? $( "#cards-container" ).empty() : '';
+                if(this.pagination(allFilters, 10, currentPage).length === 0){
+                    let title = document.getElementById('end-of-users');
+                    title ? '' : document.getElementById('cards-container').innerHTML += `<p id="end-of-users" class="text-center col-12 mt-3"> There are not more users to show </p>`;
+                } else{
+                    this.renderUsers( this.pagination(allFilters, 10, currentPage), allSkills, allLangs );
+                }
                 this.setListenerModal('.btn-modal', allFilters, allSkills, allLangs, this.renderModal );
                 this.setListenerModal('.btn-edit', allFilters, allSkills, allLangs, this.renderEditUsers );
                 this.setListenerModal('.btn-delete', allFilters, allSkills, allLangs, this.deleteUser );
-                console.log(this.pagination(allFilters, 10, currentPage));
-                console.log('Current page: ' + currentPage);
             }
 
         });

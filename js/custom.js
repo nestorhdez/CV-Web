@@ -10,7 +10,7 @@ class ScrollInfinite {
   
   control(){
 
-    const container = document.querySelector("#card-container");
+    const container = document.querySelector("#cards-container");
 
     if (container.scrollHeight - container.scrollTop === container.clientHeight && !this.hasLoaded) {
       this.hasLoaded = false;
@@ -21,7 +21,7 @@ class ScrollInfinite {
   };
 
   initScroll() {
-    const container = document.querySelector("#card-container");
+    const container = document.querySelector("#cards-container");
     container.addEventListener("scroll", () => this.control());
   }
 
