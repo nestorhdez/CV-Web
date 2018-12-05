@@ -116,7 +116,7 @@ $("#search-btn").on("click", function() {
     $(this)
       .parent()
       .remove();
-    if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("select")) {
+    if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("select")) { // due to different types of inputs this was made so that getting this if or the else.
       $(id_input).val("");
     } else {
       
@@ -126,7 +126,7 @@ $("#search-btn").on("click", function() {
         console.log(checkboxs);
       $("input[id=" + 'search-' + checkboxs + "]").prop("checked", false);
     }
-    $("#search-btn").trigger("click");
+    $("#search-btn").trigger("click"); //it reloads the container where the info is appended
   });
 });
 

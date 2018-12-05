@@ -459,7 +459,7 @@ $( "#adv-search-company" ).on( "submit", function(e) {
 
 
 
-$("#btn-search").on("click", function() {
+$("#search-company").on("click", function() {
     $(".summary").empty();
     var companyname = $("#name-search").val();
     var website = $("#website-search").val();
@@ -469,10 +469,9 @@ $("#btn-search").on("click", function() {
     var city = $("#address-city-search").val();
     var street = $("#address-street-search").val();
     var zipcode = $("#address-zipcode-search").val();
-    var spans = '<span class="badge badge-info mr-2 badge-font" ';
-    var deletion =
-      '<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button>';
-    var finspans = "</span>";
+    var select = $("#social-platform-search").val();
+    var checkbox = '';
+    $("#jobOffers-search")[0].checked ? checkbox = $("#jobOffers-search")[0] : '';
     var variables = [
         companyname,
         website,
@@ -481,7 +480,9 @@ $("#btn-search").on("click", function() {
         country,
         city,
         street,
-        zipcode
+        zipcode,
+        select,
+        checkbox
       ];
       var idsvariables = [
         "#name-search",
@@ -492,7 +493,47 @@ $("#btn-search").on("click", function() {
         "#address-city-search",
         "#address-street-search",
         "#address-zipcode-search",
+        "#social-platform-search",
+        "#jobOffers-search"
       ];
-      
-     $("#SummaryContainer").append(spans + idsvariables[i] + variables[i] + deletion + finspans); 
+
+    for (let i = 0; i < variables.length; i++) {
+        if (variables[i] != 0) {
+            if ( variables[i].checked ){
+                $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'>Includes Job Offers <button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button></span>`);
+            } else {
+            $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'> ${variables[i]} <button class="bg-transparent border-0 deletion" field-id="" field-value=""><i class="fas fa-times-circle"></i></button></span>`);
+            }
+        }
+    }
+    $(".deletion").click((e) => {
+        e.preventDefault();
+        // console.log(e.target
+            // .parentElement
+            // .parentElement);
+            let id_input = e.target
+              .parentElement
+              .parentElement
+              .getAttribute("data-idsvariables");
+              console.log(e.target
+                .parentElement
+                .parentElement)
+            e.target
+            .parentElement
+            .parentElement
+            .remove();
+            // console.log()
+        console.log(id_input);
+        if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("[type=tel]") || $(id_input).is("select")) {
+          $(id_input).val("");
+        } else {
+            $("input[type=checkbox]").prop("checked", false);
+        }
+        $("#search-company").trigger("click"); //it reloads the container where the info is appended
     });
+});
+
+$("#btn-reset").on("click", function() {
+    $("#adv-search-company")[0].reset();
+    $(".summary").empty();
+})
