@@ -80,7 +80,7 @@ class Companies extends Model{
                     </div>
                     <div class="card-header d-inline-flex justify-content-start align-items-center">
                         <div class="profile-picture mr-3">
-                            <img class="logo img-user rounded-circle" src="${company.logo}" alt="logo company">
+                            <img class="logo profile-picture rounded-circle" src="${company.logo}" alt="logo company">
                         </div>
                         <h5 class="card-title company-name text-capitalize">${company.name}</h5>
                     </div>  
@@ -92,7 +92,7 @@ class Companies extends Model{
                             <div class="card-text">
                                 ${company.address.country ? `<p class="m-0 text-capitalize"><strong>country: </strong>${company.address.country}</p>` : ''}
                                 ${company.address.street ? `<p class="m-0 text-capitalize"><strong>street: </strong>${company.address.street}</p>` : ''}
-                                ${company.address.city ? `<p class="m-0 text-capitalize"><strong>city: </strong>${company.address.street}</p>` : ''}
+                                ${company.address.city ? `<p class="m-0 text-capitalize"><strong>city: </strong>${company.address.city}</p>` : ''}
                                 ${company.address.zipcode ? `<p class="m-0 text-capitalize"><strong>zipcode: </strong>${company.address.zipcode}</p>` : ''}
                             </div>  
                         </div>
@@ -110,19 +110,6 @@ class Companies extends Model{
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <h6>About us</h6>
-                            ${company.bio ? `<p class="card-text">${company.bio}</p>` : '' }
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="row pl-5">
-                        <!--Only show when have Offert Jobs o search employees-->
-                        <p class="mr-3"><i class="fas fa-search mr-2"></i><a href="url">Search employees</a></p>
-                        ${company.jobOffers.length > 0 ? `<p class="mr-2"><i class="fas fa-file-signature mr-2"></i><a href="url">Offert job: ${company.jobOffers.length}</a></p>`: ''}
-                    </div>
-                </div>
                 </div>
             </div>
             `)
@@ -208,6 +195,29 @@ class Companies extends Model{
         });
     }
 
+    deleteCompany(e) {
+        console.log("click done.");
+        console.log(
+            "User will be delete: ",
+            $(e.target)[0].previousElementSibling.id
+        );
+        let companydelete = $(e.target)[0].previousElementSibling.id;
+        const del = new Companies();
+        del.sendDeleteCompany(companydelete);
+        console.log("Company deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + companydelete).remove();
+    }  
+
+    sendDeleteCompany(user) {
+        fetch("https://cv-mobile-api.herokuapp.com/api/companies/" + user, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(jsonResponse => console.log(jsonResponse))
+            .catch(error => console.error("Error:", error));
+    }
+
     createFormEditCompany(company) {
         
         let bodyModal = (`
@@ -235,7 +245,7 @@ class Companies extends Model{
                 <label class="d-block d-flex mt-3 card-text" for="platform-edit"><strong class="align-self-center">Platform</strong> <input name="" value="" placeholder="Facebook, Twitter..." type="text" id="platform-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <label class="d-block d-flex mt-1 card-text" for="url-edit"><strong class="align-self-center">URL</strong> <input name="" value="" type="text" id="url-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <button id="btn-add-social" class="btn-transparent">Add link  <i class="fas fa-plus-circle"></i></button>
-                ${company.socialUrls.length > 0 ? '<div class="edit-link-container d-flex mt-2 mb-2">' + this.renderLinkSocial(company).join(' ') + '</div>' : ''}
+                ${company.socialUrls.length > 0 ? `<div class="edit-link-container d-flex mt-2 mb-2">${this.renderLinkSocial(company).join(' ')}</div>` : ''}
                 </div>
                 <div class="mt-4 d-flex btn-edit-container">
                     <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-company-btn">Save</button>
@@ -270,7 +280,7 @@ class Companies extends Model{
         arrayForm.forEach((input) => {
 
             if(input.name !== ''){
-             
+
                 let name = input.name.split('-')[0]
                 switch (name) {
                     case  'address':
@@ -310,7 +320,7 @@ class Companies extends Model{
         platformCompanyArray.forEach(platform => {
             platformEditedArray.includes(platform) ? '' : companyEdited.socialUrls.splice(platformCompanyArray.indexOf(platform), 1);
         })
-        console.log(companyEdited);
+        console.log("Edited: ", companyEdited);
         return companyEdited;
     }
 
@@ -324,9 +334,9 @@ class Companies extends Model{
         })
         .then( res => res.json())
         .then( response => console.log(response))
-        .then(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .then(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: green;" class="text-center mt-2 mb-0">Saved correctly</p>'))
         .then(() => $("#search-company").trigger("click"))
-        .catch(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Error to save changes</p>'));
+        .catch(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
     sendEditedImg(company) {
@@ -343,7 +353,7 @@ class Companies extends Model{
             })
             .then( res => res.json())
             .then( response => console.log(response))
-            .catch(() => imgConfirmation ? '' : $('.modal-company-body').append('<p id="confirmation-img" class="text-center mt-2 mb-2">Error to save the new image</p>'));
+            .catch(() => imgConfirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-2">Error to save the new image</p>'));
         }
     }
 
@@ -390,7 +400,10 @@ class Companies extends Model{
                     switch (propertyOfInput) {
                         case 'address':
                             let propertyAddress = input.id.split('-')[1];
-                            let filterAddress = filteredCompanies.filter(company => company[propertyOfInput][propertyAddress].toLowerCase().indexOf(input.value.toLowerCase()) == -1);
+                            let filterAddress = filteredCompanies.filter(company => {
+                                company[propertyOfInput][propertyAddress] ? 
+                                company[propertyOfInput][propertyAddress].toLowerCase().indexOf(input.value.toLowerCase()) == -1 : '';
+                                });
                             filterAddress.forEach(company => removeFilteredCompany(company));
                             break;
                         case 'jobOffers':
@@ -434,7 +447,9 @@ class Companies extends Model{
                 } else {
                 this.renderCompaniesCards( this.pagination(filteredCompanies, 10, currentPage) );
                 }
+
                 this.setListenerModal('.btn-modal', filteredCompanies, this.renderCompanyModal );
+                this.setListenerModal('.btn-delete', filteredCompanies, this.deleteCompany );
                 this.setListenerModal('.btn-edit', filteredCompanies, this.renderEditCompany );
             }
 
