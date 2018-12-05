@@ -522,14 +522,14 @@ $("#search-company").on("click", function() {
     }
     $(".deletion").click((e) => {
         e.preventDefault();
-       ;
+
         let id_input = e.target
             .parentElement
             .parentElement
             .getAttribute("data-idsvariables");
-            console.log(e.target
-            .parentElement
-            .parentElement)
+            // console.log(e.target
+            // .parentElement
+            // .parentElement);
         e.target
         .parentElement
         .parentElement
