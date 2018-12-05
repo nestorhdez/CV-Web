@@ -118,21 +118,6 @@ function previewFile() {
   }
 }
 
-/**
- * Listener that take control when show modal with data user.
- */
-$("#invalidCheck2").click(function(e) {
-  //Check input
-  if (!$("#invalidCheck2").is(":checked")) {
-    if (tracer){console.log("is not checked.");}
-    $("#confirm-submit").attr("id", "nosubmit");
-  } else {
-    if (tracer) {console.log("is checked.");}
-    // Inser content in body:
-    $("#nosubmit").attr("id", "confirm-submit");
-    if (tracer){console.log("Se muestra Modal");}
-  }
-});
 
 /** Listener to show o hidden password */
 $("#inputGroupPrependPSW").click(function (e) {
@@ -151,6 +136,23 @@ $("#inputGroupPrependPSW").click(function (e) {
 $("#registerSubmit").submit(function(e) {
   if (tracer){console.log("submit actived...");}
   e.preventDefault();
+
+  let inputtrue = true;
+
+  /** Validation check inputs */
+  $(".input-validate").each(function(index, element){
+    // console.log($(this));
+    if($(this)[0].validity.valid == false){
+      console.log($(element)[0].validationMessage);
+      $(element).addClass("border-danger").prop('title', $(element)[0].validationMessage);
+      $(element).tooltip('enable').tooltip('show').focus();
+      inputtrue = false;
+    } else {
+      $(element).removeClass("border-danger is-invalid");
+      $(element).tooltip('disable');
+    };
+
+  });
   
   let labelslangs = getAllInputsLabel("langs[]");
   let labelsskills = getAllInputsLabel("skills[]");
@@ -292,6 +294,7 @@ $("#registerSubmit").submit(function(e) {
 
   let profilePicture = document.querySelector("input[type=file]").files[0];
 
+  /** Checkformat password */
   if (!CheckPassword(password)) {
     $("#inputPassword5")
       .addClass("border-danger is-invalid")
@@ -331,6 +334,7 @@ $("#registerSubmit").submit(function(e) {
 
     if (tracer) {console.log(registered);}
 
+    /** Render html for confirm info before to send */
     function renderModalConfirm() {
       let confirmBody = `
       <div class="container-fluid">
@@ -386,10 +390,15 @@ $("#registerSubmit").submit(function(e) {
     }
 
     renderModalConfirm();
+
+    if (inputtrue) {
+      renderModalConfirm(); 
+      $("#confirm-submit").modal('show');
+      $("#userConfirmed").click(function() {
+        sendNewUser();
+      });
+    };
     
-    $("#userConfirmed").click(function() {
-      sendNewUser();
-    })
     
     return registered;
   }
