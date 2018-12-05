@@ -293,3 +293,11 @@ footer {
   color: red;
   background-color: wheat;
 }
+
+
+
+
+/* carousel */
+#card-container {
+  overflow: hidden;
+}

@@ -1,60 +1,69 @@
-class Carousel {
-    data = [];
-    maincontainer = '';
-    innerdivwidth = 0; 
-    constructor (data, maincontainer, nextButton, prevButton, displacement) {
-        this.data = data;
+class Carousel extends Users {
+
+    constructor (url, maincontainer, nextButton, prevButton, displacement) {
+        super(url);
         this.maincontainer = maincontainer;
         this.displacement = displacement;
-        this.innerdivwidth = widthdiv;
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
         $(nextButton).click(this.next);
         $(prevButton).click(this.previous);
     }
 
     // Function for a button when is clicked next
     next() {
-        this.displacement * this.innerdivwidth; 
+        document.querySelector( this.maincontainer ).scrollBy( this.displacement * this.divWidth(), 0);
     }
 
     // Function for a button when is clicked previous
     previous() {
-        document.getElementById(carouselement0).scrollLeft(this.displacement * this.innerdivwidth);
+        document.querySelector( this.maincontainer ).scrollBy( - (this.displacement * this.divWidth()), 0);
     }
-
+    
     // For knowing the width of div where the info is inserted, so that when the button next or previous is clicked, it moves this amount of width
     divWidth() {
-        var widthdiv = document.getElementById('carouselement0').offsetWidth;
-        console.log("Width del div: ", widthdiv)
+        var widthdiv = $('#carouselelement0').width();
+
         return widthdiv;
+    }
+
+    cards(arrayUsers) {
+        arrayUsers.forEach(function(){
+            document.getElementById('card-container').innerHTML +=  createHtmlUserCard();
+        });
     }
 
     renderUsers(arrayUsers, skills, langs) {
         var users = [];
         let feature = new FeaturesModel;
-        arrayUsers.forEach((user) => {
-            let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
-            let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-            // document.getElementById('card-container').innerHTML += this.createHtmlUserCard(user, skillsLabels, langsLabels);
-			users.push(this.createHtmlUserCard(user, skillsLabels, langsLabels));
-        });
-        document.getElementById('card-container').innerHTML += "<div id='loader'><div>";                
+        arrayUsers.forEach((user, index) => {
+                let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+                let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+                document.getElementById('card-container').innerHTML += '<div id="carouselelement' + index + '" + style= "width: 100%">' + this.createHtmlUserCard(user, skillsLabels, langsLabels) + '</div>';
+                users.push(this.createHtmlUserCard(user, skillsLabels, langsLabels));
+        });                
 }
 
     // To show the information of each card, each one in his own div
     render() {
-        var info = [];
 
-        this.data.forEach(function(currentValue, index) {
-             info.push('<div id="carouselelement' + index +'">' + currentValue + '</div>'); 
+        var User = new Promise ((resolve) => this.getEntityApi( resolve ));
+        var Skills = new Promise((resolve) => this.apiSkills.getEntityApi( resolve ));
+        var Langs = new Promise((resolve) => this.apiLangs.getEntityApi( resolve ));
+
+        Promise.all([User, Skills, Langs]).then(( results ) => {
+
+        let allUsers = results[0];
+        let allSkills = results[1];
+        let allLangs = results[2];
+
+            this.renderUsers(allUsers, allSkills, allLangs);
         });
-        $('#'+this.maincontainer).html(
-            '<div id="carouselcards">'+
-            '<div>'+
-            info.join() +
-            '</div>'+
-            '</div>'
-        );
-        this.innerdivwidth = this.divWidth();
+
     }
+
 }
+
+var carousel = new Carousel('https://cv-mobile-api.herokuapp.com/api/users', '#card-container', '#nextButton' , '#prevButton', 1);
+carousel.render();
 
