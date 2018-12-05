@@ -42,8 +42,8 @@ class Users extends Model{
                     </div>   
                     <div class="row px-3">    
                         <div class="d-flex flex-column flex-nowrap text-left my-2">
+                        ${user.address.country ? '<p class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</p>' : ''}
                             ${user.address.city ? '<p class="m-0 text-capitalize"><strong>City: </strong>' + user.address.city + '</p>' : ''}
-                            ${user.address.country ? '<p class="m-0 text-capitalize"><strong>Country: </strong>' + user.address.country + '</p>' : ''}
                             ${user.address.street ? '<p class="m-0 text-capitalize"><strong>Street: </strong>' + user.address.street + '</p>' : ''}
                             ${skills.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Skills: </strong>' + skills.join(', ') + '</p>' : ''}
                             ${langs.length > 0 ? '<p class="m-0 font-italic text-capitalize"><strong>Languages: </strong>' + langs.join(', ') + '</p>' : ''}
