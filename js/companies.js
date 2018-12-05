@@ -325,6 +325,7 @@ class Companies extends Model{
         .then( res => res.json())
         .then( response => console.log(response))
         .then(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .then(() => $("#search-company").trigger("click"))
         .catch(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
