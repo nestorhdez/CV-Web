@@ -15,29 +15,34 @@
     <link rel="stylesheet" href="../css/theme.min.css">
     <link rel="stylesheet" href="../css/customstyles.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700|Roboto:300,400,700" rel="stylesheet">
-    <title>Information for companies</title>
+    <title>CV Web - Information for companies</title>
 </head>
 
 <body>
+    <!-- Header content -->
     <header>
-            <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" id="nav-top">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a href="../index.html" class="navbar-brand ml-3"><img class="rounded-circle" src="../img/logo.png" alt="20H Talent Logo">
-                        Talent</a>
-                    <div class="collapse navbar-collapse" id="navbarToggler">
-                        <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-default btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Log in</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-default btn-sm btn-outline-primary my-2 my-sm-2 border-1 border-white bg-dark text-white"><a class="text-light" href="form-company.html">Sign up</a></button>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+        <!-- Navbar section -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="../index.html" class="navbar-brand ml-3"><img class="rounded-circle" src="../img/logo.png" alt="20H Talent Logo">
+                Talent</a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav ml-auto mt-2 mx-2 mt-lg-0">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 mr-2 border-1 border-white bg-dark text-white">Login</button>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-sm btn-outline-primary my-2 my-sm-2 border-1 border-white bg-dark text-white">Logout</button>
+                    </li>
+                </ul>
+                <form id="nav-main-search" action="search-company.html" method="get" role="search" class="form-inline my-lg-0 p-sm-1">
+                    <input class="form-control form-control-sm my-2 mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-sm btn-outline-primary my-2 border-1 border-white bg-dark text-white" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
     </header>
 
     <main id="content">
@@ -254,14 +259,14 @@
                 <h2 class="h3 mt-5 mb-4 text-center">Companies opinion</h2>
                 <div class="row py-5">
                     <div class="col-md">
-                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                        <blockquote class="card-height bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
                             <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Leo Gill">
                             <p class="text-secondary">Boost theme is awesome! We've seen amazing results already.</p>
                             <cite class="small text-uppercase">Leo Gill</cite>
                         </blockquote>
                     </div>
                     <div class="col-md">
-                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                        <blockquote class="card-height bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
                             <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Renee Sims">
                             <p class="text-secondary">It really saves me time and effort. Boost theme is exactly what
                                 our business has been lacking.</p>
@@ -269,7 +274,7 @@
                         </blockquote>
                     </div>
                     <div class="col-md">
-                        <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                        <blockquote class="card-height bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
                             <img class="avatar avatar-md mb-4" src="../img/default-profile-picture.jpg" alt="Dallas Kwok">
                             <p class="text-secondary">Boost theme impressed me on multiple levels.</p>
                             <cite class="small text-uppercase">Dallas Kwok</cite>
@@ -405,6 +410,12 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
+    <script src="../js/jquery.matchHeight.js" type="text/javascript"></script>
+    <script> 
+        $(function () {
+            $('.card-height').matchHeight();
+        });
+    </script>
 
 
 </body>

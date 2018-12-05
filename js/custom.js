@@ -1,29 +1,28 @@
-//Object infinite scroll
-function Scrollinfinite(callback){
+class ScrollInfinite {
   
-  this.callback = callback;
-  this.currentpage = 1;
-  let hasLoaded = false;
+  constructor( classCallback , callback) {
+    this.classCallback = classCallback ; 
+    this.callback = callback;
+    this.currentpage = 1;
+    this.hasLoaded = false;
 
-  this.control = function (){
-    
-    const container = document.querySelector("#card-container");
+  }
+  
+  control(){
 
-    if (container.scrollHeight - container.scrollTop === container.clientHeight && !hasLoaded) {
-      console.log("Llegó al final.");
-      hasLoaded = false;
+    const container = document.querySelector("#cards-container");
+
+    if (container.scrollHeight - container.scrollTop === container.clientHeight && !this.hasLoaded) {
+      this.hasLoaded = false;
       this.currentpage += 1;
-      this.callback(this.currentpage);
-      console.log("Creado los 10 elementos.");
+      this.classCallback[this.callback](this.currentpage);
     }
 
-  }.bind(this);
+  };
 
-  this.initScroll = function () {
-    
-    const container = document.querySelector("#card-container");
-    container.addEventListener("scroll", this.control);
-
+  initScroll() {
+    const container = document.querySelector("#cards-container");
+    container.addEventListener("scroll", () => this.control());
   }
 
 }

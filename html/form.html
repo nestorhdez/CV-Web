@@ -13,13 +13,12 @@
         crossorigin="anonymous">
     <!-- CSS -->
     <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    <link rel="stylesheet" href="../css/theme.min.css">
     <link rel="stylesheet" href="../css/customstyles.css">
 </head>
 
 <body>
+    <!-- Header content -->
     <header>
         <!-- Navbar section -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" id="nav-top">
@@ -49,94 +48,101 @@
     <main>
         <div class="container-fluid">
             <div class="mx-auto bg-light w-75 p-3 shadow">
-                <!-- Need fix styles with tablet mode -->
-                <form action="" method=POST id="registerSubmit">
+                <form id="registerSubmit" class="p-2" novalidate>
                     <div class="form-row mb-2">
                         <div class="form-row mb-2">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="validationUsername"><strong>Username</strong></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupPrepend2">@</span>
                                     </div>
-                                    <input type="text" class="form-control" id="validationUsername" value="" name="username"
+                                    <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationUsername" value="" name="username"
                                         placeholder="Username" aria-describedby="inputGroupPrepend2" required>
                                 </div>
                             </div>
 
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="inputPassword5"><strong>Password</strong></label>
-                                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-                                <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20
-                                    characters long, contain letters and numbers, and must not contain spaces, special
-                                    characters, or emoji.</small>
+                                <div class="input-group">
+                                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrependPSW"><i id="eyePSW" class="far fa-eye"></i></span>
+                                    </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">Password must be 8-20
+                                        characters long, contain letters (at least one capital) and numbers, and must not contain spaces, special
+                                        characters, or emoji.</small>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="form-group col-md-6 mb-3">
+                            <div class="col mb-3">
+                                <label for="validationname"><strong>Name and surname</strong></label>
+                                <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationname" placeholder="Name with surname" name="name" value=""
+                                    required>
+                            </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationname"><strong>First name</strong></label>
-                            <input type="text" class="form-control" id="validationname" placeholder="First name" name="name"
-                                value="" required>
+                            <div class="col mb-2">
+                                <label for="validationbirthDate"><strong>Birth Date</strong></label>
+                                <input type="date" class="form-control input-validate" id="validationbirthDate" aria-describedby="birthDate" name="birthDate" value="">
+                            </div>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="InputPhone"><strong>Phone</strong></label>
-                            <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone"
-                                value="" placeholder="Enter phone number">
-                            <small id="numberHelp" class="form-text text-muted">We'll never share your phone with
-                                anyone else.</small>
-                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <div class="col mb-2">
+                                <label for="InputPhone"><strong>Phone</strong></label>
+                                <input type="tel" class="form-control" id="InputPhone" aria-describedby="numberHelp" name="phone"
+                                    value="" placeholder="Enter number">
+                                <small id="numberHelp" class="form-text text-muted">We'll never share your phone with
+                                    anyone else.</small>
+                            </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationZip"><strong>Zip</strong></label>
-                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
-                                value="" required>
-                        </div>
-
-                        <div class="form-row mb-3">
-                            <div class="col-md-7 mb-2">
+                            <div class="col mb-2">
                                 <label for="validationInputEmail"><strong>Email address</strong></label>
-                                <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp"
+                                <input type="email" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationInputEmail" aria-describedby="emailHelp"
                                     name="email" value="" placeholder="Enter email" required>
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                     else.</small>
                             </div>
-                            <div class="col-md-5 mb-2">
-                                <label for="validationbirthDate"><strong>Birth Date</strong></label>
-                                <input type="date" class="form-control" id="validationbirthDate" aria-describedby="birthDate" name="birthDate" value="">
-                            </div>
                         </div>
-
+                            
                     </div>
+                    
                     <div class="form-row mb-2">
-                        <div class="col-md-3 mb-3">
-                            <label for="validationCity"><strong>City</strong></label>
-                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city"
-                                value="" required>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 col-sm-12 mb-3">
                             <label for="validationCountry"><strong>Country</strong></label>
-                            <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
+                            <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationCountry" placeholder="Country" name="country"
                                 value="" required>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationState"><strong>State</strong></label>
-                            <input type="text" class="form-control" id="validationState" placeholder="State" name="state"
-                                value="" required>
+                        <div class="col-md-4 col-sm-12 mb-3">
+                            <label for="validationCity"><strong>City</strong></label>
+                            <input type="text" class="form-control input-validate" id="validationCity" placeholder="City" name="city"
+                                value="">
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 mb-3">
+                            <label for="validationStreet"><strong>Street</strong></label>
+                            <input type="text" class="form-control input-validate" id="validationStreet" placeholder="Street" name="street"
+                                value="" >
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationZip"><strong>Zip</strong></label>
+                            <input type="text" class="form-control input-validate" id="validationZip" placeholder="Zip" name="zip"
+                                value="">
                         </div>
                     </div>
 
                     <div class="form-row mb-2">
                         <fieldset class="form-group mb-3">
                             <label><strong>Gender</strong></label>
-                            <div class="col-md-4 mb-3">
-                                <div class="d-flex flex-nowrap" id="genders">
+                            <div class="col-auto mb-3">
+                                <div class="d-flex flex-wrap flex-md-row" id="genders">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="woman" name="gender" value="woman">
-                                        <label class="form-check-label mr-5" for="woman">Woman</label>
+                                        <input class="form-check-input" type="radio" id="female" name="gender" value="female">
+                                        <label class="form-check-label mr-5" for="female">Female</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" id="male" name="gender" value="male">
@@ -151,7 +157,7 @@
                                         <label class="form-check-label mr-5" for="trans">Trans</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="noreply" name="gender" value="no reply">
+                                        <input class="form-check-input" type="radio" id="noreply" name="gender" value="no reply" checked>
                                         <label class="form-check-label mr-5" for="noreply">No reply</label>
                                     </div>
                                 </div>
@@ -160,76 +166,30 @@
                     </div>
 
                     <div class="form-row mb-2">
-                        <div class="col-md-4 mb-3">
+                        <div class="col col-md-6 col-sm-12  mb-3">
                             <label for="validationDefault06"><strong>Laboral Experience</strong></label>
                             <select class="form-control custom-select" id="experience" name="labexp">
                                 b4-se
                                 <option value="">Years of experience</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="+5">+5</option>
+                                <option value="- 1 year">-1 year</option>
+                                <option value="1 - 3 years">1 - 3 years</option>
+                                <option value="3 - 5 years">3 - 5 years</option>
+                                <option value="+ 5 years">+5 years</option>
                             </select>
                         </div>
                     </div>
 
                     <fieldset class="form-group mb-4">
                         <div class="mb-2"><strong>Languages</strong></div>
-                        <div class="d-flex flex-wrap" id="languages">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="eng-check" name="english" value="english">
-                                <label class="form-check-label mr-5" for="eng-check">English</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="french-check" name="french" value="french">
-                                <label class="form-check-label mr-5" for="french-check">French</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="german-check" name="german" value="german">
-                                <label class="form-check-label mr-5" for="german-check">German</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="spanish-check" name="spanish" value="spanish">
-                                <label class="form-check-label mr-5" for="spanish-check">Spanish</label>
-                            </div>
+                        <div class="d-flex flex-wrap col" id="langs">
+                            <!-- Render languages from API -->
                         </div>
                     </fieldset>
 
                     <fieldset class="form-group mb-4">
                         <div class="mb-2"><strong>Skills</strong></div>
-                        <div class="d-flex flex-wrap" id="skills">
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="html-check" name="html" value="html">
-                                <label class="form-check-label mr-5" for="html-check">HTML</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="css-check" name="css" value="css">
-                                <label class="form-check-label mr-5" for="css-check">CSS</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="sass-check" name="sass" value="sass">
-                                <label class="form-check-label mr-5" for="sass-check">SASS</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="javascript-check" name="javascript"
-                                    value="javascript">
-                                <label class="form-check-label mr-5" for="javascript-check">JavaScript</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="react-check" name="react" value="react">
-                                <label class="form-check-label mr-5" for="react-check">React</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="git-check" name="git" value="git">
-                                <label class="form-check-label mr-5" for="git-check">Git</label>
-                            </div>
-                            <div class="form-check custom-checkbox">
-                                <input class="form-check-input" type="checkbox" id="github-check" name="github" value="github">
-                                <label class="form-check-label mr-5" for="github-check">Github</label>
-                            </div>
+                        <div class="d-flex flex-wrap col" id="skills">
+                            <!-- Render skills from API -->
                         </div>
                     </fieldset>
 
@@ -248,7 +208,7 @@
 
                     <div class="form-row mb-4">
                         <div class="col-md-6">
-                            <label for="validationRepository"><strong>Personal Repository</strong></label>
+                            <label for="validationRepository"><strong>Website or Personal Repository</strong></label>
                             <input type="text" class="form-control" id="validationRepository" placeholder="Web direction"
                                 name="repository" value="">
                         </div>
@@ -269,17 +229,39 @@
 
                     <div class="form-group mb-2">
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions"
+                            <input class="form-check-input input-validate" type="checkbox" value="" id="invalidCheck2" name="agreeconditions"
                                 required>
-                            <label class="form-check-label font-italic" for="invalidCheck2">
-                                Agree to terms and conditions
-                                <!-- Need linked to terms and conditions. -->
-                            </label>
+                            <label class="form-check-label font-italic" for="invalidCheck2">Agree to terms and conditions</label>
+                        <!-- Need linked to terms and conditions. -->
                         </div>
                     </div>
 
                     <button class="btn btn-cobalt ml-4" type="submit">Submit form</button>
+
+
+                    <!-- Insert Modal-->
+                    <!-- This modal dont see show if no complet information-->
+                    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="formComfirm" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLongTitle">Is the information correct?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div id="modal-confirm" class="modal-body bg-gradient-cobalt">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>
+                                    <button type="button" id="userConfirmed" class="btn btn-cobalt">Confirmed</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+
             </div>
         </div>
     </main>
