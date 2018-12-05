@@ -516,7 +516,7 @@ $("#search-company").on("click", function() {
             if ( variables[i].checked ){
                 $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'>Includes Job Offers <button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button></span>`);
             } else {
-            $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'> ${variables[i]} <button class="bg-transparent border-0 deletion" field-id="" field-value=""><i class="fas fa-times-circle"></i></button></span>`);
+            $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'> ${variables[i]} <button class="bg-transparent border-0 deletion" ><i class="fas fa-times-circle"></i></button></span>`);
             }
         }
     }

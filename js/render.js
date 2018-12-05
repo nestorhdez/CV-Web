@@ -57,8 +57,8 @@ class Users extends Model{
         return card;
     }
 
-    renderUsers(arrayUsers, skills, langs) {
 
+    renderUsers(arrayUsers, skills, langs) {
         let feature = new FeaturesModel;
 
         arrayUsers.forEach((user) => {

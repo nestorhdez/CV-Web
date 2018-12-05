@@ -50,12 +50,11 @@ footer {
   width: auto;
 }
 
+/* User Curriculum Scroll */
 
-/* User's Curriculum Scroll */
-/* .carousel-inner > img {
-  width: 18rem;
-  height: auto;
-} */
+
+
+
 .row-equal>div[class*='col-'] {
   display: flex;
   flex: 1 0 auto;
@@ -295,10 +294,19 @@ footer {
   background-color: wheat;
 }
 
+
+
+
+/* carousel */
+#card-container {
+  overflow: hidden;
+}
+
 .icon-link {
   color: #495057; 
   font-size: 1.2rem;
 }
+
 .icon-link:hover {
   color: #495057;
 }
@@ -306,6 +314,7 @@ footer {
 .edit-input {
   width: 50%!important;
 }
+
 .edit-title {
   font-size: 1rem!important;
 }
