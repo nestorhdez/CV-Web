@@ -231,7 +231,7 @@
             <div class="d-flex collapse navbar-collapse" id="navbarTogglerDemo02">
                 <div class="ml-3 d-flex justify-content-start">
                     <a class="text-white mr-3" href="">About</a>
-                    <a class="text-white" href="">Contact</a>
+                    <a class="text-white" href="#" data-toggle="modal" data-target="#FormContact">Contact</a>
                 </div>
                 <div class="ml-auto">
                     <!-- Link trigger modal -->
@@ -240,6 +240,87 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Modal Contact -->
+        <div class="modal fade" id="FormContact" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+        aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalCenterTitle">Contact Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Contact Form-->
+                        <!--Form with header-->
+                        <form action="#" method=" post">
+                            <div class="card border-primary rounded-0">
+                                <div class="card-header p-0">
+                                    <div class="bg-cobalt text-white text-center py-2">
+                                        <h3><i class="fa fa-envelope"></i> Contact us</h3>
+                                        <p class="m-0">We will gladly help you</p>
+                                    </div>
+                                </div>
+                                <div class="card-body p-3">
+
+                                    <!--Body-->
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-user text-cobalt"></i></div>
+                                            </div>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name and Surname"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-mobile-alt text-cobalt"></i></i></div>
+                                            </div>
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Contact phone"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-envelope text-cobalt"></i></div>
+                                            </div>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="example@gmail.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-comment text-cobalt"></i></div>
+                                            </div>
+                                            <textarea class="form-control noresize" placeholder="Send us your message"
+                                                required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <input type="submit" value="Send" class="btn btn-cobalt btn-block rounded-0 py-2">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <!--Form with header-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-coolgray" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
                 <!-- Modal Conditions -->
                 <div class="modal fade" id="modalConditions" tabindex="-1" role="dialog" aria-labelledby="modalConditions"
                 aria-hidden="true">
@@ -280,7 +361,7 @@
             </div>
             
     
-        </footer>
+    </footer>
     
 
     <!-- Scripts section -->

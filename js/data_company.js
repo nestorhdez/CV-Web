@@ -49,25 +49,11 @@ function previewFile() {
   }
 }
 
-/** Listener to activate modal if all info is complete. */
-function ShowModal() {
-  //Check input
-  // if (!$("#invalidCheck2").is(":checked")) {
-  //   console.log("is not checked.");
-  //   $("#confirm-submit").attr("id", "nosubmit");
-  // } else {
-  //   console.log("is checked.");
-    // Inser content in body:
-    $("#confirm-submit").modal('show');
-    console.log("Se muestra Modal");
-  // }
-}
-
 $("#registerCompanySubmit").submit(function(e) {
   e.preventDefault();
-  console.log("sumit actived.");
+  //console.log("submit actived.");
   let inputtrue = true;
-  /** Check inputs */
+
   $(".input-validate").each(function(index, element){
     // console.log($(this));
     if($(this)[0].validity.valid == false){
@@ -76,22 +62,35 @@ $("#registerCompanySubmit").submit(function(e) {
       $(element).tooltip('show');
       inputtrue = false;
     } else {
-      console.log("Remove class bd.");
       $(element).removeClass("border-danger is-invalid");
     };
 
   });
 
   // Need check CIF-NIF
-  // Método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
-  String.prototype.isNif=function()
-  {
-    return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
-  };
-
-// ejemplo de uso 
-  //  alert("12341234H".isNif());  // devolverá false
-  //  alert("00000000T".isNif()); // devolverá true
+  /** Checking CIF-NIF validate */
+  function checkNIF(nif) {
+    nif = nif.toUpperCase().replace(/[\s\-]+/g, '');
+    if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
+        var num = nif.match(/\d+/);
+        num = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+num;
+        if(nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]) {
+            return /^\d/.test(nif)? 'DNI': 'NIE';
+        }
+    }
+    else if(/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$/.test(nif)) {
+        for(var sum=0,i=1;i<8;++i) {
+            var num = nif[i]<<i%2;
+            var uni = num%10;
+            sum += (num-uni)/10+uni;
+        }
+        var c = (10-sum%10)%10;
+        if(nif[8]==c || nif[8]=='JABCDEFGHI'[c]) {
+            return /^[KLM]/.test(nif)? 'ESP': 'CIF';
+        }
+    }
+    return false;
+  }
 
   /**
    * Function to sanitaze strings before to input.
@@ -136,25 +135,7 @@ $("#registerCompanySubmit").submit(function(e) {
     }
   })
 
-  console.log("Valores registrados: ",
-    name,
-    phone,
-    email,
-    docType,
-    docNumber,
-    zip,
-    street,
-    city,
-    country,
-    "web: ", website,
-    "logo: ", logo,
-    "bio: ", bio,
-    jobOffers,
-    employes,
-    socialUrls,
-  );
-
-  if (!(docNumber.isNif())) {
+  if (!(checkNIF(docNumber))) {
     $("#docNumber")
       .addClass("border-danger is-invalid").prop('title', 'No valid number.')
       .focus();
@@ -187,6 +168,10 @@ $("#registerCompanySubmit").submit(function(e) {
     socialUrls,
   )
 
+  /** Render list links about social media inputs fill.
+   * @param {array} company is array of plataform and url
+   * @returns {array} array with all html to render.
+   */
   function renderSocialLinks(company) {
     let arrayLinks = [];
     let urls = company.socialUrls;
@@ -196,6 +181,7 @@ $("#registerCompanySubmit").submit(function(e) {
     return arrayLinks;
   }
 
+  /** Render html modal with data  confirm for send. */
   function renderModalConfirm() {
     console.log("Inserted modal html.");
     let confirmBody = `
@@ -247,6 +233,7 @@ $("#registerCompanySubmit").submit(function(e) {
     $( "#preview" ).clone().appendTo( "#imgavatar" );
   }
 
+  /** Constructor objet to send JSON */
   function createRequestBody() {
     let body = {
     "name": registered.name,
@@ -269,6 +256,7 @@ $("#registerCompanySubmit").submit(function(e) {
     return body;
   }
 
+  /** Function to send New Company */
   function sendNewCompany() {
     let BodyCompany = createRequestBody();
 
@@ -305,14 +293,12 @@ $("#registerCompanySubmit").submit(function(e) {
         .catch(error => console.log(error.message));
   })}
 
-  if (inputtrue) { 
-    ShowModal()};
-
-  renderModalConfirm();
-
-  $("#CompanyConfirmed").click(function() {
-    console.log("Confirmed.")
-    sendNewCompany();
-  });
-}
-})
+  if (inputtrue) {
+    renderModalConfirm(); 
+    $("#confirm-submit").modal('show');
+    $("#CompanyConfirmed").click(function() {
+      console.log("Confirmed.")
+      sendNewCompany();
+    });
+  };
+}})
