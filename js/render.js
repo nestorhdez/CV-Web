@@ -212,14 +212,14 @@ class Users extends Model{
                         if(form[key].checked) {
                             userEdited.skills.includes(form[key].value) ? null : userEdited.skills.push(form[key].value);
                         } else {
-                            userEdited.skills.includes(form[key].value) ? userEdited.skills.pop(form[key].value) : null;
+                            userEdited.skills.includes(form[key].value) ? userEdited.skills.splice(userEdited.skills.indexOf(form[key].value), 1) : null;
                         };
                         break;
                     case 'langs':
                         if(form[key].checked) {
                             userEdited.languages.includes(form[key].value) ? null : userEdited.languages.push(form[key].value);
                         } else {
-                            userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
+                            userEdited.languages.includes(form[key].value) ? userEdited.languages.splice(userEdited.languages.indexOf(form[key].value), 1) : null;
                         };
                     break;
                     default:
