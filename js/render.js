@@ -6,8 +6,8 @@ class Users extends Model{
         this.apiSkills = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/skills' );
         this.apiLangs = new FeaturesModel( 'https://cv-mobile-api.herokuapp.com/api/langs' );
         this.renderModal = this.renderModal.bind(this);
-        this.createFormEditUser = this.createFormEditUser.bind(this);
-        this.createObjectEditUser = this.createObjectEditUser.bind(this);
+        this.renderEditUsers = this.renderEditUsers.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
 
     /* Return an array that represent a page of the inital array.
@@ -70,20 +70,6 @@ class Users extends Model{
         document.getElementById('cards-container').innerHTML += "<div id='loader'><div>";                
     }
 
-    deleteUser(e) {
-            console.log("click done.");
-            console.log(
-              "User will be delete: ",
-              $(e.target)[0].previousElementSibling.id
-            );
-            let userdelete = $(e.target)[0].previousElementSibling.id;
-            const del = new Users();
-            del.sendDeleteUser(userdelete);
-            console.log("usuario deleted.");
-            console.log("This: ", $(e.target));
-            $("#card_" + userdelete).remove();
-    }
-
     createHtmlUserModal(user, skills, langs) {
 
         let bodyModal = (`
@@ -126,6 +112,7 @@ class Users extends Model{
                 $('#profilePicture').attr("src", `${user.avatar}`);
                 $('.icon-container') ? $('.icon-container').remove() : '';
                 $('#avatar-edit') ? $('#avatar-edit').remove() : '';
+                $('#confirmation-img') ? $('#confirmation-img').remove() : '';
                     
                 $('#ModalCenterTitleUser').empty().html(user.name);
                     
@@ -177,7 +164,8 @@ class Users extends Model{
 
         $('#ModalCenterTitleUser').empty().html(`<input value="${user.name}" class="text-center input-default edit-title form-control" form="form-edit-user" required type="text" class="pl-1 ml-auto" id="name-edit"></label>`);
         $('#profilePicture').attr("src", user.avatar);
-        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`)
+        $('#confirmation-img') ? $('#confirmation-img').remove() : '';
+        $('.user-avatar-container').append(`<label for="avatar-edit" class="icon-container position-absolute d-flex"><i title="Choose image" class=" icon-photo m-auto fas fa-camera"></i></label> <input style="display:none;" type="file" id="avatar-edit" name="avatar-edit" accept="image/png, image/jpeg">`);
         $('.modal-user-body').empty().html(bodyModal);
         user.experience !== '' ? document.querySelector('#experience-edit').value = user.experience : '';
         user.gender !== '' ? document.querySelector('#gender-edit').value = user.gender : '';
@@ -190,12 +178,12 @@ class Users extends Model{
             
             if(user._id === e.target.nextElementSibling.id) {
                 
-                listUsers.createFormEditUser(user);
+                this.createFormEditUser(user);
 
                 $('#edit-user-btn').click((e) =>{
                     e.preventDefault();
-                    listUsers.sendEditedUser(listUsers.createObjectEditUser(user));
-                    listUsers.sendEditedImg(user);
+                    this.sendEditedUser(this.createObjectEditUser(user));
+                    this.sendEditedImg(user);
                 });   
             }
         })
@@ -224,14 +212,14 @@ class Users extends Model{
                         if(form[key].checked) {
                             userEdited.skills.includes(form[key].value) ? null : userEdited.skills.push(form[key].value);
                         } else {
-                            userEdited.skills.includes(form[key].value) ? userEdited.skills.pop(form[key].value) : null;
+                            userEdited.skills.includes(form[key].value) ? userEdited.skills.splice(userEdited.skills.indexOf(form[key].value), 1) : null;
                         };
                         break;
                     case 'langs':
                         if(form[key].checked) {
                             userEdited.languages.includes(form[key].value) ? null : userEdited.languages.push(form[key].value);
                         } else {
-                            userEdited.languages.includes(form[key].value) ? userEdited.languages.pop(form[key].value) : null;
+                            userEdited.languages.includes(form[key].value) ? userEdited.languages.splice(userEdited.languages.indexOf(form[key].value), 1) : null;
                         };
                     break;
                     default:
@@ -246,27 +234,24 @@ class Users extends Model{
     }
 
     sendEditedUser(user) {
-        
+        let confirmation = document.querySelector('#confirmation-edit');
+
         fetch(`https://cv-mobile-api.herokuapp.com/api/users/${user._id}`, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: { "Content-Type": "application/json; charset=utf-8" }
         })
         .then( res => res.json())
-        .then( response => console.log(response));
-    }
-
-    sendDeleteUser(user) {
-        fetch("https://cv-mobile-api.herokuapp.com/api/users/" + user, {
-            method: "DELETE"
-        })
-            .then(response => response.json())
-            .then(jsonResponse => console.log(jsonResponse))
-            .catch(error => console.error("Error:", error));
+        .then( response => console.log(response))
+        .then(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: green;" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .then(() => $("#search-btn").trigger("click"))
+        .catch(() => confirmation ? '' : $('.modal-user-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
     sendEditedImg(user) {
+        let imgConfirmation = document.querySelector('#confirmation-img');
         let imgInput = document.querySelector('#avatar-edit');
+
         if(imgInput.files.length > 0) {
             let formData = new FormData();
             formData.append('img', imgInput.files[0]);
@@ -276,8 +261,32 @@ class Users extends Model{
                 body: formData,
             })
             .then( res => res.json())
-            .then( response => console.log(response));
+            .then( response => console.log(response))
+            .then(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: green;" class="text-center mt-2 mb-0">Image saved correctly</p>'))
+            .catch(() => imgConfirmation ? '' : $('.user-avatar-container').parent().append('<p id="confirmation-img" style="color: red;" class="text-center mt-2 mb-0">Error to save the new image</p>'));
         }
+    }
+
+    deleteUser(e) {
+        console.log("click done.");
+        console.log(
+          "User will be delete: ",
+          $(e.target)[0].previousElementSibling.id
+        );
+        let userdelete = $(e.target)[0].previousElementSibling.id;
+        this.sendDeleteUser(userdelete);
+        console.log("usuario deleted.");
+        console.log("This: ", $(e.target));
+        $("#card_" + userdelete).remove();
+    }
+
+    sendDeleteUser(user) {
+        fetch("https://cv-mobile-api.herokuapp.com/api/users/" + user, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(jsonResponse => console.log(jsonResponse))
+            .catch(error => console.error("Error:", error));
     }
 
     renderSummaryUsers(allFilters, summaryContainer) {
