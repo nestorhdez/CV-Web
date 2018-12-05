@@ -470,3 +470,82 @@ $( "#adv-search-company" ).on( "submit", function(e) {
     e.preventDefault();
     listCompany.filterCompany(1);  
 });
+
+
+
+$("#search-company").on("click", function() {
+    $(".summary").empty();
+    var companyname = $("#name-search").val();
+    var website = $("#website-search").val();
+    var email = $("#email-search").val();
+    var phone = $("#phone-search").val();
+    var country = $("#address-country-search").val();
+    var city = $("#address-city-search").val();
+    var street = $("#address-street-search").val();
+    var zipcode = $("#address-zipcode-search").val();
+    var select = $("#social-platform-search").val();
+    var checkbox = '';
+    $("#jobOffers-search")[0].checked ? checkbox = $("#jobOffers-search")[0] : '';
+    var variables = [
+        companyname,
+        website,
+        email,
+        phone,
+        country,
+        city,
+        street,
+        zipcode,
+        select,
+        checkbox
+      ];
+      var idsvariables = [
+        "#name-search",
+        "#website-search",
+        "#email-search",
+        "#phone-search",
+        "#address-country-search",
+        "#address-city-search",
+        "#address-street-search",
+        "#address-zipcode-search",
+        "#social-platform-search",
+        "#jobOffers-search"
+      ];
+
+    for (let i = 0; i < variables.length; i++) {
+        if (variables[i] != 0) {
+            if ( variables[i].checked ){
+                $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'>Includes Job Offers <button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button></span>`);
+            } else {
+            $('.summary').append(`<span class="badge badge-info mr-2 badge-font" data-idsvariables='${idsvariables[i]}'> ${variables[i]} <button class="bg-transparent border-0 deletion" field-id="" field-value=""><i class="fas fa-times-circle"></i></button></span>`);
+            }
+        }
+    }
+    $(".deletion").click((e) => {
+        e.preventDefault();
+       ;
+        let id_input = e.target
+            .parentElement
+            .parentElement
+            .getAttribute("data-idsvariables");
+            console.log(e.target
+            .parentElement
+            .parentElement)
+        e.target
+        .parentElement
+        .parentElement
+        .remove();
+        // console.log()
+        console.log(id_input);
+        if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("[type=tel]") || $(id_input).is("select")) {
+          $(id_input).val("");
+        } else {
+            $("input[type=checkbox]").prop("checked", false);
+        }
+        $("#search-company").trigger("click"); //it reloads the container where the info is appended
+    });
+});
+
+$("#btn-reset").on("click", function() {
+    $("#adv-search-company")[0].reset();
+    $(".summary").empty();
+})
