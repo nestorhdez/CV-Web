@@ -3,7 +3,8 @@ class Companies extends Model{
     constructor( url, summaryContainer ) {
         super( url );
         this.summaryContainer = summaryContainer;
-        this.createHtmlCompanyModal = this.createHtmlCompanyModal.bind(this);
+        this.renderCompanyModal = this.renderCompanyModal.bind(this);
+        this.renderEditCompany = this.renderEditCompany.bind(this);
     }
 
     pagination (arr, perpage, page) {     
@@ -38,18 +39,22 @@ class Companies extends Model{
     }
 
     addDeleteBtnLinks() {
-        let links = document.querySelectorAll('.edit-link-container')[0].childNodes;
-        links.forEach((link) => {
 
-            if(link.childNodes.length <= 1) {
-                link.className += ' position-relative';
-                link.innerHTML += (`
-                    <button class="delete-link position-absolute btn-transparent btn-delete-link" style="">
-                        <i class="icon-delete-link far fa-times-circle"></i>
-                    </button>
-                `);
-            }
-        });
+        let links = [];
+        document.querySelectorAll('.edit-link-container').length !==  0 ? links = document.querySelectorAll('.edit-link-container')[0].childNodes : '';
+        
+        if(links.length > 0) {
+            links.forEach((link) => {
+                if(link.childNodes.length <= 1) {
+                    link.className += ' position-relative';
+                    link.innerHTML += (`
+                        <button class="delete-link position-absolute btn-transparent btn-delete-link" style="">
+                            <i class="icon-delete-link far fa-times-circle"></i>
+                        </button>
+                    `);
+                }
+            });
+        }
     }
 
     deleteSocialLinks(e) {
@@ -180,7 +185,6 @@ class Companies extends Model{
 
     renderCompanyModal(e, arrayCompanies) {
 
-        const comp = new Companies();
         arrayCompanies.forEach( (company) => {
             
             if(company._id == e.target.id){
@@ -189,7 +193,7 @@ class Companies extends Model{
                 $('.icon-container') ? $('.icon-container').remove() : '';
                 $('#avatar-edit') ? $('#avatar-edit').remove() : '';          
                 $('#Title-company').empty().html(company.name);
-                $('.modal-company-body').empty().html(comp.createHtmlCompanyModal(company));
+                $('.modal-company-body').empty().html(this.createHtmlCompanyModal(company));
                 
             }
         });
@@ -245,7 +249,7 @@ class Companies extends Model{
                 <label class="d-block d-flex mt-3 card-text" for="platform-edit"><strong class="align-self-center">Platform</strong> <input name="" value="" placeholder="Facebook, Twitter..." type="text" id="platform-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <label class="d-block d-flex mt-1 card-text" for="url-edit"><strong class="align-self-center">URL</strong> <input name="" value="" type="text" id="url-edit" class="pl-1 input-default edit-input form-control ml-auto"></label>
                 <button id="btn-add-social" class="btn-transparent">Add link  <i class="fas fa-plus-circle"></i></button>
-                ${company.socialUrls.length > 0 ? `<div class="edit-link-container d-flex mt-2 mb-2">${this.renderLinkSocial(company).join(' ')}</div>` : ''}
+                <div class="edit-link-container d-flex mt-2 mb-2">${company.socialUrls.length > 0 ? this.renderLinkSocial(company).join(' ') : ''}</div>
                 </div>
                 <div class="mt-4 d-flex btn-edit-container">
                     <button type="" class="btn ml-auto mr-auto btn-sm btn-info" id="edit-company-btn">Save</button>
@@ -325,6 +329,7 @@ class Companies extends Model{
     }
 
     sendEditedCompany(company) {
+        let confirmation = document.querySelector('#confirmation-edit');
         
         fetch(`https://cv-mobile-api.herokuapp.com/api/companies/${company._id}`, {
             method: 'PUT',
@@ -332,11 +337,16 @@ class Companies extends Model{
             headers: { "Content-Type": "application/json; charset=utf-8" }
         })
         .then( res => res.json())
-        .then( response => console.log(response));
+        .then( response => console.log(response))
+        .then(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: green;" class="text-center mt-2 mb-0">Saved correctly</p>'))
+        .then(() => $("#search-company").trigger("click"))
+        .catch(() => confirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-0">Error to save changes</p>'));
     }
 
     sendEditedImg(company) {
+        let imgConfirmation = document.querySelector('#confirmation-img');
         let imgInput = document.querySelector('#avatar-edit');
+
         if(imgInput.files.length > 0){
             let formData = new FormData();
             formData.append('img', imgInput.files[0]);
@@ -346,7 +356,8 @@ class Companies extends Model{
                 body: formData,
             })
             .then( res => res.json())
-            .then( response => console.log(response));
+            .then( response => console.log(response))
+            .catch(() => imgConfirmation ? '' : $('.modal-company-body').append('<p id="confirmation-edit" style="color: red;" class="text-center mt-2 mb-2">Error to save the new image</p>'));
         }
     }
 
@@ -356,12 +367,12 @@ class Companies extends Model{
             
             if(company._id === e.target.nextElementSibling.id) {
                 
-                listCompany.createFormEditCompany(company);
-
+                this.createFormEditCompany(company);
+               
                 $('#edit-company-btn').click((e) =>{
                     e.preventDefault();
-                    listCompany.sendEditedCompany(listCompany.createObjectEditCompany(company));
-                    listCompany.sendEditedImg(company);
+                    this.sendEditedCompany(this.createObjectEditCompany(company));
+                    this.sendEditedImg(company);
                 });   
             }
         })
@@ -393,7 +404,10 @@ class Companies extends Model{
                     switch (propertyOfInput) {
                         case 'address':
                             let propertyAddress = input.id.split('-')[1];
-                            let filterAddress = filteredCompanies.filter(company => company[propertyOfInput][propertyAddress].toLowerCase().indexOf(input.value.toLowerCase()) == -1);
+                            let filterAddress = filteredCompanies.filter(company => {
+                                company[propertyOfInput][propertyAddress] ? 
+                                company[propertyOfInput][propertyAddress].toLowerCase().indexOf(input.value.toLowerCase()) == -1 : '';
+                                });
                             filterAddress.forEach(company => removeFilteredCompany(company));
                             break;
                         case 'jobOffers':
@@ -508,21 +522,19 @@ $("#search-company").on("click", function() {
     }
     $(".deletion").click((e) => {
         e.preventDefault();
-        // console.log(e.target
-            // .parentElement
-            // .parentElement);
-            let id_input = e.target
-              .parentElement
-              .parentElement
-              .getAttribute("data-idsvariables");
-              console.log(e.target
-                .parentElement
-                .parentElement)
-            e.target
+       ;
+        let id_input = e.target
             .parentElement
             .parentElement
-            .remove();
-            // console.log()
+            .getAttribute("data-idsvariables");
+            console.log(e.target
+            .parentElement
+            .parentElement)
+        e.target
+        .parentElement
+        .parentElement
+        .remove();
+        // console.log()
         console.log(id_input);
         if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("[type=tel]") || $(id_input).is("select")) {
           $(id_input).val("");
