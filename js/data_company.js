@@ -50,20 +50,47 @@ function previewFile() {
 }
 
 $("#registerCompanySubmit").submit(function(e) {
-  console.log("sumit actived.");
   e.preventDefault();
-  
+  //console.log("submit actived.");
+  let inputtrue = true;
+
+  $(".input-validate").each(function(index, element){
+    // console.log($(this));
+    if($(this)[0].validity.valid == false){
+      console.log($(element)[0].validationMessage);
+      $(element).addClass("border-danger").prop('title', $(element)[0].validationMessage);
+      $(element).tooltip('show');
+      inputtrue = false;
+    } else {
+      $(element).removeClass("border-danger is-invalid");
+    };
+
+  });
+
   // Need check CIF-NIF
-  // método para la clase String que indica si la cadena se corresponde con un nif válido o no. 7 u 8 cifras y letra mayúscula
-
-  String.prototype.isNif=function()
-  {
-    return /^(\d{7,8})([A-HJ-NP-TV-Z])$/.test(this) && ("TRWAGMYFPDXBNJZSQVHLCKE"[(RegExp.$1%23)]==RegExp.$2);
-  };
-
-// ejemplo de uso 
-  //  alert("12341234H".isNif());  // devolverá false
-  //  alert("00000000T".isNif()); // devolverá true
+  /** Checking CIF-NIF validate */
+  function checkNIF(nif) {
+    nif = nif.toUpperCase().replace(/[\s\-]+/g, '');
+    if(/^(\d|[XYZ])\d{7}[A-Z]$/.test(nif)) {
+        var num = nif.match(/\d+/);
+        num = (nif[0]!='Z'? nif[0]!='Y'? 0: 1: 2)+num;
+        if(nif[8]=='TRWAGMYFPDXBNJZSQVHLCKE'[num%23]) {
+            return /^\d/.test(nif)? 'DNI': 'NIE';
+        }
+    }
+    else if(/^[ABCDEFGHJKLMNPQRSUVW]\d{7}[\dA-J]$/.test(nif)) {
+        for(var sum=0,i=1;i<8;++i) {
+            var num = nif[i]<<i%2;
+            var uni = num%10;
+            sum += (num-uni)/10+uni;
+        }
+        var c = (10-sum%10)%10;
+        if(nif[8]==c || nif[8]=='JABCDEFGHI'[c]) {
+            return /^[KLM]/.test(nif)? 'ESP': 'CIF';
+        }
+    }
+    return false;
+  }
 
   /**
    * Function to sanitaze strings before to input.
@@ -83,7 +110,6 @@ $("#registerCompanySubmit").submit(function(e) {
     return string.replace(reg, (match)=>(map[match]));
   }
 
-
   let name = sanitarize($("#validationCompname").val());
   let phone = $("#InputPhone").val();
   let email = $("#validationInputEmail").val();
@@ -100,33 +126,16 @@ $("#registerCompanySubmit").submit(function(e) {
   let employes = $("#validationemployees").val(); // Numbers
 
   let socialUrls = [];
+
   $("input[type=url]").each(function() {
     let key = $(this).attr("name");
     let url = $(this).val();
-    socialUrls.push({"platform": key, "url": url});
+    if (url != "") {
+      socialUrls.push({"platform": key, "url": url});
+    }
   })
-  console.log("SM", socialUrls);
-  // let socialUrls = []
 
-  console.log(
-    name,
-    phone,
-    email,
-    docType,
-    docNumber,
-    zip,
-    street,
-    city,
-    country,
-    "web: ", website,
-    "logo: ", logo,
-    "bio", bio,
-    jobOffers,
-    employes,
-    socialUrls,
-  );
-
-  if (!(docNumber.isNif())) {
+  if (!(checkNIF(docNumber))) {
     $("#docNumber")
       .addClass("border-danger is-invalid").prop('title', 'No valid number.')
       .focus();
@@ -159,6 +168,72 @@ $("#registerCompanySubmit").submit(function(e) {
     socialUrls,
   )
 
+  /** Render list links about social media inputs fill.
+   * @param {array} company is array of plataform and url
+   * @returns {array} array with all html to render.
+   */
+  function renderSocialLinks(company) {
+    let arrayLinks = [];
+    let urls = company.socialUrls;
+    urls.forEach(social => {
+        arrayLinks.push(`<a href="${social.url}" title="Go to ${social.url}" id="${social.platform.toLowerCase()}-link" class="icon-link mr-1" target="_blank"><i class="fab fa-${social.platform.toLowerCase()}"></i></a>`);
+    })
+    return arrayLinks;
+  }
+
+  /** Render html modal with data  confirm for send. */
+  function renderModalConfirm() {
+    console.log("Inserted modal html.");
+    let confirmBody = `
+    <div class="container-fluid">
+      <div class="col mb-1">
+        <fieldset class="mx-auto">
+          <legend>Company</legend>
+          <div id="imgavatar" class="col-6 mb-4"></div>
+          <div class="col">
+            <p><strong>Name: </strong>${registered.name}</p>
+          </div>
+        </fieldset>
+        <address class="mx-auto">
+          <legend>Address data</legend>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <p><strong>City: </strong>${registered.city}</p>
+                <p><strong>Country: </strong>${registered.country}</p>
+                <p><strong>Street: </strong>${registered.street}</p>
+                <p><strong>Zip: </strong>${registered.zip}</p>
+              </div>
+            </div>
+          </div>            
+        </address>
+        <fieldset class="mx-auto">
+          <legend>Contact data</legend>
+          <div class="col">
+            <p><strong>Phone: </strong>${registered.phone}</p>
+            <p><strong>Email: </strong>${registered.email}</p>
+            <p><strong>Social Media: </strong>${registered.socialUrls.length > 0 ? renderSocialLinks(registered).join(' ') : ''}</p>                  
+          </div>
+        </fieldset>
+        <fieldset class="mx-auto">
+          <legend>Bio info:</legend>
+          <div class="col">
+            <p><strong>Employees: </strong>${registered.employes}</p>
+            <p><strong>About us: </strong>${registered.bio}</p>
+          </div>
+        </fieldset>
+      </div>
+    <div>
+    `;
+    
+    $("#modal-confirm")
+    .empty()
+    .html(confirmBody);
+
+    $( "#preview" ).clone().appendTo( "#imgavatar" );
+  }
+
+  /** Constructor objet to send JSON */
   function createRequestBody() {
     let body = {
     "name": registered.name,
@@ -181,6 +256,7 @@ $("#registerCompanySubmit").submit(function(e) {
     return body;
   }
 
+  /** Function to send New Company */
   function sendNewCompany() {
     let BodyCompany = createRequestBody();
 
@@ -202,10 +278,27 @@ $("#registerCompanySubmit").submit(function(e) {
           method: "POST",
           body: fileForm
         })
-        .then(response => console.log(response))
+        .then(response => {console.log(response);
+        if (response.status==200) {
+          alert('Registered information.');
+          document.getElementById("registerCompanySubmit").reset();
+          $(".close").trigger('click');
+          $("#modal-confirm").empty().html("...");
+          $("#preview").attr("src", "");
+          window.location.pathname = "../html/landpage-comp.html";
+        } else {
+          alert(`Error when sending. ${response.statusText}`);
+        }
+        })
         .catch(error => console.log(error.message));
   })}
 
-  sendNewCompany();
-  }
-})
+  if (inputtrue) {
+    renderModalConfirm(); 
+    $("#confirm-submit").modal('show');
+    $("#CompanyConfirmed").click(function() {
+      console.log("Confirmed.")
+      sendNewCompany();
+    });
+  };
+}})
