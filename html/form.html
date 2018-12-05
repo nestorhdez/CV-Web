@@ -48,8 +48,7 @@
     <main>
         <div class="container-fluid">
             <div class="mx-auto bg-light w-75 p-3 shadow">
-                <!-- Need fix styles with tablet mode -->
-                <form id="registerSubmit" class="p-2">
+                <form id="registerSubmit" class="p-2" novalidate>
                     <div class="form-row mb-2">
                         <div class="form-row mb-2">
                             <div class="col-md-6 mb-3">
@@ -58,7 +57,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupPrepend2">@</span>
                                     </div>
-                                    <input type="text" class="form-control" id="validationUsername" value="" name="username"
+                                    <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationUsername" value="" name="username"
                                         placeholder="Username" aria-describedby="inputGroupPrepend2" required>
                                 </div>
                             </div>
@@ -66,12 +65,12 @@
                             <div class="col-md-6 mb-3">
                                 <label for="inputPassword5"><strong>Password</strong></label>
                                 <div class="input-group">
-                                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupPrependPSW"><i id="eyePSW" class="far fa-eye"></i></span>
                                     </div>
-                                    <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20
-                                        characters long, contain letters and numbers, and must not contain spaces, special
+                                    <small id="passwordHelpBlock" class="form-text text-muted">Password must be 8-20
+                                        characters long, contain letters (at least one capital) and numbers, and must not contain spaces, special
                                         characters, or emoji.</small>
                                 </div>
                             </div>
@@ -80,13 +79,13 @@
                         <div class="form-group col-md-6 mb-3">
                             <div class="col mb-3">
                                 <label for="validationname"><strong>Name and surname</strong></label>
-                                <input type="text" class="form-control" id="validationname" placeholder="Name with surname" name="name" value=""
+                                <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationname" placeholder="Name with surname" name="name" value=""
                                     required>
                             </div>
 
                             <div class="col mb-2">
                                 <label for="validationbirthDate"><strong>Birth Date</strong></label>
-                                <input type="date" class="form-control" id="validationbirthDate" aria-describedby="birthDate" name="birthDate" value="">
+                                <input type="date" class="form-control input-validate" id="validationbirthDate" aria-describedby="birthDate" name="birthDate" value="">
                             </div>
                         </div>
 
@@ -101,7 +100,7 @@
 
                             <div class="col mb-2">
                                 <label for="validationInputEmail"><strong>Email address</strong></label>
-                                <input type="email" class="form-control" id="validationInputEmail" aria-describedby="emailHelp"
+                                <input type="email" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationInputEmail" aria-describedby="emailHelp"
                                     name="email" value="" placeholder="Enter email" required>
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                     else.</small>
@@ -112,27 +111,27 @@
                     
                     <div class="form-row mb-2">
                         <div class="col-md-4 col-sm-12 mb-3">
-                            <label for="validationCity"><strong>City</strong></label>
-                            <input type="text" class="form-control" id="validationCity" placeholder="City" name="city"
+                            <label for="validationCountry"><strong>Country</strong></label>
+                            <input type="text" class="form-control input-validate" data-toggle="tooltip" data-placement="top" title="" id="validationCountry" placeholder="Country" name="country"
                                 value="" required>
                         </div>
 
                         <div class="col-md-4 col-sm-12 mb-3">
-                            <label for="validationCountry"><strong>Country</strong></label>
-                            <input type="text" class="form-control" id="validationCountry" placeholder="Country" name="country"
-                                value="" required>
+                            <label for="validationCity"><strong>City</strong></label>
+                            <input type="text" class="form-control input-validate" id="validationCity" placeholder="City" name="city"
+                                value="">
                         </div>
 
                         <div class="col-md-4 col-sm-12 mb-3">
                             <label for="validationStreet"><strong>Street</strong></label>
-                            <input type="text" class="form-control" id="validationStreet" placeholder="Street" name="street"
-                                value="" required>
+                            <input type="text" class="form-control input-validate" id="validationStreet" placeholder="Street" name="street"
+                                value="" >
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label for="validationZip"><strong>Zip</strong></label>
-                            <input type="text" class="form-control" id="validationZip" placeholder="Zip" name="zip"
-                                value="" required>
+                            <input type="text" class="form-control input-validate" id="validationZip" placeholder="Zip" name="zip"
+                                value="">
                         </div>
                     </div>
 
@@ -158,7 +157,7 @@
                                         <label class="form-check-label mr-5" for="trans">Trans</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="noreply" name="gender" value="no reply">
+                                        <input class="form-check-input" type="radio" id="noreply" name="gender" value="no reply" checked>
                                         <label class="form-check-label mr-5" for="noreply">No reply</label>
                                     </div>
                                 </div>
@@ -230,19 +229,19 @@
 
                     <div class="form-group mb-2">
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" name="agreeconditions"
+                            <input class="form-check-input input-validate" type="checkbox" value="" id="invalidCheck2" name="agreeconditions"
                                 required>
                             <label class="form-check-label font-italic" for="invalidCheck2">Agree to terms and conditions</label>
                         <!-- Need linked to terms and conditions. -->
                         </div>
                     </div>
 
-                    <button class="btn btn-cobalt ml-4" type="submit" data-toggle="modal" data-target="#confirm-submit">Submit form</button>
+                    <button class="btn btn-cobalt ml-4" type="submit">Submit form</button>
+
 
                     <!-- Insert Modal-->
                     <!-- This modal dont see show if no complet information-->
-
-                    <div class="modal fade" id="nosubmit" tabindex="-1" role="dialog" aria-labelledby="formComfirm" aria-hidden="true">
+                    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="formComfirm" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">

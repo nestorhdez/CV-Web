@@ -59,10 +59,11 @@ $("#registerCompanySubmit").submit(function(e) {
     if($(this)[0].validity.valid == false){
       console.log($(element)[0].validationMessage);
       $(element).addClass("border-danger").prop('title', $(element)[0].validationMessage);
-      $(element).tooltip('show');
+      $(element).tooltip('enable').tooltip('show').focus();
       inputtrue = false;
     } else {
       $(element).removeClass("border-danger is-invalid");
+      $(element).tooltip('disable');
     };
 
   });
