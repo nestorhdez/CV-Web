@@ -471,8 +471,6 @@ $( "#adv-search-company" ).on( "submit", function(e) {
     listCompany.filterCompany(1);  
 });
 
-
-
 $("#search-company").on("click", function() {
     $(".summary").empty();
     var companyname = $("#name-search").val();
@@ -520,22 +518,17 @@ $("#search-company").on("click", function() {
             }
         }
     }
-    $(".deletion").click((e) => {
+    $(".deletion").on("click", function(e) {
         e.preventDefault();
-
-        let id_input = e.target
-            .parentElement
-            .parentElement
-            .getAttribute("data-idsvariables");
-            // console.log(e.target
-            // .parentElement
-            // .parentElement);
-        e.target
-        .parentElement
-        .parentElement
-        .remove();
+        console.log($(this));
+        let id_input = $(this)
+            .parent()
+            .attr("data-idsvariables");
+        console.log("id_input", id_input);
+        console.log("Remove this => ", $(this)
+            .parent());
+            //.remove();
         // console.log()
-        console.log(id_input);
         if ($(id_input).is("[type=text]") || $(id_input).is("[type=email]") || $(id_input).is("[type=tel]") || $(id_input).is("select")) {
           $(id_input).val("");
         } else {
