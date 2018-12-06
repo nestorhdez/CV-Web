@@ -37,10 +37,10 @@ class Carousel extends Users {
         var users = [];
         let feature = new FeaturesModel;
         arrayUsers.forEach((user, index) => {
-                let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
-                let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
-                document.getElementById('card-container').innerHTML += '<div id="carouselelement' + index + '" + style= "width: 100%">' + this.createHtmlUserCard(user, skillsLabels, langsLabels) + '</div>';
-                users.push(this.createHtmlUserCard(user, skillsLabels, langsLabels));
+            let skillsLabels = feature.returnUserPropertyLabels(user.skills, skills);
+            let langsLabels = feature.returnUserPropertyLabels(user.languages, langs);
+            document.getElementById('card-container').innerHTML += `<div id="carouselelement${index}" style= "width: 100%">${this.createHtmlUserCard(user, skillsLabels, langsLabels)}</div>`;
+            users.push(this.createHtmlUserCard(user, skillsLabels, langsLabels));
         });                
 }
 
@@ -57,7 +57,7 @@ class Carousel extends Users {
         let allSkills = results[1];
         let allLangs = results[2];
 
-            this.renderUsers(allUsers, allSkills, allLangs);
+        this.renderUsers(allUsers, allSkills, allLangs);
         });
 
     }
