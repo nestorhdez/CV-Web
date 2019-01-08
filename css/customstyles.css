@@ -201,8 +201,14 @@ footer {
 }
 
 .text-header {
-  margin-top: 5rem !important;
+  margin: auto;
   z-index: 1;
+}
+
+@media (min-width: 768px){
+  .text-header {
+    margin: auto auto auto 10%;
+  }
 }
 
 .title-header {
